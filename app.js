@@ -51,13 +51,8 @@ var roon = new RoonApi({
                     var zone_id = data.zones[x].zone_id;
                     var display_name = data.zones[x].display_name;
 
-                    for (y in data.zones[x].outputs){
-                        var output_id = data.zones[x].outputs[y].output_id;
-                    }
-
                     item = {};
                     item ["zone_id"] = zone_id;
-                    item ["output_id"] = output_id;
                     item ["display_name"] = display_name;
 
                     zoneList.push(item);
