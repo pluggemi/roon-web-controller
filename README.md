@@ -18,7 +18,7 @@ Album Credit: [Biosphere, Sound Installations (2000-2009)](https://biosphere.ban
 Album Credit: [Carbon Based Lifeforms, Twentythree](https://carbonbasedlifeforms.bandcamp.com/album/twentythree)
 
 ### Cover Art - Dark Theme
-![Cover Art - Dark Theme](https://raw.githubusercontent.com/pluggemi/roon-web-controller/master/screenshots/coverLight.png)
+![Cover Art - Dark Theme](https://raw.githubusercontent.com/pluggemi/roon-web-controller/master/screenshots/coverDark.png)
 
 Album Credit: [Android Lust, Crater Vol​.​1](http://music.androidlust.com/album/crater-vol-1)
 
