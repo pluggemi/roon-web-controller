@@ -1,20 +1,21 @@
 {
-    "name": "roon-web-controller",
-    "version": "1.0.0",
-    "description": "Roon Extension to create a web controller.",
-    "main": "app.js",
-    "author": "Mike Plugge",
-    "license": "MIT",
-    "dependencies": {
-        "express": "4.x",
-        "node-roon-api": "github:roonlabs/node-roon-api",
-        "node-roon-api-image": "github:roonlabs/node-roon-api-image",
-        "node-roon-api-status": "github:roonlabs/node-roon-api-status",
-        "node-roon-api-transport": "github:roonlabs/node-roon-api-transport",
-        "socket.io": "^1.7.3"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/pluggemi/roon-web-controller.git"
-    }
+  "name": "roon-web-controller",
+  "version": "1.0.0",
+  "description": "Roon Extension to create a web controller.",
+  "main": "app.js",
+  "author": "Mike Plugge",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.x",
+    "jquery": "^3.2.1",
+    "node-roon-api": "github:roonlabs/node-roon-api",
+    "node-roon-api-image": "github:roonlabs/node-roon-api-image",
+    "node-roon-api-status": "github:roonlabs/node-roon-api-status",
+    "node-roon-api-transport": "github:roonlabs/node-roon-api-transport",
+    "socket.io": "^1.7.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pluggemi/roon-web-controller.git"
+  }
 }

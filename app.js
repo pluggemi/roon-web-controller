@@ -198,3 +198,5 @@ app.get('/roonapi/getImage', function(req, res){
         res.end(body, 'binary');
     });
 });
+
+app.use('/dep/jquery.min.js', express.static(__dirname + '/node_modules/jquery/dist/jquery.min.js'));
