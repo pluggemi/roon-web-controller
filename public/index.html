@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Roon Web Controller</title>
+<!-- Begin Apple web app configs -->
+    <!-- Allow web app to be run in full-screen mode. -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Configure the status bar. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Set the viewport. -->
+    <meta name="viewport" content="initial-scale=1">
+    <!-- Disable automatic phone number detection. -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- Set custom location for Apple touch icon -->
+    <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
+    <!-- Prevent links within the same domain from opening in Safari -->
+    <script>
+        (function(a, b, c) {
+            if (c in b && b[c]) {
+                var d, e = a.location,
+                    f = /^(a|html)$/i;
+                a.addEventListener("click", function(a) {
+                    d = a.target;
+                    while (!f.test(d.nodeName)) d = d.parentNode;
+                    "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
+                }, !1)
+            }
+        })(document, window.navigator, "standalone")
+    </script>
+<!-- end Apple web app configs -->
+    <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/site.css">
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/jquery.simplemarquee.js"></script>
+    <script src="/js/js.cookie.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/site.js"></script>
+</head>
+<body>
+<div id="notPlaying">
+    <div id="messages">Nothing playing :-(</div>
+</div>
+<div id="isPlaying">
+    <div id="coverBackground"></div>
+    <div id="coverImageDiv"></div>
+    <div id="musicInfo">
+        <div id="line1"></div>
+        <div id="line2"></div>
+        <div id="line3"></div>
+        <div id="line4">
+            <div id="trackSeek">
+                <span id="trackSeekValue"></span>
+            </div>
+            <span id="seekPosition"></span> &nbsp;/&nbsp;
+            <span id="seekLength"></span>
+        </div>
+    </div>
+</div>
+<div id="zoneControl">
+    <div><button type="button" id="controlSettings" class="buttonTrans"></button></div>
+    <div><button type="button" id="controlZone" class="buttonTrans"></button></div>
+    <div><button type="button" id="controlVolume" class="buttonTrans"></button></div>
+</div>
+<div id="playbackControls">
+    <div><button type="button" id="controlPrev" class="buttonTrans"></button></div>
+    <div><button type="button" id="controlPlayPauseStop" class="buttonTrans"></button></div>
+    <div><button type="button" id="controlNext" class="buttonTrans"></button></div>
+</div>
+
+<div id="overlayZoneList" class="overlay">
+    <div class="overlayContentAlign"  onclick="hideOverlay('overlayZoneList')">
+        <div class="overlayContent">
+            <p>Select a Zone</p>
+            <div id="zoneList" class="overlayList"></div>
+        </div>
+    </div>
+</div>
+
+<div id="overlayVolume" class="overlay">
+<div class="overlayContentAlign" onclick="hideOverlay('overlayVolume')">
+    <div class="overlayContent">
+        <p>Change the volume</p>
+    </div>
+</div>
+</div>
+
+<div id="overlaySettings" class="overlay">
+<div class="overlayContentAlign" onclick="hideOverlay('overlaySettings')">
+    <div class="overlayContent">
+        <p>Theme</p>
+        <div class="overlayList">
+        <div><button type="button" onclick="setTheme('dark')">Dark</button></div>
+        <div><button type="button" onclick="setTheme('light')">Light</button></div>
+        <div><button type="button" onclick="setTheme('coverDark')">Cover Dark</button></div>
+        <div><button type="button" onclick="setTheme('coverLight')">Cover Light</button></div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
