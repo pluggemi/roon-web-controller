@@ -29,7 +29,7 @@ Open a web browser to your server at "http://localhost:8080"
 * To select or change a zone, click the Speaker icon at the lower left
 * To select or change the theme, click the Gears icon at the lower left
 
-### Known issues/TODO
+## Known issues/TODO
 * The volume control overlay does not have any volume controls yet.
 
 ## Sample systemd unit file
