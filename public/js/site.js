@@ -4,6 +4,10 @@ var curDisplayName;
 var curTheme;
 var curZone;
 var curZoneID;
+var lastLine1;
+var lastLine2;
+var lastLine3;
+var lastPicture;
 
 $(document).ready(function() {
     curZoneID = readCookie('curZoneID');
@@ -72,11 +76,6 @@ function showIsPlaying(curZone) {
     $("#notPlaying").hide();
     $("#isPlaying").show();
     $("#playbackControls").show();
-
-    var lastLine1;
-    var lastLine2;
-    var lastLine3;
-    var lastPicture;
 
     if ( lastLine1 != curZone.now_playing.three_line.line1) {
         lastLine1 = curZone.now_playing.three_line.line1;
