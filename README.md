@@ -9,8 +9,8 @@ This is an extension for the Roon music player that provides a web based remote.
 Ensure that Node.JS version 5.x or higher is installed.
 
 Grab the software:
-Via git (preferred): ```git clone https://github.com/pluggemi/roon-web-controller.git```
-Or download and extract the zip file.
+* Via git (preferred): ```git clone https://github.com/pluggemi/roon-web-controller.git```
+* Or download and extract the zip file.
 
 Change directory into the software:
 ```cd roon-web-controller```
