@@ -5,7 +5,7 @@ This is an extension for the Roon music player that provides a web based remote.
 ## Screenshots
 All of these screenshots were taken from a web client sized at 800x480 - the same size as a Raspberry Pi touch screen.  The application looks great natively on the Raspberry Pi Touch screen as well as in a web browser window. The application resizes to your screen size.
 
-Also notice the scrolling text in the "Cover Art - Light Theme".
+Also notice the scrolling text in the "Cover Art - Light Theme" screenshot.
 
 ### Light Theme
 ![Light Theme](https://raw.githubusercontent.com/pluggemi/roon-web-controller/master/screenshots/light.png)
