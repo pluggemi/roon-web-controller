@@ -155,7 +155,6 @@ function showIsPlaying(curZone) {
             $("#controlPlayPauseStop").attr("onclick", "goCmd(\'stop\', \'" + curZone.zone_id + "\')").html(getSVG('stop')).css("fill-opacity", "1");
         }
     } else {
-        svgPlay(curZone.zone_id)
         $("#controlPlayPauseStop").html(getSVG('play')).css("fill-opacity", "0.33");
     }
 }
