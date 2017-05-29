@@ -1,5 +1,7 @@
 var socket = io();
 
+var cssBackgroundColor;
+var cssForegroundColor;
 var curDisplayName;
 var curTheme;
 var curZone;
@@ -14,8 +16,6 @@ $(document).ready(function() {
     curDisplayName = readCookie('curDisplayName');
     curTheme = readCookie('curTheme');
 
-    setTheme(curTheme);
-
     $("#controlSettings").attr("onclick", "showOverlay(\'overlaySettings\')").html(getSVG('settings') + "<br><span id=\"clientSettings\">&nbsp;</span>");
     $("#controlZone").attr("onclick", "showOverlay(\'overlayZoneList\')").html(getSVG('zone') + "<br><span id=\"zoneName\">No Zone</span>");
     $("#controlVolume").attr("onclick", "showOverlay(\'overlayVolume\')").html(getSVG('volume') + "<br><span id=\"zoneVol\">&nbsp;</span>");
@@ -27,6 +27,8 @@ $(document).ready(function() {
     if (curZoneID == null) {
         showOverlay('overlayZoneList');
     }
+
+    setTheme(curTheme);
 });
 
 socket.on("zoneList", function(payload) {
@@ -49,8 +51,9 @@ function updateZoneList(payload){
 
     for (x in payload){
         $("#zoneList")
-        .append("<button type=\"button\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + getSVG('zone') + "<br>" + payload[x].display_name + "</button>");
+        .append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
     }
+    $(".buttonOverlay").css("background-color", cssForegroundColor).css("color", cssBackgroundColor);
 }
 
 function selectZone(zone_id, display_name) {
@@ -214,45 +217,42 @@ function setTheme(curTheme) {
 
 function showTheme(curTheme) {
     if (curTheme == "dark") {
-        $("body")
-        .css("background-color", "#232629")
-        .css("color", "#eff0f1");
-        $(".buttonTrans").css("color", "#eff0f1");
+        cssBackgroundColor = "#232629";
+        cssForegroundColor = "#eff0f1";
+
         $("#trackSeek").css("background-color", "rgba(239, 240, 241, 0.33)");
-        $(".overlayContent").css("background-color", "#232629");
         $("#coverBackground").hide();
     }
     else if (curTheme == "light") {
-        $("body")
-        .css("background-color", "#eff0f1")
-        .css("color", "#232629");
-        $(".buttonTrans").css("color", "#232629");
+        cssBackgroundColor = "#eff0f1";
+        cssForegroundColor = "#232629";
+
         $("#trackSeek").css("background-color", "rgba(35, 38, 41, 0.33)");
-        $(".overlayContent").css("background-color", "#eff0f1");
         $("#coverBackground").hide();
     }
     else if (curTheme == "coverDark") {
-        $("body")
-        .css("background-color", "#232629")
-        .css("color", "#eff0f1");
-        $(".buttonTrans").css("color", "#eff0f1");
+        cssBackgroundColor = "#232629";
+        cssForegroundColor = "#eff0f1";
+
         $("#trackSeek").css("background-color", "rgba(239, 240, 241, 0.33)");
-        $(".overlayContent").css("background-color", "#232629");
         $("#coverBackground").show();
     }
     else if (curTheme == "coverLight") {
-        $("body")
-        .css("background-color", "#eff0f1")
-        .css("color", "#232629");
-        $(".buttonTrans").css("color", "#232629");
+        cssBackgroundColor = "#eff0f1";
+        cssForegroundColor = "#232629";
+
         $("#trackSeek").css("background-color", "rgba(35, 38, 41, 0.33)");
-        $(".overlayContent").css("background-color", "#eff0f1");
         $("#coverBackground").show();
     }
     else {
         curTheme = null;
         setTheme(curTheme);
     }
+
+    $("body").css("background-color", cssBackgroundColor).css("color", cssForegroundColor);
+    $(".buttonTrans").css("color", cssForegroundColor);
+    $(".buttonOverlay").css("background-color", cssForegroundColor).css("color", cssBackgroundColor);
+    $(".overlayContent").css("background-color", cssBackgroundColor);
 }
 
 function readCookie(name){

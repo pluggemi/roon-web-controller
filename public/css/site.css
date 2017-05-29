@@ -11,6 +11,20 @@ body {
     outline:0;
 }
 
+.buttonOverlay {
+    width: 96px;
+    height: 48px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    border: none;
+    border-radius: 10px;
+    filter: drop-shadow(5px 5px 5px black);
+}
+
+.buttonOverlay:focus {
+    outline:0;
+}
+
 .svgSmall {
     width:48px;
     height:48px;
@@ -195,12 +209,6 @@ body {
 
 .overlayContent p {
     font-size: 150%;
-    font-weight: bold;
-}
-
-.overlayContent button {
-    width: 96px;
-    height: 96px;
     font-weight: bold;
 }
 
