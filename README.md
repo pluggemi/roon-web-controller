@@ -3,7 +3,23 @@
 This is an extension for the Roon music player that provides a web based remote.
 
 ## Screenshots
-(TODO)
+Notice the scrolling text in the "Cover Art - Light Theme".
+
+### Light Theme
+(https://github.com/pluggemi/roon-web-controller/raw/master/screenshots/light.png)
+Album Credit: [Biosphere, Sound Installations (2000-2009)](https://biosphere.bandcamp.com/album/sound-installations-2000-2009)
+
+### Dark Theme
+(https://github.com/pluggemi/roon-web-controller/raw/master/screenshots/dark.png)
+Album Credit: [Carbon Based Lifeforms, Twentythree](https://carbonbasedlifeforms.bandcamp.com/album/twentythree)
+
+### Cover Art - Dark Theme
+(https://github.com/pluggemi/roon-web-controller/raw/master/screenshots/coverLight.png)
+Album Credit: [Android Lust, Crater Vol​.​1](http://music.androidlust.com/album/crater-vol-1)
+
+### Cover Art - Light Theme
+(https://raw.githubusercontent.com/pluggemi/roon-web-controller/master/screenshots/coverLight.png)
+Album Credit: [Rachel Grimes, The Clearing](https://rachelgrimes.bandcamp.com/album/the-clearing)
 
 ## Installation
 Ensure that Node.JS version 5.x or higher is installed.
