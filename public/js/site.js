@@ -10,6 +10,7 @@ var lastLine1;
 var lastLine2;
 var lastLine3;
 var lastPicture;
+var lastTitle;
 
 $(document).ready(function() {
     curZoneID = readCookie('curZoneID');
@@ -111,6 +112,11 @@ function showIsPlaying(curZone) {
             delayBetweenCycles: 5000,
             handleHover: false
         });
+    };
+
+    if (lastTitle != curZone.now_playing.one_line.line1) {
+        lastTitle = curZone.now_playing.one_line.line1;
+        $(document).prop('title', curZone.now_playing.one_line.line1);
     };
 
     if ( curZone.is_seek_allowed == true ) {
