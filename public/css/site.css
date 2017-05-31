@@ -25,6 +25,54 @@ body {
     outline:0;
 }
 
+.messages {
+    font-size:5vw;
+}
+
+.overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(0,0,0,0.75);
+    display:none;
+    z-index:200;
+}
+
+.overlayContentAlign {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    vertical-align: middle;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.overlayContent {
+    align-self: center;
+    width: auto;
+    height: auto;
+    min-width: 50%;
+    border-radius: 10px;
+    padding: 5px;
+    filter: drop-shadow(10px 10px 10px black);
+}
+
+.overlayContent p {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.overlayList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
 .svgSmall {
     width:48px;
     height:48px;
@@ -40,6 +88,14 @@ body {
     height: 96px;
 }
 
+#menuButton {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 54px;
+    z-index:100;
+}
+
 #notPlaying {
     position: absolute;
     top: 0px;
@@ -49,10 +105,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#messages {
-    font-size:5vw;
 }
 
 #isPlaying {
@@ -105,7 +157,7 @@ body {
 
 #musicInfo {
     position: absolute;
-    top: 0px;
+    top: 54px;
     left: 50%;
     right: 5px;
     bottom: 106px;
@@ -155,6 +207,7 @@ body {
     height: 96px;
     display: flex;
     text-align: center;
+    justify-content: space-around;
     align-items: center;
     vertical-align: middle;
 }
@@ -176,49 +229,13 @@ body {
     vertical-align: middle;
 }
 
-.overlay {
+#libraryBrowser {
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
     bottom: 0px;
-    background-color: rgba(0,0,0,0.75);
-    display:none;
-}
-
-.overlayContentAlign {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-content: center;
-    vertical-align: middle;
-    text-align: center;
-    height: 100%;
-    width: 100%;
-}
-
-.overlayContent {
-    align-self: center;
-    width: auto;
-    height: auto;
-    min-width: 50%;
-    border-radius: 10px;
-    padding: 5px;
-    filter: drop-shadow(10px 10px 10px black);
-}
-
-.overlayContent p {
-    font-size: 150%;
-    font-weight: bold;
-}
-
-.overlayList {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-}
-
-#overlayVolume {
-
+    align-items: center;
 }

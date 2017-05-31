@@ -18,7 +18,7 @@
         (function(a, b, c) {
             if (c in b && b[c]) {
                 var d, e = a.location,
-                    f = /^(a|html)$/i;
+                f = /^(a|html)$/i;
                 a.addEventListener("click", function(a) {
                     d = a.target;
                     while (!f.test(d.nodeName)) d = d.parentNode;
@@ -30,8 +30,6 @@
 <!-- end Apple web app configs -->
     <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon">
-
-
     <link rel="stylesheet" type="text/css" href="/css/site.css">
     <script src="/jquery/jquery.min.js"></script>
     <script src="/js/jquery.simplemarquee.js"></script>
@@ -40,65 +38,106 @@
     <script src="/js/site.js"></script>
 </head>
 <body>
-<div id="notPlaying">
-    <div id="messages">Nothing playing :-(</div>
-</div>
-<div id="isPlaying">
-    <div id="coverBackground"></div>
-    <div id="coverImageDiv"></div>
-    <div id="musicInfo">
-        <div id="line1"></div>
-        <div id="line2"></div>
-        <div id="line3"></div>
-        <div id="line4">
-            <div id="trackSeek">
-                <span id="trackSeekValue"></span>
+<div id="nowPlaying">
+    <div id="notPlaying"><span class="messages">Nothing playing :-(</span></div>
+    <div id="isPlaying">
+        <div id="coverBackground"></div>
+        <div id="coverImageDiv"></div>
+        <div id="musicInfo">
+            <div id="line1"></div>
+            <div id="line2"></div>
+            <div id="line3"></div>
+            <div id="line4">
+                <div id="trackSeek">
+                    <span id="trackSeekValue"></span>
+                </div><span id="seekPosition"></span> &nbsp;/&nbsp; <span id="seekLength"></span>
             </div>
-            <span id="seekPosition"></span> &nbsp;/&nbsp;
-            <span id="seekLength"></span>
+        </div>
+    </div>
+    <div id="zoneControl">
+        <div>
+            <button type="button" id="controlZone" class="buttonTrans"></button>
+        </div>
+        <div>
+            <button type="button" id="controlVolume" class="buttonTrans"></button>
+        </div>
+    </div>
+    <div id="playbackControls">
+        <div>
+            <button type="button" id="controlPrev" class="buttonTrans"></button>
+        </div>
+        <div>
+            <button type="button" id="controlPlayPauseStop" class="buttonTrans"></button>
+        </div>
+        <div>
+            <button type="button" id="controlNext" class="buttonTrans"></button>
         </div>
     </div>
 </div>
-<div id="zoneControl">
-    <div><button type="button" id="controlSettings" class="buttonTrans"></button></div>
-    <div><button type="button" id="controlZone" class="buttonTrans"></button></div>
-    <div><button type="button" id="controlVolume" class="buttonTrans"></button></div>
-</div>
-<div id="playbackControls">
-    <div><button type="button" id="controlPrev" class="buttonTrans"></button></div>
-    <div><button type="button" id="controlPlayPauseStop" class="buttonTrans"></button></div>
-    <div><button type="button" id="controlNext" class="buttonTrans"></button></div>
+
+<div id="libraryBrowser">
+    <div class="messages">
+        Library (todo)
+    </div>
 </div>
 
+<div id="overlayMainMenu" class="overlay">
+    <div class="overlayContentAlign" onclick="hideOverlay('overlayMainMenu')">
+        <div class="overlayContent">
+            <p>Sections</p>
+            <div class="overlayList">
+                <div>
+                    <button type="button" id="controlSettings" class="buttonOverlay" onclick="showSection('libraryBrowser')">Library</button>
+                </div>
+                <div>
+                    <button type="button" id="controlSettings" class="buttonOverlay" onclick="showSection('nowPlaying')">Now Playing</button>
+                </div>
+            </div>
+            <p>Client Settings</p>
+            <div>
+                <div class="overlayList">
+                    <button type="button" id="controlSettings" class="buttonOverlay" onclick="showOverlay('overlayTheme')">Theme</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="overlayZoneList" class="overlay">
-    <div class="overlayContentAlign"  onclick="hideOverlay('overlayZoneList')">
+    <div class="overlayContentAlign" onclick="hideOverlay('overlayZoneList')">
         <div class="overlayContent">
             <p>Select a Zone</p>
             <div id="zoneList" class="overlayList"></div>
         </div>
     </div>
 </div>
-
 <div id="overlayVolume" class="overlay">
-<div class="overlayContentAlign" onclick="hideOverlay('overlayVolume')">
-    <div class="overlayContent">
-        <p>Change the volume</p>
-    </div>
-</div>
-</div>
-
-<div id="overlaySettings" class="overlay">
-<div class="overlayContentAlign" onclick="hideOverlay('overlaySettings')">
-    <div class="overlayContent">
-        <p>Select a Theme</p>
-        <div class="overlayList">
-        <div><button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button></div>
-        <div><button type="button" class="buttonOverlay" onclick="setTheme('light')">Light</button></div>
-        <div><button type="button" class="buttonOverlay" onclick="setTheme('coverDark')">Cover Dark</button></div>
-        <div><button type="button" class="buttonOverlay" onclick="setTheme('coverLight')">Cover Light</button></div>
+    <div class="overlayContentAlign" onclick="hideOverlay('overlayVolume')">
+        <div class="overlayContent">
+            <p>Change the volume</p>
         </div>
     </div>
 </div>
+<div id="overlayTheme" class="overlay">
+    <div class="overlayContentAlign" onclick="hideOverlay('overlayTheme')">
+        <div class="overlayContent">
+            <p>Select a Theme</p>
+            <div class="overlayList">
+                <div>
+                    <button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button>
+                </div>
+                <div>
+                    <button type="button" class="buttonOverlay" onclick="setTheme('light')">Light</button>
+                </div>
+                <div>
+                    <button type="button" class="buttonOverlay" onclick="setTheme('coverDark')">Cover Dark</button>
+                </div>
+                <div>
+                    <button type="button" class="buttonOverlay" onclick="setTheme('coverLight')">Cover Light</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<button type="button" id="menuButton" class="buttonTrans"></button>
 </body>
 </html>
