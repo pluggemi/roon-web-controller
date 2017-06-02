@@ -67,9 +67,8 @@ var roon = new RoonApi({
                     zoneStatus.push(data.zones[x])
                 }
                 log_file.write(util.format("Generated zoneList (subscribed) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
-                removeDuplicate(zoneList, 'zone_id');
-
-                io.emit("zoneStatus", zoneStatus);
+                removeDuplicateList(zoneList, 'zone_id');
+                removeDuplicateStatus(zoneStatus, 'zone_id');
             }
             else if (response == "Changed") {
                 if (data.zones_added){
@@ -87,9 +86,8 @@ var roon = new RoonApi({
                         zoneStatus.push(data.zones_added[x])
                     }
                     log_file.write(util.format("Generated zoneList (add) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
-
-                    removeDuplicate(zoneList, 'zone_id');
-                    io.emit("zoneStatus", zoneStatus);
+                    removeDuplicateList(zoneList, 'zone_id');
+                    removeDuplicateStatus(zoneStatus, 'zone_id');
                 }
                 else if (data.zones_removed){
                     log_file.write(util.format("Removed ---- " + JSON.stringify(data,null,2)) + '\n');
@@ -104,9 +102,8 @@ var roon = new RoonApi({
                         });
                     }
                     log_file.write(util.format("Generated zoneList (removed) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
-
-                    removeDuplicate(zoneList, 'zone_id');
-                    io.emit("zoneStatus", zoneStatus);
+                    removeDuplicateList(zoneList, 'zone_id');
+                    removeDuplicateStatus(zoneStatus, 'zone_id');
                 }
                 else if (data.zones_changed){
                     for (x in data.zones_changed){
@@ -142,7 +139,7 @@ svc_status.set_status("Extenstion enabled", false);
 roon.start_discovery();
 
 // Remove duplicates from zoneList array
-function removeDuplicate(array, property) {
+function removeDuplicateList(array, property) {
     log_file.write(util.format("Generated zoneList (pre-dedup) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
     var new_array = [];
     var lookup = {};
@@ -157,6 +154,22 @@ function removeDuplicate(array, property) {
     zoneList = new_array;
     io.emit("zoneList", zoneList);
     log_file.write(util.format("Generated zoneList (post-dedup) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
+}
+
+// Remove duplicates from zoneList array
+function removeDuplicateStatus(array, property) {
+    var new_array = [];
+    var lookup = {};
+    for (x in array) {
+        lookup[array[x][property]] = array[x];
+    }
+
+    for (x in lookup) {
+        new_array.push(lookup[x]);
+    }
+
+    zoneStatus = new_array;
+    io.emit("zoneStatus", zoneStatus);
 }
 
 // ---------------------------- WEB SOCKET --------------
