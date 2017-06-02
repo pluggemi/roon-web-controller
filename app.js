@@ -67,9 +67,8 @@ var roon = new RoonApi({
                     zoneStatus.push(data.zones[x])
                 }
                 log_file.write(util.format("Generated zoneList (subscribed) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
+                removeDuplicate(zoneList, 'zone_id');
 
-
-                io.emit("zoneList", zoneList);
                 io.emit("zoneStatus", zoneStatus);
             }
             else if (response == "Changed") {
@@ -80,13 +79,8 @@ var roon = new RoonApi({
                         var zone_id = data.zones_added[x].zone_id;
                         var display_name = data.zones_added[x].display_name;
 
-                        for (y in data.zones_added[x].outputs){
-                            var output_id = data.zones_added[x].outputs[y].output_id;
-                        }
-
                         item = {};
                         item ["zone_id"] = zone_id;
-                        item ["output_id"] = output_id;
                         item ["display_name"] = display_name;
 
                         zoneList.push(item);
@@ -94,7 +88,7 @@ var roon = new RoonApi({
                     }
                     log_file.write(util.format("Generated zoneList (add) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
 
-                    io.emit("zoneList", zoneList);
+                    removeDuplicate(zoneList, 'zone_id');
                     io.emit("zoneStatus", zoneStatus);
                 }
                 else if (data.zones_removed){
@@ -111,7 +105,7 @@ var roon = new RoonApi({
                     }
                     log_file.write(util.format("Generated zoneList (removed) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
 
-                    io.emit("zoneList", zoneList);
+                    removeDuplicate(zoneList, 'zone_id');
                     io.emit("zoneStatus", zoneStatus);
                 }
                 else if (data.zones_changed){
@@ -146,6 +140,24 @@ roon.init_services({
 svc_status.set_status("Extenstion enabled", false);
 
 roon.start_discovery();
+
+// Remove duplicates from zoneList array
+function removeDuplicate(array, property) {
+    log_file.write(util.format("Generated zoneList (pre-dedup) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
+    var new_array = [];
+    var lookup = {};
+    for (x in array) {
+        lookup[array[x][property]] = array[x];
+    }
+
+    for (x in lookup) {
+        new_array.push(lookup[x]);
+    }
+
+    zoneList = new_array;
+    io.emit("zoneList", zoneList);
+    log_file.write(util.format("Generated zoneList (post-dedup) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
+}
 
 // ---------------------------- WEB SOCKET --------------
 
