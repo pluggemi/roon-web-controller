@@ -39,7 +39,7 @@ Album Credit: [Android Lust, Crater Vol​.​1](http://music.androidlust.com/al
 Album Credit: [Rachel Grimes, The Clearing](https://rachelgrimes.bandcamp.com/album/the-clearing)
 
 ## Installation
-Ensure that Node.JS version 5.x or higher is installed.
+Ensure that Node.JS version 6.x or higher is installed.
 
 Grab the software:
 * Via git (preferred): ```git clone https://github.com/pluggemi/roon-web-controller.git```
