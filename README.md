@@ -2,6 +2,17 @@
 ---------------------------
 This is an extension for the Roon music player that provides a web based remote.
 
+## Recent Change Log
+Version 1.0.1
+- Resolved bug that could result in repeated listings in Zone Listings
+- Changed all icons to utilize SVGs from Material Design Icons (https://materialdesignicons.com/)
+- Dramactically reduced the number of times the icons were being called and redrawn
+- Changed default theme to "Cover Dark"
+- Set default icon theme to "Circles"
+- Added configuration option to select icons between icons with or without circles
+- Miscellaneous aesthetic changes
+
+
 ## Screenshots
 All of these screenshots were taken from a web client sized at 800x480 - the same size as a Raspberry Pi touch screen.  The application looks great natively on the Raspberry Pi Touch screen as well as in a web browser window. The application resizes to your screen size.
 

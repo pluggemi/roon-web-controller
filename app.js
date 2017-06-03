@@ -5,11 +5,6 @@ var core;
 var zoneStatus = [];
 var zoneList = [];
 
-// Setup debug logging
-var fs = require('fs');
-var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
-
 // Setup Express
 var express = require('express');
 var http = require('http');
@@ -40,7 +35,7 @@ var RoonApiTransport = require("node-roon-api-transport");
 var roon = new RoonApi({
     extension_id:        'com.pluggemi.roon.web.controller',
     display_name:        "Web Controller",
-    display_version:     "1.0.0",
+    display_version:     "1.0.1",
     publisher:           'Mike Plugge',
     email:               'masked',
     website:             'https://github.com/pluggemi/roon-web-controller',
@@ -52,8 +47,6 @@ var roon = new RoonApi({
 
         transport.subscribe_zones(function(response, data){
             if (response == "Subscribed") {
-                log_file.write(util.format("Subscribed ---- " + JSON.stringify(data,null,2)) + '\n');
-
                 for ( x in data.zones ) {
                     var zone_id = data.zones[x].zone_id;
                     var display_name = data.zones[x].display_name;
@@ -66,14 +59,11 @@ var roon = new RoonApi({
 
                     zoneStatus.push(data.zones[x])
                 }
-                log_file.write(util.format("Generated zoneList (subscribed) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
                 removeDuplicateList(zoneList, 'zone_id');
                 removeDuplicateStatus(zoneStatus, 'zone_id');
             }
             else if (response == "Changed") {
                 if (data.zones_added){
-                    log_file.write(util.format("Added ---- " + JSON.stringify(data,null,2)) + '\n');
-
                     for ( x in data.zones_added ) {
                         var zone_id = data.zones_added[x].zone_id;
                         var display_name = data.zones_added[x].display_name;
@@ -85,13 +75,10 @@ var roon = new RoonApi({
                         zoneList.push(item);
                         zoneStatus.push(data.zones_added[x])
                     }
-                    log_file.write(util.format("Generated zoneList (add) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
                     removeDuplicateList(zoneList, 'zone_id');
                     removeDuplicateStatus(zoneStatus, 'zone_id');
                 }
                 else if (data.zones_removed){
-                    log_file.write(util.format("Removed ---- " + JSON.stringify(data,null,2)) + '\n');
-
                     for (x in data.zones_removed) {
                         zoneList = zoneList.filter(function(zone){
                             return zone.zone_id != data.zones_removed[x];
@@ -101,7 +88,6 @@ var roon = new RoonApi({
                             return zone.zone_id != data.zones_removed[x];
                         });
                     }
-                    log_file.write(util.format("Generated zoneList (removed) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
                     removeDuplicateList(zoneList, 'zone_id');
                     removeDuplicateStatus(zoneStatus, 'zone_id');
                 }
@@ -140,7 +126,6 @@ roon.start_discovery();
 
 // Remove duplicates from zoneList array
 function removeDuplicateList(array, property) {
-    log_file.write(util.format("Generated zoneList (pre-dedup) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
     var new_array = [];
     var lookup = {};
     for (x in array) {
@@ -153,7 +138,6 @@ function removeDuplicateList(array, property) {
 
     zoneList = new_array;
     io.emit("zoneList", zoneList);
-    log_file.write(util.format("Generated zoneList (post-dedup) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
 }
 
 // Remove duplicates from zoneList array
@@ -175,7 +159,6 @@ function removeDuplicateStatus(array, property) {
 // ---------------------------- WEB SOCKET --------------
 
 io.on('connection', function(socket){
-    log_file.write(util.format("Generated zoneList (Sent) ---- " + JSON.stringify(zoneList,null,2)) + '\n');
     io.emit("zoneList", zoneList);
     io.emit("zoneStatus", zoneStatus);
 

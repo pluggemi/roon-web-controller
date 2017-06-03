@@ -75,16 +75,16 @@
     </div>
 </div>
 
-<div id="libraryBrowser">
+<!--<div id="libraryBrowser">
     <div class="messages">
         Library (todo)
     </div>
-</div>
+</div>-->
 
 <div id="overlayMainMenu" class="overlay">
     <div class="overlayContentAlign" onclick="hideOverlay('overlayMainMenu')">
         <div class="overlayContent">
-            <p>Sections</p>
+<!--            <p>Sections</p>
             <div class="overlayList">
                 <div>
                     <button type="button" id="controlSettings" class="buttonOverlay" onclick="showSection('libraryBrowser')">Library</button>
@@ -92,11 +92,12 @@
                 <div>
                     <button type="button" id="controlSettings" class="buttonOverlay" onclick="showSection('nowPlaying')">Now Playing</button>
                 </div>
-            </div>
+            </div>-->
             <p>Client Settings</p>
             <div>
                 <div class="overlayList">
                     <button type="button" id="controlSettings" class="buttonOverlay" onclick="showOverlay('overlayTheme')">Theme</button>
+                    <button type="button" id="controlSettings" class="buttonOverlay" onclick="showOverlay('overlayIcons')">Icons</button>
                 </div>
             </div>
         </div>
@@ -133,6 +134,21 @@
                 </div>
                 <div>
                     <button type="button" class="buttonOverlay" onclick="setTheme('coverLight')">Cover Light</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="overlayIcons" class="overlay">
+    <div class="overlayContentAlign" onclick="hideOverlay('overlayIcons')">
+        <div class="overlayContent">
+            <p>Select an Icon Style</p>
+            <div class="overlayList">
+                <div>
+                    <button type="button" class="buttonOverlay" onclick="setIcon('circle')">Circle</button>
+                </div>
+                <div>
+                    <button type="button" class="buttonOverlay" onclick="setIcon('standard')">Standard</button>
                 </div>
             </div>
         </div>
