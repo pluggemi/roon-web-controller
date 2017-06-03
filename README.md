@@ -1,5 +1,4 @@
 # Roon Web Controller
----------------------------
 This is an extension for the Roon music player that provides a web based remote.
 
 ## Recent Change Log
@@ -60,7 +59,7 @@ Open a web browser to your server at "http://localhost:8080"
 
 ### Usage
 * To select or change a zone, click the Speaker icon at the lower left
-* To select or change the theme, click the Gears icon at the lower left
+* To select or change the theme or icon set, click the menu icon at the upper right
 
 ## Known issues/TODO
 * The volume control overlay does not have any volume controls yet.
