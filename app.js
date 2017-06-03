@@ -35,7 +35,7 @@ var RoonApiTransport = require("node-roon-api-transport");
 var roon = new RoonApi({
     extension_id:        'com.pluggemi.roon.web.controller',
     display_name:        "Web Controller",
-    display_version:     "1.0.1",
+    display_version:     "dev",
     publisher:           'Mike Plugge',
     email:               'masked',
     website:             'https://github.com/pluggemi/roon-web-controller',
