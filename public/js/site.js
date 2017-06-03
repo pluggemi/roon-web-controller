@@ -39,6 +39,11 @@ $(document).ready(function() {
 
     if (curZoneID == null) {
         showOverlay('overlayZoneList');
+        $("#controlZone").attr("onclick", "showOverlay(\'overlayZoneList\')").html(getSVG('zone', curIcon) + "<br><span id=\"zoneName\">No Zone</span>");
+    }
+
+    if (curDisplayName != null) {
+        $("#controlZone").attr("onclick", "showOverlay(\'overlayZoneList\')").html(getSVG('zone', curIcon) + "<br><span id=\"zoneName\">" + curDisplayName +"</span>");
     }
 
     setTheme(curTheme);
@@ -47,7 +52,7 @@ $(document).ready(function() {
     $("#nowPlaying").show();
     $("#libraryBrowser").hide();
 
-    $("#controlZone").attr("onclick", "showOverlay(\'overlayZoneList\')").html(getSVG('zone', curIcon) + "<br><span id=\"zoneName\">No Zone</span>");
+
     $("#controlVolume").attr("onclick", "showOverlay(\'overlayVolume\')").html(getSVG('volume', curIcon));
 
     socket.on("zoneList", function(payload) {
