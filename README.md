@@ -6,7 +6,7 @@ This is an extension for the Roon music player that provides a web based remote.
 Version 1.0.1
 - Resolved bug that could result in repeated listings in Zone Listings
 - Changed all icons to utilize SVGs from Material Design Icons (https://materialdesignicons.com/)
-- Dramactically reduced the number of times the icons were being called and redrawn
+- Dramatically reduced the number of times the icons were being called and redrawn
 - Changed default theme to "Cover Dark"
 - Set default icon theme to "Circles"
 - Added configuration option to select icons between icons with or without circles
