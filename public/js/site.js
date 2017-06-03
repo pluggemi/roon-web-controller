@@ -3,23 +3,35 @@ var socket = io();
 var cssBackgroundColor;
 var cssForegroundColor;
 var curDisplayName;
+var curIcon;
 var curTheme;
 var curZone;
 var curZoneID;
-var lastLine1;
-var lastLine2;
-var lastLine3;
-var lastPicture;
-var lastTitle;
+var statePrev;
+var stateNext;
+var statePlayPauseStop;
+var statePlayPauseStopLast;
+var stateLine1;
+var stateLine2;
+var stateLine3;
+var statePicture;
+var stateTitle;
 
 $(document).ready(function() {
     curZoneID = readCookie('curZoneID');
     curDisplayName = readCookie('curDisplayName');
     curTheme = readCookie('curTheme');
+    curIcon = readCookie('curIcon');
 
-    $("#controlSettings").attr("onclick", "showOverlay(\'overlaySettings\')").html(getSVG('settings') + "<br><span id=\"clientSettings\">&nbsp;</span>");
-    $("#controlZone").attr("onclick", "showOverlay(\'overlayZoneList\')").html(getSVG('zone') + "<br><span id=\"zoneName\">No Zone</span>");
-    $("#controlVolume").attr("onclick", "showOverlay(\'overlayVolume\')").html(getSVG('volume') + "<br><span id=\"zoneVol\">&nbsp;</span>");
+    if (curTheme == null) {
+        curTheme = "coverDark";
+        setCookie('curTheme', curTheme);
+    };
+
+    if (curIcon == null) {
+        curIcon = "circle";
+        setCookie('curIcon', curIcon);
+    }
 
     if (curDisplayName != null){
         $("#zoneName").html(curDisplayName);
@@ -30,21 +42,28 @@ $(document).ready(function() {
     }
 
     setTheme(curTheme);
-});
 
-socket.on("zoneList", function(payload) {
-    updateZoneList(payload);
-});
+    $("#menuButton").attr("onclick", "showOverlay(\'overlayMainMenu\')").html(getSVG('menu', curIcon));
+    $("#nowPlaying").show();
+    $("#libraryBrowser").hide();
 
-socket.on("zoneStatus", function(payload) {
-    if (curZoneID != null){
-        for (x in payload){
-            if (payload[x].zone_id == curZoneID) {
-                curZone = payload[x];
-                updateZone(curZone);
+    $("#controlZone").attr("onclick", "showOverlay(\'overlayZoneList\')").html(getSVG('zone', curIcon) + "<br><span id=\"zoneName\">No Zone</span>");
+    $("#controlVolume").attr("onclick", "showOverlay(\'overlayVolume\')").html(getSVG('volume', curIcon));
+
+    socket.on("zoneList", function(payload) {
+        updateZoneList(payload);
+    });
+
+    socket.on("zoneStatus", function(payload) {
+        if (curZoneID != null){
+            for (x in payload){
+                if (payload[x].zone_id == curZoneID) {
+                    curZone = payload[x];
+                    updateZone(curZone);
+                }
             }
         }
-    }
+    });
 });
 
 function updateZoneList(payload){
@@ -81,8 +100,8 @@ function showIsPlaying(curZone) {
     $("#isPlaying").show();
     $("#playbackControls").show();
 
-    if ( lastLine1 != curZone.now_playing.three_line.line1) {
-        lastLine1 = curZone.now_playing.three_line.line1;
+    if ( stateLine1 != curZone.now_playing.three_line.line1) {
+        stateLine1 = curZone.now_playing.three_line.line1;
         $("#line1")
         .html(curZone.now_playing.three_line.line1)
         .simplemarquee({
@@ -92,8 +111,8 @@ function showIsPlaying(curZone) {
         });
     };
 
-    if ( lastLine2 != curZone.now_playing.three_line.line2) {
-        lastLine2 = curZone.now_playing.three_line.line2;
+    if ( stateLine2 != curZone.now_playing.three_line.line2) {
+        stateLine2 = curZone.now_playing.three_line.line2;
         $("#line2")
         .html(curZone.now_playing.three_line.line2)
         .simplemarquee({
@@ -103,8 +122,8 @@ function showIsPlaying(curZone) {
         });
     };
 
-    if ( lastLine3 != curZone.now_playing.three_line.line3) {
-        lastLine3 = curZone.now_playing.three_line.line3;
+    if ( stateLine3 != curZone.now_playing.three_line.line3) {
+        stateLine3 = curZone.now_playing.three_line.line3;
         $("#line3")
         .html(curZone.now_playing.three_line.line3)
         .simplemarquee({
@@ -114,8 +133,8 @@ function showIsPlaying(curZone) {
         });
     };
 
-    if (lastTitle != curZone.now_playing.one_line.line1) {
-        lastTitle = curZone.now_playing.one_line.line1;
+    if (stateTitle != curZone.now_playing.one_line.line1) {
+        stateTitle = curZone.now_playing.one_line.line1;
         $(document).prop('title', curZone.now_playing.one_line.line1);
     };
 
@@ -129,8 +148,8 @@ function showIsPlaying(curZone) {
         $("#line4").hide();
     };
 
-    if ( lastPicture != curZone.now_playing.image_key ) {
-        lastPicture = curZone.now_playing.image_key;
+    if ( statePicture != curZone.now_playing.image_key ) {
+        statePicture = curZone.now_playing.image_key;
 
         if ( curZone.now_playing.image_key == null ) {
             imgUrl = "/img/transparent.png";
@@ -143,28 +162,43 @@ function showIsPlaying(curZone) {
         $("#coverBackground").css("background-image", "url(" + imgUrl + ")");
     };
 
-    if ( curZone.is_previous_allowed == true ) {
-        $("#controlPrev").attr("onclick", "goCmd(\'prev\', \'" + curZone.zone_id + "\')").html(getSVG('prev')).css("fill-opacity", "1");
-    } else {
-        $("#controlPrev").html(getSVG('prev')).css("fill-opacity", "0.33");
+    if (statePrev != curZone.is_previous_allowed || statePrev == null) {
+        statePrev = curZone.is_previous_allowed;
+        if ( curZone.is_previous_allowed == true ) {
+            $("#controlPrev").attr("onclick", "goCmd(\'prev\', \'" + curZone.zone_id + "\')").html(getSVG('prev', curIcon)).css("fill-opacity", "1");
+        } else {
+            $("#controlPrev").html(getSVG('prev', curIcon)).css("fill-opacity", "0.33");
+        };
     };
-
-    if ( curZone.is_next_allowed == true ) {
-        $("#controlNext").attr("onclick", "goCmd(\'next\', \'" + curZone.zone_id + "\')").html(getSVG('next')).css("fill-opacity", "1");
-    } else {
-        $("#controlNext").html(getSVG('next')).css("fill-opacity", "0.33");
+    if (stateNext != curZone.is_next_allowed || stateNext == null) {
+        stateNext = curZone.is_next_allowed;
+        if ( curZone.is_next_allowed == true ) {
+            $("#controlNext").attr("onclick", "goCmd(\'next\', \'" + curZone.zone_id + "\')").html(getSVG('next', curIcon)).css("fill-opacity", "1");
+        } else {
+            $("#controlNext").html(getSVG('next', curIcon)).css("fill-opacity", "0.33");
+        }
     }
 
     if ( curZone.is_play_allowed == true ) {
-        $("#controlPlayPauseStop").attr("onclick", "goCmd(\'play\', \'" + curZone.zone_id + "\')").html(getSVG('play')).css("fill-opacity", "1");
+        statePlayPauseStop = "showPlay";
     } else if ( curZone.state == "playing" && curZone.is_play_allowed == false ) {
-        if ( curZone.is_pause_allowed == true ) {
-            $("#controlPlayPauseStop").attr("onclick", "goCmd(\'pause\', \'" + curZone.zone_id + "\')").html(getSVG('pause')).css("fill-opacity", "1");
-        } else {
-            $("#controlPlayPauseStop").attr("onclick", "goCmd(\'stop\', \'" + curZone.zone_id + "\')").html(getSVG('stop')).css("fill-opacity", "1");
-        }
+        if ( curZone.is_pause_allowed == true ) { statePlayPauseStop = "showPause"; }
+        else { statePlayPauseStop = "showStop"; }
     } else {
-        $("#controlPlayPauseStop").html(getSVG('play')).css("fill-opacity", "0.33");
+        statePlayPauseStop = "showPlayDisabled";
+    }
+
+    if (statePlayPauseStopLast != statePlayPauseStop || statePlayPauseStop == null) {
+        statePlayPauseStopLast = statePlayPauseStop;
+        if ( statePlayPauseStop == "showPlay") {
+            $("#controlPlayPauseStop").attr("onclick", "goCmd(\'play\', \'" + curZone.zone_id + "\')").html(getSVG('play', curIcon)).css("fill-opacity", "1");
+        } else if (statePlayPauseStop == "showPause") {
+            $("#controlPlayPauseStop").attr("onclick", "goCmd(\'pause\', \'" + curZone.zone_id + "\')").html(getSVG('pause', curIcon)).css("fill-opacity", "1");
+        } else if (statePlayPauseStop == "showStop") {
+            $("#controlPlayPauseStop").attr("onclick", "goCmd(\'pause\', \'" + curZone.zone_id + "\')").html(getSVG('stop', curIcon)).css("fill-opacity", "1");
+        } else if (statePlayPauseStop == "showPlayDisabled") {
+            $("#controlPlayPauseStop").html(getSVG('play', curIcon)).css("fill-opacity", "0.33");
+        }
     }
 }
 
@@ -188,14 +222,28 @@ function showNotPlaying() {
     $("#playbackControls").hide();
 }
 
+function showSection(section){
+    if (section == "nowPlaying") {
+        $("#nowPlaying").show();
+        $("#libraryBrowser").hide();
+    } else if (section == "libraryBrowser"){
+        $("#nowPlaying").hide();
+        $("#libraryBrowser").show();
+    }
+}
+
 function showOverlay(overlay) {
     if (overlay == "overlayZoneList") {
         $("#overlayZoneList").show();
         overlayZoneListState = true;
     } else if (overlay == "overlayVolume") {
         $("#overlayVolume").show();
-    } else if (overlay == "overlaySettings") {
-        $("#overlaySettings").show();
+    } else if (overlay == "overlayTheme") {
+        $("#overlayTheme").show();
+    } else if (overlay == "overlayIcons") {
+        $("#overlayIcons").show();
+    } else if (overlay == "overlayMainMenu") {
+        $("#overlayMainMenu").show();
     }
 }
 
@@ -205,20 +253,27 @@ function hideOverlay(overlay) {
         overlayZoneListState = false;
     } else if (overlay == "overlayVolume") {
         $("#overlayVolume").hide();
-    } else if (overlay == "overlaySettings") {
-        $("#overlaySettings").hide();
+    } else if (overlay == "overlayTheme") {
+        $("#overlayTheme").hide();
+    } else if (overlay == "overlayIcons") {
+        $("#overlayIcons").hide();
+    } else if (overlay == "overlayMainMenu") {
+        $("#overlayMainMenu").hide();
     }
 }
 
-function setTheme(curTheme) {
-    if (curTheme == null) {
-        curTheme = "dark";
-        setCookie('curTheme', curTheme);
-        showTheme(curTheme);
-    } else {
-        setCookie('curTheme', curTheme);
-        showTheme(curTheme);
-    }
+function setIcon(icon) {
+    curIcon = icon;
+    setCookie('curIcon', curIcon);
+    statePrev = "getSVG";
+    statePlayPauseStopLast = "getSVG";
+    stateNext = "getSVG";
+}
+
+function setTheme(theme) {
+    curTheme = theme;
+    setCookie('curTheme', curTheme);
+    showTheme(curTheme);
 }
 
 function showTheme(curTheme) {
@@ -277,22 +332,38 @@ function secondsConvert(seconds) {
     return ((hour > 0 ? hour + ":" + (minute < 10 ? "0" : "") : "") + minute + ":" + (second < 10 ? "0" : "") + second);
 }
 
-function getSVG(cmd) {
-    if (cmd == "settings") {
-        return "<svg class=\"svgSmall\" viewBox=\"0 0 1920 1792\"><path style=\"fill:currentColor;stroke:none\" d=\"M896 896q0-106-75-181t-181-75-181 75-75 181 75 181 181 75 181-75 75-181zm768 512q0-52-38-90t-90-38-90 38-38 90q0 53 37.5 90.5t90.5 37.5 90.5-37.5 37.5-90.5zm0-1024q0-52-38-90t-90-38-90 38-38 90q0 53 37.5 90.5T1536 512t90.5-37.5T1664 384zm-384 421v185q0 10-7 19.5t-16 10.5l-155 24q-11 35-32 76 34 48 90 115 7 11 7 20 0 12-7 19-23 30-82.5 89.5T999 1423q-11 0-21-7l-115-90q-37 19-77 31-11 108-23 155-7 24-30 24H547q-11 0-20-7.5t-10-17.5l-23-153q-34-10-75-31l-118 89q-7 7-20 7-11 0-21-8-144-133-144-160 0-9 7-19 10-14 41-53t47-61q-23-44-35-82l-152-24q-10-1-17-9.5T0 987V802q0-10 7-19.5T23 772l155-24q11-35 32-76-34-48-90-115-7-11-7-20 0-12 7-20 22-30 82-89t79-59q11 0 21 7l115 90q34-18 77-32 11-108 23-154 7-24 30-24h186q11 0 20 7.5t10 17.5l23 153q34 10 75 31l118-89q8-7 20-7 11 0 21 8 144 133 144 160 0 8-7 19-12 16-42 54t-45 60q23 48 34 82l152 23q10 2 17 10.5t7 19.5zm640 533v140q0 16-149 31-12 27-30 52 51 113 51 138 0 4-4 7-122 71-124 71-8 0-46-47t-52-68q-20 2-30 2t-30-2q-14 21-52 68t-46 47q-2 0-124-71-4-3-4-7 0-25 51-138-18-25-30-52-149-15-149-31v-140q0-16 149-31 13-29 30-52-51-113-51-138 0-4 4-7 4-2 35-20t59-34 30-16q8 0 46 46.5t52 67.5q20-2 30-2t30 2q51-71 92-112l6-2q4 0 124 70 4 3 4 7 0 25-51 138 17 23 30 52 149 15 149 31zm0-1024v140q0 16-149 31-12 27-30 52 51 113 51 138 0 4-4 7-122 71-124 71-8 0-46-47t-52-68q-20 2-30 2t-30-2q-14 21-52 68t-46 47q-2 0-124-71-4-3-4-7 0-25 51-138-18-25-30-52-149-15-149-31V314q0-16 149-31 13-29 30-52-51-113-51-138 0-4 4-7 4-2 35-20t59-34 30-16q8 0 46 46.5t52 67.5q20-2 30-2t30 2q51-71 92-112l6-2q4 0 124 70 4 3 4 7 0 25-51 138 17 23 30 52 149 15 149 31z\"/></svg>";
-    } else if (cmd == "zone") {
-        return "<svg class=\"svgSmall\"  viewBox=\"0 0 52 72\"><g transform=\"matrix(-1 0 0 1 76 -966.36)\"><path style=\"fill:currentColor;stroke:none\" transform=\"translate(0 952.36)\" d=\"m30 14c-3.2894 0-6 2.7106-6 6v60c0 3.2894 2.7106 6 6 6h40c3.2894 0 6-2.7106 6-6v-60c0-3.2894-2.7106-6-6-6zm0 4h40c1.1426 0 2 0.85741 2 2v60c0 1.1426-0.85741 2-2 2h-40c-1.1426 0-2-0.8574-2-2v-60c0-1.1426 0.85741-2 2-2zm3 3c-1.1046 0-2 0.89543-2 2s0.89543 2 2 2 2-0.89543 2-2-0.89543-2-2-2zm17 0c-5.4992 0-10 4.5008-10 10s4.5008 10 10 10 10-4.5008 10-10-4.5008-10-10-10zm17 0c-1.1046 0-2 0.89543-2 2s0.89543 2 2 2 2-0.89543 2-2-0.89543-2-2-2zm-17 4c3.3374 0 6 2.6626 6 6s-2.6626 6-6 6-6-2.6626-6-6 2.6626-6 6-6zm0 4c-1.1046 0-2 0.89543-2 2s0.89543 2 2 2 2-0.89543 2-2-0.89543-2-2-2zm0 18c-8.8129 0-16 7.1871-16 16s7.1871 16 16 16 16-7.1871 16-16-7.1871-16-16-16zm0 4c6.6511 0 12 5.3489 12 12s-5.3489 12-12 12-12-5.3489-12-12 5.3489-12 12-12zm0 6c-3.29 0-6 2.71-6 6s2.71 6 6 6 6-2.71 6-6-2.71-6-6-6zm0 4c1.1283 0 2 0.8717 2 2s-0.87174 2-2 2-2-0.8717-2-2 0.87174-2 2-2zm-17 14c-1.1046 0-2 0.89543-2 2s0.89543 2 2 2 2-0.89543 2-2-0.89543-2-2-2zm34 0c-1.1046 0-2 0.89543-2 2s0.89543 2 2 2 2-0.89543 2-2-0.89543-2-2-2z\"/></g></svg>";
+function getSVG(cmd, curIcon) {
+    if (cmd == "zone") {
+        return "<svg class=\"svgSmall\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 11.9994,11.9981C 10.3434,11.9981 8.99943,13.3421 8.99943,14.9981C 8.99943,16.6541 10.3434,17.9981 11.9994,17.9981C 13.6554,17.9981 14.9994,16.6541 14.9994,14.9981C 14.9994,13.3421 13.6554,11.9981 11.9994,11.9981 Z M 11.9994,19.9981C 9.23942,19.9981 6.99943,17.7601 6.99943,14.9981C 6.99943,12.2361 9.23942,9.99807 11.9994,9.99807C 14.7604,9.99807 16.9994,12.2361 16.9994,14.9981C 16.9994,17.7601 14.7604,19.9981 11.9994,19.9981 Z M 11.9994,3.99807C 13.1024,3.99807 13.9994,4.89406 13.9994,5.99807C 13.9994,7.10207 13.1024,7.99807 11.9994,7.99807C 10.8934,7.99807 9.99943,7.10207 9.99943,5.99807C 9.99943,4.89406 10.8934,3.99807 11.9994,3.99807 Z M 16.9994,1.99807L 6.99943,1.99807C 5.89442,1.99807 4.99943,2.89406 4.99943,3.99807L 4.99943,19.9981C 4.99943,21.1021 5.89442,21.9881 6.99943,21.9881L 16.9994,21.9981C 18.1034,21.9981 18.9994,21.1021 18.9994,19.9981L 18.9994,3.99807C 18.9994,2.89406 18.1034,1.99807 16.9994,1.99807 Z \"/></svg>";
     } else if (cmd == "volume") {
-        return "<svg class=\"svgSmall\" viewBox=\"0 0 22 22\"><path style=\"fill:currentColor;fill-opacity:1;stroke:none\" d=\"M 10.988281 3 L 6 7.9902344 L 6 8 L 6 9 L 6 13 L 6 14 L 6 14.009766 L 10.988281 19 L 12 19 L 12 18.597656 L 12 3.4023438 L 12 3 L 10.988281 3 z M 14.324219 7.28125 L 13.785156 8.1425781 A 4 4 0 0 1 15 11 A 4 4 0 0 1 13.789062 13.861328 L 14.328125 14.724609 A 5 5 0 0 0 16 11 A 5 5 0 0 0 14.324219 7.28125 z M 3 8 L 3 9 L 3 13 L 3 14 L 5 14 L 5 13 L 5 9 L 5 8 L 3 8 z \"/><path style=\"fill:currentColor;fill-opacity:0.25;stroke:none\" d=\"M 13.865234 3.5371094 L 13.621094 4.5136719 A 7 7 0 0 1 18 11 A 7 7 0 0 1 13.619141 17.478516 L 13.863281 18.453125 A 8 8 0 0 0 19 11 A 8 8 0 0 0 13.865234 3.5371094 z \"/></svg>";
-    } else if (cmd == "prev"){
-        return "<svg class=\"svgMedium\" max-width=\"72px\" max-height=\"72px\" viewBox=\"0 0 32 32\"><path style=\"fill:currentColor;stroke:none\" d=\"M 16.001953 3.9980469 A 12 12 0 0 0 4.0019531 15.998047 A 12 12 0 0 0 16.001953 27.998047 A 12 12 0 0 0 28.001953 15.998047 A 12 12 0 0 0 16.001953 3.9980469 z M 16.001953 4.9980469 A 11 11 0 0 1 27.001953 15.998047 A 11 11 0 0 1 16.001953 26.998047 A 11 11 0 0 1 5.0019531 15.998047 A 11 11 0 0 1 16.001953 4.9980469 z M 11 12 L 11 20 L 13 20 L 13 12 L 11 12 z M 21 12 L 14 16 L 21 20 L 21 12 z \"/></svg>";
-    } else if (cmd == "next") {
-        return "<svg class=\"svgMedium\" viewBox=\"0 0 32 32\"><path style=\"fill:currentColor;stroke:none\" d=\"M 16.001953 3.9980469 A 12 12 0 0 0 4.0019531 15.998047 A 12 12 0 0 0 16.001953 27.998047 A 12 12 0 0 0 28.001953 15.998047 A 12 12 0 0 0 16.001953 3.9980469 z M 16.001953 4.9980469 A 11 11 0 0 1 27.001953 15.998047 A 11 11 0 0 1 16.001953 26.998047 A 11 11 0 0 1 5.0019531 15.998047 A 11 11 0 0 1 16.001953 4.9980469 z M 11 12 L 11 20 L 18 16 L 11 12 z M 19 12 L 19 20 L 21 20 L 21 12 L 19 12 z \"/></svg>";
-    } else if (cmd == "play") {
-        return "<svg class=\"svgLarge\" viewBox=\"0 0 32 32\"><path style=\"fill:currentColor;stroke:none\" d=\"M 16.001953 3.9980469 A 12 12 0 0 0 4.0019531 15.998047 A 12 12 0 0 0 16.001953 27.998047 A 12 12 0 0 0 28.001953 15.998047 A 12 12 0 0 0 16.001953 3.9980469 z M 16.001953 4.9980469 A 11 11 0 0 1 27.001953 15.998047 A 11 11 0 0 1 16.001953 26.998047 A 11 11 0 0 1 5.0019531 15.998047 A 11 11 0 0 1 16.001953 4.9980469 z M 13 12 L 13 20 L 20 16 L 13 12 z \"/></svg>";
-    } else if (cmd == "pause") {
-        return "<svg class=\"svgLarge\" viewBox=\"0 0 32 32\"><path style=\"fill:currentColor;fill-opacity:1;stroke:none\" d=\"M 16.001953 3.9980469 A 12 12 0 0 0 4.0019531 15.998047 A 12 12 0 0 0 16.001953 27.998047 A 12 12 0 0 0 28.001953 15.998047 A 12 12 0 0 0 16.001953 3.9980469 z M 16.001953 4.9980469 A 11 11 0 0 1 27.001953 15.998047 A 11 11 0 0 1 16.001953 26.998047 A 11 11 0 0 1 5.0019531 15.998047 A 11 11 0 0 1 16.001953 4.9980469 z M 12 12 L 12 20 L 14 20 L 14 12 L 12 12 z M 18 12 L 18 20 L 20 20 L 20 12 L 18 12 z \"/></svg>";
-    } else if (cmd == "stop") {
-        return "<svg class=\"svgLarge\" viewBox=\"0 0 32 32\"><path style=\"fill:currentColor;fill-opacity:1;stroke:none\" d=\"M 16.001953 3.9980469 A 12 12 0 0 0 4.0019531 15.998047 A 12 12 0 0 0 16.001953 27.998047 A 12 12 0 0 0 28.001953 15.998047 A 12 12 0 0 0 16.001953 3.9980469 z M 16.001953 4.9980469 A 11 11 0 0 1 27.001953 15.998047 A 11 11 0 0 1 16.001953 26.998047 A 11 11 0 0 1 5.0019531 15.998047 A 11 11 0 0 1 16.001953 4.9980469 z M 12 12 L 12 20 L 20 20 L 20 12 L 12 12 z \"/></svg>";
+        return "<svg class=\"svgSmall\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 20.9999,12.0001C 20.9999,16.2832 18.008,19.8676 14,20.777L 14,18.7102C 16.8914,17.8496 18.9999,15.1711 18.9999,12.0001C 18.9999,8.8291 16.8914,6.15058 14,5.29L 14,3.22307C 18.008,4.13255 20.9999,7.71688 20.9999,12.0001 Z M 17,12C 17,14.0503 15.7659,15.8124 14,16.584L 14,7.41605C 15.7659,8.1876 17,9.94968 17,12 Z \"/></svg>";
+    } else if (cmd == "menu") {
+        return "<svg class=\"svgSmall\" viewBox=\"0 0 512 512\"><path style=\"fill:currentColor;fill-opacity:1;stroke:none\" d=\"M64 128h384v42.667H64V128m0 106.667h384v42.666H64v-42.666m0 106.666h384V384H64v-42.667z\"/></svg>";
+    }
+    if (curIcon == 'circle') {
+        if (cmd == "prev"){
+            return "<svg class=\"svgMedium\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 12.0025,2.0025C 17.525,2.0025 22.0025,6.475 22.0025,12.0025C 22.0025,17.525 17.525,22.0025 12.0025,22.0025C 6.475,22.0025 2.0025,17.525 2.0025,12.0025C 2.0025,6.475 6.475,2.0025 12.0025,2.0025 Z M 12.0025,3.99875C 7.5875,3.99875 3.99875,7.5875 3.99875,12.0025C 3.99875,16.4113 7.5875,20 12.0025,20C 16.4112,20 20,16.4113 20,12.0025C 20,7.5875 16.4112,3.99875 12.0025,3.99875 Z M 16.0012,7.9975L 16.0012,16.0012L 11.0013,12.0025M 10,7.9975L 10,16.0012L 7.9975,16.0012L 7.9975,7.9975\"/></svg>";
+        } else if (cmd == "next") {
+            return "<svg class=\"svgMedium\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 12.0025,2.0025C 6.475,2.0025 2.0025,6.475 2.0025,12.0025C 2.0025,17.525 6.475,22.0025 12.0025,22.0025C 17.525,22.0025 22.0025,17.525 22.0025,12.0025C 22.0025,6.475 17.525,2.0025 12.0025,2.0025 Z M 12.0025,3.99875C 16.4112,3.99875 20,7.5875 20,12.0025C 20,16.4113 16.4112,20 12.0025,20C 7.5875,20 3.99875,16.4113 3.99875,12.0025C 3.99875,7.5875 7.5875,3.99875 12.0025,3.99875 Z M 7.9975,7.9975L 7.9975,16.0012L 12.9975,12.0025M 13.9987,7.9975L 13.9987,16.0012L 16.0012,16.0012L 16.0012,7.9975\"/></svg>";
+        } else if (cmd == "play") {
+            return "<svg class=\"svgLarge\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 12,20C 7.589,20 4.00001,16.411 4.00001,12C 4.00001,7.589 7.589,4.00001 12,4.00001C 16.411,4.00001 20,7.589 20,12C 20,16.411 16.411,20 12,20 Z M 12,2.00001C 6.477,2.00001 2.00001,6.477 2.00001,12C 2.00001,17.523 6.477,22 12,22C 17.523,22 22,17.523 22,12C 22,6.477 17.523,2.00001 12,2.00001 Z M 10,16.5L 16,12L 10,7.50001L 10,16.5 Z \"/></svg>";
+        } else if (cmd == "pause") {
+            return "<svg class=\"svgLarge\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 13,16L 13,8L 15,8L 15,16L 13,16 Z M 8.99994,16L 8.99994,8.00004L 10.9999,8.00004L 10.9999,16L 8.99994,16 Z M 12,2C 17.5228,2 22,6.47716 22,12C 22,17.5229 17.5228,22 12,22C 6.47715,22 2,17.5229 2,12C 2,6.47716 6.47715,2 12,2 Z M 12,4C 7.58172,4 4,7.58173 4,12C 4,16.4183 7.58172,20 12,20C 16.4183,20 20,16.4183 20,12C 20,7.58173 16.4183,4 12,4 Z \"/></svg>";
+        } else if (cmd == "stop") {
+            return "<svg class=\"svgLarge\"  viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 12.0025,2.0025C 6.475,2.0025 2.0025,6.475 2.0025,12.0025C 2.0025,17.525 6.475,22.0025 12.0025,22.0025C 17.525,22.0025 22.0025,17.525 22.0025,12.0025C 22.0025,6.475 17.525,2.0025 12.0025,2.0025 Z M 12.0025,3.99875C 16.4112,3.99875 20,7.5875 20,12.0025C 20,16.4113 16.4112,20 12.0025,20C 7.5875,20 3.99875,16.4113 3.99875,12.0025C 3.99875,7.5875 7.5875,3.99875 12.0025,3.99875 Z M 8.99875,8.99875L 8.99875,15L 15,15L 15,8.99875\"/></svg>";
+        }
+    }
+    else if (curIcon == 'standard') {
+        if (cmd == "prev"){
+            return "<svg class=\"svgMedium\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 6,17.9997L 6,5.99972L 8,5.99972L 8,17.9997L 6,17.9997 Z M 9.5,12L 18,6L 18,18L 9.5,12 Z \"/></svg>";
+        } else if (cmd == "next") {
+            return "<svg class=\"svgMedium\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 16,18L 18,18L 18,5.99999L 16,5.99999M 6,18L 14.5,12L 6,5.99999L 6,18 Z \"/></svg>";
+        } else if (cmd == "play") {
+            return "<svg class=\"svgLarge\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 7.99939,5.13684L 7.99939,19.1368L 18.9994,12.1368L 7.99939,5.13684 Z \"/></svg>";
+        } else if (cmd == "pause") {
+            return "<svg class=\"svgLarge\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 14,19L 18,19L 18,4.99999L 14,4.99999M 6,19L 10,19L 10,4.99999L 6,4.99999L 6,19 Z \"/></svg>";
+        } else if (cmd == "stop") {
+            return "<svg class=\"svgLarge\" viewBox=\"0 0 24.00 24.00\"><path style=\"fill:currentColor\" d=\"M 18,18L 6,18L 5.99988,6.00011L 18,5.99999L 18,18 Z \"/></svg>";
+        }
     }
 }

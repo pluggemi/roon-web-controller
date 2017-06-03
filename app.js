@@ -35,7 +35,7 @@ var RoonApiTransport = require("node-roon-api-transport");
 var roon = new RoonApi({
     extension_id:        'com.pluggemi.roon.web.controller',
     display_name:        "Web Controller",
-    display_version:     "1.0.0",
+    display_version:     "1.0.1",
     publisher:           'Mike Plugge',
     email:               'masked',
     website:             'https://github.com/pluggemi/roon-web-controller',
@@ -59,9 +59,8 @@ var roon = new RoonApi({
 
                     zoneStatus.push(data.zones[x])
                 }
-
-                io.emit("zoneList", zoneList);
-                io.emit("zoneStatus", zoneStatus);
+                removeDuplicateList(zoneList, 'zone_id');
+                removeDuplicateStatus(zoneStatus, 'zone_id');
             }
             else if (response == "Changed") {
                 if (data.zones_added){
@@ -69,20 +68,15 @@ var roon = new RoonApi({
                         var zone_id = data.zones_added[x].zone_id;
                         var display_name = data.zones_added[x].display_name;
 
-                        for (y in data.zones_added[x].outputs){
-                            var output_id = data.zones_added[x].outputs[y].output_id;
-                        }
-
                         item = {};
                         item ["zone_id"] = zone_id;
-                        item ["output_id"] = output_id;
                         item ["display_name"] = display_name;
 
                         zoneList.push(item);
                         zoneStatus.push(data.zones_added[x])
                     }
-                    io.emit("zoneList", zoneList);
-                    io.emit("zoneStatus", zoneStatus);
+                    removeDuplicateList(zoneList, 'zone_id');
+                    removeDuplicateStatus(zoneStatus, 'zone_id');
                 }
                 else if (data.zones_removed){
                     for (x in data.zones_removed) {
@@ -94,8 +88,8 @@ var roon = new RoonApi({
                             return zone.zone_id != data.zones_removed[x];
                         });
                     }
-                    io.emit("zoneList", zoneList);
-                    io.emit("zoneStatus", zoneStatus);
+                    removeDuplicateList(zoneList, 'zone_id');
+                    removeDuplicateStatus(zoneStatus, 'zone_id');
                 }
                 else if (data.zones_changed){
                     for (x in data.zones_changed){
@@ -129,6 +123,38 @@ roon.init_services({
 svc_status.set_status("Extenstion enabled", false);
 
 roon.start_discovery();
+
+// Remove duplicates from zoneList array
+function removeDuplicateList(array, property) {
+    var new_array = [];
+    var lookup = {};
+    for (x in array) {
+        lookup[array[x][property]] = array[x];
+    }
+
+    for (x in lookup) {
+        new_array.push(lookup[x]);
+    }
+
+    zoneList = new_array;
+    io.emit("zoneList", zoneList);
+}
+
+// Remove duplicates from zoneList array
+function removeDuplicateStatus(array, property) {
+    var new_array = [];
+    var lookup = {};
+    for (x in array) {
+        lookup[array[x][property]] = array[x];
+    }
+
+    for (x in lookup) {
+        new_array.push(lookup[x]);
+    }
+
+    zoneStatus = new_array;
+    io.emit("zoneStatus", zoneStatus);
+}
 
 // ---------------------------- WEB SOCKET --------------
 

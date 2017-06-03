@@ -2,6 +2,17 @@
 ---------------------------
 This is an extension for the Roon music player that provides a web based remote.
 
+## Recent Change Log
+Version 1.0.1
+- Resolved bug that could result in repeated listings in Zone Listings
+- Changed all icons to utilize SVGs from Material Design Icons (https://materialdesignicons.com/)
+- Dramactically reduced the number of times the icons were being called and redrawn
+- Changed default theme to "Cover Dark"
+- Set default icon theme to "Circles"
+- Added configuration option to select icons between icons with or without circles
+- Miscellaneous aesthetic changes
+
+
 ## Screenshots
 All of these screenshots were taken from a web client sized at 800x480 - the same size as a Raspberry Pi touch screen.  The application looks great natively on the Raspberry Pi Touch screen as well as in a web browser window. The application resizes to your screen size.
 
@@ -88,7 +99,18 @@ You can monitor the output of this application using ```journalctl```.
 In addition to those packages installed via npm, this project uses:
 * [jquery.simplemarquee.js](https://github.com/IndigoUnited/jquery.simplemarquee)
 * Color palette from the KDE Visual Design Group [Human Interface Guidelines](https://community.kde.org/KDE_Visual_Design_Group/HIG/Color)
+* Icons from [Material Design Icons](https://materialdesignicons.com/)
 
 Thanks go to [st0g1e](https://github.com/st0g1e) for doing one of the first [web clients](https://github.com/st0g1e/roon-extension-ws-player) for the Roon API.
 
 And of course thanks go to [Roon Labs](https://roonlabs.com/) for making the music player and the [APIs](https://github.com/RoonLabs).
+
+## License
+The MIT License
+Copyright 2017 Mike Plugge
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
