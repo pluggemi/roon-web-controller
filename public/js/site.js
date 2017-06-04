@@ -248,19 +248,20 @@ function showIsPlaying(curZone) {
 
     if (state['Loop'] != curZone.settings.loop || state['Loop'] == null) {
         state['Loop'] = curZone.settings.loop;
+        console.log(JSON.stringify(curZone))
         if (state['Loop'] == "disabled"){
             $("#statusLoop").html(getSVG('loop', settings['iconTheme'])).css("fill-opacity", "0.33");
             $("#buttonLoopOff svg").addClass("selected");
             $("#buttonLoopAll svg").removeClass("selected");
             $("#buttonLoopOne svg").removeClass("selected");
         } else if (state['Loop'] == "loop"){
-            // yes this looks weird - but the node-roon-api does not match the roon client view
+            // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
             $("#statusLoop").html(getSVG('loopOne', settings['iconTheme'])).css("fill-opacity", "1");
             $("#buttonLoopOff svg").removeClass("selected");
             $("#buttonLoopAll svg").removeClass("selected");
             $("#buttonLoopOne svg").addClass("selected");
         } else if (state['Loop'] == "loop_one"){
-            // yes this looks weird - but the node-roon-api does not match the roon client view
+            // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
             $("#statusLoop").html(getSVG('loop', settings['iconTheme'])).css("fill-opacity", "1");
             $("#buttonLoopOff svg").removeClass("selected");
             $("#buttonLoopAll svg").addClass("selected");
