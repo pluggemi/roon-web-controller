@@ -39,16 +39,12 @@ $(document).ready(function() {
         $('#statusBar').show();
     }
 
-
-
-
     setTheme(settings['theme']);
 
     $("#nowPlaying").show();
     $("#libraryBrowser").hide();
-
-    overlayButtons();
     startTime();
+    overlayButtons();
 
     socket.on("zoneList", function(payload) {
         updateZoneList(payload);
@@ -160,7 +156,32 @@ function showIsPlaying(curZone) {
         }
 
         $("#coverImageDiv").html("<img src=\"" + imgUrl + "\" id=\"coverImage\">");
-        $("#coverBackground").css("background-image", "url(" + imgUrl + ")");
+
+        if (settings['theme'] == "coverDark" || settings['theme'] == "coverLight") {
+            $("#coverBackground").css("background-image", "url(" + imgUrl + ")");
+        }
+
+        if (settings['theme'] == "color"){
+            var colorThief = new ColorThief();
+            colorThief.getColorAsync(imgUrl, function(color){
+                r = color[0];
+                g = color[1];
+                b = color[2];
+                $("#colorBackground").css("background-color", 'rgb('+ r +','+ g +','+ b +')');
+
+                yiq = ((r*299)+(g*587)+(b*114))/1000;
+                if (yiq >= 128) {
+                    css['backgroundColor'] = "#eff0f1";
+                    css['foregroundColor'] = "#232629";
+                    css['trackSeek'] = "rgba(35, 38, 41, 0.33)"
+                } else {
+                    css['backgroundColor'] = "#232629";
+                    css['foregroundColor'] = "#eff0f1";
+                    css['trackSeek'] = "rgba(239, 240, 241, 0.33)";
+                }
+                showTheme('color');
+            });
+        }
     };
 
     if (state['Prev'] != curZone.is_previous_allowed || state['Prev'] == null) {
@@ -289,10 +310,14 @@ function showSection(section){
 function toggleStatusBar(cmd) {
     if (cmd == "show"){
         $('#statusBar').show();
+        settings['statusBar'] = "show";
         setCookie('settings[\'statusBar\']', "show");
+        startTime();
     } else if (cmd == "hide"){
         $('#statusBar').hide();
+        settings['statusBar'] = "hide";
         setCookie('settings[\'statusBar\']', "hide");
+        startTime();
     }
 }
 
@@ -336,41 +361,53 @@ function showTheme(theme) {
     if (theme == "dark") {
         css['backgroundColor'] = "#232629";
         css['foregroundColor'] = "#eff0f1";
+        css['trackSeek'] = "rgba(239, 240, 241, 0.33)";
 
-        $("#trackSeek").css("background-color", "rgba(239, 240, 241, 0.33)");
         $("#coverBackground").hide();
+        $("#colorBackground").hide();
     }
     else if (theme == "light") {
         css['backgroundColor'] = "#eff0f1";
         css['foregroundColor'] = "#232629";
+        css['trackSeek'] = "rgba(35, 38, 41, 0.33)"
 
-        $("#trackSeek").css("background-color", "rgba(35, 38, 41, 0.33)");
         $("#coverBackground").hide();
+        $("#colorBackground").hide();
     }
     else if (theme == "coverDark") {
         css['backgroundColor'] = "#232629";
         css['foregroundColor'] = "#eff0f1";
+        css['trackSeek'] = "rgba(239, 240, 241, 0.33)";
 
-        $("#trackSeek").css("background-color", "rgba(239, 240, 241, 0.33)");
+        state['image_key'] = null;
         $("#coverBackground").show();
+        $("#colorBackground").hide();
     }
     else if (theme == "coverLight") {
         css['backgroundColor'] = "#eff0f1";
         css['foregroundColor'] = "#232629";
+        css['trackSeek'] = "rgba(35, 38, 41, 0.33)"
 
-        $("#trackSeek").css("background-color", "rgba(35, 38, 41, 0.33)");
+        state['image_key'] = null;
         $("#coverBackground").show();
+        $("#colorBackground").hide();
+    }
+    else if (theme == "color") {
+        $("#coverBackground").hide();
+        $("#colorBackground").show();
     }
     else {
         settings['theme'] = null;
         setTheme(settings['theme']);
     }
 
+    settings['theme'] = theme;
     $("body").css("background-color", css['backgroundColor']).css("color", css['foregroundColor']);
     $(".buttonTrans").css("color", css['foregroundColor']);
     $(".buttonOverlay").css("background-color", css['foregroundColor']).css("color", css['backgroundColor']);
     $(".buttonStatusBar").css("color", css['foregroundColor']);
     $(".overlayContent").css("background-color", css['backgroundColor']);
+    $("#trackSeek").css("background-color", css['trackSeek']);
 }
 
 function readCookie(name){
@@ -391,8 +428,10 @@ function secondsConvert(seconds) {
 
 // For clock applet
 function startTime() {
-    $("#clock").html(moment().format('LTS'));
-    var t = setTimeout(startTime, 1000);
+    if (settings['statusBar'] == "show"){
+        $("#clock").html(moment().format('LTS'));
+        var t = setTimeout(startTime, 1000);
+    }
 }
 
 function getSVG(cmd, theme) {

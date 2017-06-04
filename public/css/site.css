@@ -1,5 +1,7 @@
 body {
     font-family: sans-serif;
+    background-color: #232629;
+    color: #eff0f1;
 }
 
 svg {
@@ -84,7 +86,6 @@ svg {
     filter: drop-shadow(10px 10px 10px black);
 }
 
-
 .overlayList {
     display: flex;
     flex-direction: row;
@@ -162,6 +163,15 @@ svg {
     text-align: center;
     justify-content: center;
     align-items: center;
+    display: none;
+}
+
+#colorBackground {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
     display: none;
 }
 
