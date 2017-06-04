@@ -45,7 +45,7 @@ var roon = new RoonApi({
         core = core_;
 
         pairStatus = 1;
-        io.emit("pairStatus", JSON.parse('{"pairEnabled": "' + pairStatus + '"}'));
+        io.emit("pairStatus", JSON.parse('{"pairEnabled": ' + pairStatus + '}'));
 
         transport = core_.services.RoonApiTransport;
 
@@ -113,7 +113,8 @@ var roon = new RoonApi({
     },
 
     core_unpaired: function(core_) {
-
+        pairStatus = 0;
+        io.emit("pairStatus", JSON.parse('{"pairEnabled": ' + pairStatus + '}'));
     }
 
 });
@@ -178,9 +179,21 @@ io.on('connection', function(socket){
     });
 
     socket.on('changeSetting', function(msg) {
-        var obj = JSON.parse(msg);
+        settings = [];
 
-//         transport.change_volume(obj.outputId, "absolute", obj.volume);
+        if (msg.setting == "shuffle") {
+            settings.shuffle = msg.value;
+        } else if (msg.setting == "auto_radio") {
+            settings.auto_radio = msg.value;
+        } else if (msg.setting == "loop") {
+            settings.loop = msg.value;
+        }
+
+        transport.change_settings(msg.output_id, settings, function(error){
+            console.log("transport.change_settings result: " + error);
+        })
+
+
     });
 
     socket.on('seek', function(msg) {

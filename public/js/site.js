@@ -15,6 +15,8 @@ $(document).ready(function() {
             $("#pairDisabled").show();
             $("#nowPlaying").hide();
             $("#libraryBrowser").hide();
+            $("#menuButton").hide();
+            $('#statusBar').hide();
         }
     });
 
@@ -39,6 +41,7 @@ function showPage() {
     $("#pairDisabled").hide();
     $("#nowPlaying").show();
     $("#libraryBrowser").hide();
+    $("#menuButton").show();
 
     settings['zoneID'] = readCookie('settings[\'zoneID\']');
     settings['displayName'] = readCookie('settings[\'displayName\']');
@@ -427,6 +430,13 @@ function showTheme(theme) {
     $("#trackSeek").css("background-color", css['trackSeek']);
 }
 
+function changeZoneSetting(zoneSetting, zoneSettingValue) {
+    for (x in curZone.outputs){
+        msg = JSON.parse('{"output_id": "' + curZone.outputs[x].output_id + '", "setting": "' + zoneSetting + '", "value": "' + zoneSettingValue + '" }');
+        socket.emit("changeSetting", msg)
+    }
+}
+
 function readCookie(name){
     return Cookies.get(name);
 }
@@ -443,7 +453,6 @@ function secondsConvert(seconds) {
     return ((hour > 0 ? hour + ":" + (minute < 10 ? "0" : "") : "") + minute + ":" + (second < 10 ? "0" : "") + second);
 }
 
-// For clock applet
 function startTime() {
     if (settings['statusBar'] == "show"){
         $("#clock").html(moment().format('LTS'));

@@ -69,7 +69,7 @@
         <span class="messages">Library (todo)</span>
     </div>
     <div id="pairDisabled">
-        <span class="messages">This extension is not enabled.  Please use a Roon client to enable it.</span>
+        <p class="messages">This extension is not enabled.  Please use a Roon client to enable it.</p>
     </div>
     <div id="overlayMainMenu" class="overlay">
         <div class="overlayContentAlign" onclick="$('#overlayMainMenu').hide()">
@@ -127,9 +127,9 @@
                     Loop
                 </p>
                 <div class="overlayList">
-                    <button type="button" class="buttonOverlay" id="buttonLoopOff"></button>
-                    <button type="button" class="buttonOverlay" id="buttonLoopAll"></button>
-                    <button type="button" class="buttonOverlay" id="buttonLoopOne"></button>
+                    <button type="button" class="buttonOverlay" id="buttonLoopOff" onclick="changeZoneSetting('loop', 'disabled')"></button>
+                    <button type="button" class="buttonOverlay" id="buttonLoopAll" onclick="changeZoneSetting('loop', 'loop')"></button>
+                    <button type="button" class="buttonOverlay" id="buttonLoopOne" onclick="changeZoneSetting('loop', 'loop_one')"></button>
                 </div>
             </div>
         </div>
@@ -141,8 +141,8 @@
                     Shuffle
                 </p>
                 <div class="overlayList">
-                    <button type="button" class="buttonOverlay" id="buttonShuffleOff"></button>
-                    <button type="button" class="buttonOverlay" id="buttonShuffleOn"></button>
+                    <button type="button" class="buttonOverlay" id="buttonShuffleOff" onclick="changeZoneSetting('shuffle', false)"></button>
+                    <button type="button" class="buttonOverlay" id="buttonShuffleOn" onclick="changeZoneSetting('shuffle', true)"></button>
                 </div>
             </div>
         </div>
@@ -154,8 +154,8 @@
                     Radio
                 </p>
                 <div class="overlayList">
-                    <button type="button" class="buttonOverlay" id="buttonRadioOff"></button>
-                    <button type="button" class="buttonOverlay" id="buttonRadioOn"></button>
+                    <button type="button" class="buttonOverlay" id="buttonRadioOff" onclick="changeZoneSetting('auto_radio', false)"></button>
+                    <button type="button" class="buttonOverlay" id="buttonRadioOn" onclick="changeZoneSetting('auto_radio', true)"></button>
                 </div>
             </div>
         </div>

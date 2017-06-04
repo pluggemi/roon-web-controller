@@ -15,6 +15,7 @@ Version 1.0.1
 Version ?
 Functional:
 - Added a check to see if the extension is enabled
+- Added controls for Loop, Shuffle, and Auto Radio
 
 UI:
 - Added new theme based on the dominant color of the cover art
