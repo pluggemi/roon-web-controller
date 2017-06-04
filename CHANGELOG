@@ -14,13 +14,14 @@ Version 1.0.1
 
 Version ?
 Functional:
+- Added a check to see if the extension is enabled
 
 UI:
 - Added new theme based on the dominant color of the cover art
 - Decluttered "Now Playing" screen
 - Moved "Select Zone" to the Menu
 - Added status bar which shows a clock, the zone name, and the status of Loop, Shuffle, and Auto Radio
-- Removed as much text as possible
+- Switched to icons and removing as much text as possible to make internationalization easier
 
 Backend:
 - Simplified showing and hiding overlays

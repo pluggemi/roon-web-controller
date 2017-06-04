@@ -2,6 +2,7 @@
 const listenPort = 8080;
 
 var core;
+var pairStatus = 0;
 var zoneStatus = [];
 var zoneList = [];
 
@@ -42,6 +43,9 @@ var roon = new RoonApi({
 
     core_paired: function(core_) {
         core = core_;
+
+        pairStatus = 1;
+        io.emit("pairStatus", JSON.parse('{"pairEnabled": "' + pairStatus + '"}'));
 
         transport = core_.services.RoonApiTransport;
 
@@ -111,6 +115,7 @@ var roon = new RoonApi({
     core_unpaired: function(core_) {
 
     }
+
 });
 
 var svc_status = new RoonApiStatus(roon);
@@ -157,8 +162,8 @@ function removeDuplicateStatus(array, property) {
 }
 
 // ---------------------------- WEB SOCKET --------------
-
 io.on('connection', function(socket){
+    io.emit("pairStatus", JSON.parse('{"pairEnabled": ' + pairStatus + '}'));
     io.emit("zoneList", zoneList);
     io.emit("zoneStatus", zoneStatus);
 
@@ -170,6 +175,12 @@ io.on('connection', function(socket){
         var obj = JSON.parse(msg);
 
         transport.change_volume(obj.outputId, "absolute", obj.volume);
+    });
+
+    socket.on('changeSetting', function(msg) {
+        var obj = JSON.parse(msg);
+
+//         transport.change_volume(obj.outputId, "absolute", obj.volume);
     });
 
     socket.on('seek', function(msg) {
@@ -202,7 +213,6 @@ io.on('connection', function(socket){
         transport.control(msg, 'stop');
     });
 });
-
 
 // Web Routes
 app.get('/', function(req, res){

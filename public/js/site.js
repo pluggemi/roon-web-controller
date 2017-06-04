@@ -1,10 +1,45 @@
 var socket = io();
 var curZone;
 var css = [];
+var pairEnabled;
 var settings = [];
 var state = [];
 
 $(document).ready(function() {
+    socket.on("pairStatus", function(payload) {
+        pairEnabled=payload.pairEnabled;
+
+        if (pairEnabled == true ) {
+            showPage();
+        } else {
+            $("#pairDisabled").show();
+            $("#nowPlaying").hide();
+            $("#libraryBrowser").hide();
+        }
+    });
+
+    socket.on("zoneList", function(payload) {
+        updateZoneList(payload);
+    });
+
+    socket.on("zoneStatus", function(payload) {
+        if (settings['zoneID'] != null){
+            for (x in payload){
+                if (payload[x].zone_id == settings['zoneID']) {
+                    curZone = payload[x];
+                    updateZone(curZone);
+                }
+            }
+        }
+    });
+
+});
+
+function showPage() {
+    $("#pairDisabled").hide();
+    $("#nowPlaying").show();
+    $("#libraryBrowser").hide();
+
     settings['zoneID'] = readCookie('settings[\'zoneID\']');
     settings['displayName'] = readCookie('settings[\'displayName\']');
     settings['theme'] = readCookie('settings[\'theme\']');
@@ -40,27 +75,9 @@ $(document).ready(function() {
     }
 
     setTheme(settings['theme']);
-
-    $("#nowPlaying").show();
-    $("#libraryBrowser").hide();
     startTime();
     overlayButtons();
-
-    socket.on("zoneList", function(payload) {
-        updateZoneList(payload);
-    });
-
-    socket.on("zoneStatus", function(payload) {
-        if (settings['zoneID'] != null){
-            for (x in payload){
-                if (payload[x].zone_id == settings['zoneID']) {
-                    curZone = payload[x];
-                    updateZone(curZone);
-                }
-            }
-        }
-    });
-});
+}
 
 function updateZoneList(payload){
     $("#zoneList").html("");

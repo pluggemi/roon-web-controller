@@ -51,6 +51,7 @@ svg {
 }
 
 .messages {
+    max-width: 90%;
     font-size:5vw;
 }
 
@@ -254,6 +255,17 @@ svg {
     vertical-align: middle;
 }
 #libraryBrowser {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pairDisabled {
     position: absolute;
     top: 0px;
     left: 0px;
