@@ -16,6 +16,7 @@ Version ?
 Functional:
 
 UI:
+- Added new theme based on the dominant color of the cover art
 - Decluttered "Now Playing" screen
 - Moved "Select Zone" to the Menu
 - Added status bar which shows a clock, the zone name, and the status of Loop, Shuffle, and Auto Radio
