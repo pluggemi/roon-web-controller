@@ -140,7 +140,7 @@ function removeDuplicateList(array, property) {
     io.emit("zoneList", zoneList);
 }
 
-// Remove duplicates from zoneList array
+// Remove duplicates from zoneStatus array
 function removeDuplicateStatus(array, property) {
     var new_array = [];
     var lookup = {};
@@ -201,7 +201,6 @@ io.on('connection', function(socket){
     socket.on('goStop', function(msg){
         transport.control(msg, 'stop');
     });
-
 });
 
 
@@ -223,3 +222,5 @@ app.get('/roonapi/getImage', function(req, res){
 app.use('/jquery/jquery.min.js', express.static(__dirname + '/node_modules/jquery/dist/jquery.min.js'));
 
 app.use('/js-cookie/js.cookie.js', express.static(__dirname + '/node_modules/js-cookie/src/js.cookie.js'));
+
+app.use('/moment/moment.min.js', express.static(__dirname + '/node_modules/moment/min/moment.min.js'));
