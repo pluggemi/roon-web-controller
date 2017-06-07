@@ -168,8 +168,8 @@ io.on('connection', function(socket){
     io.emit("zoneList", zoneList);
     io.emit("zoneStatus", zoneStatus);
 
-    socket.on('disconnect', function(){
-        //    console.log('user disconnected');
+    socket.on('getZone', function(){
+        io.emit("zoneStatus", zoneStatus);
     });
 
     socket.on('changeVolume', function(msg) {
@@ -245,5 +245,3 @@ app.get('/roonapi/getImage', function(req, res){
 app.use('/jquery/jquery.min.js', express.static(__dirname + '/node_modules/jquery/dist/jquery.min.js'));
 
 app.use('/js-cookie/js.cookie.js', express.static(__dirname + '/node_modules/js-cookie/src/js.cookie.js'));
-
-app.use('/moment/moment.min.js', express.static(__dirname + '/node_modules/moment/min/moment.min.js'));
