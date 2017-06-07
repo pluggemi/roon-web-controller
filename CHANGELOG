@@ -1,7 +1,24 @@
-Change Log
+================
+Current Change Log
+================
 
-Version 1.0.0
-- Initial Release
+Version 1.1.0
+PRE-RELEASE TODO:
+- Add volume support
+- Regression testing suite
+- Check for impacts of Roon Server 1.3 (Build 233)
+
+Done
+- Complete rewrite of UI - now supports both Portrait and Landscape view
+- Added new theme based on the dominant color of the cover art
+- Added controls for Loop, Shuffle, and Auto Radio
+- Added a check to see if the extension is enabled
+- Switching zones is now much more responsive
+- Tweaked jquery.simplemarquee.js to use "span" instead of "div" due to problems with CSS layouts
+
+================
+Release History
+================
 
 Version 1.0.1
 - Resolved bug that could result in repeated listings in Zone Listings
@@ -12,15 +29,5 @@ Version 1.0.1
 - Added configuration option to select icons between icons with or without circles
 - Miscellaneous aesthetic changes
 
-Version 1.1.0
-- Complete rewrite of UI - now supports both Portrait and Landscape view
-- Added new theme based on the dominant color of the cover art
-- Added controls for Loop, Shuffle, and Auto Radio
-- Added a check to see if the extension is enabled
-- Switching zones is now much more responsive
-- Tweaked jquery.simplemarquee.js to use "span" instead of "div" due to problems with CSS layouts
-
-PRE-RELEASE TODO:
-- Add volume support
-- Regression testing suite
-- Check for impacts of Roon Server 1.3 (Build 233)
+Version 1.0.0
+- Initial Release
