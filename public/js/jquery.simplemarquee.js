@@ -196,10 +196,10 @@
 
         // Wrap contents
         this._contents = this._element.contents();
-        wrapper = $('<div class="simplemarquee-wrapper"></div>');
+        wrapper = $('<span class="simplemarquee-wrapper"></span>');
         wrapper.append(this._contents);
         this._element.append(wrapper);
-        wrapper = $('<div class="simplemarquee-wrapper"></div>');
+        wrapper = $('<span class="simplemarquee-wrapper"></span>');
         wrapper.append(this._contents.clone());
         this._element.append(wrapper);
         this._wrappers = this._element.children();

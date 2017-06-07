@@ -12,19 +12,15 @@ Version 1.0.1
 - Added configuration option to select icons between icons with or without circles
 - Miscellaneous aesthetic changes
 
-Version ?
-Functional:
+Version 1.1.0
+- Complete rewrite of UI - now supports both Portrait and Landscape view
+- Added new theme based on the dominant color of the cover art
 - Added controls for Loop, Shuffle, and Auto Radio
 - Added a check to see if the extension is enabled
+- Switching zones is now much more responsive
+- Tweaked jquery.simplemarquee.js to use "span" instead of "div" due to problems with CSS layouts
 
-UI:
-- Added new theme based on the dominant color of the cover art
-- Decluttered "Now Playing" screen
-- Moved "Select Zone" to the Menu
-- Added status bar which shows a clock, the zone name, and the status of Loop, Shuffle, and Auto Radio
-- Switched to icons and removing as much text as possible to make internationalization easier
-
-Backend:
-- Simplified showing and hiding overlays
-- Collapsed MANY global variables into much fewer arrays
-- General code cleanup
+PRE-RELEASE TODO:
+- Add volume support
+- Regression testing suite
+- Check for impacts of Roon Server 1.3 (Build 233)
