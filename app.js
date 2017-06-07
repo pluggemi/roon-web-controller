@@ -1,10 +1,56 @@
 // Setup general variables
-const listenPort = 8080;
+const defaultListenPort = 8080;
 
 var core;
 var pairStatus = 0;
 var zoneStatus = [];
 var zoneList = [];
+
+// Read command line options
+const commandLineArgs = require('command-line-args');
+const getUsage = require('command-line-usage');
+
+const optionDefinitions = [
+    { name: 'help', alias: 'h', description: 'Display this usage guide.', type: Boolean },
+    { name: 'port', alias: 'p', description: 'Specify the port the server listens on.', type: Number }
+]
+
+const options = commandLineArgs(optionDefinitions, { partial: true })
+
+const usage = getUsage([
+{
+    header: 'Roon Web Controller',
+    content: 'A web based controller for the Roon Media System.\n\nUsage: [bold]{node app.js <options>}'
+},
+{
+    header: 'Options',
+    optionList: optionDefinitions
+},
+{
+    content: 'Project home: [underline]{https://github.com/pluggemi/roon-web-controller}'
+}
+])
+
+if (options['help']) {
+    console.log(usage)
+    process.exit()
+}
+
+// Read config file
+var config = require('config');
+
+var configPort = config.get('server.port')
+
+// Determine listen port
+if (options['port']) {
+    var listenPort = options['port'];
+} else if (configPort){
+    var listenPort = configPort
+} else {
+    var listenPort = defaultListenPort;
+}
+
+
 
 // Setup Express
 var express = require('express');

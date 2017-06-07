@@ -5,14 +5,17 @@ Current Change Log
 Version 1.1.0
 PRE-RELEASE TODO:
 - Add volume support
-- Regression testing suite
+- Complete regression test checklist
 - Check for impacts of Roon Server 1.3 (Build 233)
+- Complete pre tag / pre release checklist
 
 Done
 - Complete rewrite of UI - now supports both Portrait and Landscape view
 - Added new theme based on the dominant color of the cover art
 - Added controls for Loop, Shuffle, and Auto Radio
 - Added a check to see if the extension is enabled
+- Added command line option for help and to set the server port ('node app.js -h' for options)
+- Added config file for server settings (config/local.json).  Example file "config/local.conf.EXAMPLE" shows usage.  The example file is tracked by "git".  The "config/local.conf" is not tracked by "git" so that local settings will not be clobbered by "git pull".
 - Switching zones is now much more responsive
 - Tweaked jquery.simplemarquee.js to use "span" instead of "div" due to problems with CSS layouts
 
