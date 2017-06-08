@@ -1,22 +1,18 @@
-================
-Current Change Log
-================
+# Current Change Log
+## Version 1.1.0 (PENDING RELEASE)
+### Open Bugs
+- (BUG, BLOCKER) - volume buttons not functional
+- (BUG, minor) - seekPosition, seekLength, and seekValue refreshes with every zone update whether they actually change or not.  Causes frequent page repaints.
 
-Version 1.1.0
-+(BUG, BLOCKER) - volume buttons not functional
-+(BUG, minor) - seekPosition and seekLength refreshes with every zone update.  Causes frequent page repaints.
-
-PRE-RELEASE TODO:
+### Pre Release TODO
 - Clear all blocker bugs, prefer clear all known bugs
 - Add volume support
 - Complete regression test checklist
 - Check for impacts of Roon Server 1.3 (Build 233)
 - Complete pre tag / pre release checklist
 
-* = external bug
-+ = internal bug
 
-New
+### New to this release
 - Complete rewrite of UI - now supports both Portrait and Landscape view
 - Added new theme based on the dominant color of the cover art
 - Added controls for Loop, Shuffle, and Auto Radio
@@ -26,14 +22,14 @@ New
 - Switching zones is now much more responsive
 - Tweaked jquery.simplemarquee.js to use "span" instead of "div" due to problems with CSS layouts
 
-Implemented Feature Requests:
+### Implemented Feature Requests:
 - Added config file for server settings (config/local.json).  Example file "config/local.conf.EXAMPLE" shows usage.  The example file is tracked by "git".  The "config/local.conf" is not tracked by "git" so that local settings will not be clobbered by "git pull".
 - Added command line option for help and to set the server port ('node app.js -h' for options).
 
-Fixed Bugs:
+### Fixed Bugs:
 - After switching a zone, the zone_id did not update for the controls. This can lead to controlling the previous zone with the new zone's controls.
 
-A note on the volume controls:
+### A note on the volume controls:
 You may be wondering why I did not implement a slider for the volume controls.  There are three reasons: Browser limitations, CSS limitations, and Roon API realities.
 
 Browser limitations: The slider - known as an "input type=range" - is not yet a standard input type. While all of the most current browsers (except Opera mini), older browsers do not.  Including mobile browsers on older versions of Android and IOS. This prevents the common use case of using an old tablet as a control point.
@@ -44,11 +40,8 @@ Roon API realities: Many devices that work with Roon utlize both positive and ne
 
 It is for these reasons that I decided to go with volume buttons instead of sliders.
 
-================
-Release History
-================
-
-Version 1.0.1
+# Release History
+## Version 1.0.1
 - Resolved bug that could result in repeated listings in Zone Listings
 - Changed all icons to utilize SVGs from Material Design Icons (https://materialdesignicons.com/)
 - Dramactically reduced the number of times the icons were being called and redrawn
@@ -57,5 +50,5 @@ Version 1.0.1
 - Added configuration option to select icons between icons with or without circles
 - Miscellaneous aesthetic changes
 
-Version 1.0.0
+## Version 1.0.0
 - Initial Release
