@@ -8,11 +8,16 @@
 - Clear all blocker bugs, prefer clear all known bugs
 - Add volume support
 - Complete regression test checklist
-- Check for impacts of Roon Server 1.3 (Build 233)
+- Check for impacts of Roon Server 1.3 (Build 234)
 - Complete pre tag / pre release checklist
 
+### Install Notes
+See the [README.md](README.md) for installation instructions
 
-### New to this release
+### Upgrade notes
+Please run `npm install` after upgrading due to new dependencies.
+
+### New
 - Complete rewrite of UI - now supports both Portrait and Landscape view
 - Added new theme based on the dominant color of the cover art
 - Added controls for Loop, Shuffle, and Auto Radio
