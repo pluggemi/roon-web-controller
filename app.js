@@ -219,7 +219,7 @@ io.on('connection', function(socket){
     socket.on('changeVolume', function(msg) {
         var obj = JSON.parse(msg);
 
-        transport.change_volume(obj.outputId, "absolute", obj.volume);
+        transport.change_volume(obj.outputId, "relative_step", obj.volume);
     });
 
     socket.on('changeSetting', function(msg) {

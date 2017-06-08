@@ -74,13 +74,11 @@
             </div>
         </div>
     </div>
-    <div id="overlayVolume" class="overlay" onclick="$('#overlayVolume').hide()">
+    <div id="overlayVolume" class="overlay">
         <div class="overlayContentAlign">
             <div class="overlayContent">
-                <p class="overlayListLabel">
-                    Change the volume
-                </p>
-                <div id="volumeList" class="overlayList"></div>
+                <span id="volumeList"></span>
+                <div class="overlayList"><button type="button" class="buttonOverlay buttonClose" onclick="$('#overlayVolume').hide()"></button></div>
             </div>
         </div>
     </div>

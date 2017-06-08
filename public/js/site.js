@@ -50,6 +50,9 @@ function showPage() {
     // Show Menu Button
     $("#buttonMenu").html(getSVG('menu'));
 
+    // Show Close buttons
+    $(".buttonClose").html(getSVG('close'));
+
     // Hide inactive sections
     $("#pairDisabled").hide();
     $("#isPlaying").hide();
@@ -373,31 +376,29 @@ function showIsPlaying(curZone) {
             .removeClass()
             .addClass("buttonSmall buttonInactive")
             .css("color", css['foregroundColor']);
-
         }
     }
-    if (state['outputs'] != curZone.outputs || state['outputs'] == null) {
-        state['outputs'] = curZone.outputs;
 
-//         console.log(state['outputs'])
-        $("#volumeList").html("");
-
-        for (x in state['outputs'] ) {
-
+    for (x in curZone.outputs ) {
             if (curZone.outputs[x].volume) {
+                if (state['volume[' + x + ']'] != curZone.outputs[x].volume.value || state['volume[' + x + ']'] == null) {
+                    state['volume[' + x + ']'] = curZone.outputs[x].volume.value;
+                    $("#volume[" + x + "]").html(curZone.outputs[x].volume.value);
+
+                    $("#volumeList").html("");
+
+                    for (x in curZone.outputs) {
+                        $("#volumeList")
+                        .append("<div class=\"overlayList\"><button type=\"button\" class=\"buttonOverlay\">" + getSVG('volume-minus') + "</button><span id=\"volume[" + x + "]\" class=\"textBold\">" + curZone.outputs[x].volume.value + "</span><button type=\"button\" class=\"buttonOverlay\">" + getSVG('volume-plus') + "</button></div>");
+                    }
+                }
+
                 $("#buttonVolume")
                 .html(getSVG('volume'))
-                .attr("onclick", "$(\'#overlayVolume\').show()")
+                .attr("onclick", "$('#overlayVolume').show()")
                 .removeClass()
                 .addClass("buttonSmall buttonAvailable")
                 .css("color", css['foregroundColor']);
-
-                $("#volumeList")
-                .append("min: " + curZone.outputs[x].volume.min + "</br>")
-                .append("max: " + curZone.outputs[x].volume.max + "</br>")
-                .append("value: " + curZone.outputs[x].volume.value + "</br>")
-                .append("<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\" max=\"" + curZone.outputs[x].volume.max + "\" value=\"" + curZone.outputs[x].volume.value + "\" step=\"1\" onchange=\"changeVolume(this.value, \'" + curZone.outputs[x].output_id + "\')\"></input>");
-
             } else {
                 $("#buttonVolume")
                 .html(getSVG('volume'))
@@ -408,10 +409,9 @@ function showIsPlaying(curZone) {
             }
         }
 
-        if (state['themeShowing'] == null) {
-            state['themeShowing'] = true;
-            showTheme(settings['theme']);
-        }
+    if (state['themeShowing'] == null) {
+        state['themeShowing'] = true;
+        showTheme(settings['theme']);
     }
 }
 
@@ -499,9 +499,7 @@ function secondsConvert(seconds) {
 }
 
 function getSVG(cmd) {
-    if (cmd == "volume") {
-        return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 20.9999,12.0001C 20.9999,16.2832 18.008,19.8676 14,20.777L 14,18.7102C 16.8914,17.8496 18.9999,15.1711 18.9999,12.0001C 18.9999,8.8291 16.8914,6.15058 14,5.29L 14,3.22307C 18.008,4.13255 20.9999,7.71688 20.9999,12.0001 Z M 17,12C 17,14.0503 15.7659,15.8124 14,16.584L 14,7.41605C 15.7659,8.1876 17,9.94968 17,12 Z \"/></svg>";
-    } else if (cmd == "menu") {
+    if (cmd == "menu") {
         return "<svg viewBox=\"0 0 512 512\"><path d=\"M64 128h384v42.667H64V128m0 106.667h384v42.666H64v-42.666m0 106.666h384V384H64v-42.667z\"/></svg>";
     } else if (cmd == "loop") {
         return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 17,17L 7,17L 7,14L 3,18L 7,22L 7,19L 19,19L 19,13L 17,13M 7,7L 17,7L 17,10L 21,6L 17,2L 17,5L 5,5L 5,11L 7,11L 7,7 Z \"/></svg>";
@@ -521,5 +519,15 @@ function getSVG(cmd) {
         return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 14,19L 18,19L 18,4.99999L 14,4.99999M 6,19L 10,19L 10,4.99999L 6,4.99999L 6,19 Z \"/></svg>";
     } else if (cmd == "stop") {
         return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 18,18L 6,18L 5.99988,6.00011L 18,5.99999L 18,18 Z \"/></svg>";
+    } else if (cmd == "volume") {
+        return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 20.9999,12.0001C 20.9999,16.2832 18.008,19.8676 14,20.777L 14,18.7102C 16.8914,17.8496 18.9999,15.1711 18.9999,12.0001C 18.9999,8.8291 16.8914,6.15058 14,5.29L 14,3.22307C 18.008,4.13255 20.9999,7.71688 20.9999,12.0001 Z M 17,12C 17,14.0503 15.7659,15.8124 14,16.584L 14,7.41605C 15.7659,8.1876 17,9.94968 17,12 Z \"/></svg>";
+    } else if (cmd == "volume-mute") {
+        return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 16.5858,12L 14,9.41422L 15.4142,8L 18,10.5858L 20.5858,8L 22,9.41421L 19.4142,12L 22,14.5858L 20.5858,16L 18,13.4142L 15.4142,16L 14,14.5858L 16.5858,12 Z \"/></svg>";
+    } else if (cmd == "volume-minus") {
+        return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 14,11L 22,11L 22,13L 14,13L 14,11 Z \"/></svg>";
+    } else if (cmd == "volume-plus") {
+        return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 14,11L 17,11L 17,8L 19,8L 19,11L 22,11L 22,13L 19,13L 19,16L 17,16L 17,13L 14,13L 14,11 Z \"/></svg>";
+    } else if (cmd == "close") {
+        return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 12,2C 17.5228,2 22,6.47716 22,12C 22,17.5228 17.5228,22 12,22C 6.47715,22 2,17.5228 2,12C 2,6.47716 6.47715,2 12,2 Z M 12,4C 7.58172,4 4,7.58173 4,12C 4,13.8487 4.62708,15.551 5.68014,16.9056L 16.9056,5.68015C 15.551,4.62709 13.8487,4 12,4 Z M 12,20C 16.4183,20 20,16.4183 20,12C 20,10.1513 19.3729,8.44905 18.3199,7.09436L 7.09436,18.3199C 8.44904,19.3729 10.1513,20 12,20 Z \"/></svg>";
     }
 }
