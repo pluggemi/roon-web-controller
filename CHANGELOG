@@ -3,7 +3,7 @@ Current Change Log
 ================
 
 Version 1.1.0
-+(BUG, BLOCKER) - volume button, settings and slider refreshes with every zone update.  This prevents the input range slider from being usable.  Also causes frequent page repaints.
++(BUG, BLOCKER) - volume buttons not functional
 +(BUG, minor) - seekPosition and seekLength refreshes with every zone update.  Causes frequent page repaints.
 
 PRE-RELEASE TODO:
