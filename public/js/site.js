@@ -19,25 +19,6 @@ $(document).ready(function() {
             $("#pageLoading").hide()
         }
     });
-
-    socket.on("zoneList", function(payload) {
-        $("#zoneList").html("");
-
-        for (x in payload){
-            $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
-        }
-    });
-
-    socket.on("zoneStatus", function(payload) {
-        if (settings['zoneID'] != null){
-            for (x in payload){
-                if (payload[x].zone_id == settings['zoneID']) {
-                    curZone = payload[x];
-                    updateZone(curZone);
-                }
-            }
-        }
-    });
 });
 
 function showPage() {
@@ -75,6 +56,31 @@ function showPage() {
     $("#libraryBrowser").hide();
 
     t = setTimeout(function (){ $("#pageLoading").hide()}, 250);
+
+    enableSockets();
+}
+
+function enableSockets(){
+    socket.on("zoneList", function(payload) {
+        $("#zoneList").html("");
+
+        for (x in payload){
+            $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
+        }
+    });
+
+    socket.on("zoneStatus", function(payload) {
+        if (settings['zoneID'] != null){
+            for (x in payload){
+                if (payload[x].zone_id == settings['zoneID']) {
+                    curZone = payload[x];
+                    updateZone(curZone);
+                } else {
+                    curZone = null;
+                }
+            }
+        }
+    });
 }
 
 function selectZone(zone_id, display_name) {
@@ -85,13 +91,15 @@ function selectZone(zone_id, display_name) {
     setCookie('settings[\'displayName\']', settings['displayName']);
     $(".buttonZoneName").html(settings['displayName']);
 
+    // Reset state on zone switch
+    state = [];
     socket.emit("getZone", zone_id);
 
     $("#overlayZoneList").hide();
 }
 
 function updateZone (curZone){
-    if ( curZone.now_playing != null ) {
+    if ( curZone.now_playing ) {
         showIsPlaying(curZone);
     } else {
         showNotPlaying();
@@ -117,7 +125,7 @@ function showNotPlaying() {
     $("#line1, #line2, #line3, #seekPosition, #seekLength").html("&nbsp;");
 
     // Reset state and browser title
-    state=[];
+    state = [];
     $(document).prop("title", "Roon Web Controller");
 
 }
@@ -191,11 +199,10 @@ function showIsPlaying(curZone) {
                 r = color[0];
                 g = color[1];
                 b = color[2];
-                $("#colorBackground").css("background-color", 'rgb('+ r +','+ g +','+ b +')');
+                css['colorBackground'] = "rgb(" + color +")";
 
                 yiq = ((r*299)+(g*587)+(b*114))/1000;
                 if (yiq >= 128) {
-
                     css['backgroundColor'] = "#eff0f1";
                     css['foregroundColor'] = "#232629";
                     css['trackSeek'] = "rgba(35, 38, 41, 0.33)"
@@ -204,9 +211,9 @@ function showIsPlaying(curZone) {
                     css['foregroundColor'] = "#eff0f1";
                     css['trackSeek'] = "rgba(239, 240, 241, 0.33)";
                 }
-                showTheme(settings['theme']);
+                $("#colorBackground").show();
+                showTheme('color');
             });
-
         }
     };
 
@@ -220,6 +227,7 @@ function showIsPlaying(curZone) {
             .removeClass("buttonInactive");
         } else {
             $("#controlPrev")
+            .attr("onclick", "")
             .html(getSVG('prev'))
             .addClass("buttonInactive")
             .removeClass("buttonAvailable");
@@ -236,6 +244,7 @@ function showIsPlaying(curZone) {
             .removeClass("buttonInactive");
         } else {
             $("#controlNext")
+            .attr("onclick", "")
             .html(getSVG('next'))
             .addClass("buttonInactive")
             .removeClass("buttonAvailable");
@@ -274,6 +283,7 @@ function showIsPlaying(curZone) {
         } else if (state['PlayPauseStop'] == "showPlayDisabled") {
             $("#controlPlayPauseStop")
             .html(getSVG('play'))
+            .attr("onclick", "")
             .addClass("buttonInactive")
             .removeClass("buttonAvailable");
         }
@@ -284,7 +294,7 @@ function showIsPlaying(curZone) {
         if (state['Loop'] == "disabled"){
             $("#buttonLoop")
             .html(getSVG('loop'))
-            .attr("onclick", "changeZoneSetting(\'loop\', \'loop\')")
+            .attr("onclick", "changeZoneSetting(\'loop\', \'loop\', \'" + "\')")
             .removeClass()
             .addClass("buttonSmall buttonAvailable")
             .css("color", css['foregroundColor']);
@@ -307,6 +317,7 @@ function showIsPlaying(curZone) {
         } else {
             $("#buttonLoop")
             .html(getSVG('loop'))
+            .attr("onclick", "")
             .removeClass()
             .addClass("buttonSmall buttonInactive")
             .css("color", css['foregroundColor']);
@@ -332,6 +343,7 @@ function showIsPlaying(curZone) {
         } else {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
+            .attr("onclick", "")
             .removeClass()
             .addClass("buttonSmall buttonInactive")
             .css("color", css['foregroundColor']);
@@ -357,20 +369,50 @@ function showIsPlaying(curZone) {
         } else {
             $("#buttonRadio")
             .html(getSVG('radio'))
+            .attr("onclick", "")
             .removeClass()
             .addClass("buttonSmall buttonInactive")
             .css("color", css['foregroundColor']);
 
         }
     }
+    if (state['outputs'] != curZone.outputs || state['outputs'] == null) {
+        state['outputs'] = curZone.outputs;
 
-    $("#buttonVolume").html(getSVG('volume')).addClass("buttonAvailable");
+//         console.log(state['outputs'])
+        $("#volumeList").html("");
 
-    if (state['themeShowing'] == null) {
-        state['themeShowing'] = true;
-        showTheme(settings['theme']);
+        for (x in state['outputs'] ) {
+
+            if (curZone.outputs[x].volume) {
+                $("#buttonVolume")
+                .html(getSVG('volume'))
+                .attr("onclick", "$(\'#overlayVolume\').show()")
+                .removeClass()
+                .addClass("buttonSmall buttonAvailable")
+                .css("color", css['foregroundColor']);
+
+                $("#volumeList")
+                .append("min: " + curZone.outputs[x].volume.min + "</br>")
+                .append("max: " + curZone.outputs[x].volume.max + "</br>")
+                .append("value: " + curZone.outputs[x].volume.value + "</br>")
+                .append("<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\" max=\"" + curZone.outputs[x].volume.max + "\" value=\"" + curZone.outputs[x].volume.value + "\" step=\"1\" onchange=\"changeVolume(this.value, \'" + curZone.outputs[x].output_id + "\')\"></input>");
+
+            } else {
+                $("#buttonVolume")
+                .html(getSVG('volume'))
+                .attr("onclick", "")
+                .removeClass()
+                .addClass("buttonSmall buttonInactive")
+                .css("color", css['foregroundColor']);
+            }
+        }
+
+        if (state['themeShowing'] == null) {
+            state['themeShowing'] = true;
+            showTheme(settings['theme']);
+        }
     }
-
 }
 
 function goCmd(cmd,zone_id){
@@ -387,14 +429,20 @@ function goCmd(cmd,zone_id){
     }
 }
 
-function changeZoneSetting(zoneSetting, zoneSettingValue) {
+function changeZoneSetting(zoneSetting, zoneSettingValue, zone_id) {
     for (x in curZone.outputs){
         msg = JSON.parse('{"output_id": "' + curZone.outputs[x].output_id + '", "setting": "' + zoneSetting + '", "value": "' + zoneSettingValue + '" }');
         socket.emit("changeSetting", msg)
     }
 }
 
+function changeVolume(volume, outputId) {
+    console.log(volume + " " + outputId)
+}
+
 function setTheme(theme) {
+    settings['theme'] = theme;
+    state['themeShowing'] = null;
     setCookie('settings[\'theme\']', theme);
 
     if (theme == "dark") {
@@ -422,14 +470,12 @@ function setTheme(theme) {
         settings['theme'] = null;
         setTheme(settings['theme']);
     }
-
-    settings['theme'] = theme;
-    state['themeShowing'] = null;
 }
 
 function showTheme(theme) {
     $("body").css("background-color", css['backgroundColor']).css("color", css['foregroundColor']);
     $(".colorChange").css("color", css['foregroundColor']);
+    $("#colorBackground").css("background-color", css['colorBackground']);
     $(".buttonAvailable").css("color", css['foregroundColor']);
     $(".buttonInactive").css("color", css['foregroundColor']);
     $("#trackSeek").css("background-color", css['trackSeek']);

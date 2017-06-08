@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Roon Web Controller Playground</title>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.4.0">
+    <title>
+        Roon Web Controller Playground
+    </title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
     <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
-        (function(a, b, c) {
-            if (c in b && b[c]) {
-                var d, e = a.location,
-                f = /^(a|html)$/i;
-                a.addEventListener("click", function(a) {
-                    d = a.target;
-                    while (!f.test(d.nodeName)) d = d.parentNode;
-                    "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
-                }, !1)
-            }
-        })(document, window.navigator, "standalone")
+    (function(a, b, c) {
+    if (c in b && b[c]) {
+        var d, e = a.location,
+        f = /^(a|html)$/i;
+        a.addEventListener("click", function(a) {
+            d = a.target;
+            while (!f.test(d.nodeName)) d = d.parentNode;
+            "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
+        }, !1)
+    }
+    })(document, window.navigator, "standalone")
     </script>
-
     <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/site.css">
@@ -32,89 +34,94 @@
     <script src="/js/site.js"></script>
 </head>
 <body>
-    <div id="nowPlaying">
-        <div id="coverBackground"></div>
-        <div id="colorBackground"></div>
-            <div id="notPlaying" class="fullScreenFlexContainer">
-        <div class="messages"><p>Nothing playing on</p>
-            <button type="button" class="buttonZoneName buttonActive messages" onclick="$('#overlayZoneList').show()">zoneList</button>
+<div id="nowPlaying">
+    <div id="coverBackground"></div>
+    <div id="colorBackground"></div>
+    <div id="notPlaying" class="fullScreenFlexContainer">
+        <div class="messages">
+            <p>
+                Nothing playing on
+            </p><button type="button" class="buttonZoneName buttonActive messages" onclick="$('#overlayZoneList').show()">zoneList</button>
         </div>
     </div>
-
     <div id="isPlaying" class="fullScreenFlexContainer">
         <div id="containerCoverImage" class="container container1of2"></div>
-
         <div id="containerMusicInfo" class="container container2of2">
             <div>
-                <div id="line1" class="colorChange textBold">&nbsp;</div>
-                <div id="line2" class="colorChange">&nbsp;</div>
-                <div id="line3" class="colorChange">&nbsp;</div>
-            </div>
-
-            <div class="containerSpaceAround">
-                <button type="button" id="controlPrev" class="buttonMedium"></button>
-
-                <button type="button" id="controlPlayPauseStop" class="buttonLarge"></button>
-
-                <button type="button" id="controlNext" class="buttonMedium"></button>
-            </div>
-
-            <div id="trackSeek">
-                <div id="trackSeekValue">
-                    <span id="seekPosition" class="left">&nbsp;</span>
-                    <span id="seekLength" class="right">&nbsp;</span>
+                <div id="line1" class="colorChange textBold">
+                    &nbsp;
+                </div>
+                <div id="line2" class="colorChange">
+                    &nbsp;
+                </div>
+                <div id="line3" class="colorChange">
+                    &nbsp;
                 </div>
             </div>
-
+            <div class="containerSpaceAround">
+                <button type="button" id="controlPrev" class="buttonMedium"></button> <button type="button" id="controlPlayPauseStop" class="buttonLarge"></button> <button type="button" id="controlNext" class="buttonMedium"></button>
+            </div>
+            <div id="trackSeek">
+                <div id="trackSeekValue">
+                    <span id="seekPosition" class="left">&nbsp;</span> <span id="seekLength" class="right">&nbsp;</span>
+                </div>
+            </div>
             <div class="textCenter">
                 <button type="button" class="buttonZoneName textBold buttonAvailable colorChange" onclick="$('#overlayZoneList').show()">zoneList</button>
             </div>
-
             <div class="containerSpaceAround">
-                <button type="button" class="buttonSmall" id="buttonLoop"></button>
-                <button type="button" class="buttonSmall" id="buttonShuffle"></button>
-                <button type="button" class="buttonSmall" id="buttonRadio"></button>
-                <button type="button" class="buttonSmall" id="buttonVolume" onclick="$('#overlayVolume').show()"></button>
-            </div>
-        </div>
-    </div>
-    <div id="libraryBrowser" class="fullScreenFlexContainer">
-        <div class="messages">Library (todo)</div>
-    </div>
-    <div id="pairDisabled" class="fullScreenFlexContainer">
-        <div class="messages">This extension is not enabled.  Please use a Roon client to enable it.</div>
-    </div>
-
-    <button type="button" id="buttonMenu" class="buttonTrans" onclick="$('#overlayMainMenu').show()"></button>
-
-    <div id="overlayMainMenu" class="overlay" onclick="$('#overlayMainMenu').hide()">
-        <div class="overlayContentAlign">
-            <div class="overlayContent"><p class="overlayListLabel">main menu</p>
-                <div class="overlayList">
-                    <button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button>
-                    <button type="button" class="buttonOverlay" onclick="setTheme('color')">Color</button>
-                    <button type="button" class="buttonOverlay" onclick="setTheme('cover')">Cover</button>
-                </div>
-            </div>
-        </div>
-    </div>
-        <div id="overlayZoneList" class="overlay" onclick="$('#overlayZoneList').hide()">
-        <div class="overlayContentAlign">
-            <div class="overlayContent">
-                 <div id="zoneList" class="overlayList"></div>
+                <button type="button" class="buttonSmall" id="buttonLoop"></button> <button type="button" class="buttonSmall" id="buttonShuffle"></button> <button type="button" class="buttonSmall" id="buttonRadio"></button> <button type="button" class="buttonSmall" id="buttonVolume"></button>
             </div>
         </div>
     </div>
     <div id="overlayVolume" class="overlay" onclick="$('#overlayVolume').hide()">
-        <div class="overlayContentAlign" >
+        <div class="overlayContentAlign">
             <div class="overlayContent">
                 <p class="overlayListLabel">
                     Change the volume
                 </p>
+                <div id="volumeList" class="overlayList"></div>
             </div>
         </div>
     </div>
+    <div id="overlayZoneList" class="overlay" onclick="$('#overlayZoneList').hide()">
+        <div class="overlayContentAlign">
+            <div class="overlayContent">
+                <div id="zoneList" class="overlayList"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <div id="pageLoading" class="fullScreenFlexContainer">&nbsp;</div>
+<div id="libraryBrowser" class="fullScreenFlexContainer">
+    <div class="messages">
+        Library (todo)
+    </div>
+</div>
+
+<div id="pairDisabled" class="fullScreenFlexContainer">
+    <div class="messages">
+        This extension is not enabled. Please use a Roon client to enable it.
+    </div>
+</div>
+
+<div id="overlayMainMenu" class="overlay" onclick="$('#overlayMainMenu').hide()">
+    <div class="overlayContentAlign">
+        <div class="overlayContent">
+            <p class="overlayListLabel">
+                main menu
+            </p>
+            <div class="overlayList">
+                <button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button> <button type="button" class="buttonOverlay" onclick="setTheme('color')">Color</button> <button type="button" class="buttonOverlay" onclick="setTheme('cover')">Cover</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="button" id="buttonMenu" class="buttonTrans" onclick="$('#overlayMainMenu').show()"></button>
+
+<div id="pageLoading" class="fullScreenFlexContainer">
+    &nbsp;
+</div>
 </body>
 </html>

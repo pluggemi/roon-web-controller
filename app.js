@@ -20,7 +20,7 @@ const options = commandLineArgs(optionDefinitions, { partial: true })
 const usage = getUsage([
 {
     header: 'Roon Web Controller',
-    content: 'A web based controller for the Roon Media System.\n\nUsage: [bold]{node app.js <options>}'
+    content: 'A web based controller for the Roon Music Player.\n\nUsage: [bold]{node app.js <options>}'
 },
 {
     header: 'Options',
@@ -49,8 +49,6 @@ if (options['port']) {
 } else {
     var listenPort = defaultListenPort;
 }
-
-
 
 // Setup Express
 var express = require('express');
@@ -238,8 +236,6 @@ io.on('connection', function(socket){
         transport.change_settings(msg.output_id, settings, function(error){
             console.log("transport.change_settings result: " + error);
         })
-
-
     });
 
     socket.on('seek', function(msg) {
