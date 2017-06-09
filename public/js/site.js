@@ -4,6 +4,7 @@ var curZone;
 var css = [];
 var settings = [];
 var state = [];
+var inVolumeSlider = false;
 
 $(document).ready(function() {
     socket.on("pairStatus", function(payload) {
@@ -53,6 +54,9 @@ function showPage() {
 
     // Show Close buttons
     $(".buttonClose").html(getSVG('close'));
+
+    // Show Volume Button
+    $("#buttonVolume").html(getSVG('volume'));
 
     // Hide inactive sections
     $("#pairDisabled").hide();
@@ -126,7 +130,6 @@ function showNotPlaying() {
         $("#buttonLoop").html(getSVG('loop')).addClass("buttonInactive");
         $("#buttonShuffle").html(getSVG('shuffle')).addClass("buttonInactive");
         $("#buttonRadio").html(getSVG('radio')).addClass("buttonInactive");
-        $("#buttonVolume").html(getSVG('volume')).addClass("buttonInactive");
 
         // Blank text fields
         $("#line1, #line2, #line3, #seekPosition, #seekLength").html("&nbsp;");
@@ -386,35 +389,24 @@ function showIsPlaying(curZone) {
         }
     }
 
-    //     for (x in curZone.outputs ) {
-//             if (curZone.outputs[x].volume) {
-//                 if (state['volume[' + x + ']'] != curZone.outputs[x].volume.value || state['volume[' + x + ']'] == null) {
-//                     state['volume[' + x + ']'] = curZone.outputs[x].volume.value;
-//                     $("#volume[" + x + "]").html(curZone.outputs[x].volume.value);
-//
-//                     $("#volumeList").html("");
-//
-//                     for (x in curZone.outputs) {
-//                         $("#volumeList")
-//                         .append("<div class=\"overlayList\"><button type=\"button\" class=\"buttonOverlay\" onclick=\"changeVolume(\'-" + curZone.outputs[x].volume.step + "\', \'" + curZone.outputs[x].output_id + "\')\">" + getSVG('volume-minus') + "</button><span id=\"volume[" + x + "]\" class=\"textBold\">" + curZone.outputs[x].volume.value + "</span><button type=\"button\" class=\"buttonOverlay\" onclick=\"changeVolume(\'" + curZone.outputs[x].volume.step + "\', \'" + curZone.outputs[x].output_id + "\')\">" + getSVG('volume-plus') + "</button></div>");
-//                     }
-//                 }
-//
-//                 $("#buttonVolume")
-//                 .html(getSVG('volume'))
-//                 .attr("onclick", "$('#overlayVolume').show()")
-//                 .removeClass()
-//                 .addClass("buttonSmall buttonAvailable")
-//                 .css("color", css['foregroundColor']);
-//             } else {
-                $("#buttonVolume")
-                .html(getSVG('volume'))
-                .attr("onclick", "")
-                .removeClass()
-                .addClass("buttonSmall buttonInactive")
-                .css("color", css['foregroundColor']);
-//             }
-//         }
+    if (inVolumeSlider == false ) {
+        $("#volumeList").html("");
+        for (x in curZone.outputs) {
+            if (curZone.outputs[x].volume) {
+                type = curZone.outputs[x].volume.type
+
+                $("#volumeList")
+                .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
+                .append("<p id=\"volumeValue" + x + "\">" + curZone.outputs[x].volume.value + "</p>")
+                .append("<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/>")
+            } else {
+                $("#volumeList")
+                .append("<div>" + curZone.outputs[x].display_name + "</div>")
+                .append("<div>Fixed Volume</div>")
+            }
+        }
+    }
+
 
     if (state['themeShowing'] == null) {
         state['themeShowing'] = true;
@@ -443,12 +435,17 @@ function changeZoneSetting(zoneSetting, zoneSettingValue, zone_id) {
 //     }
 }
 
-function changeVolume(volume, output_id) {
-    console.log(volume + " " + output_id)
-    msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + volume + '" }');
+function volumeInput(spanId, value, output_id) {
+    inVolumeSlider = true;
+    $("#" + spanId + "").html(value);
 
+    msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
     socket.emit("changeVolume", msg);
-    socket.emit("getZone", true);
+
+}
+
+function volumeChange(id, value, output_id) {
+    inVolumeSlider = false;
 }
 
 function setTheme(theme) {

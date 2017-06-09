@@ -217,7 +217,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('changeVolume', function(msg) {
-        transport.change_volume(msg.output_id, "relative_step", msg.volume);
+        transport.change_volume(msg.output_id, "absolute", msg.volume);
     });
 
     socket.on('changeSetting', function(msg) {

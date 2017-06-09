@@ -70,15 +70,18 @@
                 <button type="button" class="buttonZoneName textBold buttonAvailable colorChange" onclick="$('#overlayZoneList').show()">zoneList</button>
             </div>
             <div class="containerSpaceAround">
-                <button type="button" class="buttonSmall" id="buttonLoop"></button> <button type="button" class="buttonSmall" id="buttonShuffle"></button> <button type="button" class="buttonSmall" id="buttonRadio"></button> <button type="button" class="buttonSmall" id="buttonVolume"></button>
+                <button type="button" class="buttonSmall" id="buttonLoop"></button>
+                <button type="button" class="buttonSmall" id="buttonShuffle"></button>
+                <button type="button" class="buttonSmall" id="buttonRadio"></button>
+                <button type="button" class="buttonSmall buttonAvailable" id="buttonVolume" onclick="$('#overlayVolume').show()"></button>
             </div>
         </div>
     </div>
     <div id="overlayVolume" class="overlay">
         <div class="overlayContentAlign">
-            <div class="overlayContent">
+            <div class="overlayContent overlayContent50">
                 <span id="volumeList"></span>
-                <div class="overlayList"><button type="button" class="buttonOverlay buttonClose" onclick="$('#overlayVolume').hide()"></button></div>
+                <div class="overlayList"><button type="button" class="buttonMedium buttonClose" onclick="$('#overlayVolume').hide()"></button></div>
             </div>
         </div>
     </div>

@@ -57,6 +57,7 @@ svg {
 
 .buttonClose {
     width: 48px;
+    color: #eff0f1;
 }
 
 .buttonOverlay:active {
@@ -190,7 +191,11 @@ svg {
 .overlayList svg {
     width: 100%;
     height: 100%;
-/*     fill: #eff0f1; */
+    fill: #eff0f1;
+}
+
+.overlayContent50 {
+    min-width: 50%;
 }
 
 @media screen and (orientation:portrait) {
@@ -333,7 +338,7 @@ input[type=range] {
     height: 25px;
     -webkit-appearance: none;
     margin: 10px 0;
-    width: 100%;
+    width: 75%;
     background-color: rgba(0,0,0,0);
 }
 input[type=range]:focus {

@@ -1,13 +1,7 @@
 # Change Log
 ## Version 1.1.0 (PENDING RELEASE)
 ### Open Bugs
-- (BUG) - seekPosition, seekLength, and seekValue refreshes with every zone update whether they actually change or not.  Causes frequent page repaints.
-- (BUG) - After ungrouping a zone, the grouped zone name stays on the zone list (check if zone_removed message is sent by API)
-- (Feature Request) - Volume controls - see Use Cases
- - (Use Case) - Volume overlay shows "Fixed" or a "Volume Disabled" icon for fixed volume zones (Single Zone)
- - (Use Case) - Volume overlay shows slider for min, max, value that are positive integers (Single Zone)
- - (Use Case) - Volume overlay shows slider for min, max, value that are positive and negative floating point numbers (Single Zone)
- - (Use Case) - Volume overlay shows a seperate volume control for each output_id for multiple output zones, such as grouped zones
+- (BUG) - After ungrouping a zone, the grouped zone name stays on the zone list. Workaround: restart the node application.
 
 ### Pre Release TODO
 - Clear all blocker bugs
@@ -24,12 +18,12 @@ Please run `npm install` after upgrading due to new dependencies.
 ### New
 - Complete rewrite of UI - now supports both Portrait and Landscape view making it more suitable for phones
 - Added new theme based on the dominant color of the cover art
+- Added volume controls
 - Added controls for Loop, Shuffle, and Auto Radio
 - Added a check to see if the extension is enabled
 - Added visual cues to clicking overlay buttons
 - Added close buttons to certain overlays
 - Switching zones is now much more responsive
-- Tweaked jquery.simplemarquee.js to use "span" instead of "div" due to problems with CSS layouts
 - Depreciated the "Light" and "Cover Light" themes
 
 ### Implemented Feature Requests
@@ -38,6 +32,7 @@ Please run `npm install` after upgrading due to new dependencies.
 
 ### Fixed Bugs
 - After switching a zone, the zone_id did not update for the controls. This could lead to controlling the previous zone with the new zone's controls.
+- Tweaked jquery.simplemarquee.js to use "span" instead of "div". Caused problems with CSS layouts.
 
 ### Known issues
 
