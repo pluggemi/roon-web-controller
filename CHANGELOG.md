@@ -1,12 +1,16 @@
 # Change Log
 ## Version 1.1.0 (PENDING RELEASE)
 ### Open Bugs
-- (BUG, BLOCKER) - volume buttons not functional
-- (BUG, minor) - seekPosition, seekLength, and seekValue refreshes with every zone update whether they actually change or not.  Causes frequent page repaints.
+- (BUG) - seekPosition, seekLength, and seekValue refreshes with every zone update whether they actually change or not.  Causes frequent page repaints.
+- (BUG) - After ungrouping a zone, the grouped zone name stays on the zone list (check if zone_removed message is sent by API)
+- (Feature Request) - Volume controls - see Use Cases
+-- (Use Case) - Volume overlay shows "Fixed" or a "Volume Disabled" icon for fixed volume zones (Single Zone)
+-- (Use Case) - Volume overlay shows slider for min, max, value that are positive integers (Single Zone)
+-- (Use Case) - Volume overlay shows slider for min, max, value that are positive and negative floating point numbers (Single Zone)
+-- (Use Case) - Volume overlay shows a seperate volume control for each output_id for multiple output zones, such as grouped zones
 
 ### Pre Release TODO
-- Clear all blocker bugs, prefer clear all known bugs
-- Add volume support
+- Clear all blocker bugs
 - Complete regression test checklist
 - Check for impacts of Roon Server 1.3 (Build 234)
 - Complete pre tag / pre release checklist
@@ -29,23 +33,16 @@ Please run `npm install` after upgrading due to new dependencies.
 - Depreciated the "Light" and "Cover Light" themes
 
 ### Implemented Feature Requests
-- Added config file for server settings (config/local.json).  Example file `config/local.conf.EXAMPLE` shows usage.  The example file is tracked by `git`.  The `config/local.conf` is not tracked by `git` so that local settings will not be clobbered by `git pull`.
-- Added command line option for help and to set the server port (`node app.js -h` for options).
+- Added config file for server settings (config/local.json).  The example file `config/local.conf.EXAMPLE` shows usage and is tracked by `git`.  The `config/local.conf` is not tracked by `git` so that local settings will not be clobbered by `git pull`.
+- Added command line options for help and to set the server port (`node app.js -h` for usage).
 
 ### Fixed Bugs
-- After switching a zone, the zone_id did not update for the controls. This can lead to controlling the previous zone with the new zone's controls.
+- After switching a zone, the zone_id did not update for the controls. This could lead to controlling the previous zone with the new zone's controls.
 
-### A note on the volume controls
-You may be wondering why I did not implement a slider for the volume controls.  There are three reasons: Browser limitations, CSS limitations, and Roon API realities.
+### Known issues
 
-Browser limitations: The slider - known as an `input type=range` - is in the process of being standardized. While all of the most current browsers (except Opera mini) supports it, older browsers do not.  This including mobile browsers on older versions of Android and IOS. This impacts the common use case of using an old tablet as a control point.
 
-CSS limitations: CSS styling of the `input type=range` requires quite a few browser specific CSS rules.  And my goal for maintainability is to only use standardized CSS.
-
-Roon API realities: Many devices that work with Roon utlize both positive and negative numbers for `min`, `max`, and `value` volume read outs.  Even without the browser issues and CSS issues involved with `input type=range`, the reality is that none of them natively support the use of both positive and negative numbers for `min`, `max`, and `value`.  Additionally, the values supplied by the Roon API are floating point values. The `input type=range` is designed to work with integers. There are ways to get this to work, but code portability and maintainability is a major concern.
-
-It is for these reasons that I decided to go with volume buttons instead of sliders.
-
+------------------
 # Release History
 ## Version 1.0.1
 - Resolved bug that could result in repeated listings in Zone Listings

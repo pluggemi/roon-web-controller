@@ -217,9 +217,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('changeVolume', function(msg) {
-        var obj = JSON.parse(msg);
-
-        transport.change_volume(obj.outputId, "relative_step", obj.volume);
+        transport.change_volume(msg.output_id, "relative_step", msg.volume);
     });
 
     socket.on('changeSetting', function(msg) {
@@ -233,7 +231,7 @@ io.on('connection', function(socket){
             settings.loop = msg.value;
         }
 
-        transport.change_settings(msg.output_id, settings, function(error){
+        transport.change_settings(msg.zone_id, settings, function(error){
             console.log("transport.change_settings result: " + error);
         })
     });
