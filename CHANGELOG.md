@@ -1,12 +1,12 @@
 # Change Log
 ## Version 1.1.0 (PENDING RELEASE)
 ### Open Bugs
-- (BUG) - After ungrouping a zone, the grouped zone name stays on the zone list. Workaround: restart the node application.
+- (TODO) - improve readability/layout of volume control overlay
+- (TODO) - improve readbility/layout of main menu overlay
 
 ### Pre Release TODO
 - Clear all blocker bugs
 - Complete regression test checklist
-- Check for impacts of Roon Server 1.3 (Build 234)
 - Complete pre tag / pre release checklist
 
 ### Install Notes
@@ -33,6 +33,7 @@ Please run `npm install` after upgrading due to new dependencies.
 ### Fixed Bugs
 - After switching a zone, the zone_id did not update for the controls. This could lead to controlling the previous zone with the new zone's controls.
 - Tweaked jquery.simplemarquee.js to use "span" instead of "div". Caused problems with CSS layouts.
+- Rewrote zone message parser to handle multiple events per message.  Caused problems with zone list improperly reflecting grouped and ungrouped zones. Likely root cause of previously reported problem with repeated listings in Zone Listings.
 
 ### Known issues
 
