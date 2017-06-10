@@ -84,7 +84,7 @@ Options
 
  Project home: https://github.com/pluggemi/roon-web-controller
 ```
-###S (Optional) Sample systemd unit file
+### (Optional) Sample systemd unit file
 [systemd](https://www.freedesktop.org/wiki/Software/systemd/) is the init system used by modern Linux systems.  Here is a sample systemd unit file which can be used to automatically start this application at Linux system boot time.
 ```
 [Unit]
