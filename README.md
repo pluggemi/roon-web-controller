@@ -16,7 +16,7 @@ Please run `npm install` after upgrading due to new dependencies.
 
 ### Dark Theme
 ![Dark Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/dark-Portrait.png)
-![Dark Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/dark-Portrait.png)
+![Dark Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/dark-Landscape.png)
 
 Album Credit: [Seofon, Zero Point](https://seofon.bandcamp.com/album/zero-point)
 
@@ -52,50 +52,53 @@ On an existing Roon client, go to "Settings" then "Extensions". Click "Enable" b
 
 Open a web browser to your server at "http://localhost:8080"
 
-## (Optional) Local configuration file
+### (Optional) Local configuration file
 Simply copy `config/local.conf.EXAMPLE` to `config/local.conf` and edit `config/local.conf` as needed.
 * `config/local.conf` is not tracked by `git`, so it will not be clobbered with updates
 * `config/local.conf.EXAMPLE` is tracked by `git` and will be updated in the future as new options are available
 
 Content of `config/local.conf`
-> // Copy this file to "local.json" and change the port as desired.
-> {
->   "server": {
->     "port": "1234"
->   }
-> }
 
-## (Optional) Command Line Options
+```
+// Copy this file to "local.json" and change the port as desired.
+{
+  "server": {
+    "port": "1234"
+  }
+}
+```
+
+### (Optional) Command Line Options
 This is the output `node app.js -h` which shows usage of the command line options
+```
+Roon Web Controller
 
-> Roon Web Controller
->
->  A web based controller for the Roon Media System.
->
->  Usage: node app.js <options>
->
-> Options
->
->  -h, --help          Display this usage guide.
->  -p, --port number   Specify the port the server listens on.
->
->  Project home: https://github.com/pluggemi/roon-web-controller
+ A web based controller for the Roon Media System.
 
-## (Optional) Sample systemd unit file
+ Usage: node app.js <options>
+
+Options
+
+ -h, --help          Display this usage guide.
+ -p, --port number   Specify the port the server listens on.
+
+ Project home: https://github.com/pluggemi/roon-web-controller
+```
+###S (Optional) Sample systemd unit file
 [systemd](https://www.freedesktop.org/wiki/Software/systemd/) is the init system used by modern Linux systems.  Here is a sample systemd unit file which can be used to automatically start this application at Linux system boot time.
+```
+[Unit]
+Description=NodeJS app - Roon Web Controller
+After=network.target
 
-> [Unit]
-> Description=NodeJS app - Roon Web Controller
-> After=network.target
->
-> [Service]
-> User=node
-> WorkingDirectory=/srv/node/roon-web-controller
-> ExecStart=/usr/bin/node app.js
->
-> [Install]
-> WantedBy=multi-user.target
+[Service]
+User=node
+WorkingDirectory=/srv/node/roon-web-controller
+ExecStart=/usr/bin/node app.js
 
+[Install]
+WantedBy=multi-user.target
+```
 #### Usage
 To use this unit file:
 * Save this template to a file called ```roon-web-controller.service```
