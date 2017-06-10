@@ -12,11 +12,18 @@ $(document).ready(function() {
 
         if (pairEnabled == true ) {
             showPage();
+            fixFontSize();
         } else {
             showSection('pairDisabled');
         }
     });
 });
+
+function fixFontSize() {
+    var fontSize = parseInt($("#line1").height());
+    fontSize = (Math.round(fontSize * .75))
+    $(".lineMusicInfo").css('font-size', fontSize)
+}
 
 function showPage() {
     // Read settings from cookie
@@ -158,10 +165,10 @@ function showIsPlaying(curZone) {
     $("#isPlaying").show();
     clearState = null;
 
-    if ( state['Line1'] != curZone.now_playing.three_line.line1) {
-        state['Line1'] = curZone.now_playing.three_line.line1;
+    if ( state['line1'] != curZone.now_playing.three_line.line1) {
+        state['line1'] = curZone.now_playing.three_line.line1;
         $("#line1")
-        .html(state['Line1'])
+        .html(state['line1'])
         .simplemarquee({
             cycles: Infinity,
             delayBetweenCycles: 5000,
@@ -169,8 +176,8 @@ function showIsPlaying(curZone) {
         });
     };
 
-    if ( state['Line2'] != curZone.now_playing.three_line.line2) {
-        state['Line2'] = curZone.now_playing.three_line.line2;
+    if ( state['line2'] != curZone.now_playing.three_line.line2) {
+        state['line2'] = curZone.now_playing.three_line.line2;
         $("#line2")
         .html(curZone.now_playing.three_line.line2)
         .simplemarquee({
@@ -180,8 +187,8 @@ function showIsPlaying(curZone) {
         });
     };
 
-    if ( state['Line3'] != curZone.now_playing.three_line.line3) {
-        state['Line3'] = curZone.now_playing.three_line.line3;
+    if ( state['line3'] != curZone.now_playing.three_line.line3) {
+        state['line3'] = curZone.now_playing.three_line.line3;
         $("#line3")
         .html(curZone.now_playing.three_line.line3)
         .simplemarquee({
@@ -191,8 +198,8 @@ function showIsPlaying(curZone) {
         });
     };
 
-    if (state['Title'] != curZone.now_playing.one_line.line1) {
-        state['Title'] = curZone.now_playing.one_line.line1;
+    if (state['title'] != curZone.now_playing.one_line.line1) {
+        state['title'] = curZone.now_playing.one_line.line1;
         $(document).prop("title", curZone.now_playing.one_line.line1);
     };
 
@@ -320,7 +327,7 @@ function showIsPlaying(curZone) {
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonSmall buttonAvailable")
+            .addClass("buttonLarge buttonAvailable")
             .css("color", css['foregroundColor']);
         } else if (state['Loop'] == "loop"){
             // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
@@ -328,7 +335,7 @@ function showIsPlaying(curZone) {
             .html(getSVG('loopOne'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'disabled\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonSmall buttonActive")
+            .addClass("buttonLarge buttonActive")
             .css("color", "#3daee9");
         } else if (state['Loop'] == "loop_one"){
             // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
@@ -336,14 +343,14 @@ function showIsPlaying(curZone) {
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop_one\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonSmall buttonActive")
+            .addClass("buttonLarge buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "")
             .removeClass()
-            .addClass("buttonSmall buttonInactive")
+            .addClass("buttonLarge buttonInactive")
             .css("color", css['foregroundColor']);
         }
     }
@@ -355,21 +362,21 @@ function showIsPlaying(curZone) {
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'true\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonSmall buttonAvailable")
+            .addClass("buttonLarge buttonAvailable")
             .css("color", css['foregroundColor']);
         } else if (state['Shuffle'] == true) {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'false\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonSmall buttonActive")
+            .addClass("buttonLarge buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "")
             .removeClass()
-            .addClass("buttonSmall buttonInactive")
+            .addClass("buttonLarge buttonInactive")
             .css("color", css['foregroundColor']);
         }
     }
@@ -381,21 +388,21 @@ function showIsPlaying(curZone) {
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'true\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonSmall buttonAvailable")
+            .addClass("buttonLarge buttonAvailable")
             .css("color", css['foregroundColor']);
         } else if (state['Radio'] == true) {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'false\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonSmall buttonActive")
+            .addClass("buttonLarge buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "")
             .removeClass()
-            .addClass("buttonSmall buttonInactive")
+            .addClass("buttonLarge buttonInactive")
             .css("color", css['foregroundColor']);
         }
     }

@@ -1,4 +1,12 @@
 # Change Log
+## Version 1.1.1
+
+### Fixed Bugs
+- Addressed issue that caused icons to be very small on high DPI monitors and devices
+
+------------------
+# Release History
+
 ## Version 1.1.0
 
 ### Install Notes
@@ -26,8 +34,6 @@ Please run `npm install` after upgrading due to new dependencies.
 - Tweaked jquery.simplemarquee.js to use "span" instead of "div". Caused problems with CSS layouts.
 - Rewrote zone message parser to handle multiple events per message.  Caused problems with zone list improperly reflecting grouped and ungrouped zones. Likely root cause of previously reported problem with repeated listings in Zone Listings.
 
-------------------
-# Release History
 ## Version 1.0.1
 - Resolved bug that could result in repeated listings in Zone Listings
 - Changed all icons to utilize SVGs from Material Design Icons (https://materialdesignicons.com/)

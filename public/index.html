@@ -29,6 +29,12 @@
     <script src="/js-cookie/js.cookie.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/site.js"></script>
+
+    <script>
+    $( window ).on( "orientationchange", function( event ) {
+        fixFontSize();
+    });
+    </script>
 </head>
 <body>
     <div id="nowPlaying">
@@ -40,33 +46,33 @@
                 <button type="button" class="buttonZoneName buttonActive messages" onclick="$('#overlayZoneList').show()">zoneList</button>
             </div>
         </div>
-        <div id="isPlaying" class="fullScreenFlexContainer">
-            <div id="containerCoverImage" class="container container1of2"></div>
-            <div id="containerMusicInfo" class="container container2of2">
-                <div>
-                    <div id="line1" class="colorChange textBold">&nbsp;</div>
-                    <div id="line2" class="colorChange">&nbsp;</div>
-                    <div id="line3" class="colorChange">&nbsp;</div>
-                </div>
-                <div class="containerSpaceAround">
+        <div id="isPlaying">
+            <div id="containerCoverImage"></div>
+            <div id="containerMusicInfo">
+                <div id="line1" class="colorChange textBold lineMusicInfo">&nbsp;</div>
+                <div id="line2" class="colorChange lineMusicInfo">&nbsp;</div>
+                <div id="line3" class="colorChange lineMusicInfo">&nbsp;</div>
+                <div id="controlsPlayer">
                     <button type="button" id="controlPrev" class="buttonMedium"></button>
                     <button type="button" id="controlPlayPauseStop" class="buttonLarge"></button>
                     <button type="button" id="controlNext" class="buttonMedium"></button>
                 </div>
+                <div id="containerTrackSeek">
                 <div id="trackSeek">
                     <div id="trackSeekValue">
                         <span id="seekPosition" class="left">&nbsp;</span>
                         <span id="seekLength" class="right">&nbsp;</span>
                     </div>
                 </div>
-                <div class="textCenter">
+                </div>
+                <div id="containerZoneList">
                     <button type="button" class="buttonZoneName textBold buttonAvailable colorChange" onclick="$('#overlayZoneList').show()">zoneList</button>
                 </div>
-                <div class="containerSpaceAround">
-                    <button type="button" class="buttonSmall" id="buttonLoop"></button>
-                    <button type="button" class="buttonSmall" id="buttonShuffle"></button>
-                    <button type="button" class="buttonSmall" id="buttonRadio"></button>
-                    <button type="button" class="buttonSmall buttonAvailable" id="buttonVolume" onclick="$('#overlayVolume').show()"></button>
+                <div id="controlsSettings">
+                    <button type="button" class="buttonLarge" id="buttonLoop"></button>
+                    <button type="button" class="buttonLarge" id="buttonShuffle"></button>
+                    <button type="button" class="buttonLarge" id="buttonRadio"></button>
+                    <button type="button" class="buttonLarge buttonAvailable" id="buttonVolume" onclick="$('#overlayVolume').show()"></button>
                 </div>
             </div>
         </div>
