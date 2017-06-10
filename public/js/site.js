@@ -13,12 +13,7 @@ $(document).ready(function() {
         if (pairEnabled == true ) {
             showPage();
         } else {
-            $("#pairDisabled").show();
-            $("#isPlaying").hide();
-            $("#libraryBrowser").hide();
-            $("#buttonMenu").hide();
-            $("#notPlaying").hide();
-            $("#pageLoading").hide()
+            showSection('pairDisabled');
         }
     });
 });
@@ -45,27 +40,43 @@ function showPage() {
 
     setTheme(settings['theme']);
 
-    // Show Now Playing screen
-    $("#buttonMenu").show();
-    $("#notPlaying").show();
-
-    // Show Menu Button
+    // Get Buttons
     $("#buttonMenu").html(getSVG('menu'));
-
-    // Show Close buttons
-    $(".buttonClose").html(getSVG('close'));
-
-    // Show Volume Button
     $("#buttonVolume").html(getSVG('volume'));
 
-    // Hide inactive sections
-    $("#pairDisabled").hide();
-    $("#isPlaying").hide();
-    $("#libraryBrowser").hide();
+    // Switch to nowPlaying
+    showSection('nowPlaying');
 
     t = setTimeout(function (){ $("#pageLoading").hide()}, 250);
 
     enableSockets();
+}
+
+function showSection(sectionName) {
+    if (sectionName == "nowPlaying") {
+        $("#buttonMenu").show();
+        // Show Now Playing screen
+        $("#nowPlaying").show();
+        // Hide inactive sections
+        $("#pairDisabled").hide();
+        $("#libraryBrowser").hide();
+    } else if (sectionName == "libraryBrowser") {
+        $("#buttonMenu").show();
+        // Show libraryBrowser
+        $("#libraryBrowser").show();
+        // Hide inactive sections
+        $("#pairDisabled").hide();
+        $("#nowPlaying").hide();
+    } else if (sectionName == "pairDisabled") {
+        // Show pairDisabled section
+        $("#pairDisabled").show();
+        // Hide everthing else
+        $("#buttonMenu").hide();
+        $("#libraryBrowser").hide();
+        $("#nowPlaying").hide();
+        $("#pageLoading").hide();
+
+    }
 }
 
 function enableSockets(){
@@ -397,16 +408,14 @@ function showIsPlaying(curZone) {
 
                 $("#volumeList")
                 .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
-                .append("<p id=\"volumeValue" + x + "\">" + curZone.outputs[x].volume.value + "</p>")
-                .append("<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/>")
+                .append("<span class=\"sliderGroup\"><span id=\"volumeValue" + x + "\" class=\"sliderValue\">" + curZone.outputs[x].volume.value + "</span><span class=\"sliderInput\"><input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/></span></span>")
             } else {
                 $("#volumeList")
                 .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
-                .append("<p>Fixed Volume</p>")
+                .append("<span class=\"sliderGroup\"><p>Fixed Volume</p></span>")
             }
         }
     }
-
 
     if (state['themeShowing'] == null) {
         state['themeShowing'] = true;
@@ -478,6 +487,8 @@ function setTheme(theme) {
         settings['theme'] = null;
         setTheme(settings['theme']);
     }
+
+    socket.emit("getZone", true);
 }
 
 function showTheme(theme) {
@@ -535,7 +546,5 @@ function getSVG(cmd) {
         return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 14,11L 22,11L 22,13L 14,13L 14,11 Z \"/></svg>";
     } else if (cmd == "volume-plus") {
         return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 14,11L 17,11L 17,8L 19,8L 19,11L 22,11L 22,13L 19,13L 19,16L 17,16L 17,13L 14,13L 14,11 Z \"/></svg>";
-    } else if (cmd == "close") {
-        return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 19,6.41L 17.59,5L 12,10.59L 6.41,5L 5,6.41L 10.59,12L 5,17.59L 6.41,19L 12,13.41L 17.59,19L 19,17.59L 13.41,12L 19,6.41 Z \"/></svg>";
     }
 }

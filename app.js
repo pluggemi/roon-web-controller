@@ -232,7 +232,6 @@ io.on('connection', function(socket){
         }
 
         transport.change_settings(msg.zone_id, settings, function(error){
-            console.log("transport.change_settings result: " + error);
         })
     });
 

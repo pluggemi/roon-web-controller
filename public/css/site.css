@@ -55,11 +55,6 @@ svg {
     color: #232629;
 }
 
-.buttonClose {
-    width: 48px;
-    color: #eff0f1;
-}
-
 .buttonOverlay:active {
     transform: translateY(4px);
     filter:none;
@@ -143,59 +138,64 @@ svg {
 }
 
 .overlay {
+    display:none;
+}
+
+.overlayBackground {
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
     bottom: 0px;
     background-color: rgba(0,0,0,0.75);
-    display:none;
     z-index:200;
 }
 
-.overlayContentAlign {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
-    text-align: center;
-    height: 100%;
-    width: 100%;
-}
-
 .overlayContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #232629;
     color: #eff0f1;
     width: auto;
     height: auto;
+    min-width: 50%;
     max-height: 95%;
     max-width: 95%;
     border-radius: 10px;
     padding: 5px;
     filter: drop-shadow(10px 10px 10px black);
-}
-
-.overlayList {
-    background-color: #232629;
-    color: #eff0f1;
-    justify-content: center;
-    align-items: center;
+    z-index:300;
 }
 
 .overlayListLabel {
     font-weight: bold;
-    width: 100%;
 }
 
-.overlayList svg {
-    width: 100%;
-    height: 100%;
-    fill: #eff0f1;
+.overlayList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.overlayContent50 {
-    min-width: 50%;
+.sliderGroup {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.sliderValue {
+    width: 25%;
+}
+
+.sliderInput {
+    width: 75%;
 }
 
 @media screen and (orientation:portrait) {
@@ -208,13 +208,6 @@ svg {
         height: 40%;
         width: 100%;
         text-align: center;
-    }
-
-    .overlayList {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        height: 100%;
     }
 
     .itemImage {
@@ -232,13 +225,6 @@ svg {
         height: 100%;
         width: 49%;
         text-align: left;
-    }
-
-    .overlayList {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 100%;
     }
 
     .itemImage {
@@ -338,7 +324,7 @@ input[type=range] {
     height: 25px;
     -webkit-appearance: none;
     margin: 10px 0;
-    width: 75%;
+    width: 100%;
     background-color: rgba(0,0,0,0);
 }
 input[type=range]:focus {

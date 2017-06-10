@@ -1,11 +1,7 @@
 # Change Log
 ## Version 1.1.0 (PENDING RELEASE)
-### Open Bugs
-- (TODO) - improve readability/layout of volume control overlay
-- (TODO) - improve readbility/layout of main menu overlay
 
 ### Pre Release TODO
-- Clear all blocker bugs
 - Complete regression test checklist
 - Complete pre tag / pre release checklist
 
@@ -22,7 +18,6 @@ Please run `npm install` after upgrading due to new dependencies.
 - Added controls for Loop, Shuffle, and Auto Radio
 - Added a check to see if the extension is enabled
 - Added visual feedback when clicking overlay buttons
-- Added close buttons to certain overlays
 - Switching zones is now much more responsive
 - Depreciated the "Light" and "Cover Light" themes
 

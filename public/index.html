@@ -77,19 +77,18 @@
             </div>
         </div>
     </div>
+
     <div id="overlayVolume" class="overlay">
-        <div class="overlayContentAlign">
-            <div class="overlayContent overlayContent50">
+        <div class="overlayBackground" onclick="$('#overlayVolume').hide()"></div>
+        <div class="overlayContent">
                 <span id="volumeList"></span>
-                <div class="overlayList"><button type="button" class="buttonMedium buttonClose" onclick="$('#overlayVolume').hide()"></button></div>
-            </div>
         </div>
     </div>
-    <div id="overlayZoneList" class="overlay" onclick="$('#overlayZoneList').hide()">
-        <div class="overlayContentAlign">
-            <div class="overlayContent">
-                <div id="zoneList" class="overlayList"></div>
-            </div>
+
+    <div id="overlayZoneList" class="overlay">
+        <div class="overlayBackground" onclick="$('#overlayZoneList').hide()"></div>
+        <div class="overlayContent">
+            <span id="zoneList" class="overlayList"></span>
         </div>
     </div>
 </div>
@@ -106,15 +105,21 @@
     </div>
 </div>
 
-<div id="overlayMainMenu" class="overlay" onclick="$('#overlayMainMenu').hide()">
-    <div class="overlayContentAlign">
+<div id="overlayMainMenu" class="overlay">
+<div class="overlayBackground" onclick="$('#overlayMainMenu').hide()"></div>
         <div class="overlayContent">
+
+        <span class="overlayList">
+        <button type="button" class="buttonOverlay" onclick="showSection('libraryBrowser')">Library</button>
+        <button type="button" class="buttonOverlay" onclick="showSection('nowPlaying')">Now Playing</button>
+        </span>
+        <hr>
             <p class="overlayListLabel">
-                main menu
+                Theme
             </p>
-            <div class="overlayList">
+            <span class="overlayList">
                 <button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button> <button type="button" class="buttonOverlay" onclick="setTheme('color')">Color</button> <button type="button" class="buttonOverlay" onclick="setTheme('cover')">Cover</button>
-            </div>
+            </span>
         </div>
     </div>
 </div>
