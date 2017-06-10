@@ -9,7 +9,7 @@ This is an extension for the Roon music player that provides a web based remote.
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
-## Upgrade notes
+### Upgrade notes
 Please run `npm install` after upgrading due to new dependencies.
 
 ## Screenshots
@@ -27,6 +27,7 @@ Album Credit: [Seofon, Zero Point](https://seofon.bandcamp.com/album/zero-point)
 Album Credit: [A Winged Victory for the Sullen, IRIS (Musique Originale)](https://erasedtapes.bandcamp.com/album/iris-musique-originale-bonus-track-version)
 
 ### Dominant Color Theme
+The icons and text in this theme automatically adjust to show light or dark depending on which would be more readable.
 ![Dominant Color Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/color-Portrait.png)
 ![Dominant Color Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/color-Landscape.png)
 
@@ -50,14 +51,14 @@ Run the application:
 
 On an existing Roon client, go to "Settings" then "Extensions". Click "Enable" beside "Web Controller".
 
-Open a web browser to your server at "http://localhost:8080"
+Open a web browser to your server at either "http://localhost:8080" or "http://<hostname>:8080".
 
 ### (Optional) Local configuration file
 Simply copy `config/local.conf.EXAMPLE` to `config/local.conf` and edit `config/local.conf` as needed.
 * `config/local.conf` is not tracked by `git`, so it will not be clobbered with updates
 * `config/local.conf.EXAMPLE` is tracked by `git` and will be updated in the future as new options are available
 
-Content of `config/local.conf`
+Content of `config/local.conf.EXAMPLE`
 
 ```
 // Copy this file to "local.json" and change the port as desired.
@@ -69,7 +70,7 @@ Content of `config/local.conf`
 ```
 
 ### (Optional) Command Line Options
-This is the output `node app.js -h` which shows usage of the command line options
+This is the output `node app.js -h` which shows usage of the command line options.
 ```
 Roon Web Controller
 
