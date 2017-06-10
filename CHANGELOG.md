@@ -21,7 +21,7 @@ Please run `npm install` after upgrading due to new dependencies.
 - Added volume controls
 - Added controls for Loop, Shuffle, and Auto Radio
 - Added a check to see if the extension is enabled
-- Added visual cues to clicking overlay buttons
+- Added visual feedback when clicking overlay buttons
 - Added close buttons to certain overlays
 - Switching zones is now much more responsive
 - Depreciated the "Light" and "Cover Light" themes

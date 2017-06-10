@@ -401,8 +401,8 @@ function showIsPlaying(curZone) {
                 .append("<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/>")
             } else {
                 $("#volumeList")
-                .append("<div>" + curZone.outputs[x].display_name + "</div>")
-                .append("<div>Fixed Volume</div>")
+                .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
+                .append("<p>Fixed Volume</p>")
             }
         }
     }

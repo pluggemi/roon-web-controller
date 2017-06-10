@@ -98,60 +98,60 @@ var roon = new RoonApi({
                 for ( x in data.zones ) {
                     var zone_id = data.zones[x].zone_id;
                     var display_name = data.zones[x].display_name;
-
                     item = {};
                     item ["zone_id"] = zone_id;
                     item ["display_name"] = display_name;
 
                     zoneList.push(item);
-
                     zoneStatus.push(data.zones[x])
                 }
+
                 removeDuplicateList(zoneList, 'zone_id');
                 removeDuplicateStatus(zoneStatus, 'zone_id');
             }
             else if (response == "Changed") {
-                if (data.zones_added){
-                    for ( x in data.zones_added ) {
-                        var zone_id = data.zones_added[x].zone_id;
-                        var display_name = data.zones_added[x].display_name;
-
-                        item = {};
-                        item ["zone_id"] = zone_id;
-                        item ["display_name"] = display_name;
-
-                        zoneList.push(item);
-                        zoneStatus.push(data.zones_added[x])
-                    }
-                    removeDuplicateList(zoneList, 'zone_id');
-                    removeDuplicateStatus(zoneStatus, 'zone_id');
-                }
-                else if (data.zones_removed){
-                    for (x in data.zones_removed) {
-                        zoneList = zoneList.filter(function(zone){
-                            return zone.zone_id != data.zones_removed[x];
-                        });
-
-                        zoneStatus = zoneStatus.filter(function(zone){
-                            return zone.zone_id != data.zones_removed[x];
-                        });
-                    }
-                    removeDuplicateList(zoneList, 'zone_id');
-                    removeDuplicateStatus(zoneStatus, 'zone_id');
-                }
-                else if (data.zones_changed){
-                    for (x in data.zones_changed){
-                        for (y in zoneStatus){
-                            if (zoneStatus[y].zone_id == data.zones_changed[x].zone_id){
-                                zoneStatus[y] = data.zones_changed[x];
+                for (i in data ){
+                    if (i == "zones_changed") {
+                        for (x in data.zones_changed){
+                            for (y in zoneStatus){
+                                if (zoneStatus[y].zone_id == data.zones_changed[x].zone_id){
+                                    zoneStatus[y] = data.zones_changed[x];
+                                }
                             }
                         }
+                        io.emit("zoneStatus", zoneStatus);
+
+                    } else if (i == "zones_added") {
+
+                        for ( x in data.zones_added ) {
+                            var zone_id = data.zones_added[x].zone_id;
+                            var display_name = data.zones_added[x].display_name;
+
+                            item = {};
+                            item ["zone_id"] = zone_id;
+                            item ["display_name"] = display_name;
+
+                            zoneList.push(item);
+                            zoneStatus.push(data.zones_added[x])
+                        }
+
+                        removeDuplicateList(zoneList, 'zone_id');
+                        removeDuplicateStatus(zoneStatus, 'zone_id');
+
+                    } else if (i == "zones_removed") {
+                        for (x in data.zones_removed) {
+                            zoneList = zoneList.filter(function(zone){
+                                return zone.zone_id != data.zones_removed[x];
+                            });
+                            zoneStatus = zoneStatus.filter(function(zone){
+                                return zone.zone_id != data.zones_removed[x];
+                            });
+                        }
+                        removeDuplicateList(zoneList, 'zone_id');
+                        removeDuplicateStatus(zoneStatus, 'zone_id');
                     }
-                    io.emit("zoneStatus", zoneStatus);
                 }
-                else {
-                    console.log("Unknown transport response: " + response + " : " + data);
-                }
+
             }
         });
     },
