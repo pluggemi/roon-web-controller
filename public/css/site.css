@@ -22,20 +22,17 @@ svg {
 
 .buttonSmall {
     background-color: rgba(0,0,0,0);
-    height: 36px;
-    width: 36px;
+    height: 50%;
 }
 
 .buttonMedium {
     background-color: rgba(0,0,0,0);
-    width: 64px;
-    height: 64px;
+    height: 100%;
 }
 
 .buttonLarge {
     background-color: rgba(0,0,0,0);
-    width: 76px;
-    height: 76px;
+    height: 100%;
 }
 
 .buttonZoneName {
@@ -92,34 +89,6 @@ svg {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-}
-
-.container {
-
-}
-
-.containerSpaceAround {
-    display:flex;
-    justify-content: space-around;
-    align-items: center;
-    vertical-align: middle;
-}
-
-.container1of2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container2of2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 5vmin;
-}
-
-.container2of2 div {
-    margin-bottom: 3vmin;
 }
 
 .textBold {
@@ -199,14 +168,20 @@ svg {
 }
 
 @media screen and (orientation:portrait) {
-    .container1of2 {
+    #containerCoverImage {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        left: 0px;
         height: 59%;
-        width: 100%;
     }
 
-    .container2of2 {
+    #containerMusicInfo {
+        position: absolute;
+        bottom:0px;
+        left: 0px;
+        right: 0px;
         height: 40%;
-        width: 100%;
         text-align: center;
     }
 
@@ -216,13 +191,19 @@ svg {
 }
 
 @media screen and (orientation:landscape) {
-    .container1of2 {
-        height: 100%;
+    #containerCoverImage {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
         width: 49%;
     }
 
-    .container2of2 {
-        height: 100%;
+    #containerMusicInfo {
+        position: absolute;
+        top: 54px;
+        bottom: 0px;
+        right: 0px;
         width: 49%;
         text-align: left;
     }
@@ -243,6 +224,12 @@ svg {
     z-index:100;
     border: none;
     border-radius: 0 0 0 10px;
+}
+
+#containerCoverImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #coverBackground {
@@ -269,6 +256,53 @@ svg {
     right: 0px;
     bottom: 0px;
     display: none;
+}
+
+#containerMusicInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.lineMusicInfo {
+    height: 10%;
+    margin-bottom: 1%;
+}
+
+#controlsPlayer {
+    height: 20%;
+    max-height: 96px;
+    margin-bottom: 5%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    vertical-align: middle;
+}
+
+#controlsSettings {
+    height: 10%;
+    max-height: 48px;
+    margin-bottom: 5%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    vertical-align: middle;
+}
+
+#containerTrackSeek {
+    height: 5%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+#containerZoneList {
+    height: 10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
 }
 
 #trackSeek {
