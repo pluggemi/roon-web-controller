@@ -1,9 +1,5 @@
 # Change Log
-## Version 1.1.0 (PENDING RELEASE)
-
-### Pre Release TODO
-- Complete regression test checklist
-- Complete pre tag / pre release checklist
+## Version 1.1.0
 
 ### Install Notes
 See the [README.md](README.md) for installation instructions
@@ -29,9 +25,6 @@ Please run `npm install` after upgrading due to new dependencies.
 - After switching a zone, the zone_id did not update for the controls. This could lead to controlling the previous zone with the new zone's controls.
 - Tweaked jquery.simplemarquee.js to use "span" instead of "div". Caused problems with CSS layouts.
 - Rewrote zone message parser to handle multiple events per message.  Caused problems with zone list improperly reflecting grouped and ungrouped zones. Likely root cause of previously reported problem with repeated listings in Zone Listings.
-
-### Known issues
-
 
 ------------------
 # Release History
