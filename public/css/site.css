@@ -1,119 +1,248 @@
 body {
     font-family: sans-serif;
+    background-color: #232629;
+    color: #eff0f1;
 }
 
-.buttonTrans {
-    background-color: rgba(0,0,0,0);
+button {
+    outline:0;
     border: none;
 }
 
-.buttonTrans:focus {
+button:focus {
     outline:0;
+    border: none;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.buttonSmall {
+    background-color: rgba(0,0,0,0);
+    height: 36px;
+    width: 36px;
+}
+
+.buttonMedium {
+    background-color: rgba(0,0,0,0);
+    width: 64px;
+    height: 64px;
+}
+
+.buttonLarge {
+    background-color: rgba(0,0,0,0);
+    width: 76px;
+    height: 76px;
+}
+
+.buttonZoneName {
+    background-color: rgba(0,0,0,0);
+    width: auto;
 }
 
 .buttonOverlay {
     width: 96px;
     height: 48px;
     font-weight: bold;
-    margin-bottom: 24px;
     border: none;
     border-radius: 10px;
     filter: drop-shadow(5px 5px 5px black);
+    margin: 24px;
+    background-color: #eff0f1;
+    color: #232629;
 }
 
-.buttonOverlay:focus {
-    outline:0;
+.buttonOverlay:active {
+    transform: translateY(4px);
+    filter:none;
+}
+
+.buttonAvailable {
+    fill-opacity: 1;
+}
+
+.buttonActive {
+    color: #3daee9;
+    fill-opacity: 1;
+}
+
+.buttonInactive {
+    fill-opacity: 0.33;
+}
+
+.itemImage {
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(5px 5px 5px black);
+}
+
+.fullScreenFlexContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.container {
+
+}
+
+.containerSpaceAround {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.container1of2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container2of2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 5vmin;
+}
+
+.container2of2 div {
+    margin-bottom: 3vmin;
+}
+
+.textBold {
+    font-weight: bold;
+}
+
+.textCenter {
+    text-align: center;
 }
 
 .messages {
+    max-width: 90%;
     font-size:5vw;
+    align-self: center;
+    text-align:center;
 }
 
 .overlay {
+    display:none;
+}
+
+.overlayBackground {
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
     bottom: 0px;
     background-color: rgba(0,0,0,0.75);
-    display:none;
     z-index:200;
 }
 
-.overlayContentAlign {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    vertical-align: middle;
-    text-align: center;
-    height: 100%;
-    width: 100%;
-}
-
 .overlayContent {
-    align-self: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #232629;
+    color: #eff0f1;
     width: auto;
     height: auto;
     min-width: 50%;
+    max-height: 95%;
+    max-width: 95%;
     border-radius: 10px;
     padding: 5px;
     filter: drop-shadow(10px 10px 10px black);
+    z-index:300;
 }
 
-.overlayContent p {
-    font-size: 150%;
+.overlayListLabel {
     font-weight: bold;
 }
 
 .overlayList {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
-    width: 100%;
 }
 
-.svgSmall {
-    width:48px;
-    height:48px;
-}
-
-.svgMedium {
-    width: 72px;
-    height:72px;
-}
-
-.svgLarge {
-    width: 96px;
-    height: 96px;
-}
-
-#menuButton {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    height: 54px;
-    z-index:100;
-}
-
-#notPlaying {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+.sliderGroup {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
     align-items: center;
+    vertical-align: middle;
+    text-align: center;
 }
 
-#isPlaying {
+.sliderValue {
+    width: 25%;
+}
+
+.sliderInput {
+    width: 75%;
+}
+
+@media screen and (orientation:portrait) {
+    .container1of2 {
+        height: 59%;
+        width: 100%;
+    }
+
+    .container2of2 {
+        height: 40%;
+        width: 100%;
+        text-align: center;
+    }
+
+    .itemImage {
+        border-radius: 0;
+    }
+}
+
+@media screen and (orientation:landscape) {
+    .container1of2 {
+        height: 100%;
+        width: 49%;
+    }
+
+    .container2of2 {
+        height: 100%;
+        width: 49%;
+        text-align: left;
+    }
+
+    .itemImage {
+        border-radius: 10px;
+    }
+}
+
+#buttonMenu {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    display: none;
+    background-color: rgba(0,0,0,0.33);
+    color: #eff0f1;
+    top: 0;
+    right: 0;
+    height: 54px;
+    width: 54px;
+    z-index:100;
+    border: none;
+    border-radius: 0 0 0 10px;
 }
 
 #coverBackground {
@@ -125,7 +254,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: opacity(50%) blur(20px);
+    filter: opacity(33%) blur(20px);
     display: flex;
     text-align: center;
     justify-content: center;
@@ -133,109 +262,151 @@ body {
     display: none;
 }
 
-#coverImageDiv {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 51%;
-    bottom: 106px;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-
-#coverImage {
-    width: auto;
-    height: auto;
-    max-width: 95%;
-    max-height: 95%;
-    object-fit: contain;
-    border-radius: 10px;
-    filter: drop-shadow(10px 10px 10px black);
-}
-
-#musicInfo {
-    position: absolute;
-    top: 54px;
-    left: 50%;
-    right: 5px;
-    bottom: 106px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 5vmin;
-}
-
-#musicInfo div {
-    margin: 0;
-    padding: 0;
-    margin-bottom: 3vmin;
-}
-
-#musicInfo div#line1 {
-    font-size: larger;
-    font-weight: bold;
-}
-
-#musicInfo div#line4 {
-    font-size: 50%;
-    text-align: center;
-}
-
-#trackSeek {
-    height: 5px;
-    width: 100%;
-    position: relative;
-    border-radius: 10px;
-}
-
-#trackSeekValue {
-    display: block;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    background-color: #3daee9;
-    border-radius: 10px;
-}
-
-#zoneControl {
-    position:absolute;
-    left: 0px;
-    right: 51%;
-    bottom: 10px;
-    height: 96px;
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-    align-items: center;
-    vertical-align: middle;
-}
-
-#zoneControl div {
-    width: 33%;
-}
-
-#playbackControls {
-    position:absolute;
-    left: 50%;
-    right: 0px;
-    bottom: 10px;
-    height: 96px;
-    display: flex;
-    text-align: center;
-    justify-content: space-around;
-    align-items: center;
-    vertical-align: middle;
-}
-
-#libraryBrowser {
+#colorBackground {
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
     bottom: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: none;
+}
+
+#trackSeek {
+    width: 95%;
+    height: 5px;
+    border-radius: 10px;
+    background-color: rgba(239, 240, 241, 0.33);
+    position: relative;
+    display: block;
+    padding: 0;
+    align-self: center;
+}
+
+#trackSeekValue {
+    height: 5px;
+    background-color: #3daee9;
+    border-radius: 10px;
+    padding: 0;
+    width: 0%;
+}
+
+#trackSeekValue span {
+    position: absolute;
+    bottom: -15px;
+    width: 50%;
+    margin: 0;
+    line-height: 10px;
+    font-size: 10px;
+}
+
+#trackSeekValue span.right {
+    text-align: right;
+    right: 0;
+}
+
+#trackSeekValue span.left {
+    text-align: left;
+    left: 0;
+}
+
+#notPlaying {
+    background-color: #232629;
+    color: #eff0f1;
+}
+
+#pageLoading {
+    background-color: #232629;
+    color: #eff0f1;
+    z-index: 1000;
+}
+
+input[type=range] {
+    height: 25px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 0px 0px 0px #000000;
+    background: #3daee9;
+    border-radius: 10px;
+    border: 0px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #232629;
+    border: 1px solid #232629;
+    height: 18px;
+    width: 18px;
+    border-radius: 25px;
+    background: #eff0f1;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -7px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #3daee9;
+}
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 0px 0px 0px #000000;
+    background: #3daee9;
+    border-radius: 10px;
+    border: 0px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px #232629;
+    border: 1px solid #232629;
+    height: 18px;
+    width: 18px;
+    border-radius: 25px;
+    background: #eff0f1;
+    cursor: pointer;
+}
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #3daee9;
+    border: 0px solid #000000;
+    border-radius: 2px;
+    box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-fill-upper {
+    background: #3daee9;
+    border: 0px solid #000000;
+    border-radius: 2px;
+    box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-thumb {
+    margin-top: 1px;
+    box-shadow: 0px 0px 0px #232629;
+    border: 1px solid #232629;
+    height: 18px;
+    width: 18px;
+    border-radius: 25px;
+    background: #eff0f1;
+    cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #3daee9;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #3daee9;
 }

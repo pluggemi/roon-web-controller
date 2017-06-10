@@ -1,42 +1,37 @@
-# Roon Web Controller
----------------------------
+# Roon Web Controller 1.1.0
 This is an extension for the Roon music player that provides a web based remote.
 
-## Recent Change Log
-Version 1.0.1
-- Resolved bug that could result in repeated listings in Zone Listings
-- Changed all icons to utilize SVGs from Material Design Icons (https://materialdesignicons.com/)
-- Dramatically reduced the number of times the icons were being called and redrawn
-- Changed default theme to "Cover Dark"
-- Set default icon theme to "Circles"
-- Added configuration option to select icons between icons with or without circles
-- Miscellaneous aesthetic changes
+## New Feature Highlights
+- Complete rewrite of UI - now supports both Portrait and Landscape view making it more suitable for phones
+- Added new theme based on the dominant color of the cover art
+- Added controls for Volume, Loop, Shuffle, and Auto Radio
+- Added optional command line options and local configuration file
 
+See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
+
+### Upgrade notes
+Please run `npm install` after upgrading due to new dependencies.
 
 ## Screenshots
-All of these screenshots were taken from a web client sized at 800x480 - the same size as a Raspberry Pi touch screen.  The application looks great natively on the Raspberry Pi Touch screen as well as in a web browser window. The application resizes to your screen size.
-
-Also notice the scrolling text in the "Cover Art - Light Theme" screenshot.
-
-### Light Theme
-![Light Theme](https://raw.githubusercontent.com/pluggemi/roon-web-controller/master/screenshots/light.png)
-
-Album Credit: [Biosphere, Sound Installations (2000-2009)](https://biosphere.bandcamp.com/album/sound-installations-2000-2009)
 
 ### Dark Theme
-![Dark Theme](https://raw.githubusercontent.com/pluggemi/roon-web-controller/master/screenshots/dark.png)
+![Dark Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/dark-Portrait.png)
+![Dark Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/dark-Landscape.png)
 
-Album Credit: [Carbon Based Lifeforms, Twentythree](https://carbonbasedlifeforms.bandcamp.com/album/twentythree)
+Album Credit: [Seofon, Zero Point](https://seofon.bandcamp.com/album/zero-point)
 
-### Cover Art - Dark Theme
-![Cover Art - Dark Theme](https://raw.githubusercontent.com/pluggemi/roon-web-controller/master/screenshots/coverDark.png)
+### Cover Art Theme
+![Cover Art Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/cover-Portrait.png)
+![Cover Art Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/cover-Landscape.png)
 
-Album Credit: [Android Lust, Crater Vol​.​1](http://music.androidlust.com/album/crater-vol-1)
+Album Credit: [A Winged Victory for the Sullen, IRIS (Musique Originale)](https://erasedtapes.bandcamp.com/album/iris-musique-originale-bonus-track-version)
 
-### Cover Art - Light Theme
-![Cover Art - Light Theme](https://raw.githubusercontent.com/pluggemi/roon-web-controller/master/screenshots/coverLight.png)
+### Dominant Color Theme
+The icons and text in this theme automatically adjust to show light or dark depending on which would be more readable.
+![Dominant Color Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/color-Portrait.png)
+![Dominant Color Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/color-Landscape.png)
 
-Album Credit: [Rachel Grimes, The Clearing](https://rachelgrimes.bandcamp.com/album/the-clearing)
+Album Credit: [Biosphere, Departed Glories](https://biosphere.bandcamp.com/album/departed-glories)
 
 ## Installation
 Ensure that Node.JS version 6.x or higher is installed.
@@ -56,18 +51,42 @@ Run the application:
 
 On an existing Roon client, go to "Settings" then "Extensions". Click "Enable" beside "Web Controller".
 
-Open a web browser to your server at "http://localhost:8080"
+Open a web browser to your server at either "http://localhost:8080" or "http://<hostname>:8080".
 
-### Usage
-* To select or change a zone, click the Speaker icon at the lower left
-* To select or change the theme, click the Gears icon at the lower left
+### (Optional) Local configuration file
+Simply copy `config/local.conf.EXAMPLE` to `config/local.conf` and edit `config/local.conf` as needed.
+* `config/local.conf` is not tracked by `git`, so it will not be clobbered with updates
+* `config/local.conf.EXAMPLE` is tracked by `git` and will be updated in the future as new options are available
 
-## Known issues/TODO
-* The volume control overlay does not have any volume controls yet.
+Content of `config/local.conf.EXAMPLE`
 
-## Sample systemd unit file
+```
+// Copy this file to "local.json" and change the port as desired.
+{
+  "server": {
+    "port": "1234"
+  }
+}
+```
+
+### (Optional) Command Line Options
+This is the output `node app.js -h` which shows usage of the command line options.
+```
+Roon Web Controller
+
+ A web based controller for the Roon Media System.
+
+ Usage: node app.js <options>
+
+Options
+
+ -h, --help          Display this usage guide.
+ -p, --port number   Specify the port the server listens on.
+
+ Project home: https://github.com/pluggemi/roon-web-controller
+```
+### (Optional) Sample systemd unit file
 [systemd](https://www.freedesktop.org/wiki/Software/systemd/) is the init system used by modern Linux systems.  Here is a sample systemd unit file which can be used to automatically start this application at Linux system boot time.
-
 ```
 [Unit]
 Description=NodeJS app - Roon Web Controller
@@ -97,9 +116,10 @@ You can monitor the output of this application using ```journalctl```.
 
 ## Credits
 In addition to those packages installed via npm, this project uses:
-* [jquery.simplemarquee.js](https://github.com/IndigoUnited/jquery.simplemarquee)
+* [jquery.simplemarquee.js](https://github.com/IndigoUnited/jquery.simplemarquee) to automatically scroll the long text
 * Color palette from the KDE Visual Design Group [Human Interface Guidelines](https://community.kde.org/KDE_Visual_Design_Group/HIG/Color)
 * Icons from [Material Design Icons](https://materialdesignicons.com/)
+* [Color Thief](https://github.com/lokesh/color-thief) to calculate the dominant color of the album art
 
 Thanks go to [st0g1e](https://github.com/st0g1e) for doing one of the first [web clients](https://github.com/st0g1e/roon-extension-ws-player) for the Roon API.
 

@@ -4,5 +4,5 @@ node_modules
 # Roon Core configuration file
 config.json
 
-# Debug log
-debug.log
+# Local server configuration file
+config/local.json

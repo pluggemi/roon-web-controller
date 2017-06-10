@@ -1,0 +1,7 @@
+// Copy this file to "local.json" and change the port as desired.
+
+{
+  "server": {
+    "port": "1234"
+  }
+}
