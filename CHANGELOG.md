@@ -2,9 +2,18 @@
 
 ## Version TBD (PENDING RELEASE)
 
+## TODO
+- (Feature) Library browser
+- (Feature) Search
+
+## Pre-Release TODO
+- Clear bugs
+- Regression Testing (actual devices - browser, phone, Raspberry Pi touch screen)
+- Pre-Tag/pre-release checklist
+
 ### New
-- Split "now playing" into a standalone page to allow for custom layouts
-- Added theme button to "now playing page"
+- Added theme button to "Now Playing"
+- Split "Now Playing" and "Library" into a standalone pages to allow for custom layouts (example side-by-side layout provided, http://localhost:8080/side-by-side.html)
 
 ------------------
 # Release History

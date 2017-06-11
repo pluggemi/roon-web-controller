@@ -51,7 +51,7 @@ Run the application:
 
 On an existing Roon client, go to "Settings" then "Extensions". Click "Enable" beside "Web Controller".
 
-Open a web browser to your server at either "http://localhost:8080" or "http://<hostname>:8080".
+Open a web browser to your server at either "http://localhost:8080" or "http://(IP of Device):8080".
 
 ### (Optional) Local configuration file
 Simply copy `config/local.conf.EXAMPLE` to `config/local.conf` and edit `config/local.conf` as needed.
