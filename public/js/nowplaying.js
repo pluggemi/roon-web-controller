@@ -7,16 +7,8 @@ var state = [];
 var inVolumeSlider = false;
 
 $(document).ready(function() {
-    socket.on("pairStatus", function(payload) {
-        pairEnabled=payload.pairEnabled;
-
-        if (pairEnabled == true ) {
-            showPage();
-            fixFontSize();
-        } else {
-            showSection('pairDisabled');
-        }
-    });
+    showPage();
+    fixFontSize();
 });
 
 function fixFontSize() {
@@ -48,42 +40,10 @@ function showPage() {
     setTheme(settings['theme']);
 
     // Get Buttons
-    $("#buttonMenu").html(getSVG('menu'));
     $("#buttonVolume").html(getSVG('volume'));
-
-    // Switch to nowPlaying
-    showSection('nowPlaying');
-
-    t = setTimeout(function (){ $("#pageLoading").hide()}, 250);
+    $("#buttonTheme").html(getSVG('theme'));
 
     enableSockets();
-}
-
-function showSection(sectionName) {
-    if (sectionName == "nowPlaying") {
-        $("#buttonMenu").show();
-        // Show Now Playing screen
-        $("#nowPlaying").show();
-        // Hide inactive sections
-        $("#pairDisabled").hide();
-        $("#libraryBrowser").hide();
-    } else if (sectionName == "libraryBrowser") {
-        $("#buttonMenu").show();
-        // Show libraryBrowser
-        $("#libraryBrowser").show();
-        // Hide inactive sections
-        $("#pairDisabled").hide();
-        $("#nowPlaying").hide();
-    } else if (sectionName == "pairDisabled") {
-        // Show pairDisabled section
-        $("#pairDisabled").show();
-        // Hide everthing else
-        $("#buttonMenu").hide();
-        $("#libraryBrowser").hide();
-        $("#nowPlaying").hide();
-        $("#pageLoading").hide();
-
-    }
 }
 
 function enableSockets(){
@@ -163,7 +123,11 @@ function showNotPlaying() {
 function showIsPlaying(curZone) {
     $("#notPlaying").hide();
     $("#isPlaying").show();
-    clearState = null;
+
+    if (clearState == true ){
+        fixFontSize();
+        clearState = null;
+    }
 
     if ( state['line1'] != curZone.now_playing.three_line.line1) {
         state['line1'] = curZone.now_playing.three_line.line1;
@@ -525,9 +489,7 @@ function secondsConvert(seconds) {
 }
 
 function getSVG(cmd) {
-    if (cmd == "menu") {
-        return "<svg viewBox=\"0 0 512 512\"><path d=\"M64 128h384v42.667H64V128m0 106.667h384v42.666H64v-42.666m0 106.666h384V384H64v-42.667z\"/></svg>";
-    } else if (cmd == "loop") {
+    if (cmd == "loop") {
         return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 17,17L 7,17L 7,14L 3,18L 7,22L 7,19L 19,19L 19,13L 17,13M 7,7L 17,7L 17,10L 21,6L 17,2L 17,5L 5,5L 5,11L 7,11L 7,7 Z \"/></svg>";
     } else if (cmd == "loopOne") {
         return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 13,15L 13,9L 12,9L 10,10L 10,11L 11.5,11L 11.5,15M 17,17L 7,17L 7,14L 3,18L 7,22L 7,19L 19,19L 19,13L 17,13M 7,7L 17,7L 17,10L 21,6L 17,2L 17,5L 5,5L 5,11L 7,11L 7,7 Z \"/></svg>";
@@ -553,5 +515,7 @@ function getSVG(cmd) {
         return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 14,11L 22,11L 22,13L 14,13L 14,11 Z \"/></svg>";
     } else if (cmd == "volume-plus") {
         return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 14,11L 17,11L 17,8L 19,8L 19,11L 22,11L 22,13L 19,13L 19,16L 17,16L 17,13L 14,13L 14,11 Z \"/></svg>";
+    } else if (cmd == "theme") {
+        return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 7.5,2.00001C 5.71094,3.15144 4.5,5.18431 4.5,7.5C 4.5,9.8157 5.71095,11.8486 7.53415,12.9999C 4.46243,13 2,10.5376 2,7.5C 2,4.46243 4.46243,2.00001 7.5,2.00001 Z M 19.0711,3.51472L 20.4853,4.92893L 4.92893,20.4853L 3.51471,19.0711L 19.0711,3.51472 Z M 12.8894,5.9344L 11.4059,5.00146L 9.96582,6.00001L 10.3947,4.30087L 9,3.23983L 10.7485,3.12264L 11.3266,1.46834L 11.9784,3.09504L 13.7304,3.13367L 12.3847,4.25622L 12.8894,5.9344 Z M 9.58647,9.53659L 8.43268,8.81097L 7.3126,9.58762L 7.64616,8.26607L 6.56141,7.44081L 7.92135,7.34966L 8.37101,6.06298L 8.87794,7.3282L 10.2406,7.35825L 9.19396,8.23134L 9.58647,9.53659 Z M 19,13.5C 19,16.5376 16.5376,19 13.5,19C 12.2782,19 11.1494,18.6016 10.2366,17.9276L 17.9276,10.2366C 18.6016,11.1495 19,12.2782 19,13.5 Z M 14.6009,20.0824L 17.3726,18.9343L 17.1348,22.28L 14.6009,20.0824 Z M 18.9305,17.3849L 20.0786,14.6132L 22.2762,17.1471L 18.9305,17.3849 Z M 20.0845,12.416L 18.9365,9.64433L 22.2822,9.8821L 20.0845,12.416 Z M 9.62856,18.9285L 12.4002,20.0766L 9.86632,22.2742L 9.62856,18.9285 Z \"/></svg>";
     }
 }

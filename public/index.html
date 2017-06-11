@@ -24,100 +24,65 @@
     <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/css/site.css">
     <script src="/jquery/jquery.min.js"></script>
-    <script src="/js/jquery.simplemarquee.js"></script>
-    <script src="/js/color-thief.js"></script>
-    <script src="/js-cookie/js.cookie.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/site.js"></script>
+    <script src="/js/index.js"></script>
 
-    <script>
-    $( window ).on( "orientationchange", function( event ) {
-        fixFontSize();
-    });
+    <style>
+        iframe {
+            border: none;
+        }
 
-    $( window ).resize(function() {
-        fixFontSize();
-    });
-    </script>
+        .section {
+            height: 100%;
+            width: 100%;
+        }
+
+        #pageLoading {
+            background-color: #232629;
+            color: #eff0f1;
+            z-index: 1000;
+        }
+
+        #buttonMenu {
+            position: absolute;
+            background-color: rgba(0,0,0,0.33);
+            color: #eff0f1;
+            top: 0;
+            right: 0;
+            height: 54px;
+            width: 54px;
+            z-index:100;
+            border: none;
+            border-radius: 0 0 0 10px;
+        }
+    </style>
 </head>
 <body>
-    <div id="nowPlaying">
-        <div id="coverBackground"></div>
-        <div id="colorBackground"></div>
-        <div id="notPlaying" class="fullScreenFlexContainer">
-            <div class="messages">
-                <p>Nothing playing on</p>
-                <button type="button" class="buttonZoneName buttonActive messages" onclick="$('#overlayZoneList').show()">zoneList</button>
-            </div>
-        </div>
-        <div id="isPlaying">
-            <div id="containerCoverImage"></div>
-            <div id="containerMusicInfo">
-                <div id="line1" class="colorChange textBold lineMusicInfo">&nbsp;</div>
-                <div id="line2" class="colorChange lineMusicInfo">&nbsp;</div>
-                <div id="line3" class="colorChange lineMusicInfo">&nbsp;</div>
-                <div id="controlsPlayer">
-                    <button type="button" id="controlPrev" class="buttonMedium"></button>
-                    <button type="button" id="controlPlayPauseStop" class="buttonLarge"></button>
-                    <button type="button" id="controlNext" class="buttonMedium"></button>
-                </div>
-                <div id="containerTrackSeek">
-                <div id="trackSeek">
-                    <div id="trackSeekValue">
-                        <span id="seekPosition" class="left">&nbsp;</span>
-                        <span id="seekLength" class="right">&nbsp;</span>
-                    </div>
-                </div>
-                </div>
-                <div id="containerZoneList">
-                    <button type="button" class="buttonZoneName textBold buttonAvailable colorChange" onclick="$('#overlayZoneList').show()">zoneList</button>
-                </div>
-                <div id="controlsSettings">
-                    <button type="button" class="buttonLarge" id="buttonLoop"></button>
-                    <button type="button" class="buttonLarge" id="buttonShuffle"></button>
-                    <button type="button" class="buttonLarge" id="buttonRadio"></button>
-                    <button type="button" class="buttonLarge buttonAvailable" id="buttonVolume" onclick="$('#overlayVolume').show()"></button>
-                </div>
-            </div>
-        </div>
-        <div id="overlayVolume" class="overlay">
-            <div class="overlayBackground" onclick="$('#overlayVolume').hide()"></div>
-            <div class="overlayContent">
-                <span id="volumeList"></span>
-            </div>
-        </div>
-        <div id="overlayZoneList" class="overlay">
-            <div class="overlayBackground" onclick="$('#overlayZoneList').hide()"></div>
-            <div class="overlayContent">
-                <span id="zoneList" class="overlayList"></span>
-            </div>
-        </div>
+    <div id="nowPlaying" class="fullscreenFlex">
+        <iframe class="section" src="nowplaying.html"></iframe>
     </div>
-    <div id="libraryBrowser" class="fullScreenFlexContainer">
-        <div class="messages">Library (todo)</div>
+
+    <div id="libraryBrowser" class="fullscreenFlex">
+        <iframe class="section" src="library.html"></iframe>
     </div>
-    <div id="pairDisabled" class="fullScreenFlexContainer">
+
+    <div id="pairDisabled" class="fullscreenFlex">
         <div class="messages">This extension is not enabled. Please use a Roon client to enable it.</div>
     </div>
+
     <div id="overlayMainMenu" class="overlay">
         <div class="overlayBackground" onclick="$('#overlayMainMenu').hide()"></div>
         <div class="overlayContent">
             <div class="overlayList">
-<!--                 <button type="button" class="buttonOverlay" onclick="showSection('libraryBrowser')">Library</button> -->
                 <button type="button" class="buttonOverlay" onclick="showSection('nowPlaying')">Now Playing</button>
-            </div>
-            <hr>
-            <p class="overlayListLabel">Theme</p>
-            <div class="overlayList">
-                <button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button>
-                <button type="button" class="buttonOverlay" onclick="setTheme('color')">Color</button>
-                <button type="button" class="buttonOverlay" onclick="setTheme('cover')">Cover</button>
+                <button type="button" class="buttonOverlay" onclick="showSection('libraryBrowser')">Library</button>
             </div>
         </div>
     </div>
 
     <button type="button" id="buttonMenu" class="buttonTrans" onclick="$('#overlayMainMenu').show()"></button>
 
-    <div id="pageLoading" class="fullScreenFlexContainer">&nbsp;</div>
+    <div id="pageLoading" class="fullscreenFlex">&nbsp;</div>
+
 </body>
 </html>

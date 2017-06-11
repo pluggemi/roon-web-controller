@@ -1,11 +1,18 @@
 # Change Log
+
+## Version TBD (PENDING RELEASE)
+
+### New
+- Split "now playing" into a standalone page to allow for custom layouts
+- Added theme button to "now playing page"
+
+------------------
+# Release History
+
 ## Version 1.1.1
 
 ### Fixed Bugs
 - Addressed issue that caused icons to be very small on high DPI monitors and devices
-
-------------------
-# Release History
 
 ## Version 1.1.0
 
