@@ -10,7 +10,7 @@ $(document).ready(function() {
     socket.on("pairStatus", function(payload) {
         pairEnabled=payload.pairEnabled;
 
-        if (pairEnabled === true ) {
+        if (pairEnabled === 1) {
             showPage();
             fixFontSize();
         } else {
