@@ -31,7 +31,7 @@ const usage = getUsage([
 }
 ])
 
-if (options['help']) {
+if (options.help) {
     console.log(usage)
     process.exit()
 }
@@ -42,8 +42,8 @@ var config = require('config');
 var configPort = config.get('server.port')
 
 // Determine listen port
-if (options['port']) {
-    var listenPort = options['port'];
+if (options.port) {
+    var listenPort = options.port;
 } else if (configPort){
     var listenPort = configPort
 } else {
@@ -88,7 +88,7 @@ var roon = new RoonApi({
     core_paired: function(core_) {
         core = core_;
 
-        pairStatus = 1;
+        pairStatus = true;
         io.emit("pairStatus", JSON.parse('{"pairEnabled": ' + pairStatus + '}'));
 
         transport = core_.services.RoonApiTransport;
@@ -99,8 +99,8 @@ var roon = new RoonApi({
                     var zone_id = data.zones[x].zone_id;
                     var display_name = data.zones[x].display_name;
                     item = {};
-                    item ["zone_id"] = zone_id;
-                    item ["display_name"] = display_name;
+                    item.zone_id = zone_id;
+                    item.display_name = display_name;
 
                     zoneList.push(item);
                     zoneStatus.push(data.zones[x])
@@ -128,8 +128,8 @@ var roon = new RoonApi({
                             var display_name = data.zones_added[x].display_name;
 
                             item = {};
-                            item ["zone_id"] = zone_id;
-                            item ["display_name"] = display_name;
+                            item.zone_id = zone_id;
+                            item.display_name = display_name;
 
                             zoneList.push(item);
                             zoneStatus.push(data.zones_added[x])
@@ -272,7 +272,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/roonapi/getImage', function(req, res){
-    core.services.RoonApiImage.get_image(req.query['image_key'], {"format": "image/jpeg"}, function(cb, contentType, body) {
+    core.services.RoonApiImage.get_image(req.query.image_key, {"format": "image/jpeg"}, function(cb, contentType, body) {
 
         res.contentType = contentType;
 
