@@ -31,7 +31,7 @@ const usage = getUsage([
 }
 ])
 
-if (options['help']) {
+if (options.help) {
     console.log(usage)
     process.exit()
 }
@@ -42,8 +42,8 @@ var config = require('config');
 var configPort = config.get('server.port')
 
 // Determine listen port
-if (options['port']) {
-    var listenPort = options['port'];
+if (options.port) {
+    var listenPort = options.port;
 } else if (configPort){
     var listenPort = configPort
 } else {
@@ -272,7 +272,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/roonapi/getImage', function(req, res){
-    core.services.RoonApiImage.get_image(req.query['image_key'], {"format": "image/jpeg"}, function(cb, contentType, body) {
+    core.services.RoonApiImage.get_image(req.query.image_key, {"format": "image/jpeg"}, function(cb, contentType, body) {
 
         res.contentType = contentType;
 
