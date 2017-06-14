@@ -99,8 +99,8 @@ var roon = new RoonApi({
                     var zone_id = data.zones[x].zone_id;
                     var display_name = data.zones[x].display_name;
                     item = {};
-                    item ["zone_id"] = zone_id;
-                    item ["display_name"] = display_name;
+                    item.zone_id = zone_id;
+                    item.display_name = display_name;
 
                     zoneList.push(item);
                     zoneStatus.push(data.zones[x])
@@ -128,8 +128,8 @@ var roon = new RoonApi({
                             var display_name = data.zones_added[x].display_name;
 
                             item = {};
-                            item ["zone_id"] = zone_id;
-                            item ["display_name"] = display_name;
+                            item.zone_id = zone_id;
+                            item.display_name = display_name;
 
                             zoneList.push(item);
                             zoneStatus.push(data.zones_added[x])
