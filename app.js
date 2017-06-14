@@ -88,7 +88,7 @@ var roon = new RoonApi({
     core_paired: function(core_) {
         core = core_;
 
-        pairStatus = 1;
+        pairStatus = true;
         io.emit("pairStatus", JSON.parse('{"pairEnabled": ' + pairStatus + '}'));
 
         transport = core_.services.RoonApiTransport;
