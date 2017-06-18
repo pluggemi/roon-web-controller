@@ -7,20 +7,20 @@ $(document).ready(function() {
 
 function showPage() {
     // Read settings from cookie
-    settings['zoneID'] = readCookie('settings[\'zoneID\']');
-    settings['displayName'] = readCookie('settings[\'displayName\']');
+    settings.zoneID = readCookie('settings[\'zoneID\']');
+    settings.displayName = readCookie('settings[\'displayName\']');
 
     // Set page fields to settings
-    if (settings['zoneID'] == null) {
+    if (settings.zoneID === null) {
         $("#overlayZoneList").show();
     }
 
-    if (settings['displayName'] != null){
-        $("#buttonZoneName").html(settings['displayName']);
-        if (settings['zoneID'] != null) {
-            $("#buttonBack").html(getSVG('back')).attr("onclick", "goUp(\'" + settings['zoneID'] + "\')");
-            $("#buttonHome").html(getSVG('home')).attr("onclick", "goHome(\'" + settings['zoneID'] + "\')");
-            goHome(settings['zoneID']);
+    if (settings.displayName !== null){
+        $("#buttonZoneName").html(settings.displayName);
+        if (settings.zoneID !== null) {
+            $("#buttonBack").html(getSVG('back')).attr("onclick", "goUp(\'" + settings.zoneID + "\')");
+            $("#buttonHome").html(getSVG('home')).attr("onclick", "goHome(\'" + settings.zoneID + "\')");
+            goHome(settings.zoneID);
         }
     }
 
@@ -33,21 +33,23 @@ function enableSockets() {
     socket.on("zoneList", function(payload) {
         $("#zoneList").html("");
 
-        for (x in payload){
-            $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
+        if (payload !== null) {
+            for (var x in payload){
+                $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
+            }
         }
     });
 }
 
 function selectZone(zone_id, display_name) {
-    settings['zoneID'] = zone_id;
-//     setCookie('settings[\'zoneID\']', settings['zoneID']);
+    settings.zoneID = zone_id;
+//     setCookie('settings[\'zoneID\']', settings.zoneID);
 
-    settings['displayName'] = display_name;
-//     setCookie('settings[\'displayName\']', settings['displayName']);
-    $("#buttonZoneName").html(settings['displayName'])
-    $("#buttonBack").html(getSVG('back')).attr("onclick", "goUp(\'" + settings['zoneID'] + "\')");
-    $("#buttonHome").html(getSVG('home')).attr("onclick", "goHome(\'" + settings['zoneID'] + "\')");
+    settings.displayName = display_name;
+//     setCookie('settings[\'displayName\']', settings.displayName);
+    $("#buttonZoneName").html(settings.displayName);
+    $("#buttonBack").html(getSVG('back')).attr("onclick", "goUp(\'" + settings.zoneID + "\')");
+    $("#buttonHome").html(getSVG('home')).attr("onclick", "goHome(\'" + settings.zoneID + "\')");
 
     $("#overlayZoneList").hide();
 }
@@ -104,11 +106,13 @@ function showList(item_key, zone_id, page, list_size) {
 
 function showData( payload, zone_id, page ) {
     $("#items").html("");
-    for (x in payload['list']) {
-        $("#items").append("<button type=\"button\" class=\"itemListItem\" onclick=\"showList(\'" + payload.list[x].item_key + "\', \'" + settings['zoneID'] + "\', 1, 10)\">" + payload.list[x].title + "</button>")
-//         $("#items").append("<button type=\"button\" class=\"itemListItem\" onclick=\"showList(\'" + payload.list[x].item_key + "\', \'" + settings['zoneID'] + "\', 1, 10)\">" + payload.list[x].title + " (image_key: " + payload.list[x].image_key + ")</button>")
 
+    if (payload.list !== null){
+        for (var x in payload.list) {
+            $("#items").append("<button type=\"button\" class=\"itemListItem\" onclick=\"showList(\'" + payload.list[x].item_key + "\', \'" + settings.zoneID + "\', 1, 10)\">" + payload.list[x].title + "</button>");
+//             $("#items").append("<button type=\"button\" class=\"itemListItem\" onclick=\"showList(\'" + payload.list[x].item_key + "\', \'" + settings.zoneID + "\', 1, 10)\">" + payload.list[x].title + " (image_key: " + payload.list[x].image_key + ")</button>")
 
+        }
     }
 }
 

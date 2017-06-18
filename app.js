@@ -1,5 +1,5 @@
 // Setup general variables
-const defaultListenPort = 8080;
+var defaultListenPort = 8080;
 
 var core;
 var pairStatus = 0;
@@ -7,17 +7,17 @@ var zoneStatus = [];
 var zoneList = [];
 
 // Read command line options
-const commandLineArgs = require('command-line-args');
-const getUsage = require('command-line-usage');
+var commandLineArgs = require('command-line-args');
+var getUsage = require('command-line-usage');
 
-const optionDefinitions = [
+var optionDefinitions = [
     { name: 'help', alias: 'h', description: 'Display this usage guide.', type: Boolean },
     { name: 'port', alias: 'p', description: 'Specify the port the server listens on.', type: Number }
-]
+];
 
-const options = commandLineArgs(optionDefinitions, { partial: true })
+var options = commandLineArgs(optionDefinitions, { partial: true });
 
-const usage = getUsage([
+var usage = getUsage([
 {
     header: 'Roon Web Controller',
     content: 'A web based controller for the Roon Music Player.\n\nUsage: [bold]{node app.js <options>}'
@@ -29,23 +29,23 @@ const usage = getUsage([
 {
     content: 'Project home: [underline]{https://github.com/pluggemi/roon-web-controller}'
 }
-])
+]);
 
-if (options['help']) {
-    console.log(usage)
-    process.exit()
+if (options.help) {
+    console.log(usage);
+    process.exit();
 }
 
 // Read config file
 var config = require('config');
 
-var configPort = config.get('server.port')
+var configPort = config.get('server.port');
 
 // Determine listen port
-if (options['port']) {
-    var listenPort = options['port'];
+if (options.port) {
+    var listenPort = options.port;
 } else if (configPort){
-    var listenPort = configPort
+    var listenPort = configPort;
 } else {
     var listenPort = defaultListenPort;
 }
@@ -71,7 +71,7 @@ var io = require('socket.io').listen(server);
 
 server.listen(listenPort, function() {
     console.log('Listening on port ' + listenPort);
-})
+});
 
 // Setup Roon
 var RoonApi          = require("node-roon-api");
@@ -91,32 +91,33 @@ var roon = new RoonApi({
     core_paired: function(core_) {
         core = core_;
 
-        pairStatus = 1;
+        pairStatus = true;
         io.emit("pairStatus", JSON.parse('{"pairEnabled": ' + pairStatus + '}'));
 
         transport = core_.services.RoonApiTransport;
 
         transport.subscribe_zones(function(response, data){
+            var i, x, y, zone_id, display_name;
             if (response == "Subscribed") {
                 for ( x in data.zones ) {
-                    var zone_id = data.zones[x].zone_id;
-                    var display_name = data.zones[x].display_name;
+                    zone_id = data.zones[x].zone_id;
+                    display_name = data.zones[x].display_name;
                     item = {};
-                    item ["zone_id"] = zone_id;
-                    item ["display_name"] = display_name;
+                    item.zone_id = zone_id;
+                    item.display_name = display_name;
 
                     zoneList.push(item);
-                    zoneStatus.push(data.zones[x])
+                    zoneStatus.push(data.zones[x]);
                 }
 
                 removeDuplicateList(zoneList, 'zone_id');
                 removeDuplicateStatus(zoneStatus, 'zone_id');
             }
             else if (response == "Changed") {
-                for (i in data ){
+                for ( i in data ){
                     if (i == "zones_changed") {
                         for (x in data.zones_changed){
-                            for (y in zoneStatus){
+                            for ( y in zoneStatus){
                                 if (zoneStatus[y].zone_id == data.zones_changed[x].zone_id){
                                     zoneStatus[y] = data.zones_changed[x];
                                 }
@@ -125,22 +126,20 @@ var roon = new RoonApi({
                         io.emit("zoneStatus", zoneStatus);
 
                     } else if (i == "zones_added") {
-
                         for ( x in data.zones_added ) {
-                            var zone_id = data.zones_added[x].zone_id;
-                            var display_name = data.zones_added[x].display_name;
+                            zone_id = data.zones_added[x].zone_id;
+                            display_name = data.zones_added[x].display_name;
 
                             item = {};
-                            item ["zone_id"] = zone_id;
-                            item ["display_name"] = display_name;
+                            item.zone_id = zone_id;
+                            item.display_name = display_name;
 
                             zoneList.push(item);
-                            zoneStatus.push(data.zones_added[x])
+                            zoneStatus.push(data.zones_added[x]);
                         }
 
                         removeDuplicateList(zoneList, 'zone_id');
                         removeDuplicateStatus(zoneStatus, 'zone_id');
-
                     } else if (i == "zones_removed") {
                         for (x in data.zones_removed) {
                             zoneList = zoneList.filter(function(zone){
@@ -160,7 +159,7 @@ var roon = new RoonApi({
     },
 
     core_unpaired: function(core_) {
-        pairStatus = 0;
+        pairStatus = false;
         io.emit("pairStatus", JSON.parse('{"pairEnabled": ' + pairStatus + '}'));
     }
 
@@ -179,6 +178,7 @@ roon.start_discovery();
 
 // Remove duplicates from zoneList array
 function removeDuplicateList(array, property) {
+    var x;
     var new_array = [];
     var lookup = {};
     for (x in array) {
@@ -195,6 +195,7 @@ function removeDuplicateList(array, property) {
 
 // Remove duplicates from zoneStatus array
 function removeDuplicateStatus(array, property) {
+    var x;
     var new_array = [];
     var lookup = {};
     for (x in array) {
@@ -235,7 +236,7 @@ io.on('connection', function(socket){
         }
 
         transport.change_settings(msg.zone_id, settings, function(error){
-        })
+        });
     });
 
     socket.on('goPrev', function(msg) {
@@ -270,7 +271,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/roonapi/getImage', function(req, res){
-    core.services.RoonApiImage.get_image(req.query['image_key'], {"format": "image/jpeg"}, function(cb, contentType, body) {
+    core.services.RoonApiImage.get_image(req.query.image_key, {"format": "image/jpeg"}, function(cb, contentType, body) {
 
         res.contentType = contentType;
 

@@ -13,31 +13,31 @@ $(document).ready(function() {
 
 function fixFontSize() {
     var fontSize = parseInt($("#line1").height());
-    fontSize = (Math.round(fontSize * .75))
-    $(".lineMusicInfo").css('font-size', fontSize)
+    fontSize = (Math.round(fontSize * 0.75));
+    $(".lineMusicInfo").css('font-size', fontSize);
 }
 
 function showPage() {
     // Read settings from cookie
-    settings['zoneID'] = readCookie('settings[\'zoneID\']');
-    settings['displayName'] = readCookie('settings[\'displayName\']');
-    settings['theme'] = readCookie('settings[\'theme\']');
+    settings.zoneID = readCookie('settings[\'zoneID\']');
+    settings.displayName = readCookie('settings[\'displayName\']');
+    settings.theme = readCookie('settings[\'theme\']');
 
     // Set page fields to settings
-    if (settings['zoneID'] == null) {
+    if (settings.zoneID === null) {
         $("#overlayZoneList").show();
     }
 
-    if (settings['displayName'] != null){
-        $(".buttonZoneName").html(settings['displayName']);
+    if (settings.displayName !== null){
+        $(".buttonZoneName").html(settings.displayName);
     }
 
-    if (settings['theme'] == null) {
-        settings['theme'] = "dark";
-        setCookie('settings[\'theme\']', settings['theme']);
-    };
+    if (settings.theme === null) {
+        settings.theme = "dark";
+        setCookie('settings[\'theme\']', settings.theme);
+    }
 
-    setTheme(settings['theme']);
+    setTheme(settings.theme);
 
     // Get Buttons
     $("#buttonVolume").html(getSVG('volume'));
@@ -50,15 +50,17 @@ function enableSockets(){
     socket.on("zoneList", function(payload) {
         $("#zoneList").html("");
 
-        for (x in payload){
-            $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
+        if (payload !== null) {
+            for (var x in payload){
+                $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
+            }
         }
     });
 
     socket.on("zoneStatus", function(payload) {
-        if (settings['zoneID'] != null){
-            for (x in payload){
-                if (payload[x].zone_id == settings['zoneID']) {
+        if (settings.zoneID !== null){
+            for (var x in payload){
+                if (payload[x].zone_id == settings.zoneID) {
                     curZone = payload[x];
                     updateZone(curZone);
                 } else {
@@ -70,12 +72,12 @@ function enableSockets(){
 }
 
 function selectZone(zone_id, display_name) {
-    settings['zoneID'] = zone_id;
-    setCookie('settings[\'zoneID\']', settings['zoneID']);
+    settings.zoneID = zone_id;
+    setCookie('settings[\'zoneID\']', settings.zoneID);
 
-    settings['displayName'] = display_name;
-    setCookie('settings[\'displayName\']', settings['displayName']);
-    $(".buttonZoneName").html(settings['displayName']);
+    settings.displayName = display_name;
+    setCookie('settings[\'displayName\']', settings.displayName);
+    $(".buttonZoneName").html(settings.displayName);
 
     // Reset state on zone switch
     state = [];
@@ -95,53 +97,50 @@ function updateZone(curZone){
 }
 
 function showNotPlaying() {
-    if (clearState == null ) {
-        $("#notPlaying").show();
-        $("#isPlaying").hide();
-        $("#coverBackground").hide();
-        $("#colorBackground").hide();
+    $("#notPlaying").show();
+    $("#isPlaying").hide();
+    $("#coverBackground").hide();
+    $("#colorBackground").hide();
 
-        // Reset icons
-        $("#controlPrev").html(getSVG('prev')).addClass("buttonInactive");
-        $("#controlPlayPauseStop").html(getSVG('play')).addClass("buttonInactive");
-        $("#controlNext").html(getSVG('next')).addClass("buttonInactive");
-        $("#buttonLoop").html(getSVG('loop')).addClass("buttonInactive");
-        $("#buttonShuffle").html(getSVG('shuffle')).addClass("buttonInactive");
-        $("#buttonRadio").html(getSVG('radio')).addClass("buttonInactive");
+    // Reset icons
+    $("#controlPrev").html(getSVG('prev')).addClass("buttonInactive");
+    $("#controlPlayPauseStop").html(getSVG('play')).addClass("buttonInactive");
+    $("#controlNext").html(getSVG('next')).addClass("buttonInactive");
+    $("#buttonLoop").html(getSVG('loop')).addClass("buttonInactive");
+    $("#buttonShuffle").html(getSVG('shuffle')).addClass("buttonInactive");
+    $("#buttonRadio").html(getSVG('radio')).addClass("buttonInactive");
 
-        // Blank text fields
-        $("#line1, #line2, #line3, #seekPosition, #seekLength").html("&nbsp;");
+    // Blank text fields
+    $("#line1, #line2, #line3, #seekPosition, #seekLength").html("&nbsp;");
 
-        // Reset state and browser title
-        state = [];
-        $(document).prop("title", "Roon Web Controller");
-        clearState = true;
-    }
-
+    // Reset state and browser title
+    state = [];
+    $(document).prop("title", "Roon Web Controller");
+    clearState = true;
 }
 
 function showIsPlaying(curZone) {
     $("#notPlaying").hide();
     $("#isPlaying").show();
 
-    if (clearState == true ){
+    if (clearState === true ){
         fixFontSize();
         clearState = null;
     }
 
-    if ( state['line1'] != curZone.now_playing.three_line.line1) {
-        state['line1'] = curZone.now_playing.three_line.line1;
+    if ( state.line1 != curZone.now_playing.three_line.line1) {
+        state.line1 = curZone.now_playing.three_line.line1;
         $("#line1")
-        .html(state['line1'])
+        .html(state.line1)
         .simplemarquee({
             cycles: Infinity,
             delayBetweenCycles: 5000,
             handleHover: false
         });
-    };
+    }
 
-    if ( state['line2'] != curZone.now_playing.three_line.line2) {
-        state['line2'] = curZone.now_playing.three_line.line2;
+    if ( state.line2 != curZone.now_playing.three_line.line2) {
+        state.line2 = curZone.now_playing.three_line.line2;
         $("#line2")
         .html(curZone.now_playing.three_line.line2)
         .simplemarquee({
@@ -149,10 +148,10 @@ function showIsPlaying(curZone) {
             delayBetweenCycles: 5000,
             handleHover: false
         });
-    };
+    }
 
-    if ( state['line3'] != curZone.now_playing.three_line.line3) {
-        state['line3'] = curZone.now_playing.three_line.line3;
+    if ( state.line3 != curZone.now_playing.three_line.line3) {
+        state.line3 = curZone.now_playing.three_line.line3;
         $("#line3")
         .html(curZone.now_playing.three_line.line3)
         .simplemarquee({
@@ -160,14 +159,14 @@ function showIsPlaying(curZone) {
             delayBetweenCycles: 5000,
             handleHover: false
         });
-    };
+    }
 
-    if (state['title'] != curZone.now_playing.one_line.line1) {
-        state['title'] = curZone.now_playing.one_line.line1;
+    if (state.title != curZone.now_playing.one_line.line1) {
+        state.title = curZone.now_playing.one_line.line1;
         $(document).prop("title", curZone.now_playing.one_line.line1);
-    };
+    }
 
-    if ( curZone.is_seek_allowed == true ) {
+    if ( curZone.is_seek_allowed === true ) {
         $("#seekPosition").html(secondsConvert(curZone.now_playing.seek_position));
         $("#seekLength").html(secondsConvert(curZone.now_playing.length));
         $("#trackSeekValue")
@@ -175,46 +174,46 @@ function showIsPlaying(curZone) {
     } else {
         $("#seekPosition, #seekLength").html("&nbsp;");
         $("#trackSeekValue").css("width", "0%");
-    };
+    }
 
-    if ( state['image_key'] != curZone.now_playing.image_key || state['image_key'] == null) {
-        state['image_key'] = curZone.now_playing.image_key;
+    if ( state.image_key != curZone.now_playing.image_key || state.image_key === null) {
+        state.image_key = curZone.now_playing.image_key;
 
-        if ( curZone.now_playing.image_key == null ) {
-            state['imgUrl'] = "/img/transparent.png";
+        if ( curZone.now_playing.image_key === null ) {
+            state.imgUrl = "/img/transparent.png";
         } else {
-            state['imgUrl'] = "/roonapi/getImage?image_key=" + curZone.now_playing.image_key;
+            state.imgUrl = "/roonapi/getImage?image_key=" + curZone.now_playing.image_key;
         }
-        $("#containerCoverImage").html("<img src=\"" + state['imgUrl'] + "\" class=\"itemImage\">");
-        $("#coverBackground").css("background-image", "url(" + state['imgUrl'] + ")");
+        $("#containerCoverImage").html("<img src=\"" + state.imgUrl + "\" class=\"itemImage\">");
+        $("#coverBackground").css("background-image", "url(" + state.imgUrl + ")");
 
-        if (settings['theme'] == "color"){
+        if (settings.theme == "color"){
             var colorThief = new ColorThief();
-            colorThief.getColorAsync(state['imgUrl'], function(color){
+            colorThief.getColorAsync(state.imgUrl, function(color){
                 r = color[0];
                 g = color[1];
                 b = color[2];
-                css['colorBackground'] = "rgb(" + color +")";
+                css.colorBackground = "rgb(" + color +")";
 
                 yiq = ((r*299)+(g*587)+(b*114))/1000;
                 if (yiq >= 128) {
-                    css['backgroundColor'] = "#eff0f1";
-                    css['foregroundColor'] = "#232629";
-                    css['trackSeek'] = "rgba(35, 38, 41, 0.33)"
+                    css.backgroundColor = "#eff0f1";
+                    css.foregroundColor = "#232629";
+                    css.trackSeek = "rgba(35, 38, 41, 0.33)";
                 } else {
-                    css['backgroundColor'] = "#232629";
-                    css['foregroundColor'] = "#eff0f1";
-                    css['trackSeek'] = "rgba(239, 240, 241, 0.33)";
+                    css.backgroundColor = "#232629";
+                    css.foregroundColor = "#eff0f1";
+                    css.trackSeek = "rgba(239, 240, 241, 0.33)";
                 }
                 $("#colorBackground").show();
                 showTheme('color');
             });
         }
-    };
+    }
 
-    if (state['Prev'] != curZone.is_previous_allowed || state['Prev'] == null) {
-        state['Prev'] = curZone.is_previous_allowed;
-        if ( curZone.is_previous_allowed == true ) {
+    if (state.Prev != curZone.is_previous_allowed || state.Prev === null) {
+        state.Prev = curZone.is_previous_allowed;
+        if ( curZone.is_previous_allowed === true ) {
             $("#controlPrev")
             .attr("onclick", "goCmd(\'prev\', \'" + curZone.zone_id + "\')")
             .html(getSVG('prev'))
@@ -226,12 +225,12 @@ function showIsPlaying(curZone) {
             .html(getSVG('prev'))
             .addClass("buttonInactive")
             .removeClass("buttonAvailable");
-        };
-    };
+        }
+    }
 
-    if (state['Next'] != curZone.is_next_allowed || state['Next'] == null) {
-        state['Next'] = curZone.is_next_allowed;
-        if ( curZone.is_next_allowed == true ) {
+    if (state.Next != curZone.is_next_allowed || state.Next === null) {
+        state.Next = curZone.is_next_allowed;
+        if ( curZone.is_next_allowed === true ) {
             $("#controlNext")
             .attr("onclick", "goCmd(\'next\', \'" + curZone.zone_id + "\')")
             .html(getSVG('next'))
@@ -246,36 +245,36 @@ function showIsPlaying(curZone) {
         }
     }
 
-    if ( curZone.is_play_allowed == true ) {
-        state['PlayPauseStop'] = "showPlay";
-    } else if ( curZone.state == "playing" && curZone.is_play_allowed == false ) {
-        if ( curZone.is_pause_allowed == true ) { state['PlayPauseStop'] = "showPause"; }
-        else { state['PlayPauseStop'] = "showStop"; }
+    if ( curZone.is_play_allowed === true ) {
+        state.PlayPauseStop = "showPlay";
+    } else if ( curZone.state == "playing" && curZone.is_play_allowed === false ) {
+        if ( curZone.is_pause_allowed === true ) { state.PlayPauseStop = "showPause"; }
+        else { state.PlayPauseStop = "showStop"; }
     } else {
-        state['PlayPauseStop'] = "showPlayDisabled";
+        state.PlayPauseStop = "showPlayDisabled";
     }
 
-    if (state['PlayPauseStopLast'] != state['PlayPauseStop'] || state['PlayPauseStop'] == null) {
-        state['PlayPauseStopLast'] = state['PlayPauseStop'];
-        if ( state['PlayPauseStop'] == "showPlay") {
+    if (state.PlayPauseStopLast != state.PlayPauseStop || state.PlayPauseStop === null) {
+        state.PlayPauseStopLast = state.PlayPauseStop;
+        if ( state.PlayPauseStop == "showPlay") {
             $("#controlPlayPauseStop")
             .attr("onclick", "goCmd(\'play\', \'" + curZone.zone_id + "\')")
             .html(getSVG('play'))
             .addClass("buttonAvailable")
             .removeClass("buttonInactive");
-        } else if (state['PlayPauseStop'] == "showPause") {
+        } else if (state.PlayPauseStop == "showPause") {
             $("#controlPlayPauseStop")
             .attr("onclick", "goCmd(\'pause\', \'" + curZone.zone_id + "\')")
             .html(getSVG('pause'))
             .addClass("buttonAvailable")
             .removeClass("buttonInactive");
-        } else if (state['PlayPauseStop'] == "showStop") {
+        } else if (state.PlayPauseStop == "showStop") {
             $("#controlPlayPauseStop")
             .attr("onclick", "goCmd(\'pause\', \'" + curZone.zone_id + "\')")
             .html(getSVG('stop'))
             .addClass("buttonAvailable")
             .removeClass("buttonInactive");
-        } else if (state['PlayPauseStop'] == "showPlayDisabled") {
+        } else if (state.PlayPauseStop == "showPlayDisabled") {
             $("#controlPlayPauseStop")
             .html(getSVG('play'))
             .attr("onclick", "")
@@ -284,16 +283,16 @@ function showIsPlaying(curZone) {
         }
     }
 
-    if (state['Loop'] != curZone.settings.loop || state['Loop'] == null) {
-        state['Loop'] = curZone.settings.loop;
-        if (state['Loop'] == "disabled"){
+    if (state.Loop != curZone.settings.loop || state.Loop === null) {
+        state.Loop = curZone.settings.loop;
+        if (state.Loop == "disabled"){
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop\', \'" + curZone.zone_id + "\')")
             .removeClass()
             .addClass("buttonFillHeight buttonAvailable")
-            .css("color", css['foregroundColor']);
-        } else if (state['Loop'] == "loop"){
+            .css("color", css.foregroundColor);
+        } else if (state.Loop == "loop"){
             // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
             $("#buttonLoop")
             .html(getSVG('loopOne'))
@@ -301,7 +300,7 @@ function showIsPlaying(curZone) {
             .removeClass()
             .addClass("buttonFillHeight buttonActive")
             .css("color", "#3daee9");
-        } else if (state['Loop'] == "loop_one"){
+        } else if (state.Loop == "loop_one"){
             // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
             $("#buttonLoop")
             .html(getSVG('loop'))
@@ -315,20 +314,20 @@ function showIsPlaying(curZone) {
             .attr("onclick", "")
             .removeClass()
             .addClass("buttonFillHeight buttonInactive")
-            .css("color", css['foregroundColor']);
+            .css("color", css.foregroundColor);
         }
     }
 
-    if (state['Shuffle'] != curZone.settings.shuffle || state['Shuffle'] == null) {
-        state['Shuffle'] = curZone.settings.shuffle;
-        if (state['Shuffle'] == false) {
+    if (state.Shuffle != curZone.settings.shuffle || state.Shuffle === null) {
+        state.Shuffle = curZone.settings.shuffle;
+        if (state.Shuffle === false) {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'true\', \'" + curZone.zone_id + "\')")
             .removeClass()
             .addClass("buttonFillHeight buttonAvailable")
-            .css("color", css['foregroundColor']);
-        } else if (state['Shuffle'] == true) {
+            .css("color", css.foregroundColor);
+        } else if (state.Shuffle === true) {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'false\', \'" + curZone.zone_id + "\')")
@@ -341,20 +340,20 @@ function showIsPlaying(curZone) {
             .attr("onclick", "")
             .removeClass()
             .addClass("buttonFillHeight buttonInactive")
-            .css("color", css['foregroundColor']);
+            .css("color", css.foregroundColor);
         }
     }
 
-    if (state['Radio'] != curZone.settings.auto_radio || state['Radio'] == null) {
-        state['Radio'] = curZone.settings.auto_radio;
-        if (state['Radio'] == false) {
+    if (state.Radio != curZone.settings.auto_radio || state.Radio === null) {
+        state.Radio = curZone.settings.auto_radio;
+        if (state.Radio === false) {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'true\', \'" + curZone.zone_id + "\')")
             .removeClass()
             .addClass("buttonFillHeight buttonAvailable")
-            .css("color", css['foregroundColor']);
-        } else if (state['Radio'] == true) {
+            .css("color", css.foregroundColor);
+        } else if (state.Radio === true) {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'false\', \'" + curZone.zone_id + "\')")
@@ -367,30 +366,30 @@ function showIsPlaying(curZone) {
             .attr("onclick", "")
             .removeClass()
             .addClass("buttonFillHeight buttonInactive")
-            .css("color", css['foregroundColor']);
+            .css("color", css.foregroundColor);
         }
     }
 
-    if (inVolumeSlider == false ) {
+    if (inVolumeSlider === false ) {
         $("#volumeList").html("");
-        for (x in curZone.outputs) {
+        for (var x in curZone.outputs) {
             if (curZone.outputs[x].volume) {
-                type = curZone.outputs[x].volume.type
+                type = curZone.outputs[x].volume.type;
 
                 $("#volumeList")
                 .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
-                .append("<span class=\"sliderGroup\"><span id=\"volumeValue" + x + "\" class=\"sliderValue\">" + curZone.outputs[x].volume.value + "</span><span class=\"sliderInput\"><input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/></span></span>")
+                .append("<span class=\"sliderGroup\"><span id=\"volumeValue" + x + "\" class=\"sliderValue\">" + curZone.outputs[x].volume.value + "</span><span class=\"sliderInput\"><input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/></span></span>");
             } else {
                 $("#volumeList")
                 .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
-                .append("<span class=\"sliderGroup\"><p>Fixed Volume</p></span>")
+                .append("<span class=\"sliderGroup\"><p>Fixed Volume</p></span>");
             }
         }
     }
 
-    if (state['themeShowing'] == null) {
-        state['themeShowing'] = true;
-        showTheme(settings['theme']);
+    if (state.themeShowing === null) {
+        state.themeShowing = true;
+        showTheme(settings.theme);
     }
 }
 
@@ -411,7 +410,7 @@ function goCmd(cmd,zone_id){
 function changeZoneSetting(zoneSetting, zoneSettingValue, zone_id) {
 //     for (x in curZone.outputs){
         msg = JSON.parse('{"zone_id": "' + zone_id + '", "setting": "' + zoneSetting + '", "value": "' + zoneSettingValue + '" }');
-        socket.emit("changeSetting", msg)
+        socket.emit("changeSetting", msg);
 //     }
 }
 
@@ -429,46 +428,46 @@ function volumeChange(id, value, output_id) {
 }
 
 function setTheme(theme) {
-    settings['theme'] = theme;
-    state['themeShowing'] = null;
+    settings.theme = theme;
+    state.themeShowing = null;
     setCookie('settings[\'theme\']', theme);
 
     if (theme == "dark") {
-        css['backgroundColor'] = "#232629";
-        css['foregroundColor'] = "#eff0f1";
-        css['trackSeek'] = "rgba(239, 240, 241, 0.33)";
+        css.backgroundColor = "#232629";
+        css.foregroundColor = "#eff0f1";
+        css.trackSeek = "rgba(239, 240, 241, 0.33)";
 
         $("#coverBackground").hide();
         $("#colorBackground").hide();
     }
     else if (theme == "cover") {
-        css['backgroundColor'] = "#232629";
-        css['foregroundColor'] = "#eff0f1";
-        css['trackSeek'] = "rgba(239, 240, 241, 0.33)";
+        css.backgroundColor = "#232629";
+        css.foregroundColor = "#eff0f1";
+        css.trackSeek = "rgba(239, 240, 241, 0.33)";
 
         $("#coverBackground").show();
         $("#colorBackground").hide();
     }
     else if (theme == "color") {
-        state['image_key'] = null;
+        state.image_key = null;
         $("#coverBackground").hide();
         $("#colorBackground").show();
     }
     else {
-        settings['theme'] = null;
-        setTheme(settings['theme']);
+        settings.theme = null;
+        setTheme(settings.theme);
     }
 
     socket.emit("getZone", true);
 }
 
 function showTheme(theme) {
-    $("body").css("background-color", css['backgroundColor']).css("color", css['foregroundColor']);
-    $(".colorChange").css("color", css['foregroundColor']);
-    $("#colorBackground").css("background-color", css['colorBackground']);
-    $(".buttonAvailable").css("color", css['foregroundColor']);
-    $(".buttonInactive").css("color", css['foregroundColor']);
-    $("#trackSeek").css("background-color", css['trackSeek']);
+    $("body").css("background-color", css.backgroundColor).css("color", css.foregroundColor);
+    $(".colorChange").css("color", css.foregroundColor);
+    $("#colorBackground").css("background-color", css.colorBackground);
+    $(".buttonAvailable").css("color", css.foregroundColor);
+    $(".buttonInactive").css("color", css.foregroundColor);
+    $("#trackSeek").css("background-color", css.trackSeek);
     socket.emit("getZone", true);
 }
 

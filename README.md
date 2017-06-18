@@ -123,6 +123,8 @@ In addition to those packages installed via npm, this project uses:
 
 Thanks go to [st0g1e](https://github.com/st0g1e) for doing one of the first [web clients](https://github.com/st0g1e/roon-extension-ws-player) for the Roon API.
 
+Thanks go to [noohgnas](https://github.com/noohgnas) for pointing out some code improvements.
+
 And of course thanks go to [Roon Labs](https://roonlabs.com/) for making the music player and the [APIs](https://github.com/RoonLabs).
 
 ## License
