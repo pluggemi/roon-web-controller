@@ -15,7 +15,7 @@ button:focus {
 }
 
 svg {
-    width: 100%;
+    width: auto;
     height: 100%;
     fill: currentColor;
 }
@@ -35,6 +35,11 @@ svg {
 .buttonOverlay:active {
     transform: translateY(4px);
     filter:none;
+}
+
+.buttonFillHeight {
+    background-color: rgba(0,0,0,0);
+    height: 100%;
 }
 
 
@@ -93,4 +98,13 @@ svg {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+
+.textBold {
+    font-weight: bold;
+}
+
+.textCenter {
+    text-align: center;
 }

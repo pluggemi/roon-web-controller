@@ -53,9 +53,11 @@ if (options['port']) {
 // Setup Express
 var express = require('express');
 var http = require('http');
+var bodyParser = require('body-parser');
 
 var app = express();
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -76,9 +78,10 @@ var RoonApi          = require("node-roon-api");
 var RoonApiImage     = require("node-roon-api-image");
 var RoonApiStatus    = require("node-roon-api-status");
 var RoonApiTransport = require("node-roon-api-transport");
+var RoonApiBrowse    = require("node-roon-api-browse");
 
 var roon = new RoonApi({
-    extension_id:        'com.pluggemi.roon.web.controller',
+    extension_id:        'com.pluggemi.web.controller',
     display_name:        "Web Controller",
     display_version:     "dev",
     publisher:           'Mike Plugge',
@@ -166,7 +169,7 @@ var roon = new RoonApi({
 var svc_status = new RoonApiStatus(roon);
 
 roon.init_services({
-    required_services: [ RoonApiTransport, RoonApiImage ],
+    required_services: [ RoonApiTransport, RoonApiImage, RoonApiBrowse ],
     provided_services: [ svc_status ]
 });
 
@@ -235,40 +238,35 @@ io.on('connection', function(socket){
         })
     });
 
-    socket.on('seek', function(msg) {
-        var obj = JSON.parse(msg);
-
-        transport.seek(obj.outputId, "absolute", obj.seek);
-    });
-
-    socket.on('goPrev', function(msg){
+    socket.on('goPrev', function(msg) {
         transport.control(msg, 'previous');
     });
 
-    socket.on('goNext', function(msg){
+    socket.on('goNext', function(msg) {
         transport.control(msg, 'next');
     });
 
-    socket.on('goPlayPause', function(msg){
+    socket.on('goPlayPause', function(msg) {
         transport.control(msg, 'playpause');
     });
 
-    socket.on('goPlay', function(msg){
+    socket.on('goPlay', function(msg) {
         transport.control(msg, 'play');
     });
 
-    socket.on('goPause', function(msg){
+    socket.on('goPause', function(msg) {
         transport.control(msg, 'pause');
     });
 
-    socket.on('goStop', function(msg){
+    socket.on('goStop', function(msg) {
         transport.control(msg, 'stop');
     });
+
 });
 
 // Web Routes
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/public/fullscreen.html');
 });
 
 app.get('/roonapi/getImage', function(req, res){
@@ -281,6 +279,89 @@ app.get('/roonapi/getImage', function(req, res){
     });
 });
 
+app.post('/roonapi/goUp', function(req, res){
+    refresh_browse(req.body.zone_id, { pop_levels: 1 }, 1, req.body.list_size, function (payload){
+        res.send({"list": payload});
+    });
+});
+
+app.post('/roonapi/goHome', function(req, res){
+    refresh_browse(req.body.zone_id, { pop_all: true }, 1, req.body.list_size, function(payload){
+        res.send({"list": payload});
+    });
+
+//     itemBrowse(req.body.zone_id, { pop_all: true }, 1, req.body.list_size, function(payload){
+//         res.send({"list": payload});
+//     });
+});
+
+app.post('/roonapi/listByItemKey', function(req, res){
+    refresh_browse(req.body.zone_id, {item_key: req.body.item_key}, req.body.page, req.body.list_size, function(payload){
+        res.send({"list": payload});
+    });
+});
+
 app.use('/jquery/jquery.min.js', express.static(__dirname + '/node_modules/jquery/dist/jquery.min.js'));
 
 app.use('/js-cookie/js.cookie.js', express.static(__dirname + '/node_modules/js-cookie/src/js.cookie.js'));
+
+function refresh_browse(zone_id, opts, page, listPerPage, cb) {
+    var items = [];
+    opts = Object.assign({
+        hierarchy:          "browse",
+        zone_or_output_id:  zone_id,
+    }, opts);
+
+//     console.log(opts);
+//     console.log("\n");
+
+
+    core.services.RoonApiBrowse.browse(opts, (err, r) => {
+        if (err) { console.log(err, r); return; }
+//         console.log(r);
+//         console.log("\n");
+
+        if (r.action == 'list') {
+            page = ( page - 1 ) * listPerPage;
+
+            core.services.RoonApiBrowse.load({
+                hierarchy:          "browse",
+                offset:             page,
+                set_display_offset: listPerPage,
+            }, (err, r) => {
+                items = r.items;
+//                 console.log(r);
+//                 console.log("\n");
+
+                cb(r.items);
+            });
+        }
+    });
+}
+
+// function itemBrowse () {
+//     var options = {};
+//     options.hierarchy = "browse";
+//     options.zone_or_output_id = req.body.zone_id;
+//     options.pop_all = true;
+//
+//     console.log(options);
+//     console.log("\n\n")
+//
+//     core.services.RoonApiBrowse.browse(options, function(error, payload) {
+//         if (error) {
+//             console.log(error);
+//             return;
+//         }
+//
+//         console.log(payload);
+//
+//         if (payload.action =='list') {
+//             //             page = ( page - 1 ) * req.body.list_size;
+//         }
+//
+//
+//     });
+//
+//
+// }

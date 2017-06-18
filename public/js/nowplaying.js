@@ -291,7 +291,7 @@ function showIsPlaying(curZone) {
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonLarge buttonAvailable")
+            .addClass("buttonFillHeight buttonAvailable")
             .css("color", css['foregroundColor']);
         } else if (state['Loop'] == "loop"){
             // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
@@ -299,7 +299,7 @@ function showIsPlaying(curZone) {
             .html(getSVG('loopOne'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'disabled\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonLarge buttonActive")
+            .addClass("buttonFillHeight buttonActive")
             .css("color", "#3daee9");
         } else if (state['Loop'] == "loop_one"){
             // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
@@ -307,14 +307,14 @@ function showIsPlaying(curZone) {
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop_one\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonLarge buttonActive")
+            .addClass("buttonFillHeight buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "")
             .removeClass()
-            .addClass("buttonLarge buttonInactive")
+            .addClass("buttonFillHeight buttonInactive")
             .css("color", css['foregroundColor']);
         }
     }
@@ -326,21 +326,21 @@ function showIsPlaying(curZone) {
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'true\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonLarge buttonAvailable")
+            .addClass("buttonFillHeight buttonAvailable")
             .css("color", css['foregroundColor']);
         } else if (state['Shuffle'] == true) {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'false\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonLarge buttonActive")
+            .addClass("buttonFillHeight buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "")
             .removeClass()
-            .addClass("buttonLarge buttonInactive")
+            .addClass("buttonFillHeight buttonInactive")
             .css("color", css['foregroundColor']);
         }
     }
@@ -352,21 +352,21 @@ function showIsPlaying(curZone) {
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'true\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonLarge buttonAvailable")
+            .addClass("buttonFillHeight buttonAvailable")
             .css("color", css['foregroundColor']);
         } else if (state['Radio'] == true) {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'false\', \'" + curZone.zone_id + "\')")
             .removeClass()
-            .addClass("buttonLarge buttonActive")
+            .addClass("buttonFillHeight buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "")
             .removeClass()
-            .addClass("buttonLarge buttonInactive")
+            .addClass("buttonFillHeight buttonInactive")
             .css("color", css['foregroundColor']);
         }
     }

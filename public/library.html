@@ -25,12 +25,37 @@
     <link rel="stylesheet" type="text/css" href="/css/site.css">
     <link rel="stylesheet" type="text/css" href="/css/library.css">
     <script src="/jquery/jquery.min.js"></script>
+    <script src="/js-cookie/js.cookie.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/library.js"></script>
 </head>
 <body>
-    <div class="fullscreenFlex">
-        <div class="messages">Library (todo)</div>
+<div id="header">
+<div class="headerGroup headerLeft">
+<button type="button" id="buttonBack" class="headerButton"></button>
+<button type="button" id="buttonHome" class="headerButton"></button>
+</div>
+<div class="headerGroup headerCenter">
+<button type="button" id="buttonZoneName" class="headerButton textBold" onclick="$('#overlayZoneList').show()">zoneList</button>
+</div>
+<div class="headerGroup headerRight">
+<!-- <button type="button" id="buttonSearch" class="headerButton"></button> -->
+</div>
+</div>
+
+<div id="content">
+<div id="items" class="itemList"></div>
+</div>
+
+<div id="footer">
+<div id="footerContent"></div>
+</div>
+
+<div id="overlayZoneList" class="overlay">
+    <div class="overlayBackground" onclick="$('#overlayZoneList').hide()"></div>
+    <div class="overlayContent">
+        <span id="zoneList" class="overlayList"></span>
     </div>
+</div>
 </body>
 </html>

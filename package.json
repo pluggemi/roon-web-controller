@@ -6,16 +6,18 @@
   "author": "Mike Plugge",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "command-line-args": "^4.0.6",
     "command-line-usage": "^4.0.0",
     "config": "^1.26.1",
     "express": "4.x",
     "jquery": "^3.2.1",
     "js-cookie": "^2.1.4",
-    "node-roon-api": "github:roonlabs/node-roon-api",
-    "node-roon-api-image": "github:roonlabs/node-roon-api-image",
-    "node-roon-api-status": "github:roonlabs/node-roon-api-status",
-    "node-roon-api-transport": "github:roonlabs/node-roon-api-transport",
+    "node-roon-api": "roonlabs/node-roon-api",
+    "node-roon-api-browse": "roonlabs/node-roon-api-browse",
+    "node-roon-api-image": "roonlabs/node-roon-api-image",
+    "node-roon-api-status": "roonlabs/node-roon-api-status",
+    "node-roon-api-transport": "roonlabs/node-roon-api-transport",
     "socket.io": "^1.7.3"
   },
   "repository": {
