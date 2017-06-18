@@ -6,7 +6,7 @@ $(document).ready(function() {
     socket.on("pairStatus", function(payload) {
         pairEnabled=payload.pairEnabled;
 
-        if (pairEnabled == true ) {
+        if (pairEnabled === true ) {
             showSection('nowPlaying');
         } else {
             showSection('pairDisabled');

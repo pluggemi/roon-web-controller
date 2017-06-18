@@ -1,5 +1,4 @@
 var socket = io();
-var clearState;
 var curZone;
 var css = [];
 var settings = [];
@@ -24,24 +23,29 @@ function showPage() {
     settings.theme = readCookie('settings[\'theme\']');
 
     // Set page fields to settings
-    if (settings.zoneID === null) {
+    if (settings.zoneID === undefined) {
         $("#overlayZoneList").show();
     }
 
-    if (settings.displayName !== null){
+    if (settings.displayName !== undefined){
         $(".buttonZoneName").html(settings.displayName);
     }
 
-    if (settings.theme === null) {
+    if (settings.theme === undefined) {
         settings.theme = "dark";
         setCookie('settings[\'theme\']', settings.theme);
+        setTheme(settings.theme);
+    } else {
+        setTheme(settings.theme);
     }
-
-    setTheme(settings.theme);
 
     // Get Buttons
     $("#buttonVolume").html(getSVG('volume'));
     $("#buttonTheme").html(getSVG('theme'));
+    $("#notPlaying").hide();
+    $("#isPlaying").hide();
+    $("#coverBackground").hide();
+    $("#colorBackground").hide();
 
     enableSockets();
 }
@@ -50,7 +54,7 @@ function enableSockets(){
     socket.on("zoneList", function(payload) {
         $("#zoneList").html("");
 
-        if (payload !== null) {
+        if (payload !== undefined) {
             for (var x in payload){
                 $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
             }
@@ -58,13 +62,13 @@ function enableSockets(){
     });
 
     socket.on("zoneStatus", function(payload) {
-        if (settings.zoneID !== null){
+        if (settings.zoneID !== undefined){
             for (var x in payload){
                 if (payload[x].zone_id == settings.zoneID) {
                     curZone = payload[x];
                     updateZone(curZone);
                 } else {
-                    curZone = null;
+                    curZone = undefined;
                 }
             }
         }
@@ -116,17 +120,11 @@ function showNotPlaying() {
     // Reset state and browser title
     state = [];
     $(document).prop("title", "Roon Web Controller");
-    clearState = true;
 }
 
 function showIsPlaying(curZone) {
     $("#notPlaying").hide();
     $("#isPlaying").show();
-
-    if (clearState === true ){
-        fixFontSize();
-        clearState = null;
-    }
 
     if ( state.line1 != curZone.now_playing.three_line.line1) {
         state.line1 = curZone.now_playing.three_line.line1;
@@ -176,10 +174,10 @@ function showIsPlaying(curZone) {
         $("#trackSeekValue").css("width", "0%");
     }
 
-    if ( state.image_key != curZone.now_playing.image_key || state.image_key === null) {
+    if ( state.image_key != curZone.now_playing.image_key || state.image_key === undefined) {
         state.image_key = curZone.now_playing.image_key;
 
-        if ( curZone.now_playing.image_key === null ) {
+        if ( curZone.now_playing.image_key === undefined ) {
             state.imgUrl = "/img/transparent.png";
         } else {
             state.imgUrl = "/roonapi/getImage?image_key=" + curZone.now_playing.image_key;
@@ -211,7 +209,7 @@ function showIsPlaying(curZone) {
         }
     }
 
-    if (state.Prev != curZone.is_previous_allowed || state.Prev === null) {
+    if (state.Prev != curZone.is_previous_allowed || state.Prev === undefined) {
         state.Prev = curZone.is_previous_allowed;
         if ( curZone.is_previous_allowed === true ) {
             $("#controlPrev")
@@ -228,7 +226,7 @@ function showIsPlaying(curZone) {
         }
     }
 
-    if (state.Next != curZone.is_next_allowed || state.Next === null) {
+    if (state.Next != curZone.is_next_allowed || state.Next === undefined) {
         state.Next = curZone.is_next_allowed;
         if ( curZone.is_next_allowed === true ) {
             $("#controlNext")
@@ -254,7 +252,7 @@ function showIsPlaying(curZone) {
         state.PlayPauseStop = "showPlayDisabled";
     }
 
-    if (state.PlayPauseStopLast != state.PlayPauseStop || state.PlayPauseStop === null) {
+    if (state.PlayPauseStopLast != state.PlayPauseStop || state.PlayPauseStop === undefined) {
         state.PlayPauseStopLast = state.PlayPauseStop;
         if ( state.PlayPauseStop == "showPlay") {
             $("#controlPlayPauseStop")
@@ -283,7 +281,7 @@ function showIsPlaying(curZone) {
         }
     }
 
-    if (state.Loop != curZone.settings.loop || state.Loop === null) {
+    if (state.Loop != curZone.settings.loop || state.Loop === undefined) {
         state.Loop = curZone.settings.loop;
         if (state.Loop == "disabled"){
             $("#buttonLoop")
@@ -318,7 +316,7 @@ function showIsPlaying(curZone) {
         }
     }
 
-    if (state.Shuffle != curZone.settings.shuffle || state.Shuffle === null) {
+    if (state.Shuffle != curZone.settings.shuffle || state.Shuffle === undefined) {
         state.Shuffle = curZone.settings.shuffle;
         if (state.Shuffle === false) {
             $("#buttonShuffle")
@@ -344,7 +342,7 @@ function showIsPlaying(curZone) {
         }
     }
 
-    if (state.Radio != curZone.settings.auto_radio || state.Radio === null) {
+    if (state.Radio != curZone.settings.auto_radio || state.Radio === undefined) {
         state.Radio = curZone.settings.auto_radio;
         if (state.Radio === false) {
             $("#buttonRadio")
@@ -387,7 +385,8 @@ function showIsPlaying(curZone) {
         }
     }
 
-    if (state.themeShowing === null) {
+    if (state.themeShowing == undefined) {
+        fixFontSize();
         state.themeShowing = true;
         showTheme(settings.theme);
     }
@@ -429,10 +428,10 @@ function volumeChange(id, value, output_id) {
 
 function setTheme(theme) {
     settings.theme = theme;
-    state.themeShowing = null;
+    state.themeShowing = undefined;
     setCookie('settings[\'theme\']', theme);
 
-    if (theme == "dark") {
+    if (theme == "dark" || theme === undefined) {
         css.backgroundColor = "#232629";
         css.foregroundColor = "#eff0f1";
         css.trackSeek = "rgba(239, 240, 241, 0.33)";
@@ -449,12 +448,12 @@ function setTheme(theme) {
         $("#colorBackground").hide();
     }
     else if (theme == "color") {
-        state.image_key = null;
+        state.image_key = undefined;
         $("#coverBackground").hide();
         $("#colorBackground").show();
     }
     else {
-        settings.theme = null;
+        settings.theme = undefined;
         setTheme(settings.theme);
     }
 
