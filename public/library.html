@@ -32,14 +32,12 @@
 <body>
 <div id="header">
 <div class="headerGroup headerLeft">
-<button type="button" id="buttonBack" class="headerButton"></button>
+<button type="button" id="buttonUp" class="headerButton"></button>
 <button type="button" id="buttonHome" class="headerButton"></button>
-</div>
-<div class="headerGroup headerCenter">
-<button type="button" id="buttonZoneName" class="headerButton textBold" onclick="$('#overlayZoneList').show()">zoneList</button>
+<button type="button" id="buttonRefresh" class="headerButton"></button>
 </div>
 <div class="headerGroup headerRight">
-<!-- <button type="button" id="buttonSearch" class="headerButton"></button> -->
+<button type="button" id="buttonZoneName" class="headerButton textBold" onclick="$('#overlayZoneList').show()">zoneList</button>
 </div>
 </div>
 
@@ -48,7 +46,11 @@
 </div>
 
 <div id="footer">
-<div id="footerContent"></div>
+<div id="footerContent" class="headerGroup headerCenter">
+<button type="button" id="buttonPrev" class="headerButton">prev</button>
+<span>page</span>
+<button type="button" id="buttonNext" class="headerButton">next</button>
+</div>
 </div>
 
 <div id="overlayZoneList" class="overlay">

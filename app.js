@@ -296,6 +296,12 @@ app.post('/roonapi/goHome', function(req, res){
 //     });
 });
 
+// app.post('/roonapi/goPage', function(req, res){
+//     refresh_browse(req.body.zone_id, req.body.list_size, function(payload){
+//         res.send({"list": payload});
+//     });
+// });
+
 app.post('/roonapi/listByItemKey', function(req, res){
     refresh_browse(req.body.zone_id, {item_key: req.body.item_key}, req.body.page, req.body.list_size, function(payload){
         res.send({"list": payload});
@@ -319,8 +325,8 @@ function refresh_browse(zone_id, opts, page, listPerPage, cb) {
 
     core.services.RoonApiBrowse.browse(opts, (err, r) => {
         if (err) { console.log(err, r); return; }
-//         console.log(r);
-//         console.log("\n");
+        console.log(r);
+        console.log("\n");
 
         if (r.action == 'list') {
             page = ( page - 1 ) * listPerPage;
@@ -331,8 +337,8 @@ function refresh_browse(zone_id, opts, page, listPerPage, cb) {
                 set_display_offset: listPerPage,
             }, (err, r) => {
                 items = r.items;
-//                 console.log(r);
-//                 console.log("\n");
+                console.log(JSON.stringify(r,null,2));
+                console.log("\n");
 
                 cb(r.items);
             });

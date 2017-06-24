@@ -128,6 +128,7 @@ function showIsPlaying(curZone) {
 
     if ( state.line1 != curZone.now_playing.three_line.line1) {
         state.line1 = curZone.now_playing.three_line.line1;
+        fixFontSize();
         $("#line1")
         .html(state.line1)
         .simplemarquee({
@@ -386,7 +387,6 @@ function showIsPlaying(curZone) {
     }
 
     if (state.themeShowing == undefined) {
-        fixFontSize();
         state.themeShowing = true;
         showTheme(settings.theme);
     }

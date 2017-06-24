@@ -44,13 +44,37 @@
     text-align: left;
 }
 
-.itemListButton svg {
-    height: 100px;
+.itemListButton {
+    height: 100%;
+    background-color: #4d4d4d;
+    fill-opacity: 1;
+    color: #eff0f1;
 }
 
 .itemListButton:active {
     transform: translateY(4px);
     filter:none;
+}
+
+.searchGroup {
+    height: 28px;
+    width: 100%;
+    filter: drop-shadow(5px 5px 5px black);
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+}
+
+.searchForm {
+    height: 100%;
+    width: 80%;
+    border: 0;
+    padding: 0;
+    font-size: 24px;
 }
 
 #header {
