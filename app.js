@@ -280,31 +280,16 @@ app.get('/roonapi/getImage', function(req, res){
     });
 });
 
-app.post('/roonapi/goUp', function(req, res){
-    refresh_browse(req.body.zone_id, { pop_levels: 1 }, 1, req.body.list_size, function (payload){
-        res.send({"list": payload});
+app.post('/roonapi/goRefreshBrowse', function(req, res){
+//     refresh_browse(req.body.zone_id, req.body.opts, 1, req.body.list_size, function(payload){
+    refresh_browse(req.body.zone_id, req.body.options, function(payload){
+        res.send({"data": payload});
     });
 });
 
-app.post('/roonapi/goHome', function(req, res){
-    refresh_browse(req.body.zone_id, { pop_all: true }, 1, req.body.list_size, function(payload){
-        res.send({"list": payload});
-    });
-
-//     itemBrowse(req.body.zone_id, { pop_all: true }, 1, req.body.list_size, function(payload){
-//         res.send({"list": payload});
-//     });
-});
-
-// app.post('/roonapi/goPage', function(req, res){
-//     refresh_browse(req.body.zone_id, req.body.list_size, function(payload){
-//         res.send({"list": payload});
-//     });
-// });
-
-app.post('/roonapi/listByItemKey', function(req, res){
-    refresh_browse(req.body.zone_id, {item_key: req.body.item_key}, req.body.page, req.body.list_size, function(payload){
-        res.send({"list": payload});
+app.post('/roonapi/goLoadBrowse', function(req, res){
+    load_browse(req.body.listoffset, function(payload){
+        res.send({"data": payload});
     });
 });
 
@@ -312,63 +297,98 @@ app.use('/jquery/jquery.min.js', express.static(__dirname + '/node_modules/jquer
 
 app.use('/js-cookie/js.cookie.js', express.static(__dirname + '/node_modules/js-cookie/src/js.cookie.js'));
 
-function refresh_browse(zone_id, opts, page, listPerPage, cb) {
-    var items = [];
-    opts = Object.assign({
-        hierarchy:          "browse",
-        zone_or_output_id:  zone_id,
-    }, opts);
+function refresh_browse(zone_id, options, callback) {
+    options = Object.assign({
+        hierarchy: "browse",
+        zone_or_output_id: zone_id,
+    }, options);
 
-//     console.log(opts);
-//     console.log("\n");
+//     console.log(options)
+    core.services.RoonApiBrowse.browse(options, function(error, payload) {
+        if (error) { console.log(error, payload); return;}
 
-
-    core.services.RoonApiBrowse.browse(opts, (err, r) => {
-        if (err) { console.log(err, r); return; }
-        console.log(r);
-        console.log("\n");
-
-        if (r.action == 'list') {
-            page = ( page - 1 ) * listPerPage;
-
+        if (payload.action == "list") {
+            var items = [];
+            if (payload.list.display_offset > 0) {
+                var listoffset = payload.list.display_offset;
+            } else {
+                var listoffset = 0;
+            }
             core.services.RoonApiBrowse.load({
-                hierarchy:          "browse",
-                offset:             page,
-                set_display_offset: listPerPage,
-            }, (err, r) => {
-                items = r.items;
-                console.log(JSON.stringify(r,null,2));
-                console.log("\n");
-
-                cb(r.items);
+                hierarchy: "browse",
+                offset: listoffset,
+                set_display_offset: listoffset,
+            }, function(error, payload) {
+//                 console.log("listoffset: " + listoffset)
+//                 console.log("payload:")
+//                 console.log(payload)
+                callback(payload);
             });
         }
     });
 }
 
-// function itemBrowse () {
-//     var options = {};
-//     options.hierarchy = "browse";
-//     options.zone_or_output_id = req.body.zone_id;
-//     options.pop_all = true;
+function load_browse(listoffset, callback) {
+    core.services.RoonApiBrowse.load({
+        hierarchy:          "browse",
+        offset:             listoffset,
+        set_display_offset: listoffset,
+    }, function(error, payload) {
+        console.log("listoffset: " + listoffset)
+        console.log("payload:")
+        console.log(payload)
+        callback(payload);
+    });
+}
+
+
+
+
+
+
+
+
+
+// // function refresh_browse(zone_id, opts, page, listPerPage, cb) {
+// function refresh_browse(zone_id, opts, cb) {
+//     opts = Object.assign({
+//         hierarchy:          "browse",
+//         zone_or_output_id:  zone_id,
+//     }, opts);
 //
-//     console.log(options);
-//     console.log("\n\n")
+//     core.services.RoonApiBrowse.browse(opts, function(error, payload) {
+//         if (error) { console.log(error, payload); return; }
 //
-//     core.services.RoonApiBrowse.browse(options, function(error, payload) {
-//         if (error) {
-//             console.log(error);
-//             return;
+//         console.log(opts)
+//         console.log("\n")
+//         console.log(payload)
+//         console.log("\n")
+//
+//         if (payload.action == 'list') {
+//             var items = [];
+// //             page = ( page - 1 ) * listPerPage;
+//
+//             core.services.RoonApiBrowse.load({
+//                 hierarchy:          "browse",
+//                 offset:             page,
+//                 set_display_offset: listPerPage,
+//             }, function(error, payload) {
+//                 items = payload.items;
+//                 cb(payload.items);
+//             });
 //         }
-//
-//         console.log(payload);
-//
-//         if (payload.action =='list') {
-//             //             page = ( page - 1 ) * req.body.list_size;
-//         }
-//
-//
 //     });
-//
-//
 // }
+//
+// function load_browse(page, listPerPage, cb) {
+//     page = ( page - 1 ) * listPerPage;
+//
+//     core.services.RoonApiBrowse.load({
+//         hierarchy:          "browse",
+//         offset:             page,
+//         set_display_offset: page,
+//     }, function(error, payload) {
+//         cb(payload.items);
+//     });
+// }
+

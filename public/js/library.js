@@ -18,9 +18,6 @@ function showPage() {
     if (settings.displayName !== null){
         $("#buttonZoneName").html(settings.displayName);
         if (settings.zoneID !== null) {
-            $("#buttonUp").html(getSVG('up')).attr("onclick", "goUp(\'" + settings.zoneID + "\')");
-            $("#buttonHome").html(getSVG('home')).attr("onclick", "goHome(\'" + settings.zoneID + "\')");
-            $("#buttonRefresh").html(getSVG('refresh'));
             goHome(settings.zoneID);
         }
     }
@@ -47,23 +44,19 @@ function selectZone(zone_id, display_name) {
     settings.displayName = display_name;
 //     setCookie('settings[\'displayName\']', settings.displayName);
     $("#buttonZoneName").html(settings.displayName);
-    $("#buttonUp").html(getSVG('up')).attr("onclick", "goUp(\'" + settings.zoneID + "\')");
-    $("#buttonHome").html(getSVG('home')).attr("onclick", "goHome(\'" + settings.zoneID + "\')");
-    $("#buttonRefresh").html(getSVG('refresh'));
-
     $("#overlayZoneList").hide();
 }
 
-function goUp(zone_id) {
+function goBack(zone_id) {
     var data = {};
     data.zone_id = zone_id;
-    data.list_size= 20;
+    data.options = {pop_levels: 1};
 
     $.ajax({
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-        url: '/roonapi/goUp',
+        url: '/roonapi/goRefreshBrowse',
         success: function(payload) {
             showData(payload, zone_id, 1);
         }
@@ -73,74 +66,142 @@ function goUp(zone_id) {
 function goHome(zone_id) {
     var data = {};
     data.zone_id = zone_id;
-    data.list_size= 20;
+    data.options = {pop_all: true};
 
     $.ajax({
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-        url: '/roonapi/goHome',
+        url: '/roonapi/goRefreshBrowse',
         success: function(payload) {
             showData(payload, zone_id, 1);
         }
     });
 }
 
-function goPage(zone_id, page, list_size) {
+function goRefresh(zone_id) {
     var data = {};
     data.zone_id = zone_id;
-    data.page = page;
-    data.list_size = list_size;
+    data.options = { refresh_list: true };
+
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+           contentType: 'application/json',
+           url: '/roonapi/goRefreshBrowse',
+           success: function(payload) {
+               showData(payload, zone_id, 1);
+           }
+    });
+}
+
+function goList(zone_id, item_key, listoffset) {
+    var data = {};
+    data.zone_id = zone_id;
+    data.options = {item_key: item_key};
+
+    if (listoffset === undefined) {
+        data.listoffset = 0;
+    } else {
+        data.listoffset = listoffset;
+    }
 
     $.ajax({
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
-        url: '/roonapi/goPage',
+        url: '/roonapi/goRefreshBrowse',
         success: function(payload) {
-            showData(payload, zone_id, page);
+            showData(payload, zone_id);
         }
     });
 }
 
-function showList(item_key, zone_id, page, list_size) {
+function goPage(zone_id, listoffset) {
     var data = {};
-    data.item_key = item_key;
-    data.zone_id = zone_id;
-    data.page = page;
-    data.list_size = list_size;
-
-    console.log(list_size);
+    if (listoffset === undefined) {
+        data.listoffset = 0;
+    } else {
+        data.listoffset = listoffset;
+    }
 
     $.ajax({
         type: 'POST',
         data: JSON.stringify(data),
-        contentType: 'application/json',
-        url: '/roonapi/listByItemKey',
-        success: function(payload) {
-            showData(payload, zone_id, page);
-        }
+           contentType: 'application/json',
+           url: '/roonapi/goLoadBrowse',
+           success: function(payload) {
+               showData(payload, zone_id);
+           }
     });
 }
 
-function showData( payload, zone_id, page ) {
+function showData( payload, zone_id ) {
     $("#items").html("");
 
-    if (payload.list !== null){
-        for (var x in payload.list) {
-            if (payload.list[x].input_prompt) {
+    var items = payload.data.items;
+    var list = payload.data.list;
+
+    if ( items !== null){
+        for (var x in items) {
+            if (items[x].input_prompt) {
                 var html = "";
-//                 html += "<div class=\"itemListItem\">";
-                html+="<div>";
                 html += "<form action=\"submit\" class=\"searchGroup\">";
-                html += "<input type=\"text\" class=\"searchForm\" placeholder=\"" + payload.list[x].input_prompt.prompt + "\">";
+                html += "<input type=\"text\" class=\"searchForm\" placeholder=\"" + items[x].input_prompt.prompt + "\">";
                 html += "<button type=\"submit\" class=\"itemListButton\">" + getSVG('search') + "</button>";
-                html += "</div>";
                 $("#items").append(html)
             } else {
-                $("#items").append("<button type=\"button\" class=\"itemListItem\" onclick=\"showList(\'" + payload.list[x].item_key + "\', \'" + settings.zoneID + "\', 1, 10)\">" + payload.list[x].title + "</button>");
+                $("#items").append("<button type=\"button\" class=\"itemListItem\" onclick=\"goList(\'" + zone_id + "\', \'" + items[x].item_key + "\')\">" + items[x].title + "</button>");
             }
         }
+
+        if (list.display_offset > 0) {
+            $("#buttonPrev")
+                .prop("disabled", false)
+                .attr("onclick", "goPage(\'" + zone_id + "\', \'" + (list.display_offset - 100) + "\')")
+                .html(getSVG('prev'));
+        } else {
+            $("#buttonPrev")
+                .prop("disabled", true)
+                .html(getSVG('prev'));
+        }
+
+        if ((list.display_offset + items.length) < list.count ) {
+            $("#buttonNext")
+                .prop("disabled", false)
+                .attr("onclick", "goPage(\'" + zone_id + "\', \'" + (list.display_offset + 100) + "\')")
+                .html(getSVG('next'));
+        } else {
+            $("#buttonNext")
+                .prop("disabled", true)
+                .html(getSVG('next'));
+        }
+
+        if (list.level == 0) {
+            $("#buttonBack")
+                .prop("disabled", true)
+                .html(getSVG('back'));
+            $("#buttonHome")
+                .prop("disabled", true)
+                .html(getSVG('home'));
+        } else {
+            $("#buttonBack")
+                .attr("onclick", "goBack(\'" + settings.zoneID + "\')")
+                .html(getSVG('back'))
+                .prop("disabled", false);
+            $("#buttonHome")
+                .attr("onclick", "goHome(\'" + settings.zoneID + "\')")
+                .html(getSVG('home'))
+                .prop("disabled", false);
+        }
+
+
+        $("#buttonRefresh").html(getSVG('refresh')).attr("onclick", "goRefresh(\'" + settings.zoneID + "\')");
+
+        $("#pageNumber").html((list.display_offset + 1) + "-" + (list.display_offset + items.length) + " of " + list.count);
+        $("#listTitle").html(list.title);
+        $("#listSubtitle").html(list.subtitle);
+        $("#listImageKey").html(list.image_key);
     }
 }
 
@@ -157,7 +218,7 @@ function getSVG(cmd) {
     switch (cmd) {
         case "home":
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 9.99939,19.998L 9.99939,13.998L 13.9994,13.998L 13.9994,19.998L 18.9994,19.998L 18.9994,11.998L 21.9994,11.998L 11.9994,2.99805L 1.99939,11.998L 4.99939,11.998L 4.99939,19.998L 9.99939,19.998 Z \"/></svg>";
-        case "up":
+        case "back":
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 20,11L 20,13L 7.98958,13L 13.4948,18.5052L 12.0806,19.9194L 4.16116,12L 12.0806,4.08058L 13.4948,5.49479L 7.98958,11L 20,11 Z \"/></svg>";
         case "refresh":
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 17.65,6.35C 16.2,4.9 14.21,4 12,4C 7.58,4 4.01,7.58 4.01,12C 4.01,16.42 7.58,20 12,20C 15.73,20 18.84,17.45 19.73,14L 17.65,14C 16.83,16.33 14.61,18 12,18C 8.69,18 6,15.31 6,12C 6,8.69 8.69,6 12,6C 13.66,6 15.14,6.69 16.22,7.78L 13,11L 20,11L 20,4L 17.65,6.35 Z \"/></svg>";

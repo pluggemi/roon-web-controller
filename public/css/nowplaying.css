@@ -2,7 +2,6 @@
     background-color: rgba(0,0,0,0);
     width: auto;
 }
-
 .buttonAvailable {
     fill-opacity: 1;
 }
@@ -15,7 +14,6 @@
 .buttonInactive {
     fill-opacity: 0.33;
 }
-
 .itemImage {
     border-radius: 10px;
     width: auto;

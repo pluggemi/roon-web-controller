@@ -30,28 +30,34 @@
     <script src="/js/library.js"></script>
 </head>
 <body>
-<div id="header">
-<div class="headerGroup headerLeft">
-<button type="button" id="buttonUp" class="headerButton"></button>
-<button type="button" id="buttonHome" class="headerButton"></button>
-<button type="button" id="buttonRefresh" class="headerButton"></button>
+<div id="navLine1">
+<div class="navGroup navLeft">
+<button type="button" id="buttonBack" class="navButton"></button>
+<button type="button" id="buttonHome" class="navButton"></button>
+<button type="button" id="buttonRefresh" class="navButton"></button>
 </div>
-<div class="headerGroup headerRight">
-<button type="button" id="buttonZoneName" class="headerButton textBold" onclick="$('#overlayZoneList').show()">zoneList</button>
+<div class="navGroup navRight">
+<button type="button" id="buttonZoneName" class="navButton textBold" onclick="$('#overlayZoneList').show()">zoneList</button>
 </div>
 </div>
+
+<div id="navLine2">
+<div class="navGroup navCenter">
+<button type="button" id="buttonPrev" class="navButton"></button>
+<span id="pageNumber">page</span>
+<button type="button" id="buttonNext" class="navButton">next</button>
+</div>
+</div>
+
 
 <div id="content">
-<div id="items" class="itemList"></div>
+<p id="listTitle"></p>
+<p id="listSubtitle"></p>
+<p id="listImageKey"></p>
+<div id="items"></div>
 </div>
 
-<div id="footer">
-<div id="footerContent" class="headerGroup headerCenter">
-<button type="button" id="buttonPrev" class="headerButton">prev</button>
-<span>page</span>
-<button type="button" id="buttonNext" class="headerButton">next</button>
-</div>
-</div>
+
 
 <div id="overlayZoneList" class="overlay">
     <div class="overlayBackground" onclick="$('#overlayZoneList').hide()"></div>
