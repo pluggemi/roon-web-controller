@@ -18,7 +18,7 @@ function showPage() {
     if (settings.displayName !== null){
         $("#buttonZoneName").html(settings.displayName);
         if (settings.zoneID !== null) {
-            goHome(settings.zoneID);
+            goHome();
         }
     }
 
@@ -45,9 +45,9 @@ function selectZone(zone_id, display_name) {
     goHome(settings.zoneID);
 }
 
-function goBack(zone_id) {
+function goBack() {
     var data = {};
-    data.zone_id = zone_id;
+    data.zone_id = settings.zoneID;
     data.options = {pop_levels: 1};
 
     $.ajax({
@@ -56,14 +56,14 @@ function goBack(zone_id) {
         contentType: 'application/json',
         url: '/roonapi/goRefreshBrowse',
         success: function(payload) {
-            showData(payload, zone_id, 1);
+            showData(payload, settings.zoneID, 1);
         }
     });
 }
 
-function goHome(zone_id) {
+function goHome() {
     var data = {};
-    data.zone_id = zone_id;
+    data.zone_id = settings.zoneID;
     data.options = {pop_all: true};
 
     $.ajax({
@@ -72,14 +72,14 @@ function goHome(zone_id) {
         contentType: 'application/json',
         url: '/roonapi/goRefreshBrowse',
         success: function(payload) {
-            showData(payload, zone_id);
+            showData(payload, settings.zoneID);
         }
     });
 }
 
-function goRefresh(zone_id) {
+function goRefresh() {
     var data = {};
-    data.zone_id = zone_id;
+    data.zone_id = settings.zoneID;
     data.options = { refresh_list: true };
 
     $.ajax({
@@ -88,14 +88,14 @@ function goRefresh(zone_id) {
            contentType: 'application/json',
            url: '/roonapi/goRefreshBrowse',
            success: function(payload) {
-               showData(payload, zone_id);
+               showData(payload, settings.zoneID);
            }
     });
 }
 
-function goList(zone_id, item_key, listoffset) {
+function goList(item_key, listoffset) {
     var data = {};
-    data.zone_id = zone_id;
+    data.zone_id = settings.zoneID;
     data.options = {item_key: item_key};
 
     if (listoffset === undefined) {
@@ -110,12 +110,12 @@ function goList(zone_id, item_key, listoffset) {
         contentType: 'application/json',
         url: '/roonapi/goRefreshBrowse',
         success: function(payload) {
-            showData(payload, zone_id);
+            showData(payload, settings.zoneID);
         }
     });
 }
 
-function goPage(zone_id, listoffset) {
+function goPage(listoffset) {
     var data = {};
     if (listoffset === undefined) {
         data.listoffset = 0;
@@ -129,13 +129,35 @@ function goPage(zone_id, listoffset) {
            contentType: 'application/json',
            url: '/roonapi/goLoadBrowse',
            success: function(payload) {
-               showData(payload, zone_id);
+               showData(payload, settings.zoneID);
+           }
+    });
+}
+
+function goSearch() {
+    var data = {};
+    data.zone_id = settings.zoneID;
+    data.options = {};
+    if ($("#searchText").val() === "" || $("#searchItemKey").val() === "") {
+        return;
+    } else {
+        data.options.item_key = $("#searchItemKey").val();
+        data.options.input = $("#searchText").val();
+    }
+
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+           contentType: 'application/json',
+           url: '/roonapi/goRefreshBrowse',
+           success: function(payload) {
+               showData(payload, settings.zoneID);
            }
     });
 }
 
 function showData( payload, zone_id ) {
-    $("#buttonRefresh").html(getSVG('refresh')).attr("onclick", "goRefresh(\'" + settings.zoneID + "\')");
+    $("#buttonRefresh").html(getSVG('refresh')).attr("onclick", "goRefresh()");
 
     var items = payload.data.items;
     var list = payload.data.list;
@@ -147,7 +169,7 @@ function showData( payload, zone_id ) {
         $("#listSubtitle").html(list.subtitle);
 
         if (list.image_key) {
-            $("#listImage").html("<img class=\"itemImage\" src=\"/roonapi/getImage?image_key=" + list.image_key + "\">").show();
+            $("#listImage").html("<img class=\"listInfoImage\" src=\"/roonapi/getImage?image_key=" + list.image_key + "\">").show();
             $("#coverBackground").css("background-image", "url(\"/roonapi/getImage?image_key=" + list.image_key + "\")").show();
         } else {
             $("#listImage").html("").hide();
@@ -157,18 +179,22 @@ function showData( payload, zone_id ) {
         for (var x in items) {
             var html = "";
             if (items[x].input_prompt) {
-                html += "<form action=\"submit\" class=\"searchGroup\">";
-                html += "<input type=\"text\" class=\"searchForm\" placeholder=\"" + items[x].input_prompt.prompt + "\">";
+                html += "<form action=\"javascript:goSearch();\" class=\"searchGroup\">";
+                html += "<input type=\"text\" id=\"searchText\" name=\"search\" class=\"searchForm\" placeholder=\"" + items[x].input_prompt.prompt + "\" autocomplete=\"off\">";
                 html += "<button type=\"submit\" class=\"itemListButton\">" + getSVG('search') + "</button>";
+                html += "<input type=\"text\" id=\"searchItemKey\" class=\"hidden\" value=\"" + items[x].item_key + "\" ></span>";
+                html += "</form>";
+
                 $("#items").append(html);
             } else {
-                html += "<button type=\"button\" class=\"itemListItem\" onclick=\"goList(\'" + zone_id + "\', \'" + items[x].item_key + "\')\">";
+                html += "<button type=\"button\" class=\"itemListItem\" onclick=\"goList(\'" + items[x].item_key + "\')\">";
                 html += items[x].title;
                 if (items[x].subtitle === null || items[x].subtitle == "") {
                 } else {
                     html += "<br><span class=\"textSmall\">(" + items[x].subtitle + ")</span>";
                 }
                 html += "</button>";
+                html += "</form>";
 
                 $("#items").append(html);
             }
@@ -183,11 +209,11 @@ function showData( payload, zone_id ) {
                 .html(getSVG('home'));
         } else {
             $("#buttonBack")
-                .attr("onclick", "goBack(\'" + settings.zoneID + "\')")
+                .attr("onclick", "goBack()")
                 .html(getSVG('back'))
                 .prop("disabled", false);
             $("#buttonHome")
-                .attr("onclick", "goHome(\'" + settings.zoneID + "\')")
+                .attr("onclick", "goHome()")
                 .html(getSVG('home'))
                 .prop("disabled", false);
         }
@@ -195,7 +221,7 @@ function showData( payload, zone_id ) {
         if (list.display_offset > 0) {
             $("#buttonPrev")
                 .prop("disabled", false)
-                .attr("onclick", "goPage(\'" + zone_id + "\', \'" + (list.display_offset - 100) + "\')")
+                .attr("onclick", "goPage(\'" + (list.display_offset - 100) + "\')")
                 .html(getSVG('prev'));
         } else {
             $("#buttonPrev")
@@ -206,7 +232,7 @@ function showData( payload, zone_id ) {
         if ((list.display_offset + items.length) < list.count ) {
             $("#buttonNext")
                 .prop("disabled", false)
-                .attr("onclick", "goPage(\'" + zone_id + "\', \'" + (list.display_offset + 100) + "\')")
+                .attr("onclick", "goPage(\'" + (list.display_offset + 100) + "\')")
                 .html(getSVG('next'));
         } else {
             $("#buttonNext")
@@ -243,6 +269,8 @@ function getSVG(cmd) {
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 15.4135,16.5841L 10.8275,11.9981L 15.4135,7.41207L 13.9995,5.99807L 7.99951,11.9981L 13.9995,17.9981L 15.4135,16.5841 Z \"/></svg>";
         case "next":
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 8.58527,16.584L 13.1713,11.998L 8.58527,7.41198L 9.99927,5.99798L 15.9993,11.998L 9.99927,17.998L 8.58527,16.584 Z \"/></svg>";
+        case "backspace":
+            return "<svg viewBox=\"0 0 24 24\"><path d=\"M22,3H7C6.31,3 5.77,3.35 5.41,3.88L0,12L5.41,20.11C5.77,20.64 6.31,21 7,21H22A2,2 0 0,0 24,19V5A2,2 0 0,0 22,3M19,15.59L17.59,17L14,13.41L10.41,17L9,15.59L12.59,12L9,8.41L10.41,7L14,10.59L17.59,7L19,8.41L15.41,12\" /></svg>";
         case "search":
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 9.5,3C 13.0899,3 16,5.91015 16,9.5C 16,11.1149 15.411,12.5923 14.4362,13.7291L 14.7071,14L 15.5,14L 20.5,19L 19,20.5L 14,15.5L 14,14.7071L 13.7291,14.4362C 12.5923,15.411 11.1149,16 9.5,16C 5.91015,16 3,13.0899 3,9.5C 3,5.91015 5.91015,3 9.5,3 Z M 9.5,5.00001C 7.01472,5.00001 5,7.01473 5,9.50001C 5,11.9853 7.01472,14 9.5,14C 11.9853,14 14,11.9853 14,9.50001C 14,7.01473 11.9853,5.00001 9.5,5.00001 Z \"/></svg>";
         case "music":

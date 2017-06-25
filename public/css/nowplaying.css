@@ -15,6 +15,14 @@
     fill-opacity: 0.33;
 }
 
+.itemImage {
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(5px 5px 5px black);
+}
+
 .sliderGroup {
     display: flex;
     flex-direction: row;

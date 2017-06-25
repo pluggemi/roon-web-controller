@@ -111,14 +111,6 @@ svg {
     font-size: 75%;
 }
 
-.itemImage {
-    border-radius: 10px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(5px 5px 5px black);
-}
-
 #coverBackground {
     position: absolute;
     top: 0px;

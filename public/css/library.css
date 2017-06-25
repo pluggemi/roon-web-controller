@@ -30,6 +30,9 @@
     fill-opacity: 0.33;
 }
 
+.hidden {
+    display: none;
+}
 
 .itemListItem {
     background-color: #4d4d4d;
@@ -60,9 +63,14 @@
     filter:none;
 }
 
-.itemImage {
+.listInfoImage {
     max-height: 98%;
     max-width: 98%;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(5px 5px 5px black);
 }
 
 .searchGroup {
@@ -119,6 +127,7 @@
 #listImage {
     display: flex;
     justify-content: center;
+    max-width: 49%;
 }
 
 #listInfo {
