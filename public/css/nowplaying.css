@@ -14,13 +14,6 @@
 .buttonInactive {
     fill-opacity: 0.33;
 }
-.itemImage {
-    border-radius: 10px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(5px 5px 5px black);
-}
 
 .sliderGroup {
     display: flex;
@@ -94,23 +87,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#coverBackground {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    filter: opacity(33%) blur(20px);
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    display: none;
 }
 
 #colorBackground {

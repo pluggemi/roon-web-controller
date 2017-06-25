@@ -210,6 +210,44 @@ function removeDuplicateStatus(array, property) {
     io.emit("zoneStatus", zoneStatus);
 }
 
+function refresh_browse(zone_id, options, callback) {
+    options = Object.assign({
+        hierarchy: "browse",
+        zone_or_output_id: zone_id,
+    }, options);
+
+    core.services.RoonApiBrowse.browse(options, function(error, payload) {
+        if (error) { console.log(error, payload); return;}
+
+        if (payload.action == "list") {
+            var items = [];
+            if (payload.list.display_offset > 0) {
+                var listoffset = payload.list.display_offset;
+            } else {
+                var listoffset = 0;
+            }
+            core.services.RoonApiBrowse.load({
+                hierarchy: "browse",
+                offset: listoffset,
+                set_display_offset: listoffset,
+            }, function(error, payload) {
+                callback(payload);
+            });
+        }
+    });
+}
+
+function load_browse(listoffset, callback) {
+    core.services.RoonApiBrowse.load({
+        hierarchy:          "browse",
+        offset:             listoffset,
+        set_display_offset: listoffset,
+    }, function(error, payload) {
+        callback(payload);
+    });
+}
+
+
 // ---------------------------- WEB SOCKET --------------
 io.on('connection', function(socket){
     io.emit("pairStatus", JSON.parse('{"pairEnabled": ' + pairStatus + '}'));
@@ -280,8 +318,17 @@ app.get('/roonapi/getImage', function(req, res){
     });
 });
 
+app.get('/roonapi/getIcon', function(req, res){
+    core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 48, "height": 48, "format": "image/jpeg"}, function(cb, contentType, body) {
+
+        res.contentType = contentType;
+
+        res.writeHead(200, {'Content-Type': 'image/jpeg' });
+        res.end(body, 'binary');
+    });
+});
+
 app.post('/roonapi/goRefreshBrowse', function(req, res){
-//     refresh_browse(req.body.zone_id, req.body.opts, 1, req.body.list_size, function(payload){
     refresh_browse(req.body.zone_id, req.body.options, function(payload){
         res.send({"data": payload});
     });
@@ -296,99 +343,3 @@ app.post('/roonapi/goLoadBrowse', function(req, res){
 app.use('/jquery/jquery.min.js', express.static(__dirname + '/node_modules/jquery/dist/jquery.min.js'));
 
 app.use('/js-cookie/js.cookie.js', express.static(__dirname + '/node_modules/js-cookie/src/js.cookie.js'));
-
-function refresh_browse(zone_id, options, callback) {
-    options = Object.assign({
-        hierarchy: "browse",
-        zone_or_output_id: zone_id,
-    }, options);
-
-//     console.log(options)
-    core.services.RoonApiBrowse.browse(options, function(error, payload) {
-        if (error) { console.log(error, payload); return;}
-
-        if (payload.action == "list") {
-            var items = [];
-            if (payload.list.display_offset > 0) {
-                var listoffset = payload.list.display_offset;
-            } else {
-                var listoffset = 0;
-            }
-            core.services.RoonApiBrowse.load({
-                hierarchy: "browse",
-                offset: listoffset,
-                set_display_offset: listoffset,
-            }, function(error, payload) {
-//                 console.log("listoffset: " + listoffset)
-//                 console.log("payload:")
-//                 console.log(payload)
-                callback(payload);
-            });
-        }
-    });
-}
-
-function load_browse(listoffset, callback) {
-    core.services.RoonApiBrowse.load({
-        hierarchy:          "browse",
-        offset:             listoffset,
-        set_display_offset: listoffset,
-    }, function(error, payload) {
-        console.log("listoffset: " + listoffset)
-        console.log("payload:")
-        console.log(payload)
-        callback(payload);
-    });
-}
-
-
-
-
-
-
-
-
-
-// // function refresh_browse(zone_id, opts, page, listPerPage, cb) {
-// function refresh_browse(zone_id, opts, cb) {
-//     opts = Object.assign({
-//         hierarchy:          "browse",
-//         zone_or_output_id:  zone_id,
-//     }, opts);
-//
-//     core.services.RoonApiBrowse.browse(opts, function(error, payload) {
-//         if (error) { console.log(error, payload); return; }
-//
-//         console.log(opts)
-//         console.log("\n")
-//         console.log(payload)
-//         console.log("\n")
-//
-//         if (payload.action == 'list') {
-//             var items = [];
-// //             page = ( page - 1 ) * listPerPage;
-//
-//             core.services.RoonApiBrowse.load({
-//                 hierarchy:          "browse",
-//                 offset:             page,
-//                 set_display_offset: listPerPage,
-//             }, function(error, payload) {
-//                 items = payload.items;
-//                 cb(payload.items);
-//             });
-//         }
-//     });
-// }
-//
-// function load_browse(page, listPerPage, cb) {
-//     page = ( page - 1 ) * listPerPage;
-//
-//     core.services.RoonApiBrowse.load({
-//         hierarchy:          "browse",
-//         offset:             page,
-//         set_display_offset: page,
-//     }, function(error, payload) {
-//         cb(payload.items);
-//     });
-// }
-

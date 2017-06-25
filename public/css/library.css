@@ -26,10 +26,6 @@
     color: #eff0f1;
 }
 
-.navButton:enabled:active {
-/*     transform: translateY(4px); */
-}
-
 .navButton:disabled {
     fill-opacity: 0.33;
 }
@@ -64,6 +60,10 @@
     filter:none;
 }
 
+.itemImage {
+    max-height: 98%;
+    max-width: 98%;
+}
 
 .searchGroup {
     height: 28px;
@@ -98,7 +98,6 @@
     justify-content: space-between;
     align-items: center;
     vertical-align: middle;
-/*     border: 1px solid green; */
 }
 
 #content {
@@ -108,7 +107,26 @@
     right: 0;
     bottom: 48px;
     overflow: auto;
-/*     border:1px solid red; */
+}
+#listContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-height: 40%;
+    margin-bottom: 10px;
+}
+
+#listImage {
+    display: flex;
+    justify-content: center;
+}
+
+#listInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 49%;
 }
 
 #navLine2 {
@@ -117,5 +135,4 @@
     right: 0;
     bottom: 2px;
     height: 40px;
-/*     border: 1px solid blue; */
 }

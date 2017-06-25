@@ -39,12 +39,10 @@ function enableSockets() {
 
 function selectZone(zone_id, display_name) {
     settings.zoneID = zone_id;
-//     setCookie('settings[\'zoneID\']', settings.zoneID);
-
     settings.displayName = display_name;
-//     setCookie('settings[\'displayName\']', settings.displayName);
     $("#buttonZoneName").html(settings.displayName);
     $("#overlayZoneList").hide();
+    goHome(settings.zoneID);
 }
 
 function goBack(zone_id) {
@@ -74,7 +72,7 @@ function goHome(zone_id) {
         contentType: 'application/json',
         url: '/roonapi/goRefreshBrowse',
         success: function(payload) {
-            showData(payload, zone_id, 1);
+            showData(payload, zone_id);
         }
     });
 }
@@ -90,7 +88,7 @@ function goRefresh(zone_id) {
            contentType: 'application/json',
            url: '/roonapi/goRefreshBrowse',
            success: function(payload) {
-               showData(payload, zone_id, 1);
+               showData(payload, zone_id);
            }
     });
 }
@@ -137,22 +135,61 @@ function goPage(zone_id, listoffset) {
 }
 
 function showData( payload, zone_id ) {
-    $("#items").html("");
+    $("#buttonRefresh").html(getSVG('refresh')).attr("onclick", "goRefresh(\'" + settings.zoneID + "\')");
 
     var items = payload.data.items;
     var list = payload.data.list;
 
+    $("#items").html("");
+
     if ( items !== null){
+        $("#listTitle").html(list.title);
+        $("#listSubtitle").html(list.subtitle);
+
+        if (list.image_key) {
+            $("#listImage").html("<img class=\"itemImage\" src=\"/roonapi/getImage?image_key=" + list.image_key + "\">").show();
+            $("#coverBackground").css("background-image", "url(\"/roonapi/getImage?image_key=" + list.image_key + "\")").show();
+        } else {
+            $("#listImage").html("").hide();
+            $("#coverBackground").hide();
+        }
+
         for (var x in items) {
+            var html = "";
             if (items[x].input_prompt) {
-                var html = "";
                 html += "<form action=\"submit\" class=\"searchGroup\">";
                 html += "<input type=\"text\" class=\"searchForm\" placeholder=\"" + items[x].input_prompt.prompt + "\">";
                 html += "<button type=\"submit\" class=\"itemListButton\">" + getSVG('search') + "</button>";
-                $("#items").append(html)
+                $("#items").append(html);
             } else {
-                $("#items").append("<button type=\"button\" class=\"itemListItem\" onclick=\"goList(\'" + zone_id + "\', \'" + items[x].item_key + "\')\">" + items[x].title + "</button>");
+                html += "<button type=\"button\" class=\"itemListItem\" onclick=\"goList(\'" + zone_id + "\', \'" + items[x].item_key + "\')\">";
+                html += items[x].title;
+                if (items[x].subtitle === null || items[x].subtitle == "") {
+                } else {
+                    html += "<br><span class=\"textSmall\">(" + items[x].subtitle + ")</span>";
+                }
+                html += "</button>";
+
+                $("#items").append(html);
             }
+        }
+
+        if (list.level == 0) {
+            $("#buttonBack")
+                .prop("disabled", true)
+                .html(getSVG('back'));
+            $("#buttonHome")
+                .prop("disabled", true)
+                .html(getSVG('home'));
+        } else {
+            $("#buttonBack")
+                .attr("onclick", "goBack(\'" + settings.zoneID + "\')")
+                .html(getSVG('back'))
+                .prop("disabled", false);
+            $("#buttonHome")
+                .attr("onclick", "goHome(\'" + settings.zoneID + "\')")
+                .html(getSVG('home'))
+                .prop("disabled", false);
         }
 
         if (list.display_offset > 0) {
@@ -177,31 +214,15 @@ function showData( payload, zone_id ) {
                 .html(getSVG('next'));
         }
 
-        if (list.level == 0) {
-            $("#buttonBack")
-                .prop("disabled", true)
-                .html(getSVG('back'));
-            $("#buttonHome")
-                .prop("disabled", true)
-                .html(getSVG('home'));
-        } else {
-            $("#buttonBack")
-                .attr("onclick", "goBack(\'" + settings.zoneID + "\')")
-                .html(getSVG('back'))
-                .prop("disabled", false);
-            $("#buttonHome")
-                .attr("onclick", "goHome(\'" + settings.zoneID + "\')")
-                .html(getSVG('home'))
-                .prop("disabled", false);
-        }
-
-
-        $("#buttonRefresh").html(getSVG('refresh')).attr("onclick", "goRefresh(\'" + settings.zoneID + "\')");
-
         $("#pageNumber").html((list.display_offset + 1) + "-" + (list.display_offset + items.length) + " of " + list.count);
-        $("#listTitle").html(list.title);
-        $("#listSubtitle").html(list.subtitle);
-        $("#listImageKey").html(list.image_key);
+
+        if ($("#buttonPrev").prop("disabled") === true && $("#buttonNext").prop("disabled") === true) {
+            $("#navLine2").hide();
+            $("#content").css("bottom", "0");
+        } else {
+            $("#navLine2").show();
+            $("#content").css("bottom", "48px");
+        }
     }
 }
 
@@ -209,10 +230,6 @@ function showData( payload, zone_id ) {
 function readCookie(name){
     return Cookies.get(name);
 }
-
-// function setCookie(name, value){
-//     Cookies.set(name, value, { expires: 7 });
-// }
 
 function getSVG(cmd) {
     switch (cmd) {
