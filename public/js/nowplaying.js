@@ -1,3 +1,4 @@
+"use strict";
 var socket = io();
 var curZone;
 var css = [];
@@ -44,8 +45,6 @@ function showPage() {
     $("#buttonTheme").html(getSVG('theme'));
     $("#notPlaying").hide();
     $("#isPlaying").hide();
-    $("#coverBackground").hide();
-    $("#colorBackground").hide();
 
     enableSockets();
 }
@@ -88,8 +87,6 @@ function selectZone(zone_id, display_name) {
     socket.emit("getZone", zone_id);
 
     $("#overlayZoneList").hide();
-
-
 }
 
 function updateZone(curZone){
@@ -103,19 +100,22 @@ function updateZone(curZone){
 function showNotPlaying() {
     $("#notPlaying").show();
     $("#isPlaying").hide();
-    $("#coverBackground").hide();
-    $("#colorBackground").hide();
 
     // Reset icons
-    $("#controlPrev").html(getSVG('prev')).addClass("buttonInactive");
-    $("#controlPlayPauseStop").html(getSVG('play')).addClass("buttonInactive");
-    $("#controlNext").html(getSVG('next')).addClass("buttonInactive");
-    $("#buttonLoop").html(getSVG('loop')).addClass("buttonInactive");
-    $("#buttonShuffle").html(getSVG('shuffle')).addClass("buttonInactive");
-    $("#buttonRadio").html(getSVG('radio')).addClass("buttonInactive");
+    $("#controlPrev").html(getSVG('prev')).removeClass("buttonAvailable").addClass("buttonInactive");
+    $("#controlPlayPauseStop").html(getSVG('play')).removeClass("buttonAvailable").addClass("buttonInactive");
+    $("#controlNext").html(getSVG('next')).removeClass("buttonAvailable").addClass("buttonInactive");
+    $("#buttonLoop").html(getSVG('loop')).removeClass("buttonAvailable buttonActive").addClass("buttonInactive");
+    $("#buttonShuffle").html(getSVG('shuffle')).removeClass("buttonAvailable buttonActive").addClass("buttonInactive");
+    $("#buttonRadio").html(getSVG('radio')).removeClass("buttonAvailable buttonActive").addClass("buttonInactive");
 
     // Blank text fields
     $("#line1, #line2, #line3, #seekPosition, #seekLength").html("&nbsp;");
+    $("#trackSeekValue").css("width", "0%");
+
+    // Reset pictures
+    $("#containerCoverImage").html("<img src=\"/img/transparent.png\" class=\"itemImage\">");
+    $("#coverBackground").css("background-image", "url(\'/img/transparent.png\')");
 
     // Reset state and browser title
     state = [];
@@ -188,13 +188,14 @@ function showIsPlaying(curZone) {
 
         if (settings.theme == "color"){
             var colorThief = new ColorThief();
+
             colorThief.getColorAsync(state.imgUrl, function(color){
-                r = color[0];
-                g = color[1];
-                b = color[2];
+                var r = color[0];
+                var g = color[1];
+                var b = color[2];
                 css.colorBackground = "rgb(" + color +")";
 
-                yiq = ((r*299)+(g*587)+(b*114))/1000;
+                var yiq = ((r*299)+(g*587)+(b*114))/1000;
                 if (yiq >= 128) {
                     css.backgroundColor = "#eff0f1";
                     css.foregroundColor = "#232629";
@@ -386,7 +387,7 @@ function showIsPlaying(curZone) {
         }
     }
 
-    if (state.themeShowing == undefined) {
+    if (state.themeShowing === undefined) {
         state.themeShowing = true;
         showTheme(settings.theme);
     }
