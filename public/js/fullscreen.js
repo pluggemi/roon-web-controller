@@ -1,10 +1,11 @@
+"use strict";
 var socket = io();
 
 $(document).ready(function() {
     $("#buttonMenu").html(getSVG('menu'));
 
     socket.on("pairStatus", function(payload) {
-        pairEnabled=payload.pairEnabled;
+        var pairEnabled=payload.pairEnabled;
 
         if (pairEnabled === true ) {
             showSection('nowPlaying');

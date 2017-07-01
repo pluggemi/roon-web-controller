@@ -1,3 +1,4 @@
+"use strict";
 // Setup general variables
 var defaultListenPort = 8080;
 
@@ -94,7 +95,7 @@ var roon = new RoonApi({
         pairStatus = true;
         io.emit("pairStatus", JSON.parse('{"pairEnabled": ' + pairStatus + '}'));
 
-        transport = core_.services.RoonApiTransport;
+        var transport = core_.services.RoonApiTransport;
 
         transport.subscribe_zones(function(response, data){
             var i, x, y, zone_id, display_name;
@@ -102,7 +103,7 @@ var roon = new RoonApi({
                 for ( x in data.zones ) {
                     zone_id = data.zones[x].zone_id;
                     display_name = data.zones[x].display_name;
-                    item = {};
+                    var item = {};
                     item.zone_id = zone_id;
                     item.display_name = display_name;
 
