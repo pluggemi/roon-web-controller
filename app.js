@@ -1,4 +1,3 @@
-"use strict";
 // Setup general variables
 var defaultListenPort = 8080;
 
@@ -264,7 +263,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('changeSetting', function(msg) {
-        settings = [];
+        var settings = [];
 
         if (msg.setting == "shuffle") {
             settings.shuffle = msg.value;

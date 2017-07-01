@@ -409,7 +409,7 @@ function goCmd(cmd,zone_id){
 
 function changeZoneSetting(zoneSetting, zoneSettingValue, zone_id) {
 //     for (x in curZone.outputs){
-        msg = JSON.parse('{"zone_id": "' + zone_id + '", "setting": "' + zoneSetting + '", "value": "' + zoneSettingValue + '" }');
+        var msg = JSON.parse('{"zone_id": "' + zone_id + '", "setting": "' + zoneSetting + '", "value": "' + zoneSettingValue + '" }');
         socket.emit("changeSetting", msg);
 //     }
 }
@@ -418,7 +418,7 @@ function volumeInput(spanId, value, output_id) {
     inVolumeSlider = true;
     $("#" + spanId + "").html(value);
 
-    msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
+   var msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
     socket.emit("changeVolume", msg);
 
 }
