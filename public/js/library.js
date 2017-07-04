@@ -181,7 +181,7 @@ function showData( payload, zone_id ) {
             var html = "";
             if (items[x].input_prompt) {
                 html += "<form action=\"javascript:goSearch();\" class=\"searchGroup\">";
-                html += "<input type=\"text\" id=\"searchText\" name=\"search\" class=\"searchForm\" placeholder=\"" + items[x].input_prompt.prompt + "\" autocomplete=\"off\">";
+                html += "<input type=\"search\" id=\"searchText\" name=\"search\" class=\"searchForm\" placeholder=\"" + items[x].input_prompt.prompt + "\" autocomplete=\"off\">";
                 html += "<button type=\"submit\" class=\"itemListButton\">" + getSVG('search') + "</button>";
                 html += "<input type=\"text\" id=\"searchItemKey\" class=\"hidden\" value=\"" + items[x].item_key + "\" ></span>";
                 html += "</form>";

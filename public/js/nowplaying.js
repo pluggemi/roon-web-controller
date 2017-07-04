@@ -12,9 +12,14 @@ $(document).ready(function() {
 });
 
 function fixFontSize() {
-    var fontSize = parseInt($("#line1").height());
-    fontSize = (Math.round(fontSize * 0.75));
-    $(".lineMusicInfo").css('font-size', fontSize);
+    $(".lineMusicInfo").css('font-size', Math.round(parseInt($("#line1").height() * 0.75)));
+
+    var zoneFontSize = Math.round(parseInt($("#containerZoneList").height()/3));
+        if (zoneFontSize <= 20) {
+            $("#nowplayingZoneList").css("font-size", 20);
+        } else {
+            $("#nowplayingZoneList").css("font-size", zoneFontSize);
+        }
 }
 
 function showPage() {

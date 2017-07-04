@@ -1,3 +1,4 @@
+"use strict";
 // Setup general variables
 var defaultListenPort = 8080;
 
