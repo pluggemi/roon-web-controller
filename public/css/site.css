@@ -15,7 +15,7 @@ button:focus {
 }
 
 svg {
-    width: 100%;
+    width: auto;
     height: 100%;
     fill: currentColor;
 }
@@ -37,6 +37,10 @@ svg {
     filter:none;
 }
 
+.buttonFillHeight {
+    background-color: rgba(0,0,0,0);
+    height: 100%;
+}
 
 .fullscreenFlex {
     position: absolute;
@@ -93,4 +97,33 @@ svg {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.textBold {
+    font-weight: bold;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.textSmall {
+    font-size: 75%;
+}
+
+#coverBackground {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: opacity(33%) blur(20px);
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: none;
 }

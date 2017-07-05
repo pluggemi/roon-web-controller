@@ -1,10 +1,6 @@
 # Change Log
 
-## Version TBD (PENDING RELEASE)
-
-## TODO
-- (Feature) Library browser
-- (Feature) Search
+## Version 1.2.0 (PENDING RELEASE)
 
 ## Pre-Release TODO
 - Clear bugs
@@ -12,8 +8,30 @@
 - Pre-Tag/pre-release checklist
 
 ### New
-- Added theme button to "Now Playing"
+- Library Browser
+- Search (Library -> Search)
+- Added theme button to "Now Playing" screen
 - Split "Now Playing" and "Library" into a standalone pages to allow for custom layouts (example side-by-side layout provided, http://localhost:8080/side-by-side.html)
+
+### Upgrade Notes
+Due to the use of new Roon APIs, you must remove the old extension authorization and create a new one!
+
+On the Node server:
+1. Stop the extension
+
+In an official Roon Client:
+1. Go to Settings -> Extensions.
+1. Click the "View" button.
+1. Remove all previous instances of "Web Controller".
+
+On the Node server:
+1. Run `git pull`
+1. Run `npm install`
+1. Start the extension `node .`
+
+In an official Roon Client:
+1. Go to Settings -> Extensions.
+1. Click the "Enable" button beside "Web Controller".
 
 ------------------
 # Release History
