@@ -46,73 +46,47 @@ function selectZone(zone_id, display_name) {
     goHome(settings.zoneID);
 }
 
-function goBack() {
-    var data = {};
-    data.zone_id = settings.zoneID;
-    data.options = {pop_levels: 1};
-
+function doPostRoonApi(data) {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json',
         url: '/roonapi/goRefreshBrowse',
         success: function(payload) {
-            showData(payload, settings.zoneID, 1);
+            showData(payload, settings.zoneID);
         }
+    });
+}
+
+function goBack() {
+    doPostRoonApi({
+        zone_id: settings.zoneID,
+        options: { pop_levels: 1 }
     });
 }
 
 function goHome() {
-    var data = {};
-    data.zone_id = settings.zoneID;
-    data.options = {pop_all: true};
-
-    $.ajax({
-        type: 'POST',
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        url: '/roonapi/goRefreshBrowse',
-        success: function(payload) {
-            showData(payload, settings.zoneID);
-        }
+    doPostRoonApi({
+        zone_id: settings.zoneID,
+        options: { pop_all: true }
     });
 }
 
 function goRefresh() {
-    var data = {};
-    data.zone_id = settings.zoneID;
-    data.options = { refresh_list: true };
-
-    $.ajax({
-        type: 'POST',
-        data: JSON.stringify(data),
-           contentType: 'application/json',
-           url: '/roonapi/goRefreshBrowse',
-           success: function(payload) {
-               showData(payload, settings.zoneID);
-           }
+    doPostRoonApi({
+        zone_id: settings.zoneID,
+        options: { refresh_list: true }
     });
 }
 
 function goList(item_key, listoffset) {
-    var data = {};
-    data.zone_id = settings.zoneID;
-    data.options = {item_key: item_key};
+    if (listoffset === undefined)
+        listoffset = 0;
 
-    if (listoffset === undefined) {
-        data.listoffset = 0;
-    } else {
-        data.listoffset = listoffset;
-    }
-
-    $.ajax({
-        type: 'POST',
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        url: '/roonapi/goRefreshBrowse',
-        success: function(payload) {
-            showData(payload, settings.zoneID);
-        }
+    doPostRoonApi({
+        zone_id: settings.zoneID,
+        options: { item_key: item_key },
+        listoffset: listoffset
     });
 }
 
@@ -136,23 +110,14 @@ function goPage(listoffset) {
 }
 
 function goSearch() {
-    var data = {};
-    data.zone_id = settings.zoneID;
-    data.options = {};
-    if ($("#searchText").val() === "" || $("#searchItemKey").val() === "") {
+    if ($("#searchText").val() === "" || $("#searchItemKey").val() === "")
         return;
-    } else {
-        data.options.item_key = $("#searchItemKey").val();
-        data.options.input = $("#searchText").val();
-    }
 
-    $.ajax({
-        type: 'POST',
-        data: JSON.stringify(data),
-           contentType: 'application/json',
-           url: '/roonapi/goRefreshBrowse',
-           success: function(payload) {
-               showData(payload, settings.zoneID);
+    doPostRoonApi({
+        zone_id: settings.zoneID,
+        options: {
+            item_key: $("#searchItemKey").val(),
+            input: $("#searchText").val()
            }
     });
 }
