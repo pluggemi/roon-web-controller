@@ -248,6 +248,16 @@ function load_browse(listoffset, callback) {
     });
 }
 
+function doRoonApiImage(req, res, w, h) {
+    core.services.RoonApiImage.get_image(
+        req.query.image_key,
+        {"scale": "fit", "width": w, "height": h, "format": "image/jpeg"},
+        function(cb, contentType, body) {
+            res.contentType = contentType;
+            res.writeHead(200, {'Content-Type': 'image/jpeg' });
+            res.end(body, 'binary');
+    });
+}
 
 // ---------------------------- WEB SOCKET --------------
 io.on('connection', function(socket){
@@ -310,23 +320,11 @@ app.get('/', function(req, res){
 });
 
 app.get('/roonapi/getImage', function(req, res){
-    core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 1000, "height": 1000, "format": "image/jpeg"}, function(cb, contentType, body) {
-
-        res.contentType = contentType;
-
-        res.writeHead(200, {'Content-Type': 'image/jpeg' });
-        res.end(body, 'binary');
-    });
+    doRoonApiImage(req, res, 1000, 1000);
 });
 
 app.get('/roonapi/getIcon', function(req, res){
-    core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 48, "height": 48, "format": "image/jpeg"}, function(cb, contentType, body) {
-
-        res.contentType = contentType;
-
-        res.writeHead(200, {'Content-Type': 'image/jpeg' });
-        res.end(body, 'binary');
-    });
+    doRoonApiImage(req, res, 48, 48);
 });
 
 app.post('/roonapi/goRefreshBrowse', function(req, res){
