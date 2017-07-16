@@ -1,17 +1,13 @@
 # Change Log
 
-## Version 1.2.0 (PENDING RELEASE)
-
-## Pre-Release TODO
-- Clear bugs
-- Regression Testing (actual devices - browser, phone, Raspberry Pi touch screen)
-- Pre-Tag/pre-release checklist
+## Version 1.2.0
 
 ### New
 - Library Browser
 - Search (Library -> Search)
 - Added theme button to "Now Playing" screen
 - Split "Now Playing" and "Library" into a standalone pages to allow for custom layouts (example side-by-side layout provided, http://localhost:8080/side-by-side.html)
+- Removed workaround now that API loop bug (https://github.com/RoonLabs/node-roon-api/issues/5) is resolved
 
 ### Upgrade Notes
 Due to the use of new Roon APIs, you must remove the old extension authorization and create a new one!

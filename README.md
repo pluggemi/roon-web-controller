@@ -1,16 +1,34 @@
-# Roon Web Controller 1.1.1
+# Roon Web Controller 1.2.0
 This is an extension for the Roon music player that provides a web based remote.
 
 ## New Feature Highlights
-- Complete rewrite of UI - now supports both Portrait and Landscape view making it more suitable for phones
-- Added new theme based on the dominant color of the cover art
-- Added controls for Volume, Loop, Shuffle, and Auto Radio
-- Added optional command line options and local configuration file
+- Library Browser
+- Search (Library -> Search)
+- Added theme button to "Now Playing" screen
+- Split "Now Playing" and "Library" into a standalone pages to allow for custom layouts (example side-by-side layout provided, http://localhost:8080/side-by-side.html)
+- Removed workaround now that API loop bug (https://github.com/RoonLabs/node-roon-api/issues/5) is resolved
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
 ### Upgrade notes
-Please run `npm install` after upgrading due to new dependencies.
+Due to the use of new Roon APIs, you **must** remove the old extension authorization and create a new one!
+
+On the Node server:
+1. Stop the extension
+
+In an official Roon Client:
+1. Go to Settings -> Extensions.
+1. Click the "View" button.
+1. Remove all previous instances of "Web Controller".
+
+On the Node server:
+1. Run `git pull`
+1. Run `npm install`
+1. Start the extension `node .`
+
+In an official Roon Client:
+1. Go to Settings -> Extensions.
+1. Click the "Enable" button beside "Web Controller".
 
 ## Screenshots
 
@@ -18,20 +36,32 @@ Please run `npm install` after upgrading due to new dependencies.
 ![Dark Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/dark-Portrait.png)
 ![Dark Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/dark-Landscape.png)
 
-Album Credit: [Seofon, Zero Point](https://seofon.bandcamp.com/album/zero-point)
+Album Credit: [Julia Kent, Asperities](http://music.juliakent.com/album/asperities)
 
 ### Cover Art Theme
 ![Cover Art Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/cover-Portrait.png)
 ![Cover Art Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/cover-Landscape.png)
 
-Album Credit: [A Winged Victory for the Sullen, IRIS (Musique Originale)](https://erasedtapes.bandcamp.com/album/iris-musique-originale-bonus-track-version)
+Album Credit: [Beats Antique, Blind Threshold](https://beatsantique.bandcamp.com/album/blind-threshold)
 
 ### Dominant Color Theme
 The icons and text in this theme automatically adjust to show light or dark depending on which would be more readable.
 ![Dominant Color Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/color-Portrait.png)
 ![Dominant Color Theme](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/color-Landscape.png)
 
-Album Credit: [Biosphere, Departed Glories](https://biosphere.bandcamp.com/album/departed-glories)
+Album Credit: [Carbon Based Lifeforms, Twentythree](https://carbonbasedlifeforms.bandcamp.com/album/twentythree)
+
+### Library Browser - Home Screen
+![Library - Home](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/library-Portrait-home.png)
+![Library - Home](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/library-Landscape-home.png)
+
+### Library Browser - Artist Screen
+![Library - Artist](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/library-Portrait-artist.png)
+![Library - Artist](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/library-Landscape-artist.png)
+
+### Library Browser - Album Screen
+![Library - Album](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/library-Portrait-album.png)
+![Library - Album](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/library-Landscape-album.png)
 
 ## Installation
 Ensure that Node.JS version 6.x or higher is installed.

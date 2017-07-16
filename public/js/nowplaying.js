@@ -297,16 +297,14 @@ function showIsPlaying(curZone) {
             .removeClass()
             .addClass("buttonFillHeight buttonAvailable")
             .css("color", css.foregroundColor);
-        } else if (state.Loop == "loop"){
-            // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
+        } else if (state.Loop == "loop_one"){
             $("#buttonLoop")
             .html(getSVG('loopOne'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'disabled\', \'" + curZone.zone_id + "\')")
             .removeClass()
             .addClass("buttonFillHeight buttonActive")
             .css("color", "#3daee9");
-        } else if (state.Loop == "loop_one"){
-            // workaround for https://github.com/RoonLabs/node-roon-api/issues/5
+        } else if (state.Loop == "loop"){
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop_one\', \'" + curZone.zone_id + "\')")
@@ -379,7 +377,7 @@ function showIsPlaying(curZone) {
         $("#volumeList").html("");
         for (var x in curZone.outputs) {
             if (curZone.outputs[x].volume) {
-                type = curZone.outputs[x].volume.type;
+                var type = curZone.outputs[x].volume.type;
 
                 $("#volumeList")
                 .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
