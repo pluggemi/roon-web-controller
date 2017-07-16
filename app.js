@@ -101,13 +101,10 @@ var roon = new RoonApi({
             var i, x, y, zone_id, display_name;
             if (response == "Subscribed") {
                 for ( x in data.zones ) {
-                    zone_id = data.zones[x].zone_id;
-                    display_name = data.zones[x].display_name;
-                    var item = {};
-                    item.zone_id = zone_id;
-                    item.display_name = display_name;
-
-                    zoneList.push(item);
+                    zoneList.push({
+                        zone_id: data.zones[x].zone_id,
+                        display_name: data.zones[x].display_name
+                    });
                     zoneStatus.push(data.zones[x]);
                 }
 
@@ -128,14 +125,10 @@ var roon = new RoonApi({
 
                     } else if (i == "zones_added") {
                         for ( x in data.zones_added ) {
-                            zone_id = data.zones_added[x].zone_id;
-                            display_name = data.zones_added[x].display_name;
-
-                            item = {};
-                            item.zone_id = zone_id;
-                            item.display_name = display_name;
-
-                            zoneList.push(item);
+                            zoneList.push({
+                                zone_id: data.zones_added[x].zone_id,
+                                display_name: data.zones_added[x].display_name
+                            });
                             zoneStatus.push(data.zones_added[x]);
                         }
 
@@ -248,6 +241,16 @@ function load_browse(listoffset, callback) {
     });
 }
 
+function doRoonApiImage(req, res, w, h) {
+    core.services.RoonApiImage.get_image(
+        req.query.image_key,
+        {"scale": "fit", "width": w, "height": h, "format": "image/jpeg"},
+        function(cb, contentType, body) {
+            res.contentType = contentType;
+            res.writeHead(200, {'Content-Type': 'image/jpeg' });
+            res.end(body, 'binary');
+    });
+}
 
 // ---------------------------- WEB SOCKET --------------
 io.on('connection', function(socket){
@@ -310,23 +313,11 @@ app.get('/', function(req, res){
 });
 
 app.get('/roonapi/getImage', function(req, res){
-    core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 1000, "height": 1000, "format": "image/jpeg"}, function(cb, contentType, body) {
-
-        res.contentType = contentType;
-
-        res.writeHead(200, {'Content-Type': 'image/jpeg' });
-        res.end(body, 'binary');
-    });
+    doRoonApiImage(req, res, 1000, 1000);
 });
 
 app.get('/roonapi/getIcon', function(req, res){
-    core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 48, "height": 48, "format": "image/jpeg"}, function(cb, contentType, body) {
-
-        res.contentType = contentType;
-
-        res.writeHead(200, {'Content-Type': 'image/jpeg' });
-        res.end(body, 'binary');
-    });
+    doRoonApiImage(req, res, 48, 48);
 });
 
 app.post('/roonapi/goRefreshBrowse', function(req, res){
