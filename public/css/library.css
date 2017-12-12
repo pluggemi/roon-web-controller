@@ -127,7 +127,7 @@
 #listImage {
     display: flex;
     justify-content: center;
-    max-width: 49%;
+    width: 49%;
 }
 
 #listInfo {

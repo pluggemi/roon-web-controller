@@ -312,7 +312,6 @@ app.get('/', function(req, res){
 
 app.get('/roonapi/getImage', function(req, res){
     core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 1000, "height": 1000, "format": "image/jpeg"}, function(cb, contentType, body) {
-
         res.contentType = contentType;
 
         res.writeHead(200, {'Content-Type': 'image/jpeg' });
