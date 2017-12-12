@@ -85,6 +85,7 @@ var roon = new RoonApi({
     extension_id:        'com.pluggemi.web.controller',
     display_name:        "Web Controller",
     display_version:     "dev",
+    log_level:           'none',
     publisher:           'Mike Plugge',
     email:               'masked',
     website:             'https://github.com/pluggemi/roon-web-controller',
@@ -311,16 +312,6 @@ app.get('/', function(req, res){
 
 app.get('/roonapi/getImage', function(req, res){
     core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 1000, "height": 1000, "format": "image/jpeg"}, function(cb, contentType, body) {
-
-        res.contentType = contentType;
-
-        res.writeHead(200, {'Content-Type': 'image/jpeg' });
-        res.end(body, 'binary');
-    });
-});
-
-app.get('/roonapi/getIcon', function(req, res){
-    core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 48, "height": 48, "format": "image/jpeg"}, function(cb, contentType, body) {
 
         res.contentType = contentType;
 
