@@ -21,6 +21,7 @@
     width: auto;
     height: auto;
     object-fit: contain;
+    -webkit-filter: drop-shadow(5px 5px 5px black);
     filter: drop-shadow(5px 5px 5px black);
 }
 

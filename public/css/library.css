@@ -40,6 +40,7 @@
     color: #eff0f1;
     height: 48px;
     width: 100%;
+    -webkit-filter: drop-shadow(5px 5px 5px black);
     filter: drop-shadow(5px 5px 5px black);
     margin-bottom: 10px;
     font-weight: bold;
@@ -76,6 +77,7 @@
 .searchGroup {
     height: 28px;
     width: 100%;
+    -webkit-filter: drop-shadow(5px 5px 5px black);
     filter: drop-shadow(5px 5px 5px black);
     margin-bottom: 10px;
     display: flex;
