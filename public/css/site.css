@@ -5,12 +5,17 @@ body {
 }
 
 button {
-    outline:0;
+    outline: none;
     border: none;
 }
 
 button:focus {
-    outline:0;
+    outline: none;
+    border: none;
+}
+
+button:active {
+    outline: none;
     border: none;
 }
 

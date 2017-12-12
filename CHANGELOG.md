@@ -5,14 +5,16 @@
 ### TODO
 - Volume up and volume down buttons for more granular control of the volume
 - Browser specific CSS for opacity, blur, and drop shadow - needed for older Chromium builds on DietPi
+- Seek position/length - only update when value changes
 
-### Known issues
+### Fixed - Needs testing
 - Firefox CSS issues
 
 ### Misc under the hood changes
 - Extended cookie life 7 to 365 days
 - Corrected the click action for the stop button
 - Removed the unused "getIcon" web endpoint
+- Addressed bug where image in library did not scale correctly
 
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.

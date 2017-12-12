@@ -294,29 +294,29 @@ function showIsPlaying(curZone) {
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonAvailable")
+            .removeClass("buttonActive buttonInactive")
+            .addClass("buttonAvailable")
             .css("color", css.foregroundColor);
         } else if (state.Loop == "loop_one"){
             $("#buttonLoop")
             .html(getSVG('loopOne'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'disabled\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonActive")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
             .css("color", "#3daee9");
         } else if (state.Loop == "loop"){
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop_one\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonActive")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "")
-            .removeClass()
-            .addClass("buttonFillHeight buttonInactive")
+            .removeClass("buttonAvailable buttonActive")
+            .addClass("buttonInactive")
             .css("color", css.foregroundColor);
         }
     }
@@ -327,22 +327,22 @@ function showIsPlaying(curZone) {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'true\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonAvailable")
+            .removeClass("buttonActive buttonInactive")
+            .addClass("buttonAvailable")
             .css("color", css.foregroundColor);
         } else if (state.Shuffle === true) {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'false\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonActive")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "")
-            .removeClass()
-            .addClass("buttonFillHeight buttonInactive")
+            .removeClass("buttonAvailable buttonActive")
+            .addClass("buttonInactive")
             .css("color", css.foregroundColor);
         }
     }
@@ -353,22 +353,22 @@ function showIsPlaying(curZone) {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'true\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonAvailable")
+            .removeClass("buttonActive buttonInactive")
+            .addClass("buttonAvailable")
             .css("color", css.foregroundColor);
         } else if (state.Radio === true) {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'false\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonActive")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "")
-            .removeClass()
-            .addClass("buttonFillHeight buttonInactive")
+            .removeClass("buttonAvailable buttonActive")
+            .addClass("buttonInactive")
             .css("color", css.foregroundColor);
         }
     }
