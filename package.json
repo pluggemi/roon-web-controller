@@ -24,5 +24,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/pluggemi/roon-web-controller.git"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0"
   }
 }
