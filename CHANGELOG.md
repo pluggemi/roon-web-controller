@@ -1,5 +1,32 @@
 # Change Log
 
+## PRE-RELEASE notes
+
+### TODO
+- Volume up and volume down buttons for more granular control of the volume
+- Browser specific CSS for opacity, blur, and drop shadow - needed for older Chromium builds on DietPi
+
+### Known issues
+- Firefox CSS issues
+
+### Misc under the hood changes
+- Extended cookie life 7 to 365 days
+- Corrected the click action for the stop button
+- Removed the unused "getIcon" web endpoint
+
+### Upgrade Notes
+The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
+
+On the Node server:
+1. Stop the extension
+1. Run `git pull`
+1. Run `npm install`
+1. Run `npm update`
+1. Start the extension `node .`
+
+------------------
+# Release History
+
 ## Version 1.2.0
 
 ### New
@@ -28,9 +55,6 @@ On the Node server:
 In an official Roon Client:
 1. Go to Settings -> Extensions.
 1. Click the "Enable" button beside "Web Controller".
-
-------------------
-# Release History
 
 ## Version 1.1.1
 
