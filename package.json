@@ -6,6 +6,9 @@
   "author": "Mike Plugge",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": ">=6.x"
+  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "command-line-args": "^4.0.6",
