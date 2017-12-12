@@ -275,7 +275,7 @@ function showIsPlaying(curZone) {
             .removeClass("buttonInactive");
         } else if (state.PlayPauseStop == "showStop") {
             $("#controlPlayPauseStop")
-            .attr("onclick", "goCmd(\'pause\', \'" + curZone.zone_id + "\')")
+            .attr("onclick", "goCmd(\'stop\', \'" + curZone.zone_id + "\')")
             .html(getSVG('stop'))
             .addClass("buttonAvailable")
             .removeClass("buttonInactive");
