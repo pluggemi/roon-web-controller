@@ -1,4 +1,4 @@
-# Roon Web Controller 1.2.0
+# Roon Web Controller 1.2.1
 This is an extension for the Roon music player that provides a web based remote.
 
 ## New Feature Highlights
@@ -6,29 +6,22 @@ This is an extension for the Roon music player that provides a web based remote.
 - Search (Library -> Search)
 - Added theme button to "Now Playing" screen
 - Split "Now Playing" and "Library" into a standalone pages to allow for custom layouts (example side-by-side layout provided, http://localhost:8080/side-by-side.html)
-- Removed workaround now that API loop bug (https://github.com/RoonLabs/node-roon-api/issues/5) is resolved
+
+## Version 1.2.1 new features
+- Volume up and volume down buttons for more granular control of the volume
+- Lots of bug fixes
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
 ### Upgrade notes
-Due to the use of new Roon APIs, you **must** remove the old extension authorization and create a new one!
+The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
 
 On the Node server:
 1. Stop the extension
-
-In an official Roon Client:
-1. Go to Settings -> Extensions.
-1. Click the "View" button.
-1. Remove all previous instances of "Web Controller".
-
-On the Node server:
 1. Run `git pull`
 1. Run `npm install`
+1. Run `npm update`
 1. Start the extension `node .`
-
-In an official Roon Client:
-1. Go to Settings -> Extensions.
-1. Click the "Enable" button beside "Web Controller".
 
 ## Screenshots
 
@@ -64,7 +57,7 @@ Album Credit: [Carbon Based Lifeforms, Twentythree](https://carbonbasedlifeforms
 ![Library - Album](https://raw.githubusercontent.com/pluggemi/project-screenshots/master/roon-web-controller/library-Landscape-album.png)
 
 ## Installation
-Ensure that Node.JS version 6.x or higher is installed.
+Ensure that Node.js version 6.x or higher is installed.
 
 Grab the software:
 * Via git (preferred): ```git clone https://github.com/pluggemi/roon-web-controller.git```
@@ -73,7 +66,7 @@ Grab the software:
 Change directory into the software:
 ```cd roon-web-controller```
 
-Install the Node.JS modules
+Install the Node.js modules
 ```npm install```
 
 Run the application:
@@ -155,8 +148,6 @@ In addition to those packages installed via npm, this project uses:
 * [Color Thief](https://github.com/lokesh/color-thief) to calculate the dominant color of the album art
 
 Thanks go to [st0g1e](https://github.com/st0g1e) for doing one of the first [web clients](https://github.com/st0g1e/roon-extension-ws-player) for the Roon API.
-
-Thanks go to [noohgnas](https://github.com/noohgnas) for pointing out some code improvements.
 
 And of course thanks go to [Roon Labs](https://roonlabs.com/) for making the music player and the [APIs](https://github.com/RoonLabs).
 

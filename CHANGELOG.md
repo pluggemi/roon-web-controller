@@ -1,22 +1,24 @@
 # Change Log
 
-## PRE-RELEASE notes
+## Version 1.2.1
 
 ### New
 - Volume up and volume down buttons for more granular control of the volume
 
-### Misc under the hood changes
+### Misc bug fixes and behind the scenes
 - Extended cookie life 7 to 365 days
 - Corrected the click action for the stop button
 - Removed the unused "getIcon" web endpoint
-- Addressed bug where image in library did not scale correctly
+- Addressed bug where images in library did not scale correctly
 - Fixed button rendering issue with Firefox
 - Added browser specific CSS for opacity, blur, and drop shadow - needed for older Chromium builds
+- Added "engine" field to package.json to specify the minimum required Node.js version
+- Updated package dependencies
 
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
 
-On the Node server:
+On the Node.js server:
 1. Stop the extension
 1. Run `git pull`
 1. Run `npm install`
@@ -38,7 +40,7 @@ On the Node server:
 ### Upgrade Notes
 Due to the use of new Roon APIs, you must remove the old extension authorization and create a new one!
 
-On the Node server:
+On the Node.js server:
 1. Stop the extension
 
 In an official Roon Client:
@@ -46,7 +48,7 @@ In an official Roon Client:
 1. Click the "View" button.
 1. Remove all previous instances of "Web Controller".
 
-On the Node server:
+On the Node.js server:
 1. Run `git pull`
 1. Run `npm install`
 1. Start the extension `node .`
