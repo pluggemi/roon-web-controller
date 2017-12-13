@@ -376,23 +376,28 @@ function showIsPlaying(curZone) {
     if (inVolumeSlider === false ) {
         $("#volumeList").html("");
         for (var x in curZone.outputs) {
+            if (x >= 1) { $("#volumeList").append("<hr>"); }
             if (curZone.outputs[x].volume) {
                 var html = "<div class=\"textBold\">" + curZone.outputs[x].display_name + "</div>";
-                html += "<div class=\"volumeValue\">" + curZone.outputs[x].volume.value + "</div>";
+                html += "<div>" + curZone.outputs[x].volume.value + "</div>";
 
-                html += "<div class=\"sliderGroup\">";
-                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\">"+ getSVG('volume-minus') + "</button>";
-                html += "<div class=\"sliderInput\">";
+                html += "<div class=\"volumeGroup\">";
+                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\"";
+                html += "onclick=\"volumeButton(\'volumeValue" + x + "\', " + (curZone.outputs[x].volume.value - curZone.outputs[x].volume.step) + ", \'" + curZone.outputs[x].output_id + "\')\"";
+                html += ">"+ getSVG('volume-minus') + "</button>";
+                html += "<div class=\"volumeSlider\">";
                 html += "<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/>"
                 html += "</div>";
-                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\">"+ getSVG('volume-plus') + "</button>";
+                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\"";
+                html += "onclick=\"volumeButton(\'volumeValue" + x + "\', " + (curZone.outputs[x].volume.value + curZone.outputs[x].volume.step) + ", \'" + curZone.outputs[x].output_id + "\')\"";
+                html += ">"+ getSVG('volume-plus') + "</button>";
                 html += "</div>";
 
                 $("#volumeList").append(html);
             } else {
                 $("#volumeList")
-                .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
-                .append("<span class=\"sliderGroup\"><p>Fixed Volume</p></span>");
+                .append("<div class=\"textBold\">" + curZone.outputs[x].display_name + "</div>")
+                .append("<div>Fixed Volume</div>");
             }
         }
     }
@@ -424,13 +429,19 @@ function changeZoneSetting(zoneSetting, zoneSettingValue, zone_id) {
 //     }
 }
 
+function volumeButton(spanId, value, output_id) {
+    $("#" + spanId + "").html(value);
+
+    var msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
+    socket.emit("changeVolume", msg);
+}
+
 function volumeInput(spanId, value, output_id) {
     inVolumeSlider = true;
     $("#" + spanId + "").html(value);
 
    var msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
     socket.emit("changeVolume", msg);
-
 }
 
 function volumeChange(id, value, output_id) {

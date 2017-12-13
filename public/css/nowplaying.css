@@ -207,7 +207,7 @@
     align-items: center;
 }
 
-.sliderGroup {
+.volumeGroup {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -223,8 +223,12 @@
     width: 15%;
 }
 
-.sliderInput {
+.volumeSlider {
     width: 70%;
+}
+
+hr {
+    width: 85%;
 }
 
 input[type=range] {
