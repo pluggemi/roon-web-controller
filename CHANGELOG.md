@@ -4,7 +4,6 @@
 
 ### TODO
 - Volume up and volume down buttons for more granular control of the volume
-- Seek position/length - only update when value changes
 
 ### Fixed - Needs testing
 - Firefox CSS issues

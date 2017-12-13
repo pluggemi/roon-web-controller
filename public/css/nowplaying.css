@@ -25,24 +25,6 @@
     filter: drop-shadow(5px 5px 5px black);
 }
 
-.sliderGroup {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    vertical-align: middle;
-    text-align: center;
-}
-
-.sliderValue {
-    width: 25%;
-}
-
-.sliderInput {
-    width: 75%;
-}
-
 @media screen and (orientation:portrait) {
     #containerCoverImage {
         position: absolute;
@@ -217,6 +199,32 @@
 #notPlaying {
     background-color: #232629;
     color: #eff0f1;
+}
+
+#volumeList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sliderGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.volumeButton {
+    color: #eff0f1;
+    width: 15%;
+}
+
+.sliderInput {
+    width: 70%;
 }
 
 input[type=range] {

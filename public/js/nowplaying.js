@@ -377,11 +377,18 @@ function showIsPlaying(curZone) {
         $("#volumeList").html("");
         for (var x in curZone.outputs) {
             if (curZone.outputs[x].volume) {
-                var type = curZone.outputs[x].volume.type;
+                var html = "<div class=\"textBold\">" + curZone.outputs[x].display_name + "</div>";
+                html += "<div class=\"volumeValue\">" + curZone.outputs[x].volume.value + "</div>";
 
-                $("#volumeList")
-                .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
-                .append("<span class=\"sliderGroup\"><span id=\"volumeValue" + x + "\" class=\"sliderValue\">" + curZone.outputs[x].volume.value + "</span><span class=\"sliderInput\"><input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/></span></span>");
+                html += "<div class=\"sliderGroup\">";
+                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\">"+ getSVG('volume-minus') + "</button>";
+                html += "<div class=\"sliderInput\">";
+                html += "<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/>"
+                html += "</div>";
+                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\">"+ getSVG('volume-plus') + "</button>";
+                html += "</div>";
+
+                $("#volumeList").append(html);
             } else {
                 $("#volumeList")
                 .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
