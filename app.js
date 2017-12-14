@@ -7,6 +7,14 @@ var pairStatus = 0;
 var zoneStatus = [];
 var zoneList = [];
 
+// Change to working directory
+try {
+    process.chdir(__dirname);
+    console.log(`Working directory: ${process.cwd()}`);
+} catch (err) {
+    console.error(`chdir: ${err}`);
+}
+
 // Read command line options
 var commandLineArgs = require('command-line-args');
 var getUsage = require('command-line-usage');
@@ -50,7 +58,6 @@ if (options.port) {
 } else {
     var listenPort = defaultListenPort;
 }
-
 // Setup Express
 var express = require('express');
 var http = require('http');
@@ -86,6 +93,7 @@ var roon = new RoonApi({
     display_name:        "Web Controller",
     display_version:     "1.2.1",
     publisher:           'Mike Plugge',
+    log_level:           'none',
     email:               'masked',
     website:             'https://github.com/pluggemi/roon-web-controller',
 
