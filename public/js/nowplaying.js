@@ -162,6 +162,7 @@ function showNotPlaying() {
 }
 
 function showIsPlaying(curZone) {
+<<<<<<< HEAD
 	$("#notPlaying").hide();
 	$("#isPlaying").show();
 
@@ -429,6 +430,286 @@ function showIsPlaying(curZone) {
 		state.themeShowing = true;
 		showTheme(settings.theme);
 	}
+=======
+    $("#notPlaying").hide();
+    $("#isPlaying").show();
+
+    if ( state.line1 != curZone.now_playing.three_line.line1) {
+        state.line1 = curZone.now_playing.three_line.line1;
+        fixFontSize();
+        $("#line1")
+        .html(state.line1)
+        .simplemarquee({
+            cycles: Infinity,
+            delayBetweenCycles: 5000,
+            handleHover: false
+        });
+    }
+
+    if ( state.line2 != curZone.now_playing.three_line.line2) {
+        state.line2 = curZone.now_playing.three_line.line2;
+        $("#line2")
+        .html(curZone.now_playing.three_line.line2)
+        .simplemarquee({
+            cycles: Infinity,
+            delayBetweenCycles: 5000,
+            handleHover: false
+        });
+    }
+
+    if ( state.line3 != curZone.now_playing.three_line.line3) {
+        state.line3 = curZone.now_playing.three_line.line3;
+        $("#line3")
+        .html(curZone.now_playing.three_line.line3)
+        .simplemarquee({
+            cycles: Infinity,
+            delayBetweenCycles: 5000,
+            handleHover: false
+        });
+    }
+
+    if (state.title != curZone.now_playing.one_line.line1) {
+        state.title = curZone.now_playing.one_line.line1;
+        $(document).prop("title", curZone.now_playing.one_line.line1);
+    }
+
+    if ( curZone.is_seek_allowed === true ) {
+        $("#seekPosition").html(secondsConvert(curZone.now_playing.seek_position));
+        $("#seekLength").html(secondsConvert(curZone.now_playing.length));
+        $("#trackSeekValue")
+        .css("width", Math.round((curZone.now_playing.seek_position / curZone.now_playing.length) * 100) + "%");
+    } else {
+        $("#seekPosition, #seekLength").html("&nbsp;");
+        $("#trackSeekValue").css("width", "0%");
+    }
+
+    if ( state.image_key != curZone.now_playing.image_key || state.image_key === undefined) {
+        state.image_key = curZone.now_playing.image_key;
+
+        if ( curZone.now_playing.image_key === undefined ) {
+            state.imgUrl = "/img/transparent.png";
+        } else {
+            state.imgUrl = "/roonapi/getImage?image_key=" + curZone.now_playing.image_key;
+        }
+        $("#containerCoverImage").html("<img src=\"" + state.imgUrl + "\" class=\"itemImage\">");
+        $("#coverBackground").css("background-image", "url(" + state.imgUrl + ")");
+
+        if (settings.theme == "color"){
+            var colorThief = new ColorThief();
+
+            colorThief.getColorAsync(state.imgUrl, function(color){
+                var r = color[0];
+                var g = color[1];
+                var b = color[2];
+                css.colorBackground = "rgb(" + color +")";
+
+                var yiq = ((r*299)+(g*587)+(b*114))/1000;
+                if (yiq >= 128) {
+                    css.backgroundColor = "#eff0f1";
+                    css.foregroundColor = "#232629";
+                    css.trackSeek = "rgba(35, 38, 41, 0.33)";
+                } else {
+                    css.backgroundColor = "#232629";
+                    css.foregroundColor = "#eff0f1";
+                    css.trackSeek = "rgba(239, 240, 241, 0.33)";
+                }
+                $("#colorBackground").show();
+                showTheme('color');
+            });
+        }
+    }
+
+    if (state.Prev != curZone.is_previous_allowed || state.Prev === undefined) {
+        state.Prev = curZone.is_previous_allowed;
+        if ( curZone.is_previous_allowed === true ) {
+            $("#controlPrev")
+            .attr("onclick", "goCmd(\'prev\', \'" + curZone.zone_id + "\')")
+            .html(getSVG('prev'))
+            .addClass("buttonAvailable")
+            .removeClass("buttonInactive");
+        } else {
+            $("#controlPrev")
+            .attr("onclick", "")
+            .html(getSVG('prev'))
+            .addClass("buttonInactive")
+            .removeClass("buttonAvailable");
+        }
+    }
+
+    if (state.Next != curZone.is_next_allowed || state.Next === undefined) {
+        state.Next = curZone.is_next_allowed;
+        if ( curZone.is_next_allowed === true ) {
+            $("#controlNext")
+            .attr("onclick", "goCmd(\'next\', \'" + curZone.zone_id + "\')")
+            .html(getSVG('next'))
+            .addClass("buttonAvailable")
+            .removeClass("buttonInactive");
+        } else {
+            $("#controlNext")
+            .attr("onclick", "")
+            .html(getSVG('next'))
+            .addClass("buttonInactive")
+            .removeClass("buttonAvailable");
+        }
+    }
+
+    if ( curZone.is_play_allowed === true ) {
+        state.PlayPauseStop = "showPlay";
+    } else if ( curZone.state == "playing" && curZone.is_play_allowed === false ) {
+        if ( curZone.is_pause_allowed === true ) { state.PlayPauseStop = "showPause"; }
+        else { state.PlayPauseStop = "showStop"; }
+    } else {
+        state.PlayPauseStop = "showPlayDisabled";
+    }
+
+    if (state.PlayPauseStopLast != state.PlayPauseStop || state.PlayPauseStop === undefined) {
+        state.PlayPauseStopLast = state.PlayPauseStop;
+        if ( state.PlayPauseStop == "showPlay") {
+            $("#controlPlayPauseStop")
+            .attr("onclick", "goCmd(\'play\', \'" + curZone.zone_id + "\')")
+            .html(getSVG('play'))
+            .addClass("buttonAvailable")
+            .removeClass("buttonInactive");
+        } else if (state.PlayPauseStop == "showPause") {
+            $("#controlPlayPauseStop")
+            .attr("onclick", "goCmd(\'pause\', \'" + curZone.zone_id + "\')")
+            .html(getSVG('pause'))
+            .addClass("buttonAvailable")
+            .removeClass("buttonInactive");
+        } else if (state.PlayPauseStop == "showStop") {
+            $("#controlPlayPauseStop")
+            .attr("onclick", "goCmd(\'stop\', \'" + curZone.zone_id + "\')")
+            .html(getSVG('stop'))
+            .addClass("buttonAvailable")
+            .removeClass("buttonInactive");
+        } else if (state.PlayPauseStop == "showPlayDisabled") {
+            $("#controlPlayPauseStop")
+            .html(getSVG('play'))
+            .attr("onclick", "")
+            .addClass("buttonInactive")
+            .removeClass("buttonAvailable");
+        }
+    }
+
+    if (state.Loop != curZone.settings.loop || state.Loop === undefined) {
+        state.Loop = curZone.settings.loop;
+        if (state.Loop == "disabled"){
+            $("#buttonLoop")
+            .html(getSVG('loop'))
+            .attr("onclick", "changeZoneSetting(\'loop\', \'loop\', \'" + curZone.zone_id + "\')")
+            .removeClass("buttonActive buttonInactive")
+            .addClass("buttonAvailable")
+            .css("color", css.foregroundColor);
+        } else if (state.Loop == "loop_one"){
+            $("#buttonLoop")
+            .html(getSVG('loopOne'))
+            .attr("onclick", "changeZoneSetting(\'loop\', \'disabled\', \'" + curZone.zone_id + "\')")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
+            .css("color", "#3daee9");
+        } else if (state.Loop == "loop"){
+            $("#buttonLoop")
+            .html(getSVG('loop'))
+            .attr("onclick", "changeZoneSetting(\'loop\', \'loop_one\', \'" + curZone.zone_id + "\')")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
+            .css("color", "#3daee9");
+        } else {
+            $("#buttonLoop")
+            .html(getSVG('loop'))
+            .attr("onclick", "")
+            .removeClass("buttonAvailable buttonActive")
+            .addClass("buttonInactive")
+            .css("color", css.foregroundColor);
+        }
+    }
+
+    if (state.Shuffle != curZone.settings.shuffle || state.Shuffle === undefined) {
+        state.Shuffle = curZone.settings.shuffle;
+        if (state.Shuffle === false) {
+            $("#buttonShuffle")
+            .html(getSVG('shuffle'))
+            .attr("onclick", "changeZoneSetting(\'shuffle\', \'true\', \'" + curZone.zone_id + "\')")
+            .removeClass("buttonActive buttonInactive")
+            .addClass("buttonAvailable")
+            .css("color", css.foregroundColor);
+        } else if (state.Shuffle === true) {
+            $("#buttonShuffle")
+            .html(getSVG('shuffle'))
+            .attr("onclick", "changeZoneSetting(\'shuffle\', \'false\', \'" + curZone.zone_id + "\')")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
+            .css("color", "#3daee9");
+        } else {
+            $("#buttonShuffle")
+            .html(getSVG('shuffle'))
+            .attr("onclick", "")
+            .removeClass("buttonAvailable buttonActive")
+            .addClass("buttonInactive")
+            .css("color", css.foregroundColor);
+        }
+    }
+
+    if (state.Radio != curZone.settings.auto_radio || state.Radio === undefined) {
+        state.Radio = curZone.settings.auto_radio;
+        if (state.Radio === false) {
+            $("#buttonRadio")
+            .html(getSVG('radio'))
+            .attr("onclick", "changeZoneSetting(\'auto_radio\', \'true\', \'" + curZone.zone_id + "\')")
+            .removeClass("buttonActive buttonInactive")
+            .addClass("buttonAvailable")
+            .css("color", css.foregroundColor);
+        } else if (state.Radio === true) {
+            $("#buttonRadio")
+            .html(getSVG('radio'))
+            .attr("onclick", "changeZoneSetting(\'auto_radio\', \'false\', \'" + curZone.zone_id + "\')")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
+            .css("color", "#3daee9");
+        } else {
+            $("#buttonRadio")
+            .html(getSVG('radio'))
+            .attr("onclick", "")
+            .removeClass("buttonAvailable buttonActive")
+            .addClass("buttonInactive")
+            .css("color", css.foregroundColor);
+        }
+    }
+
+    if (inVolumeSlider === false ) {
+        $("#volumeList").html("");
+        for (var x in curZone.outputs) {
+            if (x >= 1) { $("#volumeList").append("<hr>"); }
+            if (curZone.outputs[x].volume) {
+                var html = "<div class=\"textBold\">" + curZone.outputs[x].display_name + "</div>";
+                html += "<div>" + curZone.outputs[x].volume.value + "</div>";
+
+                html += "<div class=\"volumeGroup\">";
+                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\"";
+                html += "onclick=\"volumeButton(\'volumeValue" + x + "\', " + (curZone.outputs[x].volume.value - curZone.outputs[x].volume.step) + ", \'" + curZone.outputs[x].output_id + "\')\"";
+                html += ">"+ getSVG('volume-minus') + "</button>";
+                html += "<div class=\"volumeSlider\">";
+                html += "<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/>"
+                html += "</div>";
+                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\"";
+                html += "onclick=\"volumeButton(\'volumeValue" + x + "\', " + (curZone.outputs[x].volume.value + curZone.outputs[x].volume.step) + ", \'" + curZone.outputs[x].output_id + "\')\"";
+                html += ">"+ getSVG('volume-plus') + "</button>";
+                html += "</div>";
+
+                $("#volumeList").append(html);
+            } else {
+                $("#volumeList")
+                .append("<div class=\"textBold\">" + curZone.outputs[x].display_name + "</div>")
+                .append("<div>Fixed Volume</div>");
+            }
+        }
+    }
+
+    if (state.themeShowing === undefined) {
+        state.themeShowing = true;
+        showTheme(settings.theme);
+    }
+>>>>>>> upstream/master
 }
 
 function goCmd(cmd,zone_id){
@@ -452,13 +733,25 @@ function changeZoneSetting(zoneSetting, zoneSettingValue, zone_id) {
 //		 }
 }
 
+function volumeButton(spanId, value, output_id) {
+    $("#" + spanId + "").html(value);
+
+    var msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
+    socket.emit("changeVolume", msg);
+}
+
 function volumeInput(spanId, value, output_id) {
 	inVolumeSlider = true;
 	$("#" + spanId + "").html(value);
 
+<<<<<<< HEAD
 	 var msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
 	socket.emit("changeVolume", msg);
 
+=======
+   var msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
+    socket.emit("changeVolume", msg);
+>>>>>>> upstream/master
 }
 
 function volumeChange(id, value, output_id) {
@@ -514,7 +807,11 @@ function readCookie(name){
 }
 
 function setCookie(name, value){
+<<<<<<< HEAD
 	Cookies.set(name, value, { expires: 7 });
+=======
+    Cookies.set(name, value, { expires: 365 });
+>>>>>>> upstream/master
 }
 
 function secondsConvert(seconds) {
