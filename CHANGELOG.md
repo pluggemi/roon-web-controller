@@ -13,6 +13,7 @@
 - Fixed button rendering issue with Firefox
 - Added browser specific CSS for opacity, blur, and drop shadow - needed for older Chromium builds
 - Added "engine" field to package.json to specify the minimum required Node.js version
+- Added ability to run the script from any location - better compatibility with Roon Extension Manager
 - Updated package dependencies
 
 ### Upgrade Notes
