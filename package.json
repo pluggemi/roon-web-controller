@@ -22,11 +22,7 @@
     "node-roon-api-image": "github:roonlabs/node-roon-api-image",
     "node-roon-api-status": "github:roonlabs/node-roon-api-status",
     "node-roon-api-transport": "github:roonlabs/node-roon-api-transport",
-<<<<<<< HEAD
-    "socket.io": "^1.7.3"
-=======
     "socket.io": "^2.0.4"
->>>>>>> upstream/master
   },
   "repository": {
     "type": "git",
