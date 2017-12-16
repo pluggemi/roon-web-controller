@@ -5,12 +5,17 @@ body {
 }
 
 button {
-    outline:0;
+    outline: none;
     border: none;
 }
 
 button:focus {
-    outline:0;
+    outline: none;
+    border: none;
+}
+
+button:active {
+    outline: none;
     border: none;
 }
 
@@ -26,6 +31,7 @@ svg {
     font-weight: bold;
     border: none;
     border-radius: 10px;
+    -webkit-filter: drop-shadow(5px 5px 5px black);
     filter: drop-shadow(5px 5px 5px black);
     margin: 24px;
     background-color: #eff0f1;
@@ -88,6 +94,7 @@ svg {
     max-width: 95%;
     border-radius: 10px;
     padding: 5px;
+    -webkit-filter: drop-shadow(10px 10px 10px black);
     filter: drop-shadow(10px 10px 10px black);
     z-index:300;
 }
@@ -120,10 +127,19 @@ svg {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    -webkit-filter: opacity(33%) blur(20px);
     filter: opacity(33%) blur(20px);
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
     display: none;
+}
+@media screen and (orientation:portrait) {
+    .overlayContent {
+        width: 95%;
+    }
+}
+
+@media screen and (orientation:landscape) {
 }

@@ -275,7 +275,7 @@ function showIsPlaying(curZone) {
             .removeClass("buttonInactive");
         } else if (state.PlayPauseStop == "showStop") {
             $("#controlPlayPauseStop")
-            .attr("onclick", "goCmd(\'pause\', \'" + curZone.zone_id + "\')")
+            .attr("onclick", "goCmd(\'stop\', \'" + curZone.zone_id + "\')")
             .html(getSVG('stop'))
             .addClass("buttonAvailable")
             .removeClass("buttonInactive");
@@ -294,29 +294,29 @@ function showIsPlaying(curZone) {
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonAvailable")
+            .removeClass("buttonActive buttonInactive")
+            .addClass("buttonAvailable")
             .css("color", css.foregroundColor);
         } else if (state.Loop == "loop_one"){
             $("#buttonLoop")
             .html(getSVG('loopOne'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'disabled\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonActive")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
             .css("color", "#3daee9");
         } else if (state.Loop == "loop"){
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "changeZoneSetting(\'loop\', \'loop_one\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonActive")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonLoop")
             .html(getSVG('loop'))
             .attr("onclick", "")
-            .removeClass()
-            .addClass("buttonFillHeight buttonInactive")
+            .removeClass("buttonAvailable buttonActive")
+            .addClass("buttonInactive")
             .css("color", css.foregroundColor);
         }
     }
@@ -327,22 +327,22 @@ function showIsPlaying(curZone) {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'true\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonAvailable")
+            .removeClass("buttonActive buttonInactive")
+            .addClass("buttonAvailable")
             .css("color", css.foregroundColor);
         } else if (state.Shuffle === true) {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "changeZoneSetting(\'shuffle\', \'false\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonActive")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonShuffle")
             .html(getSVG('shuffle'))
             .attr("onclick", "")
-            .removeClass()
-            .addClass("buttonFillHeight buttonInactive")
+            .removeClass("buttonAvailable buttonActive")
+            .addClass("buttonInactive")
             .css("color", css.foregroundColor);
         }
     }
@@ -353,22 +353,22 @@ function showIsPlaying(curZone) {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'true\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonAvailable")
+            .removeClass("buttonActive buttonInactive")
+            .addClass("buttonAvailable")
             .css("color", css.foregroundColor);
         } else if (state.Radio === true) {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "changeZoneSetting(\'auto_radio\', \'false\', \'" + curZone.zone_id + "\')")
-            .removeClass()
-            .addClass("buttonFillHeight buttonActive")
+            .removeClass("buttonAvailable buttonInactive")
+            .addClass("buttonActive")
             .css("color", "#3daee9");
         } else {
             $("#buttonRadio")
             .html(getSVG('radio'))
             .attr("onclick", "")
-            .removeClass()
-            .addClass("buttonFillHeight buttonInactive")
+            .removeClass("buttonAvailable buttonActive")
+            .addClass("buttonInactive")
             .css("color", css.foregroundColor);
         }
     }
@@ -376,16 +376,28 @@ function showIsPlaying(curZone) {
     if (inVolumeSlider === false ) {
         $("#volumeList").html("");
         for (var x in curZone.outputs) {
+            if (x >= 1) { $("#volumeList").append("<hr>"); }
             if (curZone.outputs[x].volume) {
-                var type = curZone.outputs[x].volume.type;
+                var html = "<div class=\"textBold\">" + curZone.outputs[x].display_name + "</div>";
+                html += "<div>" + curZone.outputs[x].volume.value + "</div>";
 
-                $("#volumeList")
-                .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
-                .append("<span class=\"sliderGroup\"><span id=\"volumeValue" + x + "\" class=\"sliderValue\">" + curZone.outputs[x].volume.value + "</span><span class=\"sliderInput\"><input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/></span></span>");
+                html += "<div class=\"volumeGroup\">";
+                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\"";
+                html += "onclick=\"volumeButton(\'volumeValue" + x + "\', " + (curZone.outputs[x].volume.value - curZone.outputs[x].volume.step) + ", \'" + curZone.outputs[x].output_id + "\')\"";
+                html += ">"+ getSVG('volume-minus') + "</button>";
+                html += "<div class=\"volumeSlider\">";
+                html += "<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/>"
+                html += "</div>";
+                html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\"";
+                html += "onclick=\"volumeButton(\'volumeValue" + x + "\', " + (curZone.outputs[x].volume.value + curZone.outputs[x].volume.step) + ", \'" + curZone.outputs[x].output_id + "\')\"";
+                html += ">"+ getSVG('volume-plus') + "</button>";
+                html += "</div>";
+
+                $("#volumeList").append(html);
             } else {
                 $("#volumeList")
-                .append("<p class=\"overlayListLabel\">" + curZone.outputs[x].display_name + "</p>")
-                .append("<span class=\"sliderGroup\"><p>Fixed Volume</p></span>");
+                .append("<div class=\"textBold\">" + curZone.outputs[x].display_name + "</div>")
+                .append("<div>Fixed Volume</div>");
             }
         }
     }
@@ -417,13 +429,19 @@ function changeZoneSetting(zoneSetting, zoneSettingValue, zone_id) {
 //     }
 }
 
+function volumeButton(spanId, value, output_id) {
+    $("#" + spanId + "").html(value);
+
+    var msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
+    socket.emit("changeVolume", msg);
+}
+
 function volumeInput(spanId, value, output_id) {
     inVolumeSlider = true;
     $("#" + spanId + "").html(value);
 
    var msg = JSON.parse('{"output_id": "' + output_id + '", "volume": "' + value + '" }');
     socket.emit("changeVolume", msg);
-
 }
 
 function volumeChange(id, value, output_id) {
@@ -479,7 +497,7 @@ function readCookie(name){
 }
 
 function setCookie(name, value){
-    Cookies.set(name, value, { expires: 7 });
+    Cookies.set(name, value, { expires: 365 });
 }
 
 function secondsConvert(seconds) {
