@@ -135,3 +135,11 @@ svg {
     align-items: center;
     display: none;
 }
+@media screen and (orientation:portrait) {
+    .overlayContent {
+        width: 95%;
+    }
+}
+
+@media screen and (orientation:landscape) {
+}

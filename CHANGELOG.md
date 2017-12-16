@@ -15,6 +15,7 @@
 - Added "engine" field to package.json to specify the minimum required Node.js version
 - Added ability to run the script from any location - better compatibility with Roon Extension Manager
 - Updated package dependencies
+- Miscellaneous UI tweaks
 
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
