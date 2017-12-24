@@ -11,6 +11,18 @@ $(document).ready(function() {
 	fixFontSize();
 });
 
+function toggleNotifications(elem) {
+    if(settings.showNotifications) {
+        settings.showNotifications = false;
+        elem.value = "Notifiy OFF"
+    }
+    else {
+        settings.showNotifications = true;
+        elem.value = "Notifiy ON"
+    }
+    setCookie('settings[\'showNotifications\']', settings.showNotifications);
+}
+
 function notifyMe(three_line) {
 	// Let's check if the browser supports notifications
 	if (!("Notification" in window)) {
@@ -61,6 +73,14 @@ function showPage() {
 	settings.zoneID = readCookie('settings[\'zoneID\']');
 	settings.displayName = readCookie('settings[\'displayName\']');
 	settings.theme = readCookie('settings[\'theme\']');
+    settings.showNotifications = readCookie('settings[\'showNotifications\']');
+    
+    if(settings.showNotifications == undefined) {
+        settings.showNotifications = false;
+    }
+    else if(settings.showNotifications){
+        document.getElementById("notificationsButton").value = "Notify ON";
+    }
 
 	// Set page fields to settings
 	if (settings.zoneID === undefined) {
@@ -166,7 +186,9 @@ function showIsPlaying(curZone) {
     $("#isPlaying").show();
 
     if ( state.line1 != curZone.now_playing.three_line.line1) {
-    	notifyMe(curZone.now_playing.three_line);
+        if(settings.showNotifications) {
+          notifyMe(curZone.now_playing.three_line);
+        }
         state.line1 = curZone.now_playing.three_line.line1;
         fixFontSize();
         $("#line1")
