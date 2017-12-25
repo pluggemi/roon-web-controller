@@ -103,15 +103,20 @@
             <hr>
             <div class="overlayListRow">
                 <div class="textBold">Notifications</div>
-    <!--             <button type="button" id="notificationsButton" class="buttonOverlay" onclick="toggleNotifications()"></button> -->
-                <div><input type="checkbox" id="notificationsSwitch" onclick="toggleNotifications()"></input></div>
+                <div>
+<!--                     <input type="checkbox" class="settingsSwitch" id="notificationsSwitch" onclick="toggleNotifications()"></input> -->
+                    <label class="settingsSwitch">
+                        <input type="checkbox" id="notificationsSwitch" onclick="toggleNotifications()"></input>
+                        <span class="settingsSlider"></span>
+                    </label>
+                </div>
             </div>
             <hr>
-            <div class="overlayListRow">
+<!--            <div class="overlayListRow">
                 <div class="textBold">Use Circle Icons</div>
-                <div><input type="checkbox" id="circleIconsSwitch"></input></div>
+                <div><input type="checkbox" class="settingsSwitch" id="circleIconsSwitch"></input></div>
             </div>
-            <hr>
+            <hr>-->
         </div>
     </div>
 </div>

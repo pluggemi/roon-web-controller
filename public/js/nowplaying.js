@@ -17,17 +17,13 @@ function toggleNotifications() {
         $("#notificationsSwitch").prop("checked", true);
         settings.showNotifications = true;
         settings.showNotificationsChanged = true;
-
-
     } else {
-        $("#notificationsSwitch").prop("checked", false);
         // Triggered when the checked toggle has been unchecked
+        $("#notificationsSwitch").prop("checked", false);
         settings.showNotifications = false;
         settings.showNotificationsChanged = true;
     }
-
     setCookie('settings[\'showNotifications\']', settings.showNotifications);
-    console.log("settings.showNotifications: " + settings.showNotifications);
 }
 
 function notifyMe(three_line) {
@@ -84,11 +80,9 @@ function showPage() {
     let showNotifications = readCookie('settings[\'showNotifications\']');
     if (showNotifications === "true"){
         settings.showNotifications = true;
-//         $("#notificationsButton").html("On -mfp");
         $("#notificationsSwitch").prop("checked", true);
     } else {
         settings.showNotifications = false;
-//         $("#notificationsButton").html("Off -mfp");
         $("#notificationsSwitch").prop("checked", false);
     }
 
@@ -242,7 +236,6 @@ function showIsPlaying(curZone) {
     if ( settings.showNotificationsChanged === true) {
         if (settings.showNotifications === true) {
             notifyMe(curZone.now_playing.three_line);
-            console.log("show notification");
         };
         settings.showNotificationsChanged = false;
     }
