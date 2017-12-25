@@ -48,7 +48,7 @@ function notifyMe(three_line) {
         // If the user accepts, let's create a notification
             if (permission === "granted") {
                 var options = {
-                    body: three_line.line3,
+                    body: three_line.line2 + " - " + three_line.line3,
                     icon: "/roonapi/getImage?image_key=" + curZone.now_playing.image_key
                 }
                 var notification = new Notification(three_line.line1, options);
