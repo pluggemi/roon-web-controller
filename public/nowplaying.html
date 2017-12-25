@@ -45,8 +45,7 @@
 <div id="colorBackground"></div>
 <div id="notPlaying">
     <div class="messages">
-        <p>Nothing playing on
-        </p>
+        <p>Nothing playing on</p>
         <button type="button" class="buttonZoneName buttonActive messages" onclick="$('#overlayZoneList').show()">zoneList</button>
     </div>
 </div>
@@ -96,10 +95,23 @@
     <div class="overlayBackground" onclick="$('#overlaySettings').hide()"></div>
     <div class="overlayContent">
         <div class="overlayList">
-            <button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button>
-            <button type="button" class="buttonOverlay" onclick="setTheme('color')">Color</button>
-            <button type="button" class="buttonOverlay" onclick="setTheme('cover')">Cover</button>
-            <button type="button" id="notificationsButton" class="buttonOverlay" onclick="toggleNotifications()"></button>
+            <div class="overlayListRow">
+                <button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button>
+                <button type="button" class="buttonOverlay" onclick="setTheme('color')">Color</button>
+                <button type="button" class="buttonOverlay" onclick="setTheme('cover')">Cover</button>
+            </div>
+            <hr>
+            <div class="overlayListRow">
+                <div class="textBold">Notifications</div>
+    <!--             <button type="button" id="notificationsButton" class="buttonOverlay" onclick="toggleNotifications()"></button> -->
+                <div><input type="checkbox" id="notificationsSwitch" onclick="toggleNotifications()"></input></div>
+            </div>
+            <hr>
+            <div class="overlayListRow">
+                <div class="textBold">Use Circle Icons</div>
+                <div><input type="checkbox" id="circleIconsSwitch"></input></div>
+            </div>
+            <hr>
         </div>
     </div>
 </div>

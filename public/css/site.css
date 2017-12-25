@@ -101,9 +101,17 @@ svg {
 
 .overlayList {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlayListRow {
+    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
 }
 
 .textBold {
@@ -142,4 +150,8 @@ svg {
 }
 
 @media screen and (orientation:landscape) {
+}
+
+input[type=checkbox] {
+/*     display: none; */
 }

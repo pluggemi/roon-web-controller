@@ -12,15 +12,22 @@ $(document).ready(function() {
 });
 
 function toggleNotifications() {
-    if(settings.showNotifications) {
-        settings.showNotifications = false;
-        $("#notificationsButton").html("Off -mfp");
-    }
-    else {
+    if ($("#notificationsSwitch").is(":checked", false)) {
+        // Triggered when the unchecked toggle has been checked
+        $("#notificationsSwitch").prop("checked", true);
         settings.showNotifications = true;
-        $("#notificationsButton").html("On -mfp");
+        settings.showNotificationsChanged = true;
+
+
+    } else {
+        $("#notificationsSwitch").prop("checked", false);
+        // Triggered when the checked toggle has been unchecked
+        settings.showNotifications = false;
+        settings.showNotificationsChanged = true;
     }
+
     setCookie('settings[\'showNotifications\']', settings.showNotifications);
+    console.log("settings.showNotifications: " + settings.showNotifications);
 }
 
 function notifyMe(three_line) {
@@ -77,10 +84,12 @@ function showPage() {
     let showNotifications = readCookie('settings[\'showNotifications\']');
     if (showNotifications === "true"){
         settings.showNotifications = true;
-        $("#notificationsButton").html("On -mfp");
+//         $("#notificationsButton").html("On -mfp");
+        $("#notificationsSwitch").prop("checked", true);
     } else {
         settings.showNotifications = false;
-        $("#notificationsButton").html("Off -mfp");
+//         $("#notificationsButton").html("Off -mfp");
+        $("#notificationsSwitch").prop("checked", false);
     }
 
     // Set page fields to settings
@@ -222,12 +231,20 @@ function showIsPlaying(curZone) {
         });
     }
 
-    if (state.title != curZone.now_playing.one_line.line1) {
+    if ( state.title != curZone.now_playing.one_line.line1) {
         state.title = curZone.now_playing.one_line.line1;
         $(document).prop("title", curZone.now_playing.one_line.line1);
         if (settings.showNotifications === true) {
             notifyMe(curZone.now_playing.three_line);
         }
+    }
+
+    if ( settings.showNotificationsChanged === true) {
+        if (settings.showNotifications === true) {
+            notifyMe(curZone.now_playing.three_line);
+            console.log("show notification");
+        };
+        settings.showNotificationsChanged = false;
     }
 
     if ( curZone.is_seek_allowed === true ) {
