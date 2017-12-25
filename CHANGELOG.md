@@ -3,19 +3,7 @@
 ## Version 1.2.1
 
 ### New
-- Volume up and volume down buttons for more granular control of the volume
-
-### Misc bug fixes and behind the scenes
-- Extended cookie life 7 to 365 days
-- Corrected the click action for the stop button
-- Removed the unused "getIcon" web endpoint
-- Addressed bug where images in library did not scale correctly
-- Fixed button rendering issue with Firefox
-- Added browser specific CSS for opacity, blur, and drop shadow - needed for older Chromium builds
-- Added "engine" field to package.json to specify the minimum required Node.js version
-- Added ability to run the script from any location - better compatibility with Roon Extension Manager
-- Updated package dependencies
-- Miscellaneous UI tweaks
+- OS native song notifications thanks to initial code by [jcharr1](https://github.com/jcharr1)
 
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
@@ -29,6 +17,22 @@ On the Node.js server:
 
 ------------------
 # Release History
+## Version 1.2.1
+
+### New
+- Volume up and volume down buttons for more granular control of the volume
+
+### Misc bug fixes and behind the scenes
+- Extended cookie life 7 to 365 days
+- Corrected the click action for the stop button
+- Removed the unused "getIcon" web endpoint
+- Addressed bug where images in library did not scale correctly
+- Fixed button rendering issue with Firefox
+- Added browser specific CSS for opacity, blur, and drop shadow - needed for older Chromium builds
+- Added "engine" field to package.json to specify the minimum required Node.js version
+- Added ability to run the script from any location - better compatibility with Roon Extension Manager
+- Updated package dependencies
+- Miscellaneous UI tweaks
 
 ## Version 1.2.0
 
