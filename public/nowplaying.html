@@ -76,7 +76,7 @@
             <button type="button" class="buttonFillHeight settingsButton" id="buttonShuffle"></button>
             <button type="button" class="buttonFillHeight settingsButton" id="buttonRadio"></button>
             <button type="button" class="buttonFillHeight settingsButton buttonAvailable" id="buttonVolume" onclick="$('#overlayVolume').show()"></button>
-            <button type="button" class="buttonFillHeight settingsButton buttonAvailable" id="buttonTheme" onclick="$('#overlayTheme').show()"></button>
+            <button type="button" class="buttonFillHeight settingsButton buttonAvailable" id="buttonSettings" onclick="$('#overlaySettings').show()"></button>
         </div>
     </div>
 </div>
@@ -92,8 +92,8 @@
         <span id="zoneList" class="overlayList"></span>
     </div>
 </div>
-<div id="overlayTheme" class="overlay">
-    <div class="overlayBackground" onclick="$('#overlayTheme').hide()"></div>
+<div id="overlaySettings" class="overlay">
+    <div class="overlayBackground" onclick="$('#overlaySettings').hide()"></div>
     <div class="overlayContent">
         <div class="overlayList">
             <button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button>
