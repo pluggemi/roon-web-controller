@@ -1,6 +1,6 @@
 # Change Log
 
-## Version 1.2.1
+## Version 1.2.2
 
 ### New
 - OS native song notifications thanks to initial code by [jcharr1](https://github.com/jcharr1)
