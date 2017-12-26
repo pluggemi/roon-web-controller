@@ -43,6 +43,11 @@ svg {
     filter:none;
 }
 
+.buttonSettingActive {
+    background-color: #3daee9;
+    filter:none;
+}
+
 .buttonFillHeight {
     background-color: rgba(0,0,0,0);
     height: 100%;

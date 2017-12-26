@@ -554,6 +554,8 @@ function setTheme(theme) {
 
         $("#coverBackground").hide();
         $("#colorBackground").hide();
+        $("#buttonThemeDark").addClass("buttonSettingActive");
+        $("#buttonThemeColor, #buttonThemeCover").removeClass("buttonSettingActive");
     }
     else if (theme == "cover") {
         css.backgroundColor = "#232629";
@@ -562,11 +564,15 @@ function setTheme(theme) {
 
         $("#coverBackground").show();
         $("#colorBackground").hide();
+        $("#buttonThemeCover").addClass("buttonSettingActive");
+        $("#buttonThemeColor, #buttonThemeDark").removeClass("buttonSettingActive");
     }
     else if (theme == "color") {
         state.image_key = undefined;
         $("#coverBackground").hide();
         $("#colorBackground").show();
+        $("#buttonThemeColor").addClass("buttonSettingActive");
+        $("#buttonThemeDark, #buttonThemeCover").removeClass("buttonSettingActive");
     }
     else {
         settings.theme = undefined;
