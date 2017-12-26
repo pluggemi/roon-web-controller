@@ -60,10 +60,10 @@ function notifyMe(three_line) {
     // Otherwise, we need to ask the user for permission
     else if (Notification.permission !== "denied") {
         Notification.requestPermission(function (permission) {
-        // If the user accepts, let's create a notification
+            // If the user accepts, let's create a notification
             if (permission === "granted") {
                 var options = {
-                    body: three_line.line3,
+                    body: three_line.line2 + " - " + three_line.line3,
                     icon: "/roonapi/getImage?image_key=" + curZone.now_playing.image_key
                 }
                 var notification = new Notification(three_line.line1, options);
@@ -73,6 +73,7 @@ function notifyMe(three_line) {
 
     // At last, if the user has denied notifications, and you
     // want to be respectful there is no need to bother them any more.
+    console.log(notification);
 }
 
 function fixFontSize() {
