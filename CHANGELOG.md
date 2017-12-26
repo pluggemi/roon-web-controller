@@ -4,6 +4,8 @@
 
 ### New
 - OS native song notifications thanks to initial code by [jcharr1](https://github.com/jcharr1)
+- Added option to use circle icons (for Play, Pause and Stop only)
+- Added feedback on various overlays to show currently selected option
 
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.

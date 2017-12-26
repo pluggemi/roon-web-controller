@@ -13,6 +13,8 @@ This is an extension for the Roon music player that provides a web based remote.
 
 ## Version 1.2.2 new features
 - OS native song notifications thanks to initial code by [jcharr1](https://github.com/jcharr1)
+- Added option to use circle icons (for Play, Pause and Stop only)
+- Added feedback on various overlays to show currently selected option
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
