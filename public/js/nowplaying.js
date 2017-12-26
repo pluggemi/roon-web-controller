@@ -144,7 +144,8 @@ function enableSockets(){
 
         if (payload !== undefined) {
             for (var x in payload){
-                $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
+                $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay buttonZoneId\" id=\"button-" + payload[x].zone_id + "\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
+                console.log(payload[x].zone_id);
             }
         }
     });
@@ -154,6 +155,10 @@ function enableSockets(){
             for (var x in payload){
                 if (payload[x].zone_id == settings.zoneID) {
                     curZone = payload[x];
+                    // Set zone button to active
+                    $(".buttonZoneId").removeClass("buttonSettingActive");
+                    $("#button-" + settings.zoneID).addClass("buttonSettingActive");
+
                     updateZone(curZone);
                 } else {
                     curZone = undefined;
@@ -170,6 +175,10 @@ function selectZone(zone_id, display_name) {
     settings.displayName = display_name;
     setCookie('settings[\'displayName\']', settings.displayName);
     $(".buttonZoneName").html(settings.displayName);
+
+    // Set zone button to active
+    $(".buttonZoneId").removeClass("buttonSettingActive");
+    $("#button-" + settings.zoneID).addClass("buttonSettingActive");
 
     // Reset state on zone switch
     state = [];
