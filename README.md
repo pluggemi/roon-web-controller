@@ -1,4 +1,4 @@
-# Roon Web Controller 1.2.2
+# Roon Web Controller 1.2.3
 This is an extension for the Roon music player that provides a web based remote.
 
 ## New Feature Highlights
@@ -15,6 +15,9 @@ This is an extension for the Roon music player that provides a web based remote.
 - OS native song notifications thanks to initial code by [jcharr1](https://github.com/jcharr1)
 - Added option to use circle icons (for Play, Pause and Stop only)
 - Added feedback on various overlays to show currently selected option
+
+## Version 1.2.3 new features
+- Bug fixes, primarily in the Library view
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
