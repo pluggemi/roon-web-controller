@@ -1,5 +1,14 @@
 # Change Log
+## version TBD
 
+### New
+
+### Fixed bugs
+- Corrected button flow in the non-settings related overlays
+
+
+------------------
+# Release History
 ## Version 1.2.2
 
 ### New
@@ -17,8 +26,6 @@ On the Node.js server:
 1. Run `npm update`
 1. Start the extension `node .`
 
-------------------
-# Release History
 ## Version 1.2.1
 
 ### New
@@ -35,6 +42,16 @@ On the Node.js server:
 - Added ability to run the script from any location - better compatibility with Roon Extension Manager
 - Updated package dependencies
 - Miscellaneous UI tweaks
+
+### Upgrade Notes
+The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
+
+On the Node.js server:
+1. Stop the extension
+1. Run `git pull`
+1. Run `npm install`
+1. Run `npm update`
+1. Start the extension `node .`
 
 ## Version 1.2.0
 
