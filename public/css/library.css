@@ -38,7 +38,7 @@
     background-color: #4d4d4d;
     fill-opacity: 1;
     color: #eff0f1;
-    height: 48px;
+    min-height: 48px;
     width: 100%;
     -webkit-filter: drop-shadow(5px 5px 5px black);
     filter: drop-shadow(5px 5px 5px black);
@@ -137,6 +137,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 49%;
 }
 

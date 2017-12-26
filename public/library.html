@@ -36,7 +36,7 @@
             <button type="button" id="buttonBack" class="navButton"></button>
             <button type="button" id="buttonHome" class="navButton"></button>
             <button type="button" id="buttonRefresh" class="navButton"></button>
-            <button type="button" id="buttonZoneName" class="navButton textBold" onclick="$('#overlayZoneList').show()">zoneList</button>
+            <button type="button" class="navButton textBold buttonZoneName" onclick="$('#overlayZoneList').show()">zoneList</button>
         </div>
     </div>
     <div id="content">
@@ -59,7 +59,7 @@
     <div id="overlayZoneList" class="overlay">
         <div class="overlayBackground" onclick="$('#overlayZoneList').hide()"></div>
         <div class="overlayContent">
-            <span id="zoneList" class="overlayList"></span>
+            <span class="overlayList zoneList"></span>
         </div>
     </div>
 </body>

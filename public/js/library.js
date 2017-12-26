@@ -17,7 +17,7 @@ function showPage() {
     }
 
     if (settings.displayName !== null){
-        $("#buttonZoneName").html(settings.displayName);
+        $(".buttonZoneName").html(settings.displayName);
         if (settings.zoneID !== null) {
             goHome();
         }
@@ -28,12 +28,15 @@ function showPage() {
 
 function enableSockets() {
     socket.on("zoneList", function(payload) {
-        $("#zoneList").html("");
+        $(".zoneList").html("");
 
-        if (payload !== null) {
+        if (payload !== undefined) {
             for (var x in payload){
-                $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
+                $(".zoneList").append("<button type=\"button\" class=\"buttonOverlay buttonZoneId\" id=\"button-" + payload[x].zone_id + "\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
             }
+            // Set zone button to active
+            $(".buttonZoneId").removeClass("buttonSettingActive");
+            $("#button-" + settings.zoneID).addClass("buttonSettingActive");
         }
     });
 }
@@ -41,7 +44,11 @@ function enableSockets() {
 function selectZone(zone_id, display_name) {
     settings.zoneID = zone_id;
     settings.displayName = display_name;
-    $("#buttonZoneName").html(settings.displayName);
+    $(".buttonZoneName").html(settings.displayName);
+
+    // Set zone button to active
+    $(".buttonZoneId").removeClass("buttonSettingActive");
+    $("#button-" + settings.zoneID).addClass("buttonSettingActive");
     $("#overlayZoneList").hide();
     goHome(settings.zoneID);
 }

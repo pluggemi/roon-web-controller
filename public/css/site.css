@@ -111,8 +111,9 @@ svg {
 
 .overlayList {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -122,6 +123,12 @@ svg {
     justify-content: space-between;
     align-items: center;
     width: 85%;
+}
+
+.settingsList {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 
 .textBold {
