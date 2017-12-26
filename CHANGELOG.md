@@ -1,11 +1,13 @@
 # Change Log
-## version TBD
+## version 1.2.3
 
 ### New
 
 ### Fixed bugs
 - Corrected button flow in the non-settings related overlays
-
+- Added feedback to zonelist overlay in library to match nowplaying section
+- Fixed bug where title text was not centered in the library list
+- Fixed bug where very long text in library list would extend past the button size
 
 ------------------
 # Release History
