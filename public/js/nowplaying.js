@@ -11,6 +11,21 @@ $(document).ready(function() {
     fixFontSize();
 });
 
+function toggleCircleIcon() {
+    if ($("#circleIconsSwitch").is(":checked", false)) {
+        // Triggered when the unchecked toggle has been checked
+        $("#circleIconsSwitch").prop("checked", true);
+        settings.useCircleIcons = true;
+        state = [];
+    } else {
+        // Triggered when the checked toggle has been unchecked
+        $("#circleIconsSwitch").prop("checked", false);
+        settings.useCircleIcons = false;
+        state = [];
+    }
+        setCookie('settings[\'useCircleIcons\']', settings.useCircleIcons);
+}
+
 function toggleNotifications() {
     if ($("#notificationsSwitch").is(":checked", false)) {
         // Triggered when the unchecked toggle has been checked
@@ -84,6 +99,15 @@ function showPage() {
     } else {
         settings.showNotifications = false;
         $("#notificationsSwitch").prop("checked", false);
+    }
+
+    let useCircleIcons = readCookie('settings[\'useCircleIcons\']');
+    if (useCircleIcons === "true"){
+        settings.useCircleIcons = true;
+        $("#circleIconsSwitch").prop("checked", true);
+    } else {
+        settings.useCircleIcons = false;
+        $("#circleIconsSwitch").prop("checked", false);
     }
 
     // Set page fields to settings
@@ -579,6 +603,30 @@ function secondsConvert(seconds) {
 }
 
 function getSVG(cmd) {
+    if (settings.useCircleIcons === true) {
+        switch (cmd) {
+            case "play":
+                return "<svg viewBox=\"0 0 24 24\"><path d=\"M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z\" /></svg>";
+            case "pause":
+                return "<svg viewBox=\"0 0 24 24\"><path d=\"M13,16V8H15V16H13M9,16V8H11V16H9M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z\" /></svg>";
+            case "stop":
+                return "<svg viewBox=\"0 0 24 24\"><path d=\"M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M9,9V15H15V9\" /></svg>";
+            default:
+                break;
+        }
+    } else {
+        switch (cmd) {
+            case "play":
+                return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 7.99939,5.13684L 7.99939,19.1368L 18.9994,12.1368L 7.99939,5.13684 Z \"/></svg>";
+            case "pause":
+                return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 14,19L 18,19L 18,4.99999L 14,4.99999M 6,19L 10,19L 10,4.99999L 6,4.99999L 6,19 Z \"/></svg>";
+            case "stop":
+                return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 18,18L 6,18L 5.99988,6.00011L 18,5.99999L 18,18 Z \"/></svg>";
+            default:
+                break;
+        }
+    }
+
     switch (cmd) {
         case "loop":
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 17,17L 7,17L 7,14L 3,18L 7,22L 7,19L 19,19L 19,13L 17,13M 7,7L 17,7L 17,10L 21,6L 17,2L 17,5L 5,5L 5,11L 7,11L 7,7 Z \"/></svg>";
@@ -592,12 +640,6 @@ function getSVG(cmd) {
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 6,17.9997L 6,5.99972L 8,5.99972L 8,17.9997L 6,17.9997 Z M 9.5,12L 18,6L 18,18L 9.5,12 Z \"/></svg>";
         case "next":
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 16,18L 18,18L 18,5.99999L 16,5.99999M 6,18L 14.5,12L 6,5.99999L 6,18 Z \"/></svg>";
-        case "play":
-            return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 7.99939,5.13684L 7.99939,19.1368L 18.9994,12.1368L 7.99939,5.13684 Z \"/></svg>";
-        case "pause":
-            return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 14,19L 18,19L 18,4.99999L 14,4.99999M 6,19L 10,19L 10,4.99999L 6,4.99999L 6,19 Z \"/></svg>";
-        case "stop":
-            return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 18,18L 6,18L 5.99988,6.00011L 18,5.99999L 18,18 Z \"/></svg>";
         case "volume":
             return "<svg viewBox=\"0 0 24.00 24.00\"><path d=\"M 3,9.00002L 6.99998,9.00004L 12,4.00002L 12,20L 6.99998,15L 2.99998,15L 3,9.00002 Z M 20.9999,12.0001C 20.9999,16.2832 18.008,19.8676 14,20.777L 14,18.7102C 16.8914,17.8496 18.9999,15.1711 18.9999,12.0001C 18.9999,8.8291 16.8914,6.15058 14,5.29L 14,3.22307C 18.008,4.13255 20.9999,7.71688 20.9999,12.0001 Z M 17,12C 17,14.0503 15.7659,15.8124 14,16.584L 14,7.41605C 15.7659,8.1876 17,9.94968 17,12 Z \"/></svg>";
         case "volume-minus":

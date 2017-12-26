@@ -48,6 +48,11 @@ svg {
     height: 100%;
 }
 
+.buttonPartialHeight {
+    background-color: rgba(0,0,0,0);
+    height: 75%;
+}
+
 .fullscreenFlex {
     position: absolute;
     top: 0px;

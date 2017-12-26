@@ -56,9 +56,9 @@
         <div id="line2" class="colorChange lineMusicInfo">&nbsp;</div>
         <div id="line3" class="colorChange lineMusicInfo">&nbsp;</div>
         <div id="controlsPlayer">
-            <button type="button" id="controlPrev" class="buttonFillHeight playerButton"></button>
+            <button type="button" id="controlPrev" class="buttonPartialHeight playerButton"></button>
             <button type="button" id="controlPlayPauseStop" class="buttonFillHeight playerButton"></button>
-            <button type="button" id="controlNext" class="buttonFillHeight playerButton"></button>
+            <button type="button" id="controlNext" class="buttonPartialHeight playerButton"></button>
         </div>
         <div id="containerTrackSeek">
             <div id="trackSeek">
@@ -104,7 +104,6 @@
             <div class="overlayListRow">
                 <div class="textBold">Notifications</div>
                 <div>
-<!--                     <input type="checkbox" class="settingsSwitch" id="notificationsSwitch" onclick="toggleNotifications()"></input> -->
                     <label class="settingsSwitch">
                         <input type="checkbox" id="notificationsSwitch" onclick="toggleNotifications()"></input>
                         <span class="settingsSlider"></span>
@@ -112,11 +111,14 @@
                 </div>
             </div>
             <hr>
-<!--            <div class="overlayListRow">
+            <div class="overlayListRow">
                 <div class="textBold">Use Circle Icons</div>
-                <div><input type="checkbox" class="settingsSwitch" id="circleIconsSwitch"></input></div>
+                        <label class="settingsSwitch">
+                        <input type="checkbox" id="circleIconsSwitch" onclick="toggleCircleIcon()"></input>
+                        <span class="settingsSlider"></span>
+                    </label>
             </div>
-            <hr>-->
+            <hr>
         </div>
     </div>
 </div>
