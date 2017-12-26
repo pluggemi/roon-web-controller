@@ -489,7 +489,7 @@ function showIsPlaying(curZone) {
                 html += "onclick=\"volumeButton(\'volumeValue" + x + "\', " + (curZone.outputs[x].volume.value - curZone.outputs[x].volume.step) + ", \'" + curZone.outputs[x].output_id + "\')\"";
                 html += ">"+ getSVG('volume-minus') + "</button>";
                 html += "<div class=\"volumeSlider\">";
-                html += "<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\"/>"
+                html += "<input type=\"range\" min=\"" + curZone.outputs[x].volume.min + "\"  max=\"" + curZone.outputs[x].volume.max +  "\" step=\"" + curZone.outputs[x].volume.step + "\" value=\"" + curZone.outputs[x].volume.value + "\" oninput=\"volumeInput(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\" onchange=\"volumeChange(\'volumeValue" + x + "\', this.value, \'" + curZone.outputs[x].output_id + "\')\">"
                 html += "</div>";
                 html += "<button type=\"button\" class=\"buttonFillHeight volumeButton\"";
                 html += "onclick=\"volumeButton(\'volumeValue" + x + "\', " + (curZone.outputs[x].volume.value + curZone.outputs[x].volume.step) + ", \'" + curZone.outputs[x].output_id + "\')\"";
