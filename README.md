@@ -1,4 +1,4 @@
-# Roon Web Controller 1.2.1
+# Roon Web Controller 1.2.2
 This is an extension for the Roon music player that provides a web based remote.
 
 ## New Feature Highlights
