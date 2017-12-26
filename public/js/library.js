@@ -28,11 +28,11 @@ function showPage() {
 
 function enableSockets() {
     socket.on("zoneList", function(payload) {
-        $("#zoneList").html("");
+        $(".zoneList").html("");
 
         if (payload !== null) {
             for (var x in payload){
-                $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
+                $(".zoneList").append("<button type=\"button\" class=\"buttonOverlay\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
             }
         }
     });
