@@ -1,5 +1,24 @@
 # Change Log
 
+## Version 1.2.2
+
+### New
+- OS native song notifications thanks to initial code by [jcharr1](https://github.com/jcharr1)
+- Added option to use circle icons (for Play, Pause and Stop only)
+- Added feedback on various overlays to show currently selected option
+
+### Upgrade Notes
+The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
+
+On the Node.js server:
+1. Stop the extension
+1. Run `git pull`
+1. Run `npm install`
+1. Run `npm update`
+1. Start the extension `node .`
+
+------------------
+# Release History
 ## Version 1.2.1
 
 ### New
@@ -16,19 +35,6 @@
 - Added ability to run the script from any location - better compatibility with Roon Extension Manager
 - Updated package dependencies
 - Miscellaneous UI tweaks
-
-### Upgrade Notes
-The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
-
-On the Node.js server:
-1. Stop the extension
-1. Run `git pull`
-1. Run `npm install`
-1. Run `npm update`
-1. Start the extension `node .`
-
-------------------
-# Release History
 
 ## Version 1.2.0
 

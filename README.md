@@ -11,6 +11,11 @@ This is an extension for the Roon music player that provides a web based remote.
 - Volume up and volume down buttons for more granular control of the volume
 - Lots of bug fixes
 
+## Version 1.2.2 new features
+- OS native song notifications thanks to initial code by [jcharr1](https://github.com/jcharr1)
+- Added option to use circle icons (for Play, Pause and Stop only)
+- Added feedback on various overlays to show currently selected option
+
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
 ### Upgrade notes
@@ -148,6 +153,8 @@ In addition to those packages installed via npm, this project uses:
 * [Color Thief](https://github.com/lokesh/color-thief) to calculate the dominant color of the album art
 
 Thanks go to [st0g1e](https://github.com/st0g1e) for doing one of the first [web clients](https://github.com/st0g1e/roon-extension-ws-player) for the Roon API.
+
+Thanks go to [jcharr1](https://github.com/jcharr1) for suggesting and doing the initial implementation of OS native song notifications.
 
 And of course thanks go to [Roon Labs](https://roonlabs.com/) for making the music player and the [APIs](https://github.com/RoonLabs).
 

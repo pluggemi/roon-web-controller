@@ -1,6 +1,6 @@
 {
   "name": "roon-web-controller",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Roon Extension to create a web controller.",
   "main": "app.js",
   "author": "Mike Plugge",
@@ -27,5 +27,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/pluggemi/roon-web-controller.git"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0"
   }
 }

@@ -45,8 +45,7 @@
 <div id="colorBackground"></div>
 <div id="notPlaying">
     <div class="messages">
-        <p>Nothing playing on
-        </p>
+        <p>Nothing playing on</p>
         <button type="button" class="buttonZoneName buttonActive messages" onclick="$('#overlayZoneList').show()">zoneList</button>
     </div>
 </div>
@@ -57,9 +56,9 @@
         <div id="line2" class="colorChange lineMusicInfo">&nbsp;</div>
         <div id="line3" class="colorChange lineMusicInfo">&nbsp;</div>
         <div id="controlsPlayer">
-            <button type="button" id="controlPrev" class="buttonFillHeight playerButton"></button>
+            <button type="button" id="controlPrev" class="buttonPartialHeight playerButton"></button>
             <button type="button" id="controlPlayPauseStop" class="buttonFillHeight playerButton"></button>
-            <button type="button" id="controlNext" class="buttonFillHeight playerButton"></button>
+            <button type="button" id="controlNext" class="buttonPartialHeight playerButton"></button>
         </div>
         <div id="containerTrackSeek">
             <div id="trackSeek">
@@ -76,7 +75,7 @@
             <button type="button" class="buttonFillHeight settingsButton" id="buttonShuffle"></button>
             <button type="button" class="buttonFillHeight settingsButton" id="buttonRadio"></button>
             <button type="button" class="buttonFillHeight settingsButton buttonAvailable" id="buttonVolume" onclick="$('#overlayVolume').show()"></button>
-            <button type="button" class="buttonFillHeight settingsButton buttonAvailable" id="buttonTheme" onclick="$('#overlayTheme').show()"></button>
+            <button type="button" class="buttonFillHeight settingsButton buttonAvailable" id="buttonSettings" onclick="$('#overlaySettings').show()"></button>
         </div>
     </div>
 </div>
@@ -92,13 +91,36 @@
         <span id="zoneList" class="overlayList"></span>
     </div>
 </div>
-<div id="overlayTheme" class="overlay">
-    <div class="overlayBackground" onclick="$('#overlayTheme').hide()"></div>
+<div id="overlaySettings" class="overlay">
+    <div class="overlayBackground" onclick="$('#overlaySettings').hide()"></div>
     <div class="overlayContent">
         <div class="overlayList">
-            <button type="button" class="buttonOverlay" onclick="setTheme('dark')">Dark</button>
-            <button type="button" class="buttonOverlay" onclick="setTheme('color')">Color</button>
-            <button type="button" class="buttonOverlay" onclick="setTheme('cover')">Cover</button>
+            <div class="overlayListRow">
+                <button type="button" class="buttonOverlay" id="buttonThemeDark" onclick="setTheme('dark')">Dark</button>
+                <button type="button" class="buttonOverlay" id="buttonThemeColor" onclick="setTheme('color')">Color</button>
+                <button type="button" class="buttonOverlay" id="buttonThemeCover" onclick="setTheme('cover')">Cover</button>
+            </div>
+            <hr>
+            <div class="overlayListRow">
+                <div class="textBold">Notifications</div>
+                <div>
+                    <label class="settingsSwitch">
+                        <input type="checkbox" id="notificationsSwitch" onclick="toggleNotifications()">
+                        <span class="settingsSlider"></span>
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <div class="overlayListRow">
+                <div class="textBold">Use Circle Icons</div>
+                <div>
+                    <label class="settingsSwitch">
+                        <input type="checkbox" id="circleIconsSwitch" onclick="toggleCircleIcon()">
+                        <span class="settingsSlider"></span>
+                    </label>
+                </div>
+            </div>
+            <hr>
         </div>
     </div>
 </div>
