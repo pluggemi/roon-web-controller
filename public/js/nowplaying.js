@@ -145,7 +145,6 @@ function enableSockets(){
         if (payload !== undefined) {
             for (var x in payload){
                 $("#zoneList").append("<button type=\"button\" class=\"buttonOverlay buttonZoneId\" id=\"button-" + payload[x].zone_id + "\" onclick=\"selectZone(\'" + payload[x].zone_id + "\', \'" + payload[x].display_name + "\')\">" + payload[x].display_name + "</button>");
-                console.log(payload[x].zone_id);
             }
         }
     });
@@ -587,7 +586,7 @@ function setTheme(theme) {
         settings.theme = undefined;
         setTheme(settings.theme);
     }
-
+    state = [];
     socket.emit("getZone", true);
 }
 
