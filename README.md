@@ -148,6 +148,15 @@ You can monitor the output of this application using ```journalctl```.
 * To show the application output: ```sudo journalctl -u roon-web-controller```
 * To follow the application output: ```sudo journalctl -f -u roon-web-controller```
 
+**NOTE:**
+Some Linux distributions - including [DietPi](http://dietpi.com/) and Software Collections (addon repository for Red Hat, Centos, and Fedora) - install the Node.js binaries in a different location.  You can find the executable by running `which node`. Adjust the `ExecStart` line accordingly.
+
+Here is a list of common locations:
+* `/usr/bin/node`
+* `/usr/local/bin/node`
+* `/opt/rh/rh-nodejs6/root/usr/bin/node`
+* `/opt/rh/rh-nodejs8/root/usr/bin/node`
+
 ## Credits
 In addition to those packages installed via npm, this project uses:
 * [jquery.simplemarquee.js](https://github.com/IndigoUnited/jquery.simplemarquee) to automatically scroll the long text
@@ -162,11 +171,26 @@ Thanks go to [jcharr1](https://github.com/jcharr1) for suggesting and doing the 
 And of course thanks go to [Roon Labs](https://roonlabs.com/) for making the music player and the [APIs](https://github.com/RoonLabs).
 
 ## License
-The MIT License
-Copyright 2017 Mike Plugge
+The MIT License (MIT)
+=====================
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Copyright (c) 2017 Mike Plugge
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
