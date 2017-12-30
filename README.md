@@ -149,7 +149,7 @@ You can monitor the output of this application using ```journalctl```.
 * To follow the application output: ```sudo journalctl -f -u roon-web-controller```
 
 **NOTE:**
-Some Linux distributions - including [DietPi](http://dietpi.com/) and Software Collections (addon repository for Red Hat, Centos, and Fedora) - install the Node.js binaries in a different location.  You can find the executable by running `which node`. Adjust the `ExecStart` line accordingly.
+Some Linux distributions - including [DietPi](http://dietpi.com/) and [Software Collections](http://www.softwarecollections.org/) (addon repository for Red Hat, Centos, and Fedora) - install the Node.js binaries in a different location.  You can find the executable by running `which node`. Adjust the `ExecStart` line accordingly.
 
 Here is a list of common locations:
 * `/usr/bin/node`
