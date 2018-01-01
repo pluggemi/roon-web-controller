@@ -326,6 +326,15 @@ app.get('/roonapi/getImage', function(req, res){
     });
 });
 
+app.get('/roonapi/getOriginalImage', function(req, res){
+    core.services.RoonApiImage.get_image(req.query.image_key, {"format": "image/jpeg"}, function(cb, contentType, body) {
+        res.contentType = contentType;
+
+        res.writeHead(200, {'Content-Type': 'image/jpeg' });
+        res.end(body, 'binary');
+    });
+});
+
 app.post('/roonapi/goRefreshBrowse', function(req, res){
     refresh_browse(req.body.zone_id, req.body.options, function(payload){
         res.send({"data": payload});
