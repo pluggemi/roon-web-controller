@@ -93,7 +93,7 @@ var roon = new RoonApi({
     display_name:        "Web Controller",
     display_version:     "1.2.4",
     publisher:           'Mike Plugge',
-    log_level:           'none',
+    //log_level:           'none',
     email:               'masked',
     website:             'https://github.com/pluggemi/roon-web-controller',
 
