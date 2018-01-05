@@ -93,7 +93,7 @@ function showPage() {
     settings.displayName = readCookie('settings[\'displayName\']');
     settings.theme = readCookie('settings[\'theme\']');
 
-    let showNotifications = readCookie('settings[\'showNotifications\']');
+    var showNotifications = readCookie('settings[\'showNotifications\']');
     if (showNotifications === "true"){
         settings.showNotifications = true;
         $("#notificationsSwitch").prop("checked", true);
@@ -102,7 +102,7 @@ function showPage() {
         $("#notificationsSwitch").prop("checked", false);
     }
 
-    let useCircleIcons = readCookie('settings[\'useCircleIcons\']');
+    var useCircleIcons = readCookie('settings[\'useCircleIcons\']');
     if (useCircleIcons === "true"){
         settings.useCircleIcons = true;
         $("#circleIconsSwitch").prop("checked", true);

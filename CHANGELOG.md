@@ -1,4 +1,14 @@
 # Change Log
+
+## version 1.2.4
+
+### New
+
+### Fixed bugs
+- Fixed compatibility issue with older versions of IOS Safari.
+
+------------------
+
 ## version 1.2.3
 
 ### New
@@ -9,7 +19,6 @@
 - Fixed bug where title text was not centered in the library list
 - Fixed bug where very long text in library list would extend past the button size
 
-------------------
 # Release History
 ## Version 1.2.2
 

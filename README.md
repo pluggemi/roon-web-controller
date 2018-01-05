@@ -21,6 +21,11 @@ This is an extension for the Roon music player that provides a web based remote.
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
+## version 1.2.4 new features
+
+### Fixed bugs
+- Fixed compatibility issue with older versions of IOS Safari.
+
 ### Upgrade notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
 
