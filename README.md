@@ -1,4 +1,4 @@
-# Roon Web Controller 1.2.3
+# Roon Web Controller 1.2.4
 This is an extension for the Roon music player that provides a web based remote.
 
 ## New Feature Highlights
@@ -22,6 +22,7 @@ This is an extension for the Roon music player that provides a web based remote.
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
 ## version 1.2.4 new features
+- Added option for 4K cover images on the Now Playing screen. (Settings -> Use 4k Images)
 
 ### Fixed bugs
 - Fixed compatibility issue with older versions of IOS Safari.

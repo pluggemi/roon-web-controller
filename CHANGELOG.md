@@ -3,6 +3,7 @@
 ## version 1.2.4
 
 ### New
+- Added option for 4K cover images on the Now Playing screen. (Settings -> Use 4k Images)
 
 ### Fixed bugs
 - Fixed compatibility issue with older versions of IOS Safari.
