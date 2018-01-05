@@ -1,6 +1,6 @@
 {
   "name": "roon-web-controller",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Roon Extension to create a web controller.",
   "main": "app.js",
   "author": "Mike Plugge",
@@ -10,13 +10,13 @@
     "node": ">=6.x"
   },
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "command-line-args": "^4.0.6",
-    "command-line-usage": "^4.0.0",
-    "config": "^1.26.1",
+    "body-parser": "^1.18.2",
+    "command-line-args": "^4.0.7",
+    "command-line-usage": "^4.0.2",
+    "config": "^1.29.0",
     "express": "4.x",
     "jquery": "^3.2.1",
-    "js-cookie": "^2.1.4",
+    "js-cookie": "^2.2.0",
     "node-roon-api": "github:roonlabs/node-roon-api",
     "node-roon-api-browse": "github:roonlabs/node-roon-api-browse",
     "node-roon-api-image": "github:roonlabs/node-roon-api-image",
@@ -27,8 +27,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/pluggemi/roon-web-controller.git"
-  },
-  "devDependencies": {
-    "webpack": "^3.10.0"
   }
 }

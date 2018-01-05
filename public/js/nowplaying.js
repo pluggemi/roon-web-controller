@@ -26,6 +26,21 @@ function toggleCircleIcon() {
         setCookie('settings[\'useCircleIcons\']', settings.useCircleIcons);
 }
 
+function toggle4kImages() {
+    if ($("#4kImagesSwitch").is(":checked", false)) {
+        // Triggered when the unchecked toggle has been checked
+        $("#4kImagesSwitch").prop("checked", true);
+        settings.use4kImages = true;
+        state = [];
+    } else {
+        // Triggered when the checked toggle has been unchecked
+        $("#4kImagesSwitch").prop("checked", false);
+        settings.use4kImages = false;
+        state = [];
+    }
+    setCookie('settings[\'use4kImages\']', settings.use4kImages);
+}
+
 function toggleNotifications() {
     if ($("#notificationsSwitch").is(":checked", false)) {
         // Triggered when the unchecked toggle has been checked
@@ -93,7 +108,7 @@ function showPage() {
     settings.displayName = readCookie('settings[\'displayName\']');
     settings.theme = readCookie('settings[\'theme\']');
 
-    let showNotifications = readCookie('settings[\'showNotifications\']');
+    var showNotifications = readCookie('settings[\'showNotifications\']');
     if (showNotifications === "true"){
         settings.showNotifications = true;
         $("#notificationsSwitch").prop("checked", true);
@@ -102,13 +117,22 @@ function showPage() {
         $("#notificationsSwitch").prop("checked", false);
     }
 
-    let useCircleIcons = readCookie('settings[\'useCircleIcons\']');
+    var useCircleIcons = readCookie('settings[\'useCircleIcons\']');
     if (useCircleIcons === "true"){
         settings.useCircleIcons = true;
         $("#circleIconsSwitch").prop("checked", true);
     } else {
         settings.useCircleIcons = false;
         $("#circleIconsSwitch").prop("checked", false);
+    }
+
+    var use4kImages = readCookie('settings[\'use4kImages\']');
+    if (use4kImages === "true"){
+        settings.use4kImages = true;
+        $("#4kImagesSwitch").prop("checked", true);
+    } else {
+        settings.use4kImages = false;
+        $("#4kImagesSwitch").prop("checked", false);
     }
 
     // Set page fields to settings
@@ -289,7 +313,13 @@ function showIsPlaying(curZone) {
         if ( curZone.now_playing.image_key === undefined ) {
             state.imgUrl = "/img/transparent.png";
         } else {
-            state.imgUrl = "/roonapi/getImage?image_key=" + curZone.now_playing.image_key;
+            if (settings.use4kImages === true ) {
+                state.imgUrl = "/roonapi/getImage4k?image_key=" + curZone.now_playing.image_key;
+                state.CTimgUrl = "/roonapi/getImage?image_key=" + curZone.now_playing.image_key;
+            } else {
+                state.imgUrl = "/roonapi/getImage?image_key=" + curZone.now_playing.image_key;
+                state.CTimgUrl = "/roonapi/getImage?image_key=" + curZone.now_playing.image_key;
+            }
         }
         $("#containerCoverImage").html("<img src=\"" + state.imgUrl + "\" class=\"itemImage\">");
         $("#coverBackground").css("background-image", "url(" + state.imgUrl + ")");
@@ -297,7 +327,7 @@ function showIsPlaying(curZone) {
         if (settings.theme == "color"){
             var colorThief = new ColorThief();
 
-            colorThief.getColorAsync(state.imgUrl, function(color){
+            colorThief.getColorAsync(state.CTimgUrl, function(color){
                 var r = color[0];
                 var g = color[1];
                 var b = color[2];

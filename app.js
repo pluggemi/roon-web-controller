@@ -91,9 +91,9 @@ var RoonApiBrowse    = require("node-roon-api-browse");
 var roon = new RoonApi({
     extension_id:        'com.pluggemi.web.controller',
     display_name:        "Web Controller",
-    display_version:     "1.2.3",
+    display_version:     "1.2.4",
     publisher:           'Mike Plugge',
-//     log_level:           'none',
+    log_level:           'none',
     email:               'masked',
     website:             'https://github.com/pluggemi/roon-web-controller',
 
@@ -318,7 +318,16 @@ app.get('/', function(req, res){
 });
 
 app.get('/roonapi/getImage', function(req, res){
-    core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 1000, "height": 1000, "format": "image/jpeg"}, function(cb, contentType, body) {
+    core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 1080, "height": 1080, "format": "image/jpeg"}, function(cb, contentType, body) {
+        res.contentType = contentType;
+
+        res.writeHead(200, {'Content-Type': 'image/jpeg' });
+        res.end(body, 'binary');
+    });
+});
+
+app.get('/roonapi/getImage4k', function(req, res){
+    core.services.RoonApiImage.get_image(req.query.image_key, {"scale": "fit", "width": 2160, "height": 2160, "format": "image/jpeg"}, function(cb, contentType, body) {
         res.contentType = contentType;
 
         res.writeHead(200, {'Content-Type': 'image/jpeg' });
