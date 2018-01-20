@@ -1,5 +1,6 @@
 "use strict";
 var socket = io();
+var noSleep = new NoSleep();
 var curZone;
 var css = [];
 var settings = [];
@@ -39,6 +40,21 @@ function toggle4kImages() {
         state = [];
     }
     setCookie('settings[\'use4kImages\']', settings.use4kImages);
+}
+
+function toggleScreensaver() {
+    if ($("#screensaverSwitch").is(":checked", false)) {
+        // Triggered when the unchecked toggle has been checked
+        $("#screensaverSwitch").prop("checked", true);
+        settings.screensaverDisable = true;
+        state = [];
+    } else {
+        // Triggered when the checked toggle has been unchecked
+        $("#screensaverSwitch").prop("checked", false);
+        settings.screensaverDisable = false;
+        state = [];
+    }
+    setCookie('settings[\'screensaverDisable\']', settings.screensaverDisable);
 }
 
 function toggleNotifications() {
@@ -133,6 +149,15 @@ function showPage() {
     } else {
         settings.use4kImages = false;
         $("#4kImagesSwitch").prop("checked", false);
+    }
+
+    var screensaverDisable = readCookie('settings[\'screensaverDisable\']');
+    if (screensaverDisable === "true"){
+        settings.screensaverDisable = true;
+        $("#screensaverSwitch").prop("checked", true);
+    } else {
+        settings.screensaverDisable = false;
+        $("#screensaverSwitch").prop("checked", false);
     }
 
     // Set page fields to settings
@@ -238,6 +263,9 @@ function showNotPlaying() {
     // Reset pictures
     $("#containerCoverImage").html("<img src=\"/img/transparent.png\" class=\"itemImage\">");
     $("#coverBackground").css("background-image", "url(\'/img/transparent.png\')");
+
+    // Turn off screensaverDisable
+    noSleep.disable();
 
     // Reset state and browser title
     state = [];
@@ -385,11 +413,27 @@ function showIsPlaying(curZone) {
 
     if ( curZone.is_play_allowed === true ) {
         state.PlayPauseStop = "showPlay";
+        noSleep.disable();
     } else if ( curZone.state == "playing" && curZone.is_play_allowed === false ) {
-        if ( curZone.is_pause_allowed === true ) { state.PlayPauseStop = "showPause"; }
-        else { state.PlayPauseStop = "showStop"; }
+        if ( curZone.is_pause_allowed === true ) {
+            state.PlayPauseStop = "showPause";
+            if ( settings.screensaverDisable === true ){
+                noSleep.enable();
+            } else {
+                noSleep.disable();
+            }
+        }
+        else {
+            state.PlayPauseStop = "showStop";
+            if ( settings.screensaverDisable === true ){
+                noSleep.enable();
+            } else {
+                noSleep.disable();
+            }
+        }
     } else {
         state.PlayPauseStop = "showPlayDisabled";
+        noSleep.disable();
     }
 
     if (state.PlayPauseStopLast != state.PlayPauseStop || state.PlayPauseStop === undefined) {

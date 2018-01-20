@@ -1,44 +1,23 @@
-# Roon Web Controller 1.2.5
+# Roon Web Controller 1.2.6
 This is an extension for the Roon music player that provides a web based remote.
 
-## New Feature Highlights
-- Library Browser
-- Search (Library -> Search)
-- Added theme button to "Now Playing" screen
-- Split "Now Playing" and "Library" into a standalone pages to allow for custom layouts (example side-by-side layout provided, http://localhost:8080/side-by-side.html)
-
-## Version 1.2.1 new features
-- Volume up and volume down buttons for more granular control of the volume
-- Lots of bug fixes
-
-## Version 1.2.2 new features
-- OS native song notifications thanks to initial code by [jcharr1](https://github.com/jcharr1)
-- Added option to use circle icons (for Play, Pause and Stop only)
-- Added feedback on various overlays to show currently selected option
-
-## Version 1.2.3 new features
-- Bug fixes, primarily in the Library view
-
-## Version 1.2.4 new features
-- Added option for 4K cover images on the Now Playing screen. (Settings -> Use 4k Images)
-
-### Fixed bugs
-- Fixed compatibility issue with older versions of IOS Safari.
-
-## Version 1.2.5 new features
-- Version bump for NPM registration
+## New features
+- Added option to disable the screensaver or sleep mode when a song is playing. The screensaver or sleep mode is allowed when a track is paused or stopped.
+    - Known limitation - the app will not wake up a screen that is already sleeping when playback is started from another app.
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
 ### Upgrade notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
 
-On the Node server:
+If you followed the [Diet Pi installation](https://github.com/pluggemi/roon-web-controller/wiki/Diet-Pi-Installation) guide, follow these [update instructions](https://github.com/pluggemi/roon-web-controller/wiki/Diet-Pi-Installation#updating-the-web-controller-software)
+
+Otherwise, on the Node.js server:
 1. Stop the extension
 1. Run `git pull`
 1. Run `npm install`
 1. Run `npm update`
-1. Start the extension `node .`
+1. Start the extension
 
 ## Screenshots
 

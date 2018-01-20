@@ -29,6 +29,7 @@
     <script src="/js/color-thief.js"></script>
     <script src="/js-cookie/js.cookie.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/NoSleep.min.js"></script>
     <script src="/js/nowplaying.js"></script>
     <script>
     $( window ).on( "orientationchange", function( event ) {
@@ -126,6 +127,16 @@
                 <div>
                     <label class="settingsSwitch">
                         <input type="checkbox" id="4kImagesSwitch" onclick="toggle4kImages()">
+                        <span class="settingsSlider"></span>
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <div class="overlayListRow">
+                <div class="textBold">Disable screensaver while playing</div>
+                <div>
+                    <label class="settingsSwitch">
+                        <input type="checkbox" id="screensaverSwitch" onclick="toggleScreensaver()">
                         <span class="settingsSlider"></span>
                     </label>
                 </div>
