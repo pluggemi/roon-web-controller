@@ -8,7 +8,7 @@
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
 
-If you followed my [Diet Pi installation](https://github.com/pluggemi/roon-web-controller/wiki/Diet-Pi-Installation) guide, follow these [update instructions](https://github.com/pluggemi/roon-web-controller/wiki/Diet-Pi-Installation#updating-the-web-controller-software)
+If you followed the [Diet Pi installation](https://github.com/pluggemi/roon-web-controller/wiki/Diet-Pi-Installation) guide, follow these [update instructions](https://github.com/pluggemi/roon-web-controller/wiki/Diet-Pi-Installation#updating-the-web-controller-software)
 
 Otherwise, on the Node.js server:
 1. Stop the extension
