@@ -1,6 +1,28 @@
 # Change Log
 
-## version 1.2.4
+## Version 1.2.6
+### New
+- Added option to disable the screensaver or sleep mode when a song is playing. The screensaver or sleep mode is allowed when a track is paused or stopped.
+    - Known limitation - the app will not wake up a screen that is already sleeping when playback is started from another app.
+
+### Upgrade Notes
+The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
+
+If you followed my [Diet Pi installation](https://github.com/pluggemi/roon-web-controller/wiki/Diet-Pi-Installation) guide, follow these [update instructions](https://github.com/pluggemi/roon-web-controller/wiki/Diet-Pi-Installation#updating-the-web-controller-software)
+
+Otherwise, on the Node.js server:
+1. Stop the extension
+1. Run `git pull`
+1. Run `npm install`
+1. Run `npm update`
+1. Start the extension
+
+------------------
+# Release History
+## Version 1.2.5
+No changes - version bump to allow registration on [npmjs.com](https://www.npmjs.com/package/roon-web-controller)
+
+## Version 1.2.4
 
 ### New
 - Added option for 4K cover images on the Now Playing screen. (Settings -> Use 4k Images)
@@ -8,9 +30,7 @@
 ### Fixed bugs
 - Fixed compatibility issue with older versions of IOS Safari.
 
-------------------
-
-## version 1.2.3
+## Version 1.2.3
 
 ### New
 
@@ -20,7 +40,6 @@
 - Fixed bug where title text was not centered in the library list
 - Fixed bug where very long text in library list would extend past the button size
 
-# Release History
 ## Version 1.2.2
 
 ### New
@@ -28,15 +47,6 @@
 - Added option to use circle icons (for Play, Pause and Stop only)
 - Added feedback on various overlays to show currently selected option
 
-### Upgrade Notes
-The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
-
-On the Node.js server:
-1. Stop the extension
-1. Run `git pull`
-1. Run `npm install`
-1. Run `npm update`
-1. Start the extension `node .`
 
 ## Version 1.2.1
 
