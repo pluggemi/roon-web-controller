@@ -1,9 +1,9 @@
-# Roon Web Controller 1.2.6
+# Roon Web Controller 1.2.7
 This is an extension for the Roon music player that provides a web based remote.
 
 ## New features
-- Added option to disable the screensaver or sleep mode when a song is playing. The screensaver or sleep mode is allowed when a track is paused or stopped.
-    - Known limitation - the app will not wake up a screen that is already sleeping when playback is started from another app.
+- Maintenance Release
+- Updated dependencies and updated code for compatibility with the Command Line Usage module.
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 

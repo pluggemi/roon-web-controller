@@ -29,14 +29,14 @@ var options = commandLineArgs(optionDefinitions, { partial: true });
 var usage = getUsage([
 {
     header: 'Roon Web Controller',
-    content: 'A web based controller for the Roon Music Player.\n\nUsage: [bold]{node app.js <options>}'
+    content: 'A web based controller for the Roon Music Player.\n\nUsage: {bold node app.js <options>}'
 },
 {
     header: 'Options',
     optionList: optionDefinitions
 },
 {
-    content: 'Project home: [underline]{https://github.com/pluggemi/roon-web-controller}'
+    content: 'Project home: {underline https://github.com/pluggemi/roon-web-controller}'
 }
 ]);
 
@@ -91,9 +91,9 @@ var RoonApiBrowse    = require("node-roon-api-browse");
 var roon = new RoonApi({
     extension_id:        'com.pluggemi.web.controller',
     display_name:        "Web Controller",
-    display_version:     "1.2.6",
+    display_version:     "1.2.7",
     publisher:           'Mike Plugge',
-    log_level:           'none',
+//     log_level:           'none',
     email:               'masked',
     website:             'https://github.com/pluggemi/roon-web-controller',
 

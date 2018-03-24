@@ -1,9 +1,9 @@
 # Change Log
 
-## Version 1.2.6
+## Version 1.2.7
 ### New
-- Added option to disable the screensaver or sleep mode when a song is playing. The screensaver or sleep mode is allowed when a track is paused or stopped.
-    - Known limitation - the app will not wake up a screen that is already sleeping when playback is started from another app.
+- Maintenance Release
+- Updated dependencies and updated code for compatibility with the Command Line Usage module.
 
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
@@ -19,6 +19,12 @@ Otherwise, on the Node.js server:
 
 ------------------
 # Release History
+
+## Version 1.2.6
+### New
+- Added option to disable the screensaver or sleep mode when a song is playing. The screensaver or sleep mode is allowed when a track is paused or stopped.
+    - Known limitation - the app will not wake up a screen that is already sleeping when playback is started from another app.
+
 ## Version 1.2.5
 No changes - version bump to allow registration on [npmjs.com](https://www.npmjs.com/package/roon-web-controller)
 
