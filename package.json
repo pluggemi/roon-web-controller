@@ -1,6 +1,6 @@
 {
   "name": "roon-web-controller",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Roon Extension to create a web controller.",
   "main": "app.js",
   "author": "Mike Plugge",
