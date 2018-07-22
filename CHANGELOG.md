@@ -1,9 +1,10 @@
 # Change Log
 
-## Version 1.2.7
+## Version 1.2.8
 ### New
 - Maintenance Release
-- Updated dependencies and updated code for compatibility with the Command Line Usage module.
+- Addressed issue where the song seek time was not updating.
+- Updated dependencies to address a security issue with the "deep-extend" package. [https://nodesecurity.io/advisories/612](https://nodesecurity.io/advisories/612)
 
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
@@ -19,6 +20,11 @@ Otherwise, on the Node.js server:
 
 ------------------
 # Release History
+
+## Version 1.2.7
+### New
+- Maintenance Release
+- Updated dependencies and updated code for compatibility with the Command Line Usage module.
 
 ## Version 1.2.6
 ### New

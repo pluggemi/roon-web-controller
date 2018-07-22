@@ -91,7 +91,7 @@ var RoonApiBrowse    = require("node-roon-api-browse");
 var roon = new RoonApi({
     extension_id:        'com.pluggemi.web.controller',
     display_name:        "Web Controller",
-    display_version:     "1.2.7",
+    display_version:     "1.2.8",
     publisher:           'Mike Plugge',
 //     log_level:           'none',
     email:               'masked',
@@ -124,7 +124,7 @@ var roon = new RoonApi({
             }
             else if (response == "Changed") {
                 for ( i in data ){
-                    if (i == "zones_changed") {
+                    if (i == "zones_changed" || i == "zones_seek_changed") {
                         for (x in data.zones_changed){
                             for ( y in zoneStatus){
                                 if (zoneStatus[y].zone_id == data.zones_changed[x].zone_id){
