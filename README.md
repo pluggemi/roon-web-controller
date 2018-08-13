@@ -77,11 +77,11 @@ Open a web browser to your server at either "http://localhost:8080" or "http://(
 Many operating systems now have a firewall enabled by default. Make sure that the port that this is running is open on the firewall.  By default, this is TCP port 8080.  But this can be changed with the configuration file or command line options below.
 
 ### (Optional) Local configuration file
-Simply copy `config/local.conf.EXAMPLE` to `config/local.conf` and edit `config/local.conf` as needed.
-* `config/local.conf` is not tracked by `git`, so it will not be clobbered with updates
-* `config/local.conf.EXAMPLE` is tracked by `git` and will be updated in the future as new options are available
+Simply copy `config/local.json.EXAMPLE` to `config/local.json` and edit `config/local.json` as needed.
+* `config/local.json` is not tracked by `git`, so it will not be clobbered with updates
+* `config/local.json.EXAMPLE` is tracked by `git` and will be updated in the future as new options are available
 
-Content of `config/local.conf.EXAMPLE`
+Content of `config/local.json.EXAMPLE`
 
 ```
 // Copy this file to "local.json" and change the port as desired.
