@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Roon Web Controller - Now Playing</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon" href="/favicons/apple-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
-    (function(a, b, c) {
-    if (c in b && b[c]) {
-    var d, e = a.location,
-    f = /^(a|html)$/i;
-    a.addEventListener("click", function(a) {
-    d = a.target;
-    while (!f.test(d.nodeName)) d = d.parentNode;
-    "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
-    }, !1)
-    }
-    })(document, window.navigator, "standalone")
+      (function(a, b, c) {
+        if (c in b && b[c]) {
+          var d,
+            e = a.location,
+            f = /^(a|html)$/i;
+          a.addEventListener(
+            "click",
+            function(a) {
+              d = a.target;
+              while (!f.test(d.nodeName)) d = d.parentNode;
+              "href" in d &&
+                (d.href.indexOf("http") || ~d.href.indexOf(e.host)) &&
+                (a.preventDefault(), (e.href = d.href));
+            },
+            !1
+          );
+        }
+      })(document, window.navigator, "standalone");
     </script>
-    <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/css/site.css">
-    <link rel="stylesheet" type="text/css" href="/css/nowplaying.css">
+    <link
+      rel="shortcut icon"
+      href="/favicons/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="/css/nowplaying.css" />
     <script src="/jquery/jquery.min.js"></script>
     <script src="/js/jquery.simplemarquee.js"></script>
     <script src="/js/color-thief.js"></script>
@@ -32,118 +43,207 @@
     <script src="/js/NoSleep.min.js"></script>
     <script src="/js/nowplaying.js"></script>
     <script>
-    $( window ).on( "orientationchange", function( event ) {
-    fixFontSize();
-    });
+      $(window).on("orientationchange", function(event) {
+        fixFontSize();
+      });
 
-    $( window ).resize(function() {
-    fixFontSize();
-    });
+      $(window).resize(function() {
+        fixFontSize();
+      });
     </script>
-</head>
-<body>
-<div id="coverBackground"></div>
-<div id="colorBackground"></div>
-<div id="notPlaying">
-    <div class="messages">
+  </head>
+  <body>
+    <div id="coverBackground"></div>
+    <div id="colorBackground"></div>
+    <div id="notPlaying">
+      <div class="messages">
         <p>Nothing playing on</p>
-        <button type="button" class="buttonZoneName buttonActive messages" onclick="$('#overlayZoneList').show()">zoneList</button>
+        <button
+          type="button"
+          class="buttonZoneName buttonActive messages"
+          onclick="$('#overlayZoneList').show()"
+        >
+          zoneList
+        </button>
+      </div>
     </div>
-</div>
-<div id="isPlaying">
-    <div id="containerCoverImage"></div>
-    <div id="containerMusicInfo">
+    <div id="isPlaying">
+      <div id="containerCoverImage"></div>
+      <div id="containerMusicInfo">
         <div id="line1" class="colorChange textBold lineMusicInfo">&nbsp;</div>
         <div id="line2" class="colorChange lineMusicInfo">&nbsp;</div>
         <div id="line3" class="colorChange lineMusicInfo">&nbsp;</div>
         <div id="controlsPlayer">
-            <button type="button" id="controlPrev" class="buttonPartialHeight playerButton"></button>
-            <button type="button" id="controlPlayPauseStop" class="buttonFillHeight playerButton"></button>
-            <button type="button" id="controlNext" class="buttonPartialHeight playerButton"></button>
+          <button
+            type="button"
+            id="controlPrev"
+            class="buttonPartialHeight playerButton"
+          ></button>
+          <button
+            type="button"
+            id="controlPlayPauseStop"
+            class="buttonFillHeight playerButton"
+          ></button>
+          <button
+            type="button"
+            id="controlNext"
+            class="buttonPartialHeight playerButton"
+          ></button>
         </div>
         <div id="containerTrackSeek">
-            <div id="trackSeek">
-                <div id="trackSeekValue">
-                    <span id="seekPosition" class="left">&nbsp;</span> <span id="seekLength" class="right">&nbsp;</span>
-                </div>
+          <div id="trackSeek">
+            <div id="trackSeekValue">
+              <span id="seekPosition" class="left">&nbsp;</span>
+              <span id="seekLength" class="right">&nbsp;</span>
             </div>
+          </div>
         </div>
         <div id="containerZoneList">
-            <button type="button" class="buttonZoneName textBold buttonAvailable colorChange" id="nowplayingZoneList" onclick="$('#overlayZoneList').show()">zoneList</button>
+          <button
+            type="button"
+            class="buttonZoneName textBold buttonAvailable colorChange"
+            id="nowplayingZoneList"
+            onclick="$('#overlayZoneList').show()"
+          >
+            zoneList
+          </button>
         </div>
         <div id="controlsSettings">
-            <button type="button" class="buttonFillHeight settingsButton" id="buttonLoop"></button>
-            <button type="button" class="buttonFillHeight settingsButton" id="buttonShuffle"></button>
-            <button type="button" class="buttonFillHeight settingsButton" id="buttonRadio"></button>
-            <button type="button" class="buttonFillHeight settingsButton buttonAvailable" id="buttonVolume" onclick="$('#overlayVolume').show()"></button>
-            <button type="button" class="buttonFillHeight settingsButton buttonAvailable" id="buttonSettings" onclick="$('#overlaySettings').show()"></button>
+          <button
+            type="button"
+            class="buttonFillHeight settingsButton"
+            id="buttonLoop"
+          ></button>
+          <button
+            type="button"
+            class="buttonFillHeight settingsButton"
+            id="buttonShuffle"
+          ></button>
+          <button
+            type="button"
+            class="buttonFillHeight settingsButton"
+            id="buttonRadio"
+          ></button>
+          <button
+            type="button"
+            class="buttonFillHeight settingsButton buttonAvailable"
+            id="buttonVolume"
+            onclick="$('#overlayVolume').show()"
+          ></button>
+          <button
+            type="button"
+            class="buttonFillHeight settingsButton buttonAvailable"
+            id="buttonSettings"
+            onclick="$('#overlaySettings').show()"
+          ></button>
         </div>
+      </div>
     </div>
-</div>
-<div id="overlayVolume" class="overlay">
-    <div class="overlayBackground" onclick="$('#overlayVolume').hide()"></div>
-    <div class="overlayContent">
-        <span id="volumeList"></span>
+    <div id="overlayVolume" class="overlay">
+      <div class="overlayBackground" onclick="$('#overlayVolume').hide()"></div>
+      <div class="overlayContent"><span id="volumeList"></span></div>
     </div>
-</div>
-<div id="overlayZoneList" class="overlay">
-    <div class="overlayBackground" onclick="$('#overlayZoneList').hide()"></div>
-    <div class="overlayContent">
+    <div id="overlayZoneList" class="overlay">
+      <div
+        class="overlayBackground"
+        onclick="$('#overlayZoneList').hide()"
+      ></div>
+      <div class="overlayContent">
         <span class="overlayList zoneList"></span>
+      </div>
     </div>
-</div>
-<div id="overlaySettings" class="overlay">
-    <div class="overlayBackground" onclick="$('#overlaySettings').hide()"></div>
-    <div class="overlayContent">
+    <div id="overlaySettings" class="overlay">
+      <div
+        class="overlayBackground"
+        onclick="$('#overlaySettings').hide()"
+      ></div>
+      <div class="overlayContent">
         <div class="overlayList settingsList">
-            <div class="overlayListRow">
-                <button type="button" class="buttonOverlay" id="buttonThemeDark" onclick="setTheme('dark')">Dark</button>
-                <button type="button" class="buttonOverlay" id="buttonThemeColor" onclick="setTheme('color')">Color</button>
-                <button type="button" class="buttonOverlay" id="buttonThemeCover" onclick="setTheme('cover')">Cover</button>
+          <div class="overlayListRow">
+            <button
+              type="button"
+              class="buttonOverlay"
+              id="buttonThemeDark"
+              onclick="setTheme('dark')"
+            >
+              Dark
+            </button>
+            <button
+              type="button"
+              class="buttonOverlay"
+              id="buttonThemeColor"
+              onclick="setTheme('color')"
+            >
+              Color
+            </button>
+            <button
+              type="button"
+              class="buttonOverlay"
+              id="buttonThemeCover"
+              onclick="setTheme('cover')"
+            >
+              Cover
+            </button>
+          </div>
+          <hr />
+          <div class="overlayListRow">
+            <div class="textBold">Notifications</div>
+            <div>
+              <label class="settingsSwitch">
+                <input
+                  type="checkbox"
+                  id="notificationsSwitch"
+                  onclick="toggleNotifications()"
+                />
+                <span class="settingsSlider"></span>
+              </label>
             </div>
-            <hr>
-            <div class="overlayListRow">
-                <div class="textBold">Notifications</div>
-                <div>
-                    <label class="settingsSwitch">
-                        <input type="checkbox" id="notificationsSwitch" onclick="toggleNotifications()">
-                        <span class="settingsSlider"></span>
-                    </label>
-                </div>
+          </div>
+          <hr />
+          <div class="overlayListRow">
+            <div class="textBold">Use Circle Icons</div>
+            <div>
+              <label class="settingsSwitch">
+                <input
+                  type="checkbox"
+                  id="circleIconsSwitch"
+                  onclick="toggleCircleIcon()"
+                />
+                <span class="settingsSlider"></span>
+              </label>
             </div>
-            <hr>
-            <div class="overlayListRow">
-                <div class="textBold">Use Circle Icons</div>
-                <div>
-                    <label class="settingsSwitch">
-                        <input type="checkbox" id="circleIconsSwitch" onclick="toggleCircleIcon()">
-                        <span class="settingsSlider"></span>
-                    </label>
-                </div>
+          </div>
+          <hr />
+          <div class="overlayListRow">
+            <div class="textBold">Use 4k Images</div>
+            <div>
+              <label class="settingsSwitch">
+                <input
+                  type="checkbox"
+                  id="4kImagesSwitch"
+                  onclick="toggle4kImages()"
+                />
+                <span class="settingsSlider"></span>
+              </label>
             </div>
-            <hr>
-            <div class="overlayListRow">
-                <div class="textBold">Use 4k Images</div>
-                <div>
-                    <label class="settingsSwitch">
-                        <input type="checkbox" id="4kImagesSwitch" onclick="toggle4kImages()">
-                        <span class="settingsSlider"></span>
-                    </label>
-                </div>
+          </div>
+          <hr />
+          <div class="overlayListRow">
+            <div class="textBold">Disable screensaver while playing</div>
+            <div>
+              <label class="settingsSwitch">
+                <input
+                  type="checkbox"
+                  id="screensaverSwitch"
+                  onclick="toggleScreensaver()"
+                />
+                <span class="settingsSlider"></span>
+              </label>
             </div>
-            <hr>
-            <div class="overlayListRow">
-                <div class="textBold">Disable screensaver while playing</div>
-                <div>
-                    <label class="settingsSwitch">
-                        <input type="checkbox" id="screensaverSwitch" onclick="toggleScreensaver()">
-                        <span class="settingsSlider"></span>
-                    </label>
-                </div>
-            </div>
-            <hr>
+          </div>
+          <hr />
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>

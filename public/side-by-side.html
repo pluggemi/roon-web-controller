@@ -1,58 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Roon Web Controller - Side by Side Layout</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon" href="/favicons/apple-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
-        (function(a, b, c) {
+      (function(a, b, c) {
         if (c in b && b[c]) {
-        var d, e = a.location,
-        f = /^(a|html)$/i;
-        a.addEventListener("click", function(a) {
-        d = a.target;
-        while (!f.test(d.nodeName)) d = d.parentNode;
-        "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
-        }, !1)
+          var d,
+            e = a.location,
+            f = /^(a|html)$/i;
+          a.addEventListener(
+            "click",
+            function(a) {
+              d = a.target;
+              while (!f.test(d.nodeName)) d = d.parentNode;
+              "href" in d &&
+                (d.href.indexOf("http") || ~d.href.indexOf(e.host)) &&
+                (a.preventDefault(), (e.href = d.href));
+            },
+            !1
+          );
         }
-        })(document, window.navigator, "standalone")
+      })(document, window.navigator, "standalone");
     </script>
-    <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="/favicons/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon" />
     <style>
-    body {
+      body {
         font-family: sans-serif;
         background-color: #232629;
         color: #eff0f1;
-    }
-    iframe {
+      }
+      iframe {
         border: none;
-    }
-    #nowPlaying iframe {
+      }
+      #nowPlaying iframe {
         position: absolute;
         top: 0;
         left: 0;
         height: 100%;
         width: 50%;
-    }
-    #libraryBrowser iframe {
+      }
+      #libraryBrowser iframe {
         position: absolute;
         top: 0;
         right: 0;
         height: 100%;
         width: 50%;
-    }
+      }
     </style>
-</head>
-<body>
-    <div id="nowPlaying">
-        <iframe src="nowplaying.html"></iframe>
-    </div>
-    <div id="libraryBrowser">
-        <iframe src="library.html"></iframe>
-    </div>
-</body>
+  </head>
+  <body>
+    <div id="nowPlaying"><iframe src="nowplaying.html"></iframe></div>
+    <div id="libraryBrowser"><iframe src="library.html"></iframe></div>
+  </body>
 </html>

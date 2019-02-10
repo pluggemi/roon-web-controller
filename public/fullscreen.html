@@ -1,89 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Roon Web Controller</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="apple-touch-icon" href="/favicons/apple-icon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon" href="/favicons/apple-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
-    (function(a, b, c) {
-    if (c in b && b[c]) {
-    var d, e = a.location,
-    f = /^(a|html)$/i;
-    a.addEventListener("click", function(a) {
-        d = a.target;
-        while (!f.test(d.nodeName)) d = d.parentNode;
-        "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href)
-    }, !1)
-    }
-    })(document, window.navigator, "standalone")
+      (function(a, b, c) {
+        if (c in b && b[c]) {
+          var d,
+            e = a.location,
+            f = /^(a|html)$/i;
+          a.addEventListener(
+            "click",
+            function(a) {
+              d = a.target;
+              while (!f.test(d.nodeName)) d = d.parentNode;
+              "href" in d &&
+                (d.href.indexOf("http") || ~d.href.indexOf(e.host)) &&
+                (a.preventDefault(), (e.href = d.href));
+            },
+            !1
+          );
+        }
+      })(document, window.navigator, "standalone");
     </script>
-    <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon">
-    <link rel="manifest" href="/favicons/manifest.json">
-    <link rel="stylesheet" type="text/css" href="/css/site.css">
+    <link
+      rel="shortcut icon"
+      href="/favicons/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="icon" href="/favicons/favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="/favicons/manifest.json" />
+    <link rel="stylesheet" type="text/css" href="/css/site.css" />
     <script src="/jquery/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/fullscreen.js"></script>
 
     <style>
-        iframe {
-            border: none;
-        }
+      iframe {
+        border: none;
+      }
 
-        .section {
-            height: 100%;
-            width: 100%;
-        }
+      .section {
+        height: 100%;
+        width: 100%;
+      }
 
-        #pageLoading {
-            background-color: #232629;
-            color: #eff0f1;
-            z-index: 1000;
-        }
+      #pageLoading {
+        background-color: #232629;
+        color: #eff0f1;
+        z-index: 1000;
+      }
 
-        #buttonMenu {
-            position: absolute;
-            background-color: rgba(0,0,0,0.33);
-            color: #eff0f1;
-            top: 0;
-            right: 0;
-            height: 54px;
-            width: auto;
-            z-index:100;
-            border: none;
-            border-radius: 0 0 0 10px;
-        }
+      #buttonMenu {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.33);
+        color: #eff0f1;
+        top: 0;
+        right: 0;
+        height: 54px;
+        width: auto;
+        z-index: 100;
+        border: none;
+        border-radius: 0 0 0 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="nowPlaying" class="fullscreenFlex">
-        <iframe class="section" src="nowplaying.html"></iframe>
+      <iframe class="section" src="nowplaying.html"></iframe>
     </div>
 
     <div id="libraryBrowser" class="fullscreenFlex">
-        <iframe class="section" src="library.html"></iframe>
+      <iframe class="section" src="library.html"></iframe>
     </div>
 
     <div id="pairDisabled" class="fullscreenFlex">
-        <div class="messages">This extension is not enabled. Please use a Roon client to enable it.</div>
+      <div class="messages">
+        This extension is not enabled. Please use a Roon client to enable it.
+      </div>
     </div>
 
     <div id="overlayMainMenu" class="overlay">
-        <div class="overlayBackground" onclick="$('#overlayMainMenu').hide()"></div>
-        <div class="overlayContent">
-            <div class="overlayList">
-                <button type="button" class="buttonOverlay" onclick="showSection('nowPlaying')">Now Playing</button>
-                <button type="button" class="buttonOverlay" onclick="showSection('libraryBrowser')">Library</button>
-            </div>
+      <div
+        class="overlayBackground"
+        onclick="$('#overlayMainMenu').hide()"
+      ></div>
+      <div class="overlayContent">
+        <div class="overlayList">
+          <button
+            type="button"
+            class="buttonOverlay"
+            onclick="showSection('nowPlaying')"
+          >
+            Now Playing
+          </button>
+          <button
+            type="button"
+            class="buttonOverlay"
+            onclick="showSection('libraryBrowser')"
+          >
+            Library
+          </button>
         </div>
+      </div>
     </div>
 
-    <button type="button" id="buttonMenu" class="buttonTrans" onclick="$('#overlayMainMenu').show()"></button>
+    <button
+      type="button"
+      id="buttonMenu"
+      class="buttonTrans"
+      onclick="$('#overlayMainMenu').show()"
+    ></button>
 
     <div id="pageLoading" class="fullscreenFlex">&nbsp;</div>
-
-</body>
+  </body>
 </html>
