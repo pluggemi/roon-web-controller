@@ -12,7 +12,7 @@
     "body-parser": "^1.18.3",
     "command-line-args": "^5.0.2",
     "command-line-usage": "^5.0.5",
-    "config": "^1.30.0",
+    "config": "^3.0.1",
     "express": "4.x",
     "jquery": "^3.3.1",
     "js-cookie": "^2.2.0",
@@ -21,7 +21,7 @@
     "node-roon-api-image": "github:roonlabs/node-roon-api-image",
     "node-roon-api-status": "github:roonlabs/node-roon-api-status",
     "node-roon-api-transport": "github:roonlabs/node-roon-api-transport",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.2.0"
   },
   "repository": {
     "type": "git",
