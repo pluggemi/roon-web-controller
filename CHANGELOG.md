@@ -1,10 +1,9 @@
 # Change Log
 
-## Version 1.2.8
+## Version 1.2.9
 ### New
-- Maintenance Release
-- Addressed issue where the song seek time was not updating.
-- Updated dependencies to address a security issue with the "deep-extend" package. [https://nodesecurity.io/advisories/612](https://nodesecurity.io/advisories/612)
+- Updated dependencies
+- Added check to show zone selection overlay if selected zone is no longer available.
 
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
@@ -20,6 +19,12 @@ Otherwise, on the Node.js server:
 
 ------------------
 # Release History
+
+## Version 1.2.8
+### New
+- Maintenance Release
+- Addressed issue where the song seek time was not updating.
+-
 
 ## Version 1.2.7
 ### New

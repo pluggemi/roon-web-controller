@@ -1,10 +1,10 @@
-# Roon Web Controller 1.2.8
+# Roon Web Controller 1.2.9
 This is an extension for the Roon music player that provides a web based remote.
 
 ## New features
-- Maintenance Release
-- Addressed issue where the song seek time was not updating.
-- Updated dependencies to address a security issue with the "deep-extend" package. [https://nodesecurity.io/advisories/612](https://nodesecurity.io/advisories/612)
+- Updated dependencies
+- Added check to show zone selection overlay if selected zone is no longer available.
+
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
@@ -182,4 +182,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
