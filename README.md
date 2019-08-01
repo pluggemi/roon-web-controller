@@ -1,9 +1,8 @@
-# Roon Web Controller 1.2.9
+# Roon Web Controller 1.2.10
 This is an extension for the Roon music player that provides a web based remote.
 
 ## New features
-- Updated dependencies
-- Added check to show zone selection overlay if selected zone is no longer available.
+- Updated dependencies to address a potential security vulnerability
 
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes

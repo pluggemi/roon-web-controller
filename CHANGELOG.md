@@ -1,9 +1,8 @@
 # Change Log
 
-## Version 1.2.9
+## Version 1.2.10
 ### New
-- Updated dependencies
-- Added check to show zone selection overlay if selected zone is no longer available.
+- Updated dependencies to address a potential security vulnerability
 
 ### Upgrade Notes
 The package dependencies have been updated to the latest versions.  It is recommended to perform an update.
@@ -20,11 +19,15 @@ Otherwise, on the Node.js server:
 ------------------
 # Release History
 
+## Version 1.2.9
+### New
+- Updated dependencies
+- Added check to show zone selection overlay if selected zone is no longer available.
+
 ## Version 1.2.8
 ### New
 - Maintenance Release
 - Addressed issue where the song seek time was not updating.
--
 
 ## Version 1.2.7
 ### New
