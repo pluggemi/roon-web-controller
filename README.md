@@ -1,4 +1,4 @@
-# Roon Web Controller 1.2.11
+# Roon Web Controller 1.2.12
 
 This is an extension for the Roon music player that provides a web based remote.
 
@@ -6,9 +6,7 @@ This is an extension for the Roon music player that provides a web based remote.
 
 Accessibility
 
-- added dynamic alt text for album cover
-- added names and aria labels to buttons
-- added aria disabled status to buttons
+- corrected name and aria label for one of the zone list buttons
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 

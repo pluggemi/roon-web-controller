@@ -1,14 +1,10 @@
 # Change Log
 
-## Version 1.2.11
-
-### New
+## Version 1.2.12
 
 Accessibility
 
-- added dynamic alt text for album cover
-- added names and aria labels to buttons
-- added aria disabled status to buttons
+- corrected name and aria label for one of the zone list buttons
 
 ### Upgrade Notes
 
@@ -27,6 +23,16 @@ Otherwise, on the Node.js server:
 ---
 
 # Release History
+
+## Version 1.2.11
+
+### New
+
+Accessibility
+
+- added dynamic alt text for album cover
+- added names and aria labels to buttons
+- added aria disabled status to buttons
 
 ## Version 1.2.10
 
