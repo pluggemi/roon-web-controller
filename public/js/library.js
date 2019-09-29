@@ -193,7 +193,7 @@ function showData(payload, zone_id) {
         .html(
           '<img class="listInfoImage" src="/roonapi/getImage?image_key=' +
             list.image_key +
-            '">'
+            '" alt="">'
         )
         .show();
       $("#coverBackground")
@@ -249,17 +249,21 @@ function showData(payload, zone_id) {
     if (list.level == 0) {
       $("#buttonBack")
         .prop("disabled", true)
+        .attr("aria-disabled", true)
         .html(getSVG("back"));
       $("#buttonHome")
         .prop("disabled", true)
+        .attr("aria-disabled", true)
         .html(getSVG("home"));
     } else {
       $("#buttonBack")
         .attr("onclick", "goBack()")
+        .attr("aria-disabled", false)
         .html(getSVG("back"))
         .prop("disabled", false);
       $("#buttonHome")
         .attr("onclick", "goHome()")
+        .attr("aria-disabled", false)
         .html(getSVG("home"))
         .prop("disabled", false);
     }
@@ -268,21 +272,25 @@ function showData(payload, zone_id) {
       $("#buttonPrev")
         .prop("disabled", false)
         .attr("onclick", "goPage('" + (list.display_offset - 100) + "')")
+        .attr("aria-disabled", false)
         .html(getSVG("prev"));
     } else {
       $("#buttonPrev")
         .prop("disabled", true)
+        .attr("aria-disabled", true)
         .html(getSVG("prev"));
     }
 
     if (list.display_offset + items.length < list.count) {
       $("#buttonNext")
         .prop("disabled", false)
+        .attr("aria-disabled", false)
         .attr("onclick", "goPage('" + (list.display_offset + 100) + "')")
         .html(getSVG("next"));
     } else {
       $("#buttonNext")
         .prop("disabled", true)
+        .attr("aria-disabled", true)
         .html(getSVG("next"));
     }
 

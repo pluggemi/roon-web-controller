@@ -1,12 +1,15 @@
 {
   "name": "roon-web-controller",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "Roon Extension to create a web controller.",
   "main": "app.js",
   "author": "Mike Plugge",
   "license": "MIT",
   "engines": {
     "node": ">=6.x"
+  },
+  "scripts": {
+    "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

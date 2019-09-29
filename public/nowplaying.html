@@ -62,6 +62,8 @@
           type="button"
           class="buttonZoneName buttonActive messages"
           onclick="$('#overlayZoneList').show()"
+          name="Zone List"
+          aria-label="Zone List"
         >
           zoneList
         </button>
@@ -78,16 +80,22 @@
             type="button"
             id="controlPrev"
             class="buttonPartialHeight playerButton"
+            name="Previous"
+            aria-label="Previous"
           ></button>
           <button
             type="button"
             id="controlPlayPauseStop"
             class="buttonFillHeight playerButton"
+            name="Play Pause"
+            aria-label="Play Pause"
           ></button>
           <button
             type="button"
             id="controlNext"
             class="buttonPartialHeight playerButton"
+            name="Next"
+            aria-label="Next"
           ></button>
         </div>
         <div id="containerTrackSeek">
@@ -104,6 +112,8 @@
             class="buttonZoneName textBold buttonAvailable colorChange"
             id="nowplayingZoneList"
             onclick="$('#overlayZoneList').show()"
+            name="Previous"
+            aria-label="Previous"
           >
             zoneList
           </button>
@@ -129,12 +139,16 @@
             class="buttonFillHeight settingsButton buttonAvailable"
             id="buttonVolume"
             onclick="$('#overlayVolume').show()"
+            name="Show Volume Controls"
+            aria-label="Show Volume Controls"
           ></button>
           <button
             type="button"
             class="buttonFillHeight settingsButton buttonAvailable"
             id="buttonSettings"
             onclick="$('#overlaySettings').show()"
+            name="Show Settings"
+            aria-label="Show Settings"
           ></button>
         </div>
       </div>
@@ -165,6 +179,8 @@
               class="buttonOverlay"
               id="buttonThemeDark"
               onclick="setTheme('dark')"
+              name="Select dark theme"
+              aria-label="Select dark theme"
             >
               Dark
             </button>
@@ -173,6 +189,8 @@
               class="buttonOverlay"
               id="buttonThemeColor"
               onclick="setTheme('color')"
+              name="Select dominant color theme"
+              aria-label="Select dominant color theme"
             >
               Color
             </button>
@@ -181,6 +199,8 @@
               class="buttonOverlay"
               id="buttonThemeCover"
               onclick="setTheme('cover')"
+              name="Select cover art theme"
+              aria-label="Select cover art theme"
             >
               Cover
             </button>
@@ -194,6 +214,8 @@
                   type="checkbox"
                   id="notificationsSwitch"
                   onclick="toggleNotifications()"
+                  name="Toggle desktop notifications on song change"
+                  aria-label="Toggle desktop notifications on song change"
                 />
                 <span class="settingsSlider"></span>
               </label>
@@ -208,6 +230,8 @@
                   type="checkbox"
                   id="circleIconsSwitch"
                   onclick="toggleCircleIcon()"
+                  name="Toggle circle icons for playback controls"
+                  aria-label="Toggle circle icons for playback controls"
                 />
                 <span class="settingsSlider"></span>
               </label>
@@ -222,6 +246,8 @@
                   type="checkbox"
                   id="4kImagesSwitch"
                   onclick="toggle4kImages()"
+                  name="Toggle 4k cover images"
+                  aria-label="Toggle 4k cover images"
                 />
                 <span class="settingsSlider"></span>
               </label>
@@ -236,6 +262,8 @@
                   type="checkbox"
                   id="screensaverSwitch"
                   onclick="toggleScreensaver()"
+                  name="Toggle disabling the screen saver"
+                  aria-label="Toggle disabling the screen saver"
                 />
                 <span class="settingsSlider"></span>
               </label>

@@ -399,7 +399,11 @@ function showIsPlaying(curZone) {
       }
     }
     $("#containerCoverImage").html(
-      '<img src="' + state.imgUrl + '" class="itemImage">'
+      '<img src="' +
+        state.imgUrl +
+        '" class="itemImage" alt="Cover art for ' +
+        state.title +
+        '">'
     );
     $("#coverBackground").css("background-image", "url(" + state.imgUrl + ")");
 
@@ -433,12 +437,14 @@ function showIsPlaying(curZone) {
     if (curZone.is_previous_allowed === true) {
       $("#controlPrev")
         .attr("onclick", "goCmd('prev', '" + curZone.zone_id + "')")
+        .attr("aria-disabled", false)
         .html(getSVG("prev"))
         .addClass("buttonAvailable")
         .removeClass("buttonInactive");
     } else {
       $("#controlPrev")
         .attr("onclick", "")
+        .attr("aria-disabled", true)
         .html(getSVG("prev"))
         .addClass("buttonInactive")
         .removeClass("buttonAvailable");
@@ -450,12 +456,14 @@ function showIsPlaying(curZone) {
     if (curZone.is_next_allowed === true) {
       $("#controlNext")
         .attr("onclick", "goCmd('next', '" + curZone.zone_id + "')")
+        .attr("aria-disabled", false)
         .html(getSVG("next"))
         .addClass("buttonAvailable")
         .removeClass("buttonInactive");
     } else {
       $("#controlNext")
         .attr("onclick", "")
+        .attr("aria-disabled", true)
         .html(getSVG("next"))
         .addClass("buttonInactive")
         .removeClass("buttonAvailable");
@@ -494,18 +502,21 @@ function showIsPlaying(curZone) {
     if (state.PlayPauseStop == "showPlay") {
       $("#controlPlayPauseStop")
         .attr("onclick", "goCmd('play', '" + curZone.zone_id + "')")
+        .attr("aria-disabled", false)
         .html(getSVG("play"))
         .addClass("buttonAvailable")
         .removeClass("buttonInactive");
     } else if (state.PlayPauseStop == "showPause") {
       $("#controlPlayPauseStop")
         .attr("onclick", "goCmd('pause', '" + curZone.zone_id + "')")
+        .attr("aria-disabled", false)
         .html(getSVG("pause"))
         .addClass("buttonAvailable")
         .removeClass("buttonInactive");
     } else if (state.PlayPauseStop == "showStop") {
       $("#controlPlayPauseStop")
         .attr("onclick", "goCmd('stop', '" + curZone.zone_id + "')")
+        .attr("aria-disabled", false)
         .html(getSVG("stop"))
         .addClass("buttonAvailable")
         .removeClass("buttonInactive");
@@ -513,6 +524,7 @@ function showIsPlaying(curZone) {
       $("#controlPlayPauseStop")
         .html(getSVG("play"))
         .attr("onclick", "")
+        .attr("aria-disabled", true)
         .addClass("buttonInactive")
         .removeClass("buttonAvailable");
     }
@@ -527,6 +539,9 @@ function showIsPlaying(curZone) {
           "onclick",
           "changeZoneSetting('loop', 'loop', '" + curZone.zone_id + "')"
         )
+        .attr("name", "Loop off")
+        .attr("aria-label", "Loop off")
+        .attr("aria-disabled", false)
         .removeClass("buttonActive buttonInactive")
         .addClass("buttonAvailable")
         .css("color", css.foregroundColor);
@@ -537,6 +552,9 @@ function showIsPlaying(curZone) {
           "onclick",
           "changeZoneSetting('loop', 'disabled', '" + curZone.zone_id + "')"
         )
+        .attr("name", "Loop one")
+        .attr("aria-label", "Loop one")
+        .attr("aria-disabled", false)
         .removeClass("buttonAvailable buttonInactive")
         .addClass("buttonActive")
         .css("color", "#3daee9");
@@ -547,6 +565,9 @@ function showIsPlaying(curZone) {
           "onclick",
           "changeZoneSetting('loop', 'loop_one', '" + curZone.zone_id + "')"
         )
+        .attr("name", "Loop all")
+        .attr("aria-label", "Loop all")
+        .attr("aria-disabled", false)
         .removeClass("buttonAvailable buttonInactive")
         .addClass("buttonActive")
         .css("color", "#3daee9");
@@ -554,6 +575,9 @@ function showIsPlaying(curZone) {
       $("#buttonLoop")
         .html(getSVG("loop"))
         .attr("onclick", "")
+        .attr("name", "Loop disabled")
+        .attr("aria-label", "Loop disabled")
+        .attr("aria-disabled", true)
         .removeClass("buttonAvailable buttonActive")
         .addClass("buttonInactive")
         .css("color", css.foregroundColor);
@@ -572,6 +596,9 @@ function showIsPlaying(curZone) {
           "onclick",
           "changeZoneSetting('shuffle', 'true', '" + curZone.zone_id + "')"
         )
+        .attr("name", "Shuffle off")
+        .attr("aria-label", "Shuffle off")
+        .attr("aria-disabled", false)
         .removeClass("buttonActive buttonInactive")
         .addClass("buttonAvailable")
         .css("color", css.foregroundColor);
@@ -582,6 +609,9 @@ function showIsPlaying(curZone) {
           "onclick",
           "changeZoneSetting('shuffle', 'false', '" + curZone.zone_id + "')"
         )
+        .attr("name", "Shuffle on")
+        .attr("aria-label", "Shuffle on")
+        .attr("aria-disabled", false)
         .removeClass("buttonAvailable buttonInactive")
         .addClass("buttonActive")
         .css("color", "#3daee9");
@@ -589,6 +619,9 @@ function showIsPlaying(curZone) {
       $("#buttonShuffle")
         .html(getSVG("shuffle"))
         .attr("onclick", "")
+        .attr("name", "Shuffle disabled")
+        .attr("aria-label", "Shuffle disabled")
+        .attr("aria-disabled", true)
         .removeClass("buttonAvailable buttonActive")
         .addClass("buttonInactive")
         .css("color", css.foregroundColor);
@@ -604,6 +637,9 @@ function showIsPlaying(curZone) {
           "onclick",
           "changeZoneSetting('auto_radio', 'true', '" + curZone.zone_id + "')"
         )
+        .attr("name", "Roon Radio off")
+        .attr("aria-label", "Roon Radio off")
+        .attr("aria-disabled", false)
         .removeClass("buttonActive buttonInactive")
         .addClass("buttonAvailable")
         .css("color", css.foregroundColor);
@@ -614,6 +650,9 @@ function showIsPlaying(curZone) {
           "onclick",
           "changeZoneSetting('auto_radio', 'false', '" + curZone.zone_id + "')"
         )
+        .attr("name", "Roon Radio on")
+        .attr("aria-label", "Roon Radio on")
+        .attr("aria-disabled", false)
         .removeClass("buttonAvailable buttonInactive")
         .addClass("buttonActive")
         .css("color", "#3daee9");
@@ -621,6 +660,9 @@ function showIsPlaying(curZone) {
       $("#buttonRadio")
         .html(getSVG("radio"))
         .attr("onclick", "")
+        .attr("name", "Roon Radio disabled")
+        .attr("aria-label", "Roon Radio disabled")
+        .attr("aria-disabled", true)
         .removeClass("buttonAvailable buttonActive")
         .addClass("buttonInactive")
         .css("color", css.foregroundColor);
@@ -648,6 +690,8 @@ function showIsPlaying(curZone) {
           ", '" +
           curZone.outputs[x].output_id +
           "')\"";
+        html += 'name="Volume down"';
+        html += 'aria-label="Volume down"';
         html += ">" + getSVG("volume-minus") + "</button>";
         html += '<div class="volumeSlider">';
         html +=
@@ -678,6 +722,8 @@ function showIsPlaying(curZone) {
           ", '" +
           curZone.outputs[x].output_id +
           "')\"";
+        html += 'name="Volume up"';
+        html += 'aria-label="Volume up"';
         html += ">" + getSVG("volume-plus") + "</button>";
         html += "</div>";
 
