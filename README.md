@@ -4,6 +4,7 @@ NOTE: This is alpha software.  There is missing functionality.
 
 ## What works
 - Touchscreen layout
+- Landscape view
 - Library functionality
 - Now Playing functionality
 - Queue display
@@ -11,6 +12,7 @@ NOTE: This is alpha software.  There is missing functionality.
 - Loop, Shuffle, and Radio controls on the Queue page
 
 ## What does not work
+- Portrait mode, only landscape is available right now
 - Volume overlay is empty, no volume controls
 - Settings overlay is empty, no settings controls
 - Queue "Play from Here" is not functional
@@ -26,7 +28,7 @@ NOTE: This is alpha software.  There is missing functionality.
 - UI: Now Playing: Clock
 - UI: Queue: "play from here"
 - UI: Touchscreen Global: Volume overlay
-- UI: Touchscreen Global:Settings overlay
+- UI: Touchscreen Global: Settings overlay
 - UI: Settings Overlay: Save settings, including current zone id to browser local storage
 - UI: Settings Overlay: Clock enable/disable and Moment.js format option
 - UI: Settings Overlay: Desktop Notifications enable/disable
