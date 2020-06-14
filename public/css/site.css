@@ -1,217 +1,28 @@
+:root {
+  --ThemeColor: rgb(44, 62, 80);
+  --BaseColor: rgb(35, 38, 41);
+  --AvailableColor: rgb(239, 240, 241);
+  --ActiveColor: rgb(41, 128, 185);
+  --DisabledColor: rgba(239, 240, 241, 0.25);
+  --TransparentColor: rgba(0, 0, 0, 0.75);
+  --TransparentActiveColor: rgba(41, 128, 185, 0.25);
+}
+
 body {
-    font-family: sans-serif;
-    background-color: #232629;
-    color: #eff0f1;
+  background: var(--BaseColor);
+  color: var(--AvailableColor);
+  font-family: sans-serif;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-button {
-    outline: none;
-    border: none;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-size: 100%;
 }
 
-button:focus {
-    outline: none;
-    border: none;
-}
-
-button:active {
-    outline: none;
-    border: none;
-}
-
-svg {
-    width: auto;
-    height: 100%;
-    fill: currentColor;
-}
-
-.buttonOverlay {
-    width: 96px;
-    height: 48px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    -webkit-filter: drop-shadow(5px 5px 5px black);
-    filter: drop-shadow(5px 5px 5px black);
-    margin: 24px;
-    background-color: #eff0f1;
-    color: #232629;
-}
-
-.buttonOverlay:active {
-    transform: translateY(4px);
-    filter:none;
-}
-
-.buttonSettingActive {
-    background-color: #3daee9;
-    filter:none;
-}
-
-.buttonFillHeight {
-    background-color: rgba(0,0,0,0);
-    height: 100%;
-}
-
-.buttonPartialHeight {
-    background-color: rgba(0,0,0,0);
-    height: 75%;
-}
-
-.fullscreenFlex {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.messages {
-    max-width: 90%;
-    font-size:5vw;
-    align-self: center;
-    text-align:center;
-}
-
-.overlay {
-    display:none;
-}
-
-.overlayBackground {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background-color: rgba(0,0,0,0.75);
-    z-index:200;
-}
-
-.overlayContent {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #232629;
-    color: #eff0f1;
-    width: auto;
-    height: auto;
-    min-width: 50%;
-    max-height: 95%;
-    max-width: 95%;
-    border-radius: 10px;
-    padding: 5px;
-    -webkit-filter: drop-shadow(10px 10px 10px black);
-    filter: drop-shadow(10px 10px 10px black);
-    z-index:300;
-}
-
-.overlayList {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.overlayListRow {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 85%;
-}
-
-.settingsList {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-}
-
-.textBold {
-    font-weight: bold;
-}
-
-.textCenter {
-    text-align: center;
-}
-
-.textSmall {
-    font-size: 75%;
-}
-
-#coverBackground {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    -webkit-filter: opacity(33%) blur(20px);
-    filter: opacity(33%) blur(20px);
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    display: none;
-}
-@media screen and (orientation:portrait) {
-    .overlayContent {
-        width: 95%;
-    }
-}
-
-@media screen and (orientation:landscape) {
-}
-
-.settingsSwitch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-
-.settingsSwitch input {
-    display: none;
-}
-
-.settingsSlider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #4d4d4d;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 34px;
-}
-
-.settingsSlider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: #fcfcfc;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%;
-}
-
-.settingsSwitch input:checked + .settingsSlider {
-    background-color: #1d99f3;
-}
-
-.settingsSwitch input:checked + .settingsSlider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+h1 {
+  font-size: 200%;
 }

@@ -1,8 +1,23 @@
-# Dependency directory
+.DS_Store
 node_modules
+/dist
+/backend/config.json
 
-# Roon Core configuration file
-config.json
+# local env files
+.env.local
+.env.*.local
 
-# Local server configuration file
-config/local.json
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
