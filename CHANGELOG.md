@@ -1,10 +1,12 @@
 # Change Log
 
-## Version 1.2.12
+## Version 1.2.13
 
-Accessibility
+NOTE: this is the final release of the 1.x series.
 
-- corrected name and aria label for one of the zone list buttons
+Security
+- updated dependencies for security issues.
+
 
 ### Upgrade Notes
 
@@ -23,6 +25,13 @@ Otherwise, on the Node.js server:
 ---
 
 # Release History
+
+## Version 1.2.12
+
+Accessibility
+
+- corrected name and aria label for one of the zone list buttons
+
 
 ## Version 1.2.11
 

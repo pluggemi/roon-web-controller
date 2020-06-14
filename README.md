@@ -1,12 +1,13 @@
-# Roon Web Controller 1.2.12
+# Roon Web Controller 1.2.13
 
 This is an extension for the Roon music player that provides a web based remote.
 
+NOTE: this is the final release of the 1.x series.
+
 ## New features
 
-Accessibility
-
-- corrected name and aria label for one of the zone list buttons
+Security
+- updated dependencies for security issues.
 
 See the [CHANGELOG.md](CHANGELOG.md) for complete list of changes
 
