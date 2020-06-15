@@ -5,6 +5,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   strict: process.env.NODE_ENV !== "production",
   state: {
+    tmp: {
+      session_key: "",
+    },
     ui: {
       width: 800,
       height: 480,
@@ -33,6 +36,12 @@ export default new Vuex.Store({
     SET_window_size: (state) => {
       state.ui.width = window.innerWidth;
       state.ui.height = window.innerHeight;
+    },
+    SET_session_key: (state) => {
+      let session_key = Math.round(Math.random() * new Date())
+        .toString(16)
+        .slice(-6);
+      state.tmp.session_key = session_key;
     },
     SOCKET_connect: (state) => {
       state.socket.connected = true;
@@ -92,6 +101,7 @@ export default new Vuex.Store({
       data.options = {
         zone_or_output_id: state.settings.current_zone_id,
         hierarchy: "browse",
+        multi_session_key: state.tmp.session_key,
       };
       data.pager = {
         count: state.ui.library_list_count,
@@ -126,6 +136,7 @@ export default new Vuex.Store({
         zone_or_output_id: state.settings.current_zone_id,
         hierarchy: "browse",
         item_key: payload.item_key,
+        multi_session_key: state.tmp.session_key,
       };
       data.pager = {
         offset: payload.listoffset || 0,
@@ -150,6 +161,7 @@ export default new Vuex.Store({
         hierarchy: "browse",
         count: state.ui.library_list_count,
         offset: offset,
+        multi_session_key: state.tmp.session_key,
       };
 
       let url = `${state.roon.base_url}/api/load`;
@@ -168,6 +180,7 @@ export default new Vuex.Store({
         hierarchy: "browse",
         input: payload.input_value,
         item_key: payload.item_key,
+        multi_session_key: state.tmp.session_key,
       };
       data.pager = {
         count: state.ui.library_list_count,

@@ -398,6 +398,7 @@ function roonLibraryBrowse(data, cb) {
           hierarchy: "browse",
           count: data.pager.count,
           offset: listoffset,
+          multi_session_key: data.options.multi_session_key,
         },
         (error, payload) => {
           cb(payload);
@@ -410,12 +411,12 @@ function roonLibraryBrowse(data, cb) {
 }
 
 function roonLibraryLoad(options, cb) {
-  // console.log(options);
   api.roon_browse.load(
     {
       hierarchy: "browse",
       count: options.count,
       offset: options.offset,
+      multi_session_key: options.multi_session_key,
     },
     (error, payload) => {
       cb(payload);

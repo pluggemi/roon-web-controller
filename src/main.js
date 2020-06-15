@@ -79,6 +79,7 @@ new Vue({
         this.$store.commit("SET_window_size")
       );
       this.$store.commit("SET_window_size");
+      this.$store.commit("SET_session_key");
       this.$store.commit("SET_base_url", BASE_URL);
       document.title = "Roon Web Controller";
     });

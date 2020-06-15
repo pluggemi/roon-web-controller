@@ -44,6 +44,7 @@ NOTE: This is alpha software. There is missing functionality.
 - [ ] Backend: Environmental variables for Roon host/port
 - [ ] Backend: Environmental variables to enable / disable Health checks
 - [ ] Backend: Environmental variables to configure Health check port
+- [x] ~~Backend: Multi Session Key support for library browser~~
 - [ ] Backend: Dockerfile
 - [ ] Backend: Track Seek support
 - [ ] Backend: Play from here support
