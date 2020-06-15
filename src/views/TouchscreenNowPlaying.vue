@@ -75,6 +75,10 @@
             <use href="#svg_chevron_down" /></svg
         ></router-link>
       </div>
+      <UiClock
+        v-if="clock.show_clock"
+        v-bind:class="'clock_' + clock.position"
+      />
     </div>
     <div v-else class="not_playing_page">
       <div class="library_view_button_container">
@@ -123,6 +127,11 @@ export default {
         ];
       },
     },
+    clock: {
+      get() {
+        return this.$store.state.settings.clock;
+      },
+    },
   },
 };
 </script>
@@ -133,10 +142,10 @@ export default {
   grid-template-columns: 45vw 10vw 45vw;
   grid-template-rows: 7vh 50vh 36vh 7vh;
   grid-template-areas:
-    ". library_view_button_container ."
+    "clock_top_left library_view_button_container clock_top_right"
     "cover_art_container song_info_container song_info_container"
     "cover_art_container control_container control_container"
-    ". queue_view_button_container .";
+    "clock_bottom_left queue_view_button_container clock_bottom_right";
 }
 .not_playing_page {
   display: grid;
@@ -182,24 +191,20 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
-
 .media_control_container {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
 }
-
 .range_track_seek {
   width: 50vw;
 }
-
 .cover_art {
   max-height: 95%;
   max-width: 95%;
   filter: drop-shadow(1vh 1vh 1vh black);
 }
-
 .song_position_container {
   width: 90%;
   display: flex;
@@ -212,7 +217,6 @@ export default {
 .queue_view_button_container {
   grid-area: queue_view_button_container;
 }
-
 .not_playing_info {
   grid-area: not_playing_info;
   display: flex;
@@ -225,5 +229,17 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.clock_top_left {
+  grid-area: clock_top_left;
+}
+.clock_top_right {
+  grid-area: clock_top_right;
+}
+.clock_bottom_left {
+  grid-area: clock_bottom_left;
+}
+.clock_bottom_right {
+  grid-area: clock_bottom_right;
 }
 </style>

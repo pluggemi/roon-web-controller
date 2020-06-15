@@ -29,6 +29,7 @@ import VueSocketio from "vue-socket.io";
 // import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import moment from "moment";
 
 Vue.config.productionTip = false;
 
@@ -69,6 +70,10 @@ Vue.use(
     },
   })
 );
+
+Vue.use(require("vue-moment"), {
+  moment,
+});
 
 new Vue({
   router,

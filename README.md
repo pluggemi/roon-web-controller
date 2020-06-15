@@ -4,10 +4,11 @@ NOTE: This is alpha software. There is missing functionality.
 
 ## What works
 
-- Touchscreen layout
+Touchscreen layout
 - Landscape view
 - Library functionality
 - Now Playing functionality
+- Clock, with settings for enabled, position, and format
 - Queue display
 - Volume controls overlay
 - Zone selection overlay
@@ -16,7 +17,7 @@ NOTE: This is alpha software. There is missing functionality.
 ## What does not work
 
 - Portrait mode, only landscape is available right now
-- Settings overlay is empty, no settings controls
+- Settings overlay is in progress, partial settings controls
 - Queue "Play from Here" is not functional
 - Track seek controls
 
@@ -29,15 +30,15 @@ NOTE: This is alpha software. There is missing functionality.
 - [ ] App global: Keyboard shortcuts
 - [ ] UI: Now Playing: Track seek controls
 - [ ] UI: Now Playing: Current Position / Time Left option
-- [ ] UI: Now Playing: Clock
+- [x] ~~UI: Now Playing: Clock~~
 - [ ] UI: Queue: "play from here"
 - [x] ~~UI: Touchscreen Global: Volume overlay~~
 - [ ] UI: Touchscreen Global: Settings overlay
 - [ ] UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage
 - [ ] UI: Settings Overlay: Select Layout
-- [ ] UI: Settings Overlay: Clock enable/disable and Moment.js format option
+- [x] ~~UI: Settings Overlay: Clock enable/disable and Moment.js format option~~
 - [ ] UI: Settings Overlay: Desktop Notifications enable/disable
-- [ ] UI: Settings Overlay: Background cover art enable/disable
+- [x] ~~UI: Settings Overlay: Background cover art enable/disable~~
 - [ ] UI: Settings Overlay: Keyboard shortcuts enable/disable
 - [ ] UI: Settings Overlay: Keyboard shortcuts configure
 - [ ] UI: Settings Overlay: Current Position / Time Left option

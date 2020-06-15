@@ -59,7 +59,7 @@ export default {
     },
     show_cover_background: {
       get() {
-        return this.$store.state.settings.show_cover_background;
+        return this.$store.state.settings.ui.show_cover_background;
       },
     },
     current_zone: {
@@ -252,6 +252,20 @@ export default {
 .list_item_button:active {
   background: var(--ActiveColor);
   color: var(--AvailableColor);
+}
+
+.ui_button {
+  color: var(--BaseColor);
+  background-color: var(--AvailableColor);
+  text-decoration: none;
+  display: inline-block;
+  margin: 1vh 1vw;
+  padding: 1vh 1vw;
+  border-radius: 1vh;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  filter: drop-shadow(1vh 1vh 1vh black);
 }
 
 input[type="radio"] {

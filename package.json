@@ -23,6 +23,7 @@
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
+    "vue-moment": "^4.1.0",
     "vue-router": "^3.3.4",
     "vue-socket.io": "^3.0.9",
     "vuex": "^3.4.0",

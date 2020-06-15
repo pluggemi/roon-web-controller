@@ -22,8 +22,16 @@ export default new Vuex.Store({
       error: "",
     },
     settings: {
-      show_cover_background: true,
       current_zone_id: "",
+      clock: {
+        show_clock: true,
+        position: "bottom_right",
+        format_line1: "LTS",
+        format_line2: "LL",
+      },
+      ui: {
+        show_cover_background: true,
+      },
     },
     roon: {
       base_url: "",
@@ -75,6 +83,12 @@ export default new Vuex.Store({
     },
     SHOW_overlay: (state, payload) => {
       state.ui["show_" + payload.overlay_name] = payload.show;
+    },
+    SHOW_cover_background: (state, payload) => {
+      state.settings.ui.show_cover_background = payload;
+    },
+    SET_clock: (state, payload) => {
+      state.settings.clock[payload.option] = payload.value;
     },
   },
   actions: {
