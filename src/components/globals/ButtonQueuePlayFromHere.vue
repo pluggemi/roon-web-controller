@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "TouchscreenQueuePlayFromHere",
+  name: "ButtonQueuePlayFromHere",
   props: {
     queue_item_id: { type: Number, required: true },
   },

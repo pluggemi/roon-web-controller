@@ -32,7 +32,7 @@
           />
         </div>
         <div class="list_item_control">
-          <TouchscreenQueuePlayFromHere
+          <ButtonQueuePlayFromHere
             v-bind:queue_item_id="queue_item.queue_item_id"
             class="list_item_button"
           />
@@ -62,13 +62,11 @@
 <script>
 import TouchscreenControlsOverlays from "@/components/TouchscreenControlsOverlays.vue";
 import TouchscreenControlsPlaySettings from "@/components/TouchscreenControlsPlaySettings.vue";
-import TouchscreenQueuePlayFromHere from "@/components/TouchscreenQueuePlayFromHere.vue";
 export default {
   name: "TouchscreenViewQueue",
   components: {
     TouchscreenControlsOverlays,
     TouchscreenControlsPlaySettings,
-    TouchscreenQueuePlayFromHere,
   },
   computed: {
     current_zone: {
