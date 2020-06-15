@@ -224,5 +224,9 @@ export default new Vuex.Store({
       let url = `${state.roon.base_url}/api/volume?id=${payload.output_id}&value=${payload.value}`;
       await fetch(url);
     },
+    GO_play_from_here: async ({ state }, payload) => {
+      let url = `${state.roon.base_url}/api/play_from_here?id=${state.settings.current_zone_id}&queue_item_id=${payload.queue_item_id}`;
+      await fetch(url);
+    },
   },
 });

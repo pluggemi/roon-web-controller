@@ -16,9 +16,9 @@
       class="content"
     >
       <p class="queue_stats text_bold">
-          {{ current_zone.queue_items_remaining }} tracks remaining ({{
-            secondsToTime(current_zone.queue_time_remaining)
-          }})
+        {{ current_zone.queue_items_remaining }} tracks remaining ({{
+          secondsToTime(current_zone.queue_time_remaining)
+        }})
       </p>
       <div
         class="list_item"
@@ -32,9 +32,10 @@
           />
         </div>
         <div class="list_item_control">
-          <svg>
-            <use href="#svg_play" />
-          </svg>
+          <TouchscreenQueuePlayFromHere
+            v-bind:queue_item_id="queue_item.queue_item_id"
+            class="list_item_button"
+          />
         </div>
         <div class="list_item_info">
           <div class="text_bold">
@@ -61,11 +62,13 @@
 <script>
 import TouchscreenControlsOverlays from "@/components/TouchscreenControlsOverlays.vue";
 import TouchscreenControlsPlaySettings from "@/components/TouchscreenControlsPlaySettings.vue";
+import TouchscreenQueuePlayFromHere from "@/components/TouchscreenQueuePlayFromHere.vue";
 export default {
   name: "TouchscreenViewQueue",
   components: {
     TouchscreenControlsOverlays,
     TouchscreenControlsPlaySettings,
+    TouchscreenQueuePlayFromHere,
   },
   computed: {
     current_zone: {
@@ -127,7 +130,7 @@ export default {
 .list_item:first-of-type {
   background: var(--ThemeColor);
 }
-.list_item:first-of-type .list_item_control svg {
+.list_item:first-of-type .list_item_control button {
   display: none;
 }
 </style>

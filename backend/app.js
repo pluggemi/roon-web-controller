@@ -213,6 +213,17 @@ function setupExpress() {
     res.json(state.zone_list);
   });
 
+  app.get("/api/play_from_here", (req, res) => {
+    if (req.query.id && req.query.queue_item_id) {
+      api.roon_transport.play_from_here(
+        req.query.id,
+        req.query.queue_item_id,
+        (msg) => console.log(msg)
+      );
+    }
+    res.status(204);
+  });
+
   // Start Server
   server.listen(setting.express.port, () => {
     console.log(sw.name + " listening on port " + setting.express.port);

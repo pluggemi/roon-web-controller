@@ -9,7 +9,7 @@ Touchscreen layout
 - Library functionality
 - Now Playing functionality
 - Clock, with settings for enabled, position, and format
-- Queue display
+- Queue display and "play from here"
 - Volume controls overlay
 - Zone selection overlay
 - Loop, Shuffle, and Radio controls on the Queue page
@@ -18,7 +18,6 @@ Touchscreen layout
 
 - Portrait mode, only landscape is available right now
 - Settings overlay is in progress, partial settings controls
-- Queue "Play from Here" is not functional
 - Track seek controls
 
 ## TODO - 2.0.0
@@ -31,7 +30,7 @@ Touchscreen layout
 - [ ] UI: Now Playing: Track seek controls
 - [ ] UI: Now Playing: Current Position / Time Left option
 - [x] ~~UI: Now Playing: Clock~~
-- [ ] UI: Queue: "play from here"
+- [x] ~~UI: Queue: "play from here"~~
 - [x] ~~UI: Queue: queue items/time remaining~~
 - [x] ~~UI: Touchscreen Global: Volume overlay~~
 - [ ] UI: Touchscreen Global: Settings overlay
@@ -49,7 +48,7 @@ Touchscreen layout
 - [x] ~~Backend: Multi Session Key support for library browser~~
 - [ ] Backend: Dockerfile
 - [ ] Backend: Track Seek support
-- [ ] Backend: Play from here support
+- [x] ~~Backend: Play from here support~~
 
 ## TODO - 2.1.0
 
