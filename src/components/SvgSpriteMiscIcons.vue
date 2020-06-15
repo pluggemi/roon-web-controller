@@ -95,9 +95,14 @@
       />
     </symbol>
 
-    <symbol id="svg_volume_mute" viewBox="0 0 24 24">
+    <symbol id="svg_volume_mute_true" viewBox="0 0 24 24">
       <path
         d="M3 9h4l5-5v16l-5-5H3V9m13.59 3L14 9.41 15.41 8 18 10.59 20.59 8 22 9.41 19.41 12 22 14.59 20.59 16 18 13.41 15.41 16 14 14.59 16.59 12z"
+      />
+    </symbol>
+    <symbol id="svg_volume_mute_false" viewBox="0 0 24 24">
+      <path
+        d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.84-5 6.7v2.07c4-.91 7-4.49 7-8.77 0-4.28-3-7.86-7-8.77M16.5 12c0-1.77-1-3.29-2.5-4.03V16c1.5-.71 2.5-2.24 2.5-4M3 9v6h4l5 5V4L7 9H3z"
       />
     </symbol>
     <symbol id="svg_volume_minus" viewBox="0 0 24 24">

@@ -156,7 +156,7 @@ export default {
   border-radius: 1vh;
   filter: drop-shadow(1vh 1vh 1vh black);
   text-align: center;
-  min-width: 45vw;
+  min-width: 50vw;
 }
 .overlay_close_button {
   position: absolute;

@@ -69,13 +69,16 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    SOCKET_zone_list: ({ commit }, message) => {
-      message = JSON.parse(message);
-      commit("SET_zone_list", message, { root: true });
+    SOCKET_zone_list: ({ state, commit }, message) => {
+      let zone_list = JSON.parse(message);
+      commit("SET_zone_list", zone_list);
+      if (!zone_list[state.settings.current_zone_id]) {
+        commit("SET_current_zone_id", "");
+      }
     },
     SOCKET_queue_list: ({ commit }, message) => {
-      message = JSON.parse(message);
-      commit("SET_queue_list", message, { root: true });
+      let queue_list = JSON.parse(message);
+      commit("SET_queue_list", queue_list);
     },
     SET_current_zone_id: ({ commit, dispatch }, payload) => {
       commit("SET_current_zone_id", payload);
@@ -179,12 +182,19 @@ export default new Vuex.Store({
       let result = await response.json();
       commit("SET_library", result);
     },
-
     GO_command: async ({ state }, payload) => {
       let url = `${state.roon.base_url}/api/cmd?id=${state.settings.current_zone_id}&command=${payload.command}`;
       if (payload.value !== undefined) {
         url += `&value=${payload.value}`;
       }
+      await fetch(url);
+    },
+    GO_volume_mute: async ({ state }, payload) => {
+      let url = `${state.roon.base_url}/api/mute?id=${payload.output_id}&mute=${payload.mute}`;
+      await fetch(url);
+    },
+    GO_volume: async ({ state }, payload) => {
+      let url = `${state.roon.base_url}/api/volume?id=${payload.output_id}&value=${payload.value}`;
       await fetch(url);
     },
   },

@@ -11,21 +11,24 @@
           <use href="#svg_close" />
         </svg>
       </button>
-      <p>
-        <span v-for="zone in zone_list" v-bind:key="zone.zone_id">
+      <div>
+        <template v-for="zone in zone_list">
           <input
             type="radio"
             name="radio_zone_select"
+            v-bind:key="'radio_zone_select_' + zone.zone_id"
             v-bind:id="'radio_zone_select_' + zone.zone_id"
             v-bind:value="zone.zone_id"
             v-model="current_zone_id"
           />
 
-          <label v-bind:for="'radio_zone_select_' + zone.zone_id">{{
-            zone.display_name
-          }}</label>
-        </span>
-      </p>
+          <label
+            v-bind:key="'label_zone_select_' + zone.zone_id"
+            v-bind:for="'radio_zone_select_' + zone.zone_id"
+            >{{ zone.display_name }}</label
+          >
+        </template>
+      </div>
     </div>
   </div>
 </template>
