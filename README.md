@@ -1,4 +1,4 @@
-# Roon Web Controller ALPHA
+# Roon Web Controller 2.0.0 ALPHA
 
 NOTE: This is alpha software. There is missing functionality.
 
@@ -32,6 +32,7 @@ Touchscreen layout
 - [ ] UI: Now Playing: Current Position / Time Left option
 - [x] ~~UI: Now Playing: Clock~~
 - [ ] UI: Queue: "play from here"
+- [x] ~~UI: Queue: queue items/time remaining~~
 - [x] ~~UI: Touchscreen Global: Volume overlay~~
 - [ ] UI: Touchscreen Global: Settings overlay
 - [ ] UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage

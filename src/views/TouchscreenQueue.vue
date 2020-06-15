@@ -15,6 +15,11 @@
       "
       class="content"
     >
+      <p class="queue_stats text_bold">
+          {{ current_zone.queue_items_remaining }} tracks remaining ({{
+            secondsToTime(current_zone.queue_time_remaining)
+          }})
+      </p>
       <div
         class="list_item"
         v-for="queue_item in current_queue.queue"
@@ -93,7 +98,6 @@ export default {
 .now_playing_view_button_container {
   grid-area: now_playing_view_button_container;
 }
-
 .content {
   grid-area: content;
   overflow: auto;
@@ -110,7 +114,9 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
-
+.queue_stats {
+  text-align: center;
+}
 .queue_list_empty {
   display: flex;
   justify-content: center;
