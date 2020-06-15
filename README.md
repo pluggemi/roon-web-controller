@@ -16,7 +16,7 @@ NOTE: This is alpha software. There is missing functionality.
 ## What does not work
 
 - Portrait mode, only landscape is available right now
-- ~~ Volume overlay is empty, no volume controls~~
+- ~~Volume overlay is empty, no volume controls~~
 - Settings overlay is empty, no settings controls
 - Queue "Play from Here" is not functional
 - Track seek controls
