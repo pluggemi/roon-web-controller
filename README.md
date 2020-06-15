@@ -28,6 +28,7 @@ NOTE: This is alpha software. There is missing functionality.
 - [ ] App global: Desktop notifications
 - [ ] App global: Keyboard shortcuts
 - [ ] UI: Now Playing: Track seek controls
+- [ ] UI: Now Playing: Current Position / Time Left option
 - [ ] UI: Now Playing: Clock
 - [ ] UI: Queue: "play from here"
 - [x] ~~UI: Touchscreen Global: Volume overlay~~
@@ -39,6 +40,7 @@ NOTE: This is alpha software. There is missing functionality.
 - [ ] UI: Settings Overlay: Background cover art enable/disable
 - [ ] UI: Settings Overlay: Keyboard shortcuts enable/disable
 - [ ] UI: Settings Overlay: Keyboard shortcuts configure
+- [ ] UI: Settings Overlay: Current Position / Time Left option
 - [ ] Backend: Environmental variables for Roon host/port
 - [ ] Backend: Environmental variables to enable / disable Health checks
 - [ ] Backend: Environmental variables to configure Health check port
