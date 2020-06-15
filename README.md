@@ -15,37 +15,37 @@ NOTE: This is alpha software. There is missing functionality.
 
 ## What does not work
 
-- Portrait mode, only landscape is available right now
-- ~~Volume overlay is empty, no volume controls~~
-- Settings overlay is empty, no settings controls
-- Queue "Play from Here" is not functional
-- Track seek controls
+- [ ] Portrait mode, only landscape is available right now
+- [x] ~~Volume overlay is empty, no volume controls~~
+- [ ] Settings overlay is empty, no settings controls
+- [ ] Queue "Play from Here" is not functional
+- [ ] Track seek controls
 
 ## TODO - 2.0.0
 
-- App global: Screen reader layout
-- App global: Change favicons from default Vue icons to Roon Web Controller icons
-- App global: enable Service Worker, configure app manifest colors and icons
-- App global: Desktop notifications
-- App global: Keyboard shortcuts
-- UI: Now Playing: Track seek controls
-- UI: Now Playing: Clock
-- UI: Queue: "play from here"
-- ~~UI: Touchscreen Global: Volume overlay~~
-- UI: Touchscreen Global: Settings overlay
-- UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage
-- UI: Settings Overlay: Select Layout
-- UI: Settings Overlay: Clock enable/disable and Moment.js format option
-- UI: Settings Overlay: Desktop Notifications enable/disable
-- UI: Settings Overlay: Background cover art enable/disable
-- UI: Settings Overlay: Keyboard shortcuts enable/disable
-- UI: Settings Overlay: Keyboard shortcuts configure
-- Backend: Environmental variables for Roon host/port
-- Backend: Environmental variables to enable / disable Health checks
-- Backend: Environmental variables to configure Health check port
-- Backend: Dockerfile
-- Backend: Track Seek support
-- Backend: Play from here support
+- [ ] App global: Screen reader layout
+- [ ] App global: Change favicons from default Vue icons to Roon Web Controller icons
+- [ ] App global: enable Service Worker, configure app manifest colors and icons
+- [ ] App global: Desktop notifications
+- [ ] App global: Keyboard shortcuts
+- [ ] UI: Now Playing: Track seek controls
+- [ ] UI: Now Playing: Clock
+- [ ] UI: Queue: "play from here"
+- [x] ~~UI: Touchscreen Global: Volume overlay~~
+- [ ] UI: Touchscreen Global: Settings overlay
+- [ ] UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage
+- [ ] UI: Settings Overlay: Select Layout
+- [ ] UI: Settings Overlay: Clock enable/disable and Moment.js format option
+- [ ] UI: Settings Overlay: Desktop Notifications enable/disable
+- [ ] UI: Settings Overlay: Background cover art enable/disable
+- [ ] UI: Settings Overlay: Keyboard shortcuts enable/disable
+- [ ] UI: Settings Overlay: Keyboard shortcuts configure
+- [ ] Backend: Environmental variables for Roon host/port
+- [ ] Backend: Environmental variables to enable / disable Health checks
+- [ ] Backend: Environmental variables to configure Health check port
+- [ ] Backend: Dockerfile
+- [ ] Backend: Track Seek support
+- [ ] Backend: Play from here support
 
 ## TODO - 2.1.0
 
