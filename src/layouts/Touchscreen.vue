@@ -248,6 +248,7 @@ export default {
   height: 7.5vh;
   width: 7.5vw;
   outline: none;
+  cursor: pointer;
 }
 .list_item_button:active {
   background: var(--ActiveColor);

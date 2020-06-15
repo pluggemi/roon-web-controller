@@ -56,7 +56,15 @@
             "
           />
           <div class="song_position_container">
-            <div>
+            <div v-if="show_time_remaining">
+              {{
+                secondsToTime(
+                  current_zone.now_playing.length -
+                    current_zone.now_playing.seek_position
+                )
+              }}
+            </div>
+            <div v-else>
               {{ secondsToTime(current_zone.now_playing.seek_position) }}
             </div>
             <div>
@@ -131,6 +139,11 @@ export default {
     clock: {
       get() {
         return this.$store.state.settings.clock;
+      },
+    },
+    show_time_remaining: {
+      get() {
+        return this.$store.state.settings.ui.show_time_remaining;
       },
     },
   },

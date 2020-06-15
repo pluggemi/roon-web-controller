@@ -31,6 +31,7 @@ export default new Vuex.Store({
       },
       ui: {
         show_cover_background: true,
+        show_time_remaining: false,
       },
     },
     roon: {
@@ -84,11 +85,11 @@ export default new Vuex.Store({
     SHOW_overlay: (state, payload) => {
       state.ui["show_" + payload.overlay_name] = payload.show;
     },
-    SHOW_cover_background: (state, payload) => {
-      state.settings.ui.show_cover_background = payload;
-    },
     SET_clock: (state, payload) => {
       state.settings.clock[payload.option] = payload.value;
+    },
+    SET_ui: (state, payload) => {
+      state.settings.ui[payload.option] = payload.value;
     },
   },
   actions: {

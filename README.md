@@ -5,6 +5,7 @@ NOTE: This is alpha software. There is missing functionality.
 ## What works
 
 Touchscreen layout
+
 - Landscape view
 - Library functionality
 - Now Playing functionality
@@ -28,7 +29,7 @@ Touchscreen layout
 - [ ] App global: Desktop notifications
 - [ ] App global: Keyboard shortcuts
 - [ ] UI: Now Playing: Track seek controls
-- [ ] UI: Now Playing: Current Position / Time Left option
+- [x] ~~UI: Now Playing: Current Position / Time Left option~~
 - [x] ~~UI: Now Playing: Clock~~
 - [x] ~~UI: Queue: "play from here"~~
 - [x] ~~UI: Queue: queue items/time remaining~~
@@ -41,7 +42,7 @@ Touchscreen layout
 - [x] ~~UI: Settings Overlay: Background cover art enable/disable~~
 - [ ] UI: Settings Overlay: Keyboard shortcuts enable/disable
 - [ ] UI: Settings Overlay: Keyboard shortcuts configure
-- [ ] UI: Settings Overlay: Current Position / Time Left option
+- [x] ~~UI: Settings Overlay: Current Position / Time Left option~~
 - [ ] Backend: Environmental variables for Roon host/port
 - [ ] Backend: Environmental variables to enable / disable Health checks
 - [ ] Backend: Environmental variables to configure Health check port
@@ -85,29 +86,30 @@ Using this alpha requires git, Node JS 10+ and npm.
 7. View the application by opening a browser to [http://localhost:8080](http://localhost:8080)
 
 ## Update instructions
+
 1. Pull the latest changes
 
-  `git pull`
+`git pull`
 
-  2. Switch to the alpha branch (if you are not already there):
+2. Switch to the alpha branch (if you are not already there):
 
-  `git checkout alpha`
+`git checkout alpha`
 
-  3. Install the updated/changed dependencies:
+3. Install the updated/changed dependencies:
 
-  `npm install`
+`npm install`
 
-  4. Build the application:
+4. Build the application:
 
-  `npm run build`
+`npm run build`
 
-  5. Start the application:
+5. Start the application:
 
-  `npm start`
+`npm start`
 
-  6. Enable the extension in an official Roon client (if not already done)
+6. Enable the extension in an official Roon client (if not already done)
 
-  7. View the application by opening a browser to [http://localhost:8080](http://localhost:8080)
+7. View the application by opening a browser to [http://localhost:8080](http://localhost:8080)
 
 ## To develop:
 
