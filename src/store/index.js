@@ -26,7 +26,7 @@ export default new Vuex.Store({
       clock: {
         show_clock: true,
         position: "bottom_right",
-        format_line1: "LTS",
+        format_line1: "LT",
         format_line2: "LL",
       },
       ui: {

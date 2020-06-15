@@ -80,9 +80,28 @@ export default {
 }
 .settings_name {
   font-weight: bold;
+  font-size: 125%;
   width: 40%;
 }
 .settings_options {
   width: 60%;
+}
+.settings_checkbox input[type="checkbox"] {
+  display: none;
+}
+.settings_checkbox label {
+  cursor: pointer;
+  font-size: 125%;
+}
+
+.settings_checkbox input[type="checkbox"] + label::after {
+  /* unicode ballot box without check */
+  content: " \2610 ";
+}
+
+.settings_checkbox input[type="checkbox"]:checked + label::after {
+  /* unicode ballot box with check */
+  content: " \2611 ";
+  color: var(--ActiveColor);
 }
 </style>

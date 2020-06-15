@@ -1,11 +1,15 @@
 <template lang="html">
   <div data-name="TouchscreenOverlaySettingsClock" class="settings_content">
     <div class="settings_row">
-      <div class="settings_name">
-        Show Clock:
-      </div>
       <div class="settings_options">
-        <input type="checkbox" name="" v-model="show_clock" />
+        <span class="settings_checkbox">
+          <input
+            type="checkbox"
+            id="checkbox_show_clock"
+            v-model="show_clock"
+          />
+          <label for="checkbox_show_clock" class="text_bold">Show Clock</label>
+        </span>
       </div>
     </div>
     <div class="settings_row">
@@ -79,7 +83,12 @@
         Format Documentation:
       </div>
       <div class="settings_options">
-        <a href="https://momentjs.com/docs/#/displaying/format/">Momentjs</a>
+        <a
+          href="https://momentjs.com/docs/#/displaying/format/"
+          target="_blank"
+          rel="noreferrer noopener"
+          >Momentjs</a
+        >
       </div>
     </div>
   </div>
