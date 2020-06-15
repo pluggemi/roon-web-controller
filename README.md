@@ -15,11 +15,10 @@ NOTE: This is alpha software. There is missing functionality.
 
 ## What does not work
 
-- [ ] Portrait mode, only landscape is available right now
-- [x] ~~Volume overlay is empty, no volume controls~~
-- [ ] Settings overlay is empty, no settings controls
-- [ ] Queue "Play from Here" is not functional
-- [ ] Track seek controls
+- Portrait mode, only landscape is available right now
+- Settings overlay is empty, no settings controls
+- Queue "Play from Here" is not functional
+- Track seek controls
 
 ## TODO - 2.0.0
 
