@@ -147,7 +147,7 @@ export default {
   z-index: 500;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background: var(--TransparentColor);
 }
 .overlay_content {

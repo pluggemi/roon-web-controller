@@ -2,7 +2,11 @@
   <div id="app" data-name="app">
     <SvgSpriteMediaControls />
     <SvgSpriteMiscIcons />
-    <router-view class="app_content" />
+    <router-view v-if="sw.paired && sw.paired === true" class="app_content" />
+    <p v-else>
+      The {{ sw.name }} extension is not enabled. Please use an official Roon
+      client to enable it.
+    </p>
   </div>
 </template>
 
@@ -15,6 +19,13 @@ export default {
   components: {
     SvgSpriteMediaControls,
     SvgSpriteMiscIcons,
+  },
+  computed: {
+    sw: {
+      get() {
+        return this.$store.state.socket.sw;
+      },
+    },
   },
 };
 </script>

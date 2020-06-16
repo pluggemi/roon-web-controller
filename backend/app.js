@@ -31,6 +31,7 @@ const sw = {};
 sw.name = "Roon Web Controller";
 sw.version = "2.0.0-alpha.0";
 sw.publisher = "Mike Plugge";
+sw.paired = false;
 
 const setting = {};
 setting.roon = {};
@@ -239,6 +240,7 @@ function setupSocketIO(server) {
   api.socketio.on("connection", () => {
     api.socketio.emit("zone_list", JSON.stringify(state.zone_list));
     api.socketio.emit("queue_list", JSON.stringify(state.queue_list));
+    api.socketio.emit("sw", JSON.stringify(sw));
   });
   health.socketio = "ready";
 }
@@ -262,6 +264,8 @@ function setupRoon() {
       api.roon_browse = core.services.RoonApiBrowse;
       api.roon_image = core.services.RoonApiImage;
       api.roon_transport = core.services.RoonApiTransport;
+      sw.paired = true;
+      api.socketio.emit("sw", JSON.stringify(sw));
 
       api.roon_transport.subscribe_zones((response, data) => {
         if (response == "Subscribed") {
@@ -307,7 +311,10 @@ function setupRoon() {
         }
       });
     },
-    core_unpaired: () => {},
+    core_unpaired: () => {
+      sw.paired = false;
+      api.socketio.emit("sw", JSON.stringify(sw));
+    },
   });
 
   api.roon_status = new RoonApiStatus(api.roon);

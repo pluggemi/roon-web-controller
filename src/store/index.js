@@ -20,6 +20,7 @@ export default new Vuex.Store({
       connected: false,
       message: "",
       error: "",
+      sw: {},
     },
     settings: {
       current_zone_id: "",
@@ -82,6 +83,9 @@ export default new Vuex.Store({
     SET_library: (state, payload) => {
       state.roon.library = payload;
     },
+    SET_sw: (state, payload) => {
+      state.socket.sw = payload;
+    },
     SHOW_overlay: (state, payload) => {
       state.ui["show_" + payload.overlay_name] = payload.show;
     },
@@ -103,6 +107,10 @@ export default new Vuex.Store({
     SOCKET_queue_list: ({ commit }, message) => {
       let queue_list = JSON.parse(message);
       commit("SET_queue_list", queue_list);
+    },
+    SOCKET_sw: ({ commit }, message) => {
+      let sw = JSON.parse(message);
+      commit("SET_sw", sw);
     },
     SET_current_zone_id: ({ commit, dispatch }, payload) => {
       commit("SET_current_zone_id", payload);
