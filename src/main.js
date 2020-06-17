@@ -87,6 +87,26 @@ new Vue({
       this.$store.commit("SET_session_key");
       this.$store.commit("SET_base_url", BASE_URL);
       document.title = "Roon Web Controller";
+
+      /* eslint-disable no-console */
+      let lang = navigator.language;
+      lang = lang.toLowerCase();
+      if (lang !== "en-us") {
+        try {
+          require("moment/locale/" + lang);
+        } catch (e) {
+          console.error("No moment locale file for " + lang);
+          let split_lang = lang.split("-");
+          try {
+            require("moment/locale/" + split_lang[0]);
+          } catch (e) {
+            console.error("No moment locale file for " + split_lang[0]);
+          }
+        }
+      }
+      console.log("browser lang: " + lang);
+      console.log("moment lang: " + moment().locale());
+      /* eslint-enable no-console */
     });
   },
   render: (h) => h(App),
