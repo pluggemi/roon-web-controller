@@ -59,7 +59,7 @@ export default {
     },
     show_cover_background: {
       get() {
-        return this.$store.state.settings.ui.show_cover_background;
+        return this.$store.state.settings.general.show_cover_background;
       },
     },
     current_zone: {
@@ -156,7 +156,7 @@ export default {
   border-radius: 1vh;
   filter: drop-shadow(1vh 1vh 1vh black);
   text-align: center;
-  min-width: 50vw;
+  min-width: 75vw;
 }
 .overlay_close_button {
   position: absolute;

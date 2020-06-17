@@ -107,7 +107,7 @@ export default {
           option: "show_clock",
           value: value,
         };
-        this.$store.commit("SET_clock", payload);
+        this.$store.commit("SET_clock_settings", payload);
       },
     },
     clock_position: {
@@ -119,7 +119,7 @@ export default {
           option: "position",
           value: value,
         };
-        this.$store.commit("SET_clock", payload);
+        this.$store.commit("SET_clock_settings", payload);
       },
     },
     format_line1: {
@@ -131,7 +131,7 @@ export default {
           option: "format_line1",
           value: value,
         };
-        this.$store.commit("SET_clock", payload);
+        this.$store.commit("SET_clock_settings", payload);
       },
     },
     format_line2: {
@@ -143,7 +143,7 @@ export default {
           option: "format_line2",
           value: value,
         };
-        this.$store.commit("SET_clock", payload);
+        this.$store.commit("SET_clock_settings", payload);
       },
     },
   },

@@ -36,21 +36,21 @@
 </template>
 
 <script>
-import TouchscreenOverlaySettingsUi from "@/components/TouchscreenOverlaySettingsUi.vue";
+import TouchscreenOverlaySettingsGeneral from "@/components/TouchscreenOverlaySettingsGeneral.vue";
 import TouchscreenOverlaySettingsClock from "@/components/TouchscreenOverlaySettingsClock.vue";
 import TouchscreenOverlaySettingsAbout from "@/components/TouchscreenOverlaySettingsAbout.vue";
 export default {
   name: "TouchscreenViewSettings",
   components: {
-    TouchscreenOverlaySettingsUi,
+    TouchscreenOverlaySettingsGeneral,
     TouchscreenOverlaySettingsClock,
     TouchscreenOverlaySettingsAbout,
   },
   data: function () {
     return {
-      current_component: "TouchscreenOverlaySettingsUi",
+      current_component: "TouchscreenOverlaySettingsGeneral",
       tabs: [
-        { name: "UI", component: "TouchscreenOverlaySettingsUi" },
+        { name: "General", component: "TouchscreenOverlaySettingsGeneral" },
         { name: "Clock", component: "TouchscreenOverlaySettingsClock" },
         { name: "About", component: "TouchscreenOverlaySettingsAbout" },
       ],

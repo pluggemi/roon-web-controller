@@ -30,7 +30,7 @@ export default new Vuex.Store({
         format_line1: "LT",
         format_line2: "LL",
       },
-      ui: {
+      general: {
         show_cover_background: true,
         show_time_remaining: false,
       },
@@ -89,11 +89,11 @@ export default new Vuex.Store({
     SHOW_overlay: (state, payload) => {
       state.ui["show_" + payload.overlay_name] = payload.show;
     },
-    SET_clock: (state, payload) => {
+    SET_clock_settings: (state, payload) => {
       state.settings.clock[payload.option] = payload.value;
     },
-    SET_ui: (state, payload) => {
-      state.settings.ui[payload.option] = payload.value;
+    SET_general_settings: (state, payload) => {
+      state.settings.general[payload.option] = payload.value;
     },
   },
   actions: {

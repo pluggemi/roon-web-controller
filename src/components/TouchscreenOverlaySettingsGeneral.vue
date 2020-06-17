@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenOverlaySettingsUi" class="settings_content">
+  <div data-name="TouchscreenOverlaySettingsGeneral" class="settings_content">
     <div class="settings_row">
       <div class="settings_options">
         <span class="settings_checkbox">
@@ -33,30 +33,30 @@
 
 <script>
 export default {
-  name: "TouchscreenOverlaySettingsUi",
+  name: "TouchscreenOverlaySettingsGeneral",
   computed: {
     show_cover_background: {
       get() {
-        return this.$store.state.settings.ui.show_cover_background;
+        return this.$store.state.settings.general.show_cover_background;
       },
       set(value) {
         let payload = {
           option: "show_cover_background",
           value: value,
         };
-        this.$store.commit("SET_ui", payload);
+        this.$store.commit("SET_general_settings", payload);
       },
     },
     show_time_remaining: {
       get() {
-        return this.$store.state.settings.ui.show_time_remaining;
+        return this.$store.state.settings.general.show_time_remaining;
       },
       set(value) {
         let payload = {
           option: "show_time_remaining",
           value: value,
         };
-        this.$store.commit("SET_ui", payload);
+        this.$store.commit("SET_general_settings", payload);
       },
     },
   },
