@@ -56,6 +56,9 @@
             "
           />
           <div class="song_position_container">
+            <div>
+              {{ secondsToTime(current_zone.now_playing.seek_position) }}
+            </div>
             <div v-if="show_time_remaining === true">
               {{
                 secondsToTime(
@@ -65,9 +68,6 @@
               }}
             </div>
             <div v-else>
-              {{ secondsToTime(current_zone.now_playing.seek_position) }}
-            </div>
-            <div>
               {{ secondsToTime(current_zone.now_playing.length) }}
             </div>
           </div>

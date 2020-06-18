@@ -104,8 +104,6 @@ new Vue({
           }
         }
       }
-      console.log("browser lang: " + lang);
-      console.log("moment lang: " + moment().locale());
       /* eslint-enable no-console */
     });
   },

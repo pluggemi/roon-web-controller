@@ -10,6 +10,7 @@ Touchscreen layout
 - Library functionality
 - Now Playing functionality
 - Clock, with settings for enabled, position, and format
+  - Browser language detection for localized clock format
 - Queue display and "play from here"
 - Volume controls overlay
 - Zone selection overlay
@@ -29,7 +30,7 @@ Touchscreen layout
 - [ ] App global: Desktop notifications
 - [ ] App global: Keyboard shortcuts
 - [ ] UI: Now Playing: Track seek controls
-- [x] ~~UI: Now Playing: Current Position / Time Left option~~
+- [x] ~~UI: Now Playing: Track length / Time Remaining option~~
 - [x] ~~UI: Now Playing: Clock~~
 - [x] ~~UI: Queue: "play from here"~~
 - [x] ~~UI: Queue: queue items/time remaining~~
