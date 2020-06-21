@@ -164,11 +164,11 @@ export default {
 .not_playing_page {
   display: grid;
   grid-template-columns: 45vw 10vw 45vw;
-  grid-template-rows: 7vh 40vh 6vh 40vh 7vh;
+  grid-template-rows: 7vh 35vh 16vh 35vh 7vh;
   grid-template-areas:
     ". library_view_button_container ."
     "not_playing_info not_playing_info not_playing_info"
-    ". clock_not_playing ."
+    "clock_not_playing clock_not_playing clock_not_playing"
     "not_playing_control_container not_playing_control_container not_playing_control_container"
     ". queue_view_button_container .";
 }

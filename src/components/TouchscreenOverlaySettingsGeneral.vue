@@ -19,13 +19,34 @@
         <span class="settings_checkbox">
           <input
             type="checkbox"
-            id="checkbox_show_time_remaining"
-            v-model="show_time_remaining"
+            id="checkbox_use_circle_icons"
+            v-model="use_circle_icons"
           />
-          <label for="checkbox_show_time_remaining" class="text_bold"
-            >Show Play Time Remaining</label
+          <label for="checkbox_use_circle_icons" class="text_bold"
+            >Use Circle Icons</label
           >
         </span>
+      </div>
+    </div>
+    <div class="settings_row">
+      <div class="settings_options">
+        <input
+          type="radio"
+          name="radio_total_vs_remaining_time"
+          id="radio_total_vs_remaining_time_false"
+          v-bind:value="false"
+          v-model="show_time_remaining"
+        />
+        <label for="radio_total_vs_remaining_time_false">Total Time</label>
+
+        <input
+          type="radio"
+          name="radio_total_vs_remaining_time"
+          id="radio_total_vs_remaining_time_true"
+          v-bind:value="true"
+          v-model="show_time_remaining"
+        />
+        <label for="radio_total_vs_remaining_time_true">Time Remaining</label>
       </div>
     </div>
   </div>
@@ -42,6 +63,18 @@ export default {
       set(value) {
         let payload = {
           option: "show_cover_background",
+          value: value,
+        };
+        this.$store.commit("SET_general_settings", payload);
+      },
+    },
+    use_circle_icons: {
+      get() {
+        return this.$store.state.settings.general.use_circle_icons;
+      },
+      set(value) {
+        let payload = {
+          option: "use_circle_icons",
           value: value,
         };
         this.$store.commit("SET_general_settings", payload);

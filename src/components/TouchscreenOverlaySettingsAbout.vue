@@ -13,7 +13,14 @@
     </div>
     <div class="settings_row">
       <div class="settings_name">License</div>
-      <div class="settings_options">MIT</div>
+      <div class="settings_options">
+        <a
+          href="https://opensource.org/licenses/MIT"
+          target="_blank"
+          rel="noreferrer noopener"
+          >MIT</a
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -30,5 +37,3 @@ export default {
   },
 };
 </script>
-
-<style lang="css" scoped></style>

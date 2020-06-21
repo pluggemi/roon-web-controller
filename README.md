@@ -29,6 +29,8 @@ Touchscreen layout
 - [ ] App global: enable Service Worker, configure app manifest colors and icons
 - [ ] App global: Desktop notifications
 - [ ] App global: Keyboard shortcuts
+- [ ] App global: Prevent screensaver/screen blank
+- [x] ~~App global: Circle Icons option~~
 - [ ] UI: Now Playing: Track seek controls
 - [x] ~~UI: Now Playing: Track length / Time Remaining option~~
 - [x] ~~UI: Now Playing: Clock~~
@@ -40,6 +42,8 @@ Touchscreen layout
 - [ ] UI: Settings Overlay: Select Layout
 - [x] ~~UI: Settings Overlay: Clock enable/disable and Moment.js format option~~
 - [ ] UI: Settings Overlay: Desktop Notifications enable/disable
+- [ ] UI: Settings Overlay: Prevent screensaver/screen blank
+- [x] ~~UI: Settings Overlay: Circle Icons option~~
 - [x] ~~UI: Settings Overlay: Background cover art enable/disable~~
 - [ ] UI: Settings Overlay: Keyboard shortcuts enable/disable
 - [ ] UI: Settings Overlay: Keyboard shortcuts configure

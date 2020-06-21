@@ -32,7 +32,8 @@ export default new Vuex.Store({
       },
       general: {
         show_cover_background: true,
-        show_time_remaining: false,
+        use_circle_icons: false,
+        show_time_remaining: true,
       },
     },
     roon: {

@@ -149,9 +149,3 @@ export default {
   },
 };
 </script>
-
-<style lang="css" scoped>
-a {
-  color: var(--AvailableColor);
-}
-</style>
