@@ -35,10 +35,16 @@ sw.paired = false;
 
 const setting = {};
 setting.roon = {};
-// TODO: Set these with environmental settings to support docker
-setting.roon.host = "";
-setting.roon.port = 9100; // default port is 9100
-// end TODO
+if (process.env.ROON_HOST !== undefined) {
+  setting.roon.host = process.env.ROON_HOST;
+} else {
+  setting.roon.host = "";
+}
+if (process.env.ROON_PORT !== undefined) {
+  setting.roon.port = process.env.ROON_PORT;
+} else {
+  setting.roon.port = 9100; // default port is 9100
+}
 setting.express = {};
 if (process.env.NODE_ENV === "development") {
   setting.express.port = 10000;
@@ -49,8 +55,6 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const health = {};
-// TODO: environmental setting to enable/disable health
-//// TODO: environment setting to set health port
 health.port = 9090;
 health.express = "initializing";
 health.roon = "initializing";
@@ -324,7 +328,7 @@ function setupRoon() {
     required_services: [RoonApiTransport, RoonApiImage, RoonApiBrowse],
     provided_services: [api.roon_status],
   });
-  if (setting.roon.host !== "" || setting.roon.host === undefined) {
+  if (setting.roon.host !== "" || setting.roon.host !== undefined) {
     api.roon.ws_connect({
       host: setting.roon.host,
       port: setting.roon.port || 9100,
