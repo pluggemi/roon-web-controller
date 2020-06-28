@@ -328,7 +328,7 @@ function setupRoon() {
     required_services: [RoonApiTransport, RoonApiImage, RoonApiBrowse],
     provided_services: [api.roon_status],
   });
-  if (setting.roon.host !== "" || setting.roon.host !== undefined) {
+  if (setting.roon.host !== "") {
     api.roon.ws_connect({
       host: setting.roon.host,
       port: setting.roon.port || 9100,
