@@ -290,4 +290,41 @@ input[type="radio"]:checked + label {
   color: var(--AvailableColor);
   filter: none;
 }
+
+input[type="range"] {
+  appearance: none;
+  outline: none;
+  background: var(--ActiveColor);
+  border-radius: 1vh;
+  height: 1vh;
+  margin-bottom: 1vh;
+}
+
+/* Thumb styling for WebKit/Blink/Chrome/Safari */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 2.5vh;
+  width: 2.5vh;
+  border-radius: 50%;
+  background: var(--AvailableColor);
+  cursor: pointer;
+}
+
+/* Thumb styling for Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: 2.5vh;
+  width: 2.5vh;
+  border-radius: 50%;
+  background: var(--AvailableColor);
+  cursor: pointer;
+}
+
+/* Thumb styling for IE */
+input[type="range"]::-ms-thumb {
+  height: 2.5vh;
+  width: 2.5vh;
+  border-radius: 50%;
+  background: var(--AvailableColor);
+  cursor: pointer;
+}
 </style>
