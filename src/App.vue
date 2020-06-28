@@ -6,6 +6,7 @@
     <SvgSpriteMediaControlsDefault v-else />
     <SvgSpriteMiscIcons />
     <AppDesktopNotifications />
+    <AppBrowserTitle />
     <router-view v-if="sw.paired && sw.paired === true" class="app_content" />
     <p v-else>
       The {{ sw.name }} extension is not enabled. Please use an official Roon
@@ -19,6 +20,7 @@ import SvgSpriteMediaControlsDefault from "@/components/SvgSpriteMediaControlsDe
 import SvgSpriteMediaControlsCircle from "@/components/SvgSpriteMediaControlsCircle.vue";
 import SvgSpriteMiscIcons from "@/components/SvgSpriteMiscIcons.vue";
 import AppDesktopNotifications from "@/components/AppDesktopNotifications.vue";
+import AppBrowserTitle from "@/components/AppBrowserTitle.vue";
 
 export default {
   name: "app",
@@ -27,6 +29,7 @@ export default {
     SvgSpriteMediaControlsCircle,
     SvgSpriteMiscIcons,
     AppDesktopNotifications,
+    AppBrowserTitle,
   },
   computed: {
     sw: {

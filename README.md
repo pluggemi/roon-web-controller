@@ -30,6 +30,7 @@ Touchscreen layout
 - [ ] App global: Desktop notifications
 - [ ] App global: Keyboard shortcuts
 - [ ] App global: Prevent screensaver/screen blank
+- [x] ~~App global: Option to update browser title with track information~~
 - [x] ~~App global: Circle Icons option~~
 - [ ] UI: Now Playing: Track seek controls
 - [x] ~~UI: Now Playing: Track length / Time Remaining option~~
@@ -42,6 +43,7 @@ Touchscreen layout
 - [ ] UI: Settings Overlay: Select Layout
 - [x] ~~UI: Settings Overlay: Clock enable/disable and Moment.js format option~~
 - [ ] UI: Settings Overlay: Desktop Notifications enable/disable
+- [x] ~~UI: Settings Overlay: Track Name in Browser Title enable/disable~~
 - [ ] UI: Settings Overlay: Prevent screensaver/screen blank
 - [x] ~~UI: Settings Overlay: Circle Icons option~~
 - [x] ~~UI: Settings Overlay: Background cover art enable/disable~~
@@ -123,15 +125,18 @@ This application is compatible with Vue UI Graphical User Interface and the Vue 
 For more information, visit [https://cli.vuejs.org/](https://cli.vuejs.org/)
 
 ## Docker / Kubernetes support
+
 Docker will be the preferred way to use Roon Web Controller. Images will be published to Docker Hub at [pluggemi/roon-web-controller](https://hub.docker.com/repository/docker/pluggemi/roon-web-controller).
 
 ### Environmental Options
+
 The following environmental settings are available to configure the Roon Web Controller image:
 
-- ROON_HOST: This is set to the ip address (or host name if you have a working DNS setup) of the Roon Core.  If this is not set, Roon Web Controller will attempt to auto discover the Roon Core.
-- ROON_PORT: This is used to set the port that the Roon Core is running on.  The default port is 9100 and most likely will not need to be changed.
+- ROON_HOST: This is set to the ip address (or host name if you have a working DNS setup) of the Roon Core. If this is not set, Roon Web Controller will attempt to auto discover the Roon Core.
+- ROON_PORT: This is used to set the port that the Roon Core is running on. The default port is 9100 and most likely will not need to be changed.
 
 ### Example run command
+
 Here is an example command to run this docker container.
 
 ```
@@ -142,6 +147,7 @@ docker run -d \
 ```
 
 To also publish the live/ready/health endpoints (see below):
+
 ```
 docker run -d \
   -p 8080:8080 \
@@ -151,11 +157,13 @@ docker run -d \
 ```
 
 ### Kubernetes Live and Ready endpoints
-This docker image has Live, Ready and Health endpoints for Kubernetes deployments.  The health endpoints run on port 9090 within the docker container.
+
+This docker image has Live, Ready and Health endpoints for Kubernetes deployments. The health endpoints run on port 9090 within the docker container.
 
 - /live: this returns an HTTP 200 status code (OK) when the software is running
-- /ready: this returns an HTTP 200 status code (OK) when the software is running and is paired with a Roon core.  Otherwise, this returns a HTTP 503 status code (Service Unavailable).
-- /health: this returns a JSON payload showing detailed health status.  This is an example of the output from /health:
+- /ready: this returns an HTTP 200 status code (OK) when the software is running and is paired with a Roon core. Otherwise, this returns a HTTP 503 status code (Service Unavailable).
+- /health: this returns a JSON payload showing detailed health status. This is an example of the output from /health:
+
 ```javascript
 {
   "app": {

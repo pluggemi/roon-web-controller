@@ -30,6 +30,20 @@
     </div>
     <div class="settings_row">
       <div class="settings_options">
+        <span class="settings_checkbox">
+          <input
+            type="checkbox"
+            id="checkbox_track_info_in_browser_title"
+            v-model="track_info_in_browser_title"
+          />
+          <label for="checkbox_track_info_in_browser_title" class="text_bold"
+            >Show Track Info in Browser Title</label
+          >
+        </span>
+      </div>
+    </div>
+    <div class="settings_row">
+      <div class="settings_options">
         <input
           type="radio"
           name="radio_total_vs_remaining_time"
@@ -75,6 +89,18 @@ export default {
       set(value) {
         let payload = {
           option: "use_circle_icons",
+          value: value,
+        };
+        this.$store.commit("SET_general_settings", payload);
+      },
+    },
+    track_info_in_browser_title: {
+      get() {
+        return this.$store.state.settings.general.track_info_in_browser_title;
+      },
+      set(value) {
+        let payload = {
+          option: "track_info_in_browser_title",
           value: value,
         };
         this.$store.commit("SET_general_settings", payload);

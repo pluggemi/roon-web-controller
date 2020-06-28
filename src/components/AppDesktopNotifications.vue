@@ -1,5 +1,5 @@
 <template lang="html">
-  <div></div>
+  <div data-name="AppDesktopNotifications"></div>
 </template>
 <script>
 export default {
@@ -41,4 +41,8 @@ export default {
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+div {
+  display: none;
+}
+</style>
