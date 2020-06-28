@@ -46,7 +46,7 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .app_content {
   position: absolute;
   top: 0;
@@ -54,19 +54,7 @@ export default {
   left: 0;
   right: 0;
 }
-
 .svg_sprite {
   display: none;
-}
-svg {
-  height: 100%;
-  width: 100%;
-}
-.text_bold {
-  font-weight: bold;
-  font-size: 125%;
-}
-a {
-  color: var(--AvailableColor);
 }
 </style>

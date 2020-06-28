@@ -53,4 +53,7 @@ export default {
   cursor: pointer;
   filter: drop-shadow(1vh 1vh 1vh black);
 }
+h1 {
+  font-size: 200%;
+}
 </style>

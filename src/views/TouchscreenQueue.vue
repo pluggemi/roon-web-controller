@@ -128,7 +128,7 @@ export default {
 .list_item:first-of-type {
   background: var(--ThemeColor);
 }
-.list_item:first-of-type .list_item_control button {
+.list_item:first-of-type .list_item_button {
   display: none;
 }
 </style>

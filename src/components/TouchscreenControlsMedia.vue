@@ -19,7 +19,6 @@
       class="control_button media_control"
       v-bind:disabled="!current_zone.is_next_allowed"
       v-bind:command="'next'"
-      v-bind:zone_id="current_zone.zone_id"
     ></ButtonPlayCommand>
   </div>
 </template>

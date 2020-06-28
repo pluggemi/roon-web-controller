@@ -268,7 +268,20 @@ export default {
   cursor: pointer;
   filter: drop-shadow(1vh 1vh 1vh black);
 }
-
+.text_bold {
+  font-weight: bold;
+  font-size: 125%;
+}
+a {
+  color: var(--AvailableColor);
+}
+svg {
+  height: 100%;
+  width: 100%;
+}
+h1 {
+  font-size: 200%;
+}
 input[type="radio"] {
   display: none;
 }
