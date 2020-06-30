@@ -28,6 +28,16 @@
     <symbol id="svg_chevron_right" viewBox="0 0 24 24">
       <path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z" />
     </symbol>
+    <symbol id="svg_checkbox_false" viewBox="0 0 24 24">
+      <path
+        d="M19 3H5c-1.11 0-2 .89-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2m0 2v14H5V5h14z"
+      />
+    </symbol>
+    <symbol id="svg_checkbox_true" viewBox="0 0 24 24">
+      <path
+        d="M19 19H5V5h10V3H5c-1.11 0-2 .89-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-8h-2m-11.09-.92L6.5 11.5 11 16 21 6l-1.41-1.42L11 13.17l-3.09-3.09z"
+      />
+    </symbol>
 
     <symbol id="svg_library" viewBox="0 0 24 24">
       <path

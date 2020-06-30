@@ -8,7 +8,15 @@
             id="checkbox_show_clock"
             v-model="show_clock"
           />
-          <label for="checkbox_show_clock" class="text_bold">Show Clock</label>
+          <label for="checkbox_show_clock" class="text_bold"
+            >Show Clock
+            <svg v-if="show_clock === true">
+              <use href="#svg_checkbox_true" />
+            </svg>
+            <svg v-else>
+              <use href="#svg_checkbox_false" />
+            </svg>
+          </label>
         </span>
       </div>
     </div>

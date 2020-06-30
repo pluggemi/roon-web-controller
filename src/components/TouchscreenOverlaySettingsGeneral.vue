@@ -9,8 +9,14 @@
             v-model="show_cover_background"
           />
           <label for="checkbox_show_cover_background" class="text_bold"
-            >Show Background</label
-          >
+            >Show Background
+            <svg v-if="show_cover_background === true">
+              <use href="#svg_checkbox_true" />
+            </svg>
+            <svg v-else>
+              <use href="#svg_checkbox_false" />
+            </svg>
+          </label>
         </span>
       </div>
     </div>
@@ -23,8 +29,14 @@
             v-model="use_circle_icons"
           />
           <label for="checkbox_use_circle_icons" class="text_bold"
-            >Use Circle Icons</label
-          >
+            >Use Circle Icons
+            <svg v-if="use_circle_icons === true">
+              <use href="#svg_checkbox_true" />
+            </svg>
+            <svg v-else>
+              <use href="#svg_checkbox_false" />
+            </svg>
+          </label>
         </span>
       </div>
     </div>
@@ -37,8 +49,14 @@
             v-model="track_info_in_browser_title"
           />
           <label for="checkbox_track_info_in_browser_title" class="text_bold"
-            >Show Track Info in Browser Title</label
-          >
+            >Show Track Info in Browser Title
+            <svg v-if="track_info_in_browser_title === true">
+              <use href="#svg_checkbox_true" />
+            </svg>
+            <svg v-else>
+              <use href="#svg_checkbox_false" />
+            </svg>
+          </label>
         </span>
       </div>
     </div>

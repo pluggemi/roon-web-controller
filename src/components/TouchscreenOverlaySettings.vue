@@ -92,19 +92,21 @@ export default {
 .settings_checkbox input[type="checkbox"] {
   display: none;
 }
-.settings_checkbox label {
+.settings_checkbox input[type="checkbox"] + label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   cursor: pointer;
   font-size: 125%;
 }
 
-.settings_checkbox input[type="checkbox"] + label::after {
-  /* unicode ballot box without check */
-  content: " \2610 ";
-}
-
-.settings_checkbox input[type="checkbox"]:checked + label::after {
-  /* unicode ballot box with check */
-  content: " \2611 ";
+.settings_checkbox input[type="checkbox"]:checked + label {
   color: var(--ActiveColor);
+}
+.settings_checkbox input[type="checkbox"] + label svg {
+  fill: currentColor;
+  height: 3vh;
+  width: 3vh;
 }
 </style>
