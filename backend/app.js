@@ -257,7 +257,7 @@ function setupRoon() {
   const RoonApiBrowse = require("node-roon-api-browse");
 
   api.roon = new RoonApi({
-    extension_id: "com.pluggemi.roonapi",
+    extension_id: "com.pluggemi.web.controller",
     display_name: sw.name,
     display_version: sw.version,
     publisher: sw.publisher,
