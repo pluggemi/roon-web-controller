@@ -25,11 +25,12 @@ Touchscreen layout
 ## TODO - 2.0.0
 
 - [ ] App global: Screen reader layout
-- [ ] App global: Change favicons from default Vue icons to Roon Web Controller icons
-- [ ] App global: enable Service Worker, configure app manifest colors and icons
+- [x] ~~App global: Change favicons from default Vue icons to Roon Web Controller icons~~
+- [x] ~~App global: configure app manifest colors and icons~~
+- [ ] App global: enable Service Worker
 - [ ] App global: Desktop notifications
 - [ ] App global: Keyboard shortcuts
-- [ ] App global: Prevent screensaver/screen blank
+- [ ] App global: Option to prevent screensaver/screen blank
 - [x] ~~App global: Option to update browser title with track information~~
 - [x] ~~App global: Circle Icons option~~
 - [ ] UI: Now Playing: Track seek controls
@@ -44,13 +45,13 @@ Touchscreen layout
 - [x] ~~UI: Settings Overlay: Clock enable/disable and Moment.js format option~~
 - [ ] UI: Settings Overlay: Desktop Notifications enable/disable
 - [x] ~~UI: Settings Overlay: Track Name in Browser Title enable/disable~~
-- [ ] UI: Settings Overlay: Prevent screensaver/screen blank
+- [ ] UI: Settings Overlay: Option to prevent screensaver/screen blank
 - [x] ~~UI: Settings Overlay: Circle Icons option~~
 - [x] ~~UI: Settings Overlay: Background cover art enable/disable~~
 - [ ] UI: Settings Overlay: Keyboard shortcuts enable/disable
 - [ ] UI: Settings Overlay: Keyboard shortcuts configure
 - [x] ~~UI: Settings Overlay: Current Position / Time Left option~~
-- [ ] Backend: Environmental variables for Roon host/port
+- [x] ~~Backend: Environmental variables for Roon host/port~~
 - [ ] Backend: Environmental variables to enable / disable Health checks
 - [ ] Backend: Environmental variables to configure Health check port
 - [x] ~~Backend: Multi Session Key support for library browser~~
