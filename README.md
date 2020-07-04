@@ -6,7 +6,7 @@ NOTE: This is alpha software. There is missing functionality.
 
 Touchscreen layout
 
-- Landscape view
+- Landscape and Portrait view
 - Library functionality
 - Now Playing functionality
 - Clock, with settings for enabled, position, and format
@@ -18,7 +18,6 @@ Touchscreen layout
 
 ## What does not work
 
-- Portrait mode, only landscape is available right now
 - Settings overlay is in progress, partial settings controls
 - Track seek controls
 

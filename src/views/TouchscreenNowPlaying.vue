@@ -151,33 +151,73 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.now_playing_page {
-  display: grid;
-  grid-template-columns: 45vw 10vw 45vw;
-  grid-template-rows: 7vh 50vh 36vh 7vh;
-  grid-template-areas:
-    "clock_top_left library_view_button_container clock_top_right"
-    "cover_art_container song_info_container song_info_container"
-    "cover_art_container control_container control_container"
-    "clock_bottom_left queue_view_button_container clock_bottom_right";
+@media screen and (orientation: landscape) {
+  .now_playing_page {
+    display: grid;
+    grid-template-columns: 45vw 10vw 45vw;
+    grid-template-rows: 7vh 50vh 36vh 7vh;
+    grid-template-areas:
+      "clock_top_left library_view_button_container clock_top_right"
+      "cover_art_container song_info_container song_info_container"
+      "cover_art_container control_container control_container"
+      "clock_bottom_left queue_view_button_container clock_bottom_right";
+  }
+  .not_playing_page {
+    display: grid;
+    grid-template-columns: 45vw 10vw 45vw;
+    grid-template-rows: 7vh 35vh 16vh 35vh 7vh;
+    grid-template-areas:
+      ". library_view_button_container ."
+      "not_playing_info not_playing_info not_playing_info"
+      "clock_not_playing clock_not_playing clock_not_playing"
+      "not_playing_control_container not_playing_control_container not_playing_control_container"
+      ". queue_view_button_container .";
+  }
+  .range_track_seek {
+    width: 50vw;
+  }
+  .cover_art_container {
+    align-items: center;
+  }
 }
-.not_playing_page {
-  display: grid;
-  grid-template-columns: 45vw 10vw 45vw;
-  grid-template-rows: 7vh 35vh 16vh 35vh 7vh;
-  grid-template-areas:
-    ". library_view_button_container ."
-    "not_playing_info not_playing_info not_playing_info"
-    "clock_not_playing clock_not_playing clock_not_playing"
-    "not_playing_control_container not_playing_control_container not_playing_control_container"
-    ". queue_view_button_container .";
+@media screen and (orientation: portrait) {
+  .now_playing_page {
+    display: grid;
+    grid-template-columns: 45vw 10vw 45vw;
+    grid-template-rows: 7vh 40vh 21vh 25vh 7vh;
+    grid-template-areas:
+      "clock_top_left library_view_button_container clock_top_right"
+      "cover_art_container cover_art_container cover_art_container"
+      "song_info_container song_info_container song_info_container"
+      "control_container control_container control_container"
+      "clock_bottom_left queue_view_button_container clock_bottom_right";
+  }
+  .not_playing_page {
+    display: grid;
+    grid-template-columns: 45vw 10vw 45vw;
+    grid-template-rows: 7vh 35vh 16vh 35vh 7vh;
+    grid-template-areas:
+      ". library_view_button_container ."
+      "not_playing_info not_playing_info not_playing_info"
+      "clock_not_playing clock_not_playing clock_not_playing"
+      "not_playing_control_container not_playing_control_container not_playing_control_container"
+      ". queue_view_button_container .";
+  }
+  .range_track_seek {
+    width: 95vw;
+  }
+  .media_control_container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+  }
 }
 
 .cover_art_container {
   grid-area: cover_art_container;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .song_info_container {
   grid-area: song_info_container;
@@ -198,6 +238,7 @@ export default {
   grid-area: control_container;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 .overlay_controls {
@@ -206,15 +247,7 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
-.media_control_container {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.range_track_seek {
-  width: 50vw;
-}
+
 .cover_art {
   max-height: 95%;
   max-width: 95%;
@@ -241,8 +274,10 @@ export default {
 }
 .not_playing_control_container {
   grid-area: not_playing_control_container;
+  justify-self: center;
   display: flex;
-  justify-content: center;
+  width: 50%;
+  justify-content: space-around;
   align-items: center;
 }
 .clock_top_left {

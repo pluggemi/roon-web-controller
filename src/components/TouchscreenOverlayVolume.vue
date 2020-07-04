@@ -18,15 +18,15 @@
         >
           <div class="zone_volume_controls">
             <div class="zone_name">{{ output.display_name }}</div>
+            <RangeVolume v-bind:output="output" />
+            <div class="volume_value">
+              {{ output.volume.value }}
+            </div>
             <ButtonVolumeMute
               class="volume_button"
               v-bind:muted="output.volume.is_muted"
               v-bind:output_id="output.output_id"
             />
-            <div class="volume_value">
-              {{ output.volume.value }}
-            </div>
-            <RangeVolume v-bind:output="output" />
             <ButtonVolume
               class="volume_button"
               v-bind:command="'minus'"

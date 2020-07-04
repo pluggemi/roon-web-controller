@@ -153,10 +153,10 @@ export default {
 .overlay_content {
   background: var(--BaseColor);
   padding: 1vh 1vw;
-  border-radius: 1vh;
+  border-radius: 0 0 1vh 1vh;
   filter: drop-shadow(1vh 1vh 1vh black);
   text-align: center;
-  min-width: 75vw;
+  width: 90vw;
 }
 .overlay_close_button {
   position: absolute;
@@ -167,8 +167,7 @@ export default {
   fill: currentColor;
   border: none;
   outline: none;
-  height: 5vh;
-  width: 5vw;
+
   cursor: pointer;
   filter: drop-shadow(1vh 1vh 1vh black);
 }
@@ -339,5 +338,18 @@ input[type="range"]::-ms-thumb {
   border-radius: 50%;
   background: var(--AvailableColor);
   cursor: pointer;
+}
+
+@media screen and (orientation: landscape) {
+  .overlay_close_button {
+    height: 7.5vh;
+    width: 7.5vh;
+  }
+}
+@media screen and (orientation: portrait) {
+  .overlay_close_button {
+    height: 5vh;
+    width: 5vh;
+  }
 }
 </style>
