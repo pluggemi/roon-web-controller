@@ -1,7 +1,9 @@
 <template lang="html">
   <div data-name="TouchscreenOverlaySettingsAbout" class="settings_content">
     <div class="settings_row">
-      <div class="settings_name">{{ sw.name }}</div>
+      <div class="text_bold sw_name">
+        {{ sw.name }}
+      </div>
     </div>
     <div class="settings_row">
       <div class="settings_name">Version</div>
@@ -22,6 +24,20 @@
         >
       </div>
     </div>
+    <div class="settings_row">
+      <div class="settings_name">Reload Browser</div>
+      <div class="settings_options">
+        <button
+          type="button"
+          onclick="location.reload()"
+          class="ui_button settings_button"
+        >
+          <svg>
+            <use href="#svg_refresh" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,3 +53,16 @@ export default {
   },
 };
 </script>
+
+<style lang="css" scoped>
+.sw_name {
+  text-align: center;
+  width: 100%;
+}
+.settings_button {
+  width: 5vh;
+  height: 5vh;
+  min-width: 48px;
+  min-height: 48px;
+}
+</style>

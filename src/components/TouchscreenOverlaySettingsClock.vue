@@ -1,6 +1,9 @@
 <template lang="html">
   <div data-name="TouchscreenOverlaySettingsClock" class="settings_content">
     <div class="settings_row">
+      <div class="settings_name">
+        Show Clock:
+      </div>
       <div class="settings_options">
         <span class="settings_checkbox">
           <input
@@ -8,8 +11,7 @@
             id="checkbox_show_clock"
             v-model="show_clock"
           />
-          <label for="checkbox_show_clock" class="text_bold"
-            >Show Clock
+          <label for="checkbox_show_clock" class="text_bold">
             <svg v-if="show_clock === true">
               <use href="#svg_checkbox_true" />
             </svg>

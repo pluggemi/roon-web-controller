@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenViewSettings" class="overlay">
+  <div data-name="TouchscreenOverlaySettings" class="overlay">
     <div class="overlay_content">
       <h1>Settings</h1>
       <button
@@ -40,7 +40,7 @@ import TouchscreenOverlaySettingsGeneral from "@/components/TouchscreenOverlaySe
 import TouchscreenOverlaySettingsClock from "@/components/TouchscreenOverlaySettingsClock.vue";
 import TouchscreenOverlaySettingsAbout from "@/components/TouchscreenOverlaySettingsAbout.vue";
 export default {
-  name: "TouchscreenViewSettings",
+  name: "TouchscreenOverlaySettings",
   components: {
     TouchscreenOverlaySettingsGeneral,
     TouchscreenOverlaySettingsClock,
@@ -75,7 +75,6 @@ export default {
 }
 .settings_row {
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 100%;
   border-top: 1px solid var(--AvailableColor);
@@ -84,18 +83,16 @@ export default {
 .settings_name {
   font-weight: bold;
   font-size: 125%;
-  width: 40%;
+  width: 50%;
+  /* text-align: right; */
 }
 .settings_options {
-  width: 60%;
+  width: 50%;
 }
 .settings_checkbox input[type="checkbox"] {
   display: none;
 }
 .settings_checkbox input[type="checkbox"] + label {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
   cursor: pointer;
   font-size: 125%;

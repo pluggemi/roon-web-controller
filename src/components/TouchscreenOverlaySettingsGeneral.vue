@@ -1,6 +1,9 @@
 <template lang="html">
   <div data-name="TouchscreenOverlaySettingsGeneral" class="settings_content">
     <div class="settings_row">
+      <div class="settings_name">
+        Show Background:
+      </div>
       <div class="settings_options">
         <span class="settings_checkbox">
           <input
@@ -8,8 +11,7 @@
             id="checkbox_show_cover_background"
             v-model="show_cover_background"
           />
-          <label for="checkbox_show_cover_background" class="text_bold"
-            >Show Background
+          <label for="checkbox_show_cover_background" class="text_bold">
             <svg v-if="show_cover_background === true">
               <use href="#svg_checkbox_true" />
             </svg>
@@ -21,6 +23,9 @@
       </div>
     </div>
     <div class="settings_row">
+      <div class="settings_name">
+        Use Circle Icons:
+      </div>
       <div class="settings_options">
         <span class="settings_checkbox">
           <input
@@ -28,8 +33,7 @@
             id="checkbox_use_circle_icons"
             v-model="use_circle_icons"
           />
-          <label for="checkbox_use_circle_icons" class="text_bold"
-            >Use Circle Icons
+          <label for="checkbox_use_circle_icons" class="text_bold">
             <svg v-if="use_circle_icons === true">
               <use href="#svg_checkbox_true" />
             </svg>
@@ -41,6 +45,9 @@
       </div>
     </div>
     <div class="settings_row">
+      <div class="settings_name">
+        Show Track Info in Browser Title:
+      </div>
       <div class="settings_options">
         <span class="settings_checkbox">
           <input
@@ -48,8 +55,7 @@
             id="checkbox_track_info_in_browser_title"
             v-model="track_info_in_browser_title"
           />
-          <label for="checkbox_track_info_in_browser_title" class="text_bold"
-            >Show Track Info in Browser Title
+          <label for="checkbox_track_info_in_browser_title" class="text_bold">
             <svg v-if="track_info_in_browser_title === true">
               <use href="#svg_checkbox_true" />
             </svg>
@@ -61,6 +67,9 @@
       </div>
     </div>
     <div class="settings_row">
+      <div class="settings_name">
+        Now Playing Time:
+      </div>
       <div class="settings_options">
         <input
           type="radio"
