@@ -21,6 +21,11 @@ Touchscreen layout
 - Settings overlay is in progress, partial settings controls
 - Track seek controls
 
+## Known Issues
+- Volume overlay does not display when a zone with a fixed volume is selected (such as a Chromecast or an AppleTV).
+- Volume overlay only works if volume.type is number, should work with volume.type = incremental, and possible UI update for volume.type = db. [reference this post](https://community.roonlabs.com/t/roon-extension-roon-web-controller-v1-2-0/28412/362?u=mike_plugge)
+- Song information does not display correctly in portrait view.  It overflows into other view elements.
+
 ## TODO - 2.0.0
 
 - [ ] App global: Screen reader layout
