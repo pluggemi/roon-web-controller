@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenVolume" class="overlay">
+  <div data-name="Volume" class="overlay">
     <div class="overlay_content">
       <h1>Volume</h1>
       <button
@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: "TouchscreenVolume",
+  name: "Volume",
   computed: {
     current_zone: {
       get() {

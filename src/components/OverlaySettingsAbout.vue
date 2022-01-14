@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenOverlaySettingsAbout" class="settings_content">
+  <div data-name="OverlaySettingsAbout" class="settings_content">
     <div class="settings_row">
       <div class="text_bold sw_name">
         {{ sw.name }}
@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  name: "TouchscreenOverlaySettingsAbout",
+  name: "OverlaySettingsAbout",
   computed: {
     sw: {
       get() {

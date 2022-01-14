@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import SvgSpriteMediaControlsDefault from "@/components/SvgSpriteMediaControlsDefault.vue";
-import SvgSpriteMediaControlsCircle from "@/components/SvgSpriteMediaControlsCircle.vue";
-import SvgSpriteMiscIcons from "@/components/SvgSpriteMiscIcons.vue";
+import SvgSpriteMediaControlsDefault from "@/components/SVG/MediaControlsDefault.vue";
+import SvgSpriteMediaControlsCircle from "@/components/SVG/MediaControlsCircle.vue";
+import SvgSpriteMiscIcons from "@/components/SVG/MiscIcons.vue";
 import AppDesktopNotifications from "@/components/AppDesktopNotifications.vue";
 import AppBrowserTitle from "@/components/AppBrowserTitle.vue";
 
@@ -46,15 +46,3 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
-.app_content {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.svg_sprite {
-  display: none;
-}
-</style>

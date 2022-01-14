@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenZoneSelect" class="overlay">
+  <div data-name="ZoneSelectr" class="overlay">
     <div class="overlay_content">
       <h1>Select a Zone</h1>
       <button
@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: "TouchscreenZoneSelect",
+  name: "ZoneSelect",
   computed: {
     zone_list: {
       get() {
@@ -43,8 +43,8 @@ export default {
         for (let zone_id in this.$store.state.roon.zone_list) {
           let item = {
             zone_id: zone_id,
-            display_name: this.$store.state.roon.zone_list[zone_id]
-              .display_name,
+            display_name:
+              this.$store.state.roon.zone_list[zone_id].display_name,
           };
           zone_list.push(item);
         }

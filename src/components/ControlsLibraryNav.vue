@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenControlsLibraryNav">
+  <div data-name="ControlsLibraryNav">
     <ButtonLibraryNav
       class="control_button"
       v-if="library && library.list && library.list.level !== undefined"
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "TouchscreenControlsLibraryNav",
+  name: "ControlsLibraryNav",
   computed: {
     library: {
       get() {

@@ -1,10 +1,10 @@
 <template lang="html">
-  <div data-name="TouchscreenViewQueue" class="queue_page">
+  <div data-name="ViewQueue" class="queue_page">
     <div class="now_playing_view_button_container">
       <router-link
         tag="button"
         class="view_button"
-        v-bind:to="{ name: 'TouchscreenNowPlaying' }"
+        v-bind:to="{ name: 'NowPlaying' }"
         ><svg>
           <use href="#svg_chevron_up" /></svg
       ></router-link>
@@ -47,26 +47,21 @@
         </div>
       </div>
     </div>
-    <div v-else class="content queue_list_empty">
-      Nothing Queued
-    </div>
+    <div v-else class="content queue_list_empty">Nothing Queued</div>
 
-    <TouchscreenControlsPlaySettings
-      v-if="current_zone"
-      class="settings_controls"
-    />
-    <TouchscreenControlsOverlays class="overlay_controls" />
+    <ControlsPlaySettings v-if="current_zone" class="settings_controls" />
+    <ControlsOverlays class="overlay_controls" />
   </div>
 </template>
 
 <script>
-import TouchscreenControlsOverlays from "@/components/TouchscreenControlsOverlays.vue";
-import TouchscreenControlsPlaySettings from "@/components/TouchscreenControlsPlaySettings.vue";
+import ControlsOverlays from "@/components/ControlsOverlays.vue";
+import ControlsPlaySettings from "@/components/ControlsPlaySettings.vue";
 export default {
-  name: "TouchscreenViewQueue",
+  name: "ViewQueue",
   components: {
-    TouchscreenControlsOverlays,
-    TouchscreenControlsPlaySettings,
+    ControlsOverlays,
+    ControlsPlaySettings,
   },
   computed: {
     current_zone: {

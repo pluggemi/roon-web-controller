@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenControlsViews">
+  <div data-name="ControlsViews">
     <router-link
       class="view_control"
       v-for="view in view_list"
@@ -15,17 +15,17 @@
 
 <script>
 export default {
-  name: "TouchscreenControlsViews",
+  name: "ControlsViews",
   data: function () {
     return {
       view_list: [
-        { name: "Library", icon: "svg_library", link: "TouchscreenLibrary" },
+        { name: "Library", icon: "svg_library", link: "Library" },
         {
           name: "Now Playing",
           icon: "svg_now_playing",
-          link: "TouchscreenNowPlaying",
+          link: "NowPlaying",
         },
-        { name: "Queue", icon: "svg_queue", link: "TouchscreenQueue" },
+        { name: "Queue", icon: "svg_queue", link: "Queue" },
       ],
     };
   },

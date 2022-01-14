@@ -1,7 +1,7 @@
 <template lang="html">
   <div
     class="list_item"
-    data-name="TouchscreenLibraryItem"
+    data-name="LibraryItem"
     v-on:click="go_list(item.item_key)"
   >
     <div class="list_item_image">
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "TouchscreenLibraryItem",
+  name: "LibraryItem",
   props: {
     item: { type: Object, required: true },
   },

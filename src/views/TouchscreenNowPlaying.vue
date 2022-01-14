@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenNowPlaying">
+  <div data-name="NowPlaying">
     <div
       v-if="current_zone && current_zone.now_playing"
       class="now_playing_page"
@@ -8,7 +8,7 @@
         <router-link
           tag="button"
           class="view_button"
-          v-bind:to="{ name: 'TouchscreenLibrary' }"
+          v-bind:to="{ name: 'Library' }"
         >
           <svg>
             <use href="#svg_chevron_up" />
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="control_container">
-        <TouchscreenControlsMedia class="media_control_container" />
+        <ControlsMedia class="media_control_container" />
         <template v-if="current_zone.is_seek_allowed === true">
           <input
             class="range_track_seek"
@@ -72,13 +72,13 @@
             </div>
           </div>
         </template>
-        <TouchscreenControlsOverlays class="overlay_controls" />
+        <ControlsOverlays class="overlay_controls" />
       </div>
       <div class="queue_view_button_container">
         <router-link
           tag="button"
           class="view_button"
-          v-bind:to="{ name: 'TouchscreenQueue' }"
+          v-bind:to="{ name: 'Queue' }"
           ><svg>
             <use href="#svg_chevron_down" /></svg
         ></router-link>
@@ -93,22 +93,20 @@
         <router-link
           tag="button"
           class="view_button"
-          v-bind:to="{ name: 'TouchscreenLibrary' }"
+          v-bind:to="{ name: 'Library' }"
         >
           <svg>
             <use href="#svg_chevron_up" />
           </svg>
         </router-link>
       </div>
-      <div class="not_playing_info">
-        Nothing Playing
-      </div>
-      <TouchscreenControlsOverlays class="not_playing_control_container" />
+      <div class="not_playing_info">Nothing Playing</div>
+      <ControlsOverlays class="not_playing_control_container" />
       <div class="queue_view_button_container">
         <router-link
           tag="button"
           class="view_button"
-          v-bind:to="{ name: 'TouchscreenQueue' }"
+          v-bind:to="{ name: 'Queue' }"
           ><svg>
             <use href="#svg_chevron_down" /></svg
         ></router-link>
@@ -119,14 +117,14 @@
 </template>
 
 <script>
-import TouchscreenControlsMedia from "@/components/TouchscreenControlsMedia.vue";
-import TouchscreenControlsOverlays from "@/components/TouchscreenControlsOverlays.vue";
+import ControlsMedia from "@/components/ControlsMedia.vue";
+import ControlsOverlays from "@/components/ControlsOverlays.vue";
 
 export default {
-  name: "TouchscreenViewNowPlaying",
+  name: "ViewNowPlaying",
   components: {
-    TouchscreenControlsMedia,
-    TouchscreenControlsOverlays,
+    ControlsMedia,
+    ControlsOverlays,
   },
   computed: {
     current_zone: {

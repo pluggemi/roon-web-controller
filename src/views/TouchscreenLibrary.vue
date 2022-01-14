@@ -1,7 +1,7 @@
 <template lang="html">
-  <div data-name="TouchscreenViewLibrary" class="library_page">
-    <TouchscreenControlsLibraryNav class="nav_controls" />
-    <TouchscreenControlsOverlays class="overlay_controls" />
+  <div data-name="ViewLibrary" class="library_page">
+    <ControlsLibraryNav class="nav_controls" />
+    <ControlsOverlays class="overlay_controls" />
 
     <div v-if="library && library.list" class="content">
       <div class="list_title" v-if="library.list.title">
@@ -10,15 +10,15 @@
           {{ library.list.subtitle }}
         </div>
       </div>
-      <TouchscreenLibraryPager class="list_nav" v-if="page_count > 1" />
+      <LibraryPager class="list_nav" v-if="page_count > 1" />
       <div class="list">
         <template v-for="item in library.items">
-          <TouchscreenLibraryItemSearch
+          <LibraryItemSearch
             v-if="item.input_prompt"
             v-bind:key="item.item_key"
             v-bind:item="item"
           />
-          <TouchscreenLibraryItem
+          <LibraryItem
             v-else
             v-bind:key="item.item_key"
             v-bind:item="item"
@@ -34,7 +34,7 @@
       <router-link
         tag="button"
         class="view_button"
-        v-bind:to="{ name: 'TouchscreenNowPlaying' }"
+        v-bind:to="{ name: 'NowPlaying' }"
       >
         <svg>
           <use href="#svg_chevron_down" />
@@ -45,20 +45,20 @@
 </template>
 
 <script>
-import TouchscreenControlsLibraryNav from "@/components/TouchscreenControlsLibraryNav.vue";
-import TouchscreenControlsOverlays from "@/components/TouchscreenControlsOverlays.vue";
-import TouchscreenLibraryPager from "@/components/TouchscreenLibraryPager.vue";
-import TouchscreenLibraryItem from "@/components/TouchscreenLibraryItem.vue";
-import TouchscreenLibraryItemSearch from "@/components/TouchscreenLibraryItemSearch.vue";
+import ControlsLibraryNav from "@/components/ControlsLibraryNav.vue";
+import ControlsOverlays from "@/components/ControlsOverlays.vue";
+import LibraryPager from "@/components/LibraryPager.vue";
+import LibraryItem from "@/components/LibraryItem.vue";
+import LibraryItemSearch from "@/components/LibraryItemSearch.vue";
 
 export default {
-  name: "TouchscreenViewLibrary",
+  name: "ViewLibrary",
   components: {
-    TouchscreenControlsLibraryNav,
-    TouchscreenControlsOverlays,
-    TouchscreenLibraryPager,
-    TouchscreenLibraryItem,
-    TouchscreenLibraryItemSearch,
+    ControlsLibraryNav,
+    ControlsOverlays,
+    LibraryPager,
+    LibraryItem,
+    LibraryItemSearch,
   },
   computed: {
     library: {

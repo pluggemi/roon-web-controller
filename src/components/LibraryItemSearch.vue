@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="list_item" data-name="TouchscreenLibraryItemSearch">
+  <div class="list_item" data-name="LibraryItemSearch">
     <div class="list_item_image">
       <ImageList v-if="item.image_key" v-bind:image_key="item.image_key" />
     </div>
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "TouchscreenLibraryItemSearch",
+  name: "LibraryItemSearch",
   data: function () {
     return {
       input_value: "",

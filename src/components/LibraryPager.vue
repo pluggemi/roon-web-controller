@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenLibraryPager">
+  <div data-name="LibraryPager">
     <button
       type="button"
       class="list_nav_button"
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: "TouchscreenLibraryPager",
+  name: "LibraryPager",
   computed: {
     page_count: {
       get() {

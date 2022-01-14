@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenControlsMedia">
+  <div data-name="ControlsMedia">
     <ButtonPlayCommand
       class="control_button media_control"
       v-bind:disabled="!current_zone.is_previous_allowed"
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "TouchscreenControlsMedia",
+  name: "ControlsMedia",
   computed: {
     current_zone: {
       get() {

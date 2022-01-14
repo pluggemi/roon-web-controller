@@ -1,6 +1,6 @@
 <template lang="html">
   <div data-name="Touchscreen">
-    <TouchscreenBackgroundCoverArt
+    <BackgroundCoverArt
       v-if="
         show_cover_background === true &&
         current_zone &&
@@ -9,15 +9,15 @@
       "
       v-bind:image_key="current_zone.now_playing.image_key"
     />
-    <TouchscreenOverlayVolume v-if="ui.show_volume === true" />
-    <TouchscreenOverlayZoneSelect
+    <OverlayVolume v-if="ui.show_volume === true" />
+    <OverlayZoneSelect
       v-if="ui.show_zone_select === true || current_zone_id === ''"
     />
-    <TouchscreenOverlaySettings v-if="ui.show_settings === true" />
+    <OverlaySettings v-if="ui.show_settings === true" />
     <template v-if="this.$route.name === 'Touchscreen'">
       <div class="touchscreen_view_controls">
-        <TouchscreenControlsViews />
-        <TouchscreenControlsOverlays />
+        <ControlsViews />
+        <ControlsOverlays />
       </div>
     </template>
     <template v-else>
@@ -29,12 +29,12 @@
 </template>
 
 <script>
-import TouchscreenBackgroundCoverArt from "@/components/TouchscreenBackgroundCoverArt.vue";
-import TouchscreenOverlayVolume from "@/components/TouchscreenOverlayVolume.vue";
-import TouchscreenOverlayZoneSelect from "@/components/TouchscreenOverlayZoneSelect.vue";
-import TouchscreenOverlaySettings from "@/components/TouchscreenOverlaySettings.vue";
-import TouchscreenControlsViews from "@/components/TouchscreenControlsViews.vue";
-import TouchscreenControlsOverlays from "@/components/TouchscreenControlsOverlays.vue";
+import BackgroundCoverArt from "@/components/BackgroundCoverArt.vue";
+import OverlayVolume from "@/components/OverlayVolume.vue";
+import OverlayZoneSelect from "@/components/OverlayZoneSelect.vue";
+import OverlaySettings from "@/components/OverlaySettings.vue";
+import ControlsViews from "@/components/ControlsViews.vue";
+import ControlsOverlays from "@/components/ControlsOverlays.vue";
 
 export default {
   name: "Touchscreen",
@@ -44,12 +44,12 @@ export default {
     };
   },
   components: {
-    TouchscreenBackgroundCoverArt,
-    TouchscreenOverlayVolume,
-    TouchscreenOverlayZoneSelect,
-    TouchscreenOverlaySettings,
-    TouchscreenControlsViews,
-    TouchscreenControlsOverlays,
+    BackgroundCoverArt,
+    OverlayVolume,
+    OverlayZoneSelect,
+    OverlaySettings,
+    ControlsViews,
+    ControlsOverlays,
   },
   computed: {
     ui: {

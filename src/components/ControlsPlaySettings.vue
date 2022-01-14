@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenControlsPlaySettings">
+  <div data-name="ControlsPlaySettings">
     <ButtonPlaySetting class="control_button" v-bind:command="'loop'" />
     <ButtonPlaySetting class="control_button" v-bind:command="'shuffle'" />
     <ButtonPlaySetting class="control_button" v-bind:command="'auto_radio'" />
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "TouchscreenControlsPlaySettings",
+  name: "ControlsPlaySettings",
   computed: {
     current_zone: {
       get() {

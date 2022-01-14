@@ -1,9 +1,7 @@
 <template lang="html">
-  <div data-name="TouchscreenOverlaySettingsGeneral" class="settings_content">
+  <div data-name="OverlaySettingsGeneral" class="settings_content">
     <div class="settings_row">
-      <div class="settings_name">
-        Show Background:
-      </div>
+      <div class="settings_name">Show Background:</div>
       <div class="settings_options">
         <span class="settings_checkbox">
           <input
@@ -23,9 +21,7 @@
       </div>
     </div>
     <div class="settings_row">
-      <div class="settings_name">
-        Use Circle Icons:
-      </div>
+      <div class="settings_name">Use Circle Icons:</div>
       <div class="settings_options">
         <span class="settings_checkbox">
           <input
@@ -45,9 +41,7 @@
       </div>
     </div>
     <div class="settings_row">
-      <div class="settings_name">
-        Show Track Info in Browser Title:
-      </div>
+      <div class="settings_name">Show Track Info in Browser Title:</div>
       <div class="settings_options">
         <span class="settings_checkbox">
           <input
@@ -67,9 +61,7 @@
       </div>
     </div>
     <div class="settings_row">
-      <div class="settings_name">
-        Now Playing Time:
-      </div>
+      <div class="settings_name">Now Playing Time:</div>
       <div class="settings_options">
         <input
           type="radio"
@@ -95,7 +87,7 @@
 
 <script>
 export default {
-  name: "TouchscreenOverlaySettingsGeneral",
+  name: "OverlaySettingsGeneral",
   computed: {
     show_cover_background: {
       get() {

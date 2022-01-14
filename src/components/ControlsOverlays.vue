@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenControlsOverlays">
+  <div data-name="ControlsOverlays">
     <ButtonOverlayToggle
       class="control_button"
       v-bind:overlay_name="'volume'"
@@ -20,6 +20,6 @@
 
 <script>
 export default {
-  name: "TouchscreenControlsOverlays",
+  name: "ControlsOverlays",
 };
 </script>

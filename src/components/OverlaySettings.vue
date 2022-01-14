@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenOverlaySettings" class="overlay">
+  <div data-name="OverlaySettings" class="overlay">
     <div class="overlay_content">
       <h1>Settings</h1>
       <button
@@ -36,23 +36,23 @@
 </template>
 
 <script>
-import TouchscreenOverlaySettingsGeneral from "@/components/TouchscreenOverlaySettingsGeneral.vue";
-import TouchscreenOverlaySettingsClock from "@/components/TouchscreenOverlaySettingsClock.vue";
-import TouchscreenOverlaySettingsAbout from "@/components/TouchscreenOverlaySettingsAbout.vue";
+import OverlaySettingsGeneral from "@/components/OverlaySettingsGeneral.vue";
+import OverlaySettingsClock from "@/components/OverlaySettingsClock.vue";
+import OverlaySettingsAbout from "@/components/OverlaySettingsAbout.vue";
 export default {
-  name: "TouchscreenOverlaySettings",
+  name: "OverlaySettings",
   components: {
-    TouchscreenOverlaySettingsGeneral,
-    TouchscreenOverlaySettingsClock,
-    TouchscreenOverlaySettingsAbout,
+    OverlaySettingsGeneral,
+    OverlaySettingsClock,
+    OverlaySettingsAbout,
   },
   data: function () {
     return {
-      current_component: "TouchscreenOverlaySettingsGeneral",
+      current_component: "OverlaySettingsGeneral",
       tabs: [
-        { name: "General", component: "TouchscreenOverlaySettingsGeneral" },
-        { name: "Clock", component: "TouchscreenOverlaySettingsClock" },
-        { name: "About", component: "TouchscreenOverlaySettingsAbout" },
+        { name: "General", component: "OverlaySettingsGeneral" },
+        { name: "Clock", component: "OverlaySettingsClock" },
+        { name: "About", component: "OverlaySettingsAbout" },
       ],
     };
   },

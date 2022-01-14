@@ -1,5 +1,5 @@
 <template lang="html">
-  <div data-name="TouchscreenBackgroundCoverArt">
+  <div data-name="BackgroundCoverArt">
     <div class="background_color background"></div>
     <div
       class="background_image background"
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "TouchscreenBackgroundCoverArt",
+  name: "BackgroundCoverArt",
   props: {
     image_key: { type: String, required: true },
   },

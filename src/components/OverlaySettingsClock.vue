@@ -1,9 +1,7 @@
 <template lang="html">
-  <div data-name="TouchscreenOverlaySettingsClock" class="settings_content">
+  <div data-name="OverlaySettingsClock" class="settings_content">
     <div class="settings_row">
-      <div class="settings_name">
-        Show Clock:
-      </div>
+      <div class="settings_name">Show Clock:</div>
       <div class="settings_options">
         <span class="settings_checkbox">
           <input
@@ -23,9 +21,7 @@
       </div>
     </div>
     <div class="settings_row">
-      <div class="settings_name">
-        Clock Position:
-      </div>
+      <div class="settings_name">Clock Position:</div>
       <div class="settings_options">
         <input
           type="radio"
@@ -73,25 +69,19 @@
       </div>
     </div>
     <div class="settings_row">
-      <div class="settings_name">
-        Line 1 format:
-      </div>
+      <div class="settings_name">Line 1 format:</div>
       <div class="settings_options">
         <input type="text" v-model="format_line1" />
       </div>
     </div>
     <div class="settings_row">
-      <div class="settings_name">
-        Line 2 format:
-      </div>
+      <div class="settings_name">Line 2 format:</div>
       <div class="settings_options">
         <input type="text" v-model="format_line2" />
       </div>
     </div>
     <div class="settings_row">
-      <div class="settings_name">
-        Format Documentation:
-      </div>
+      <div class="settings_name">Format Documentation:</div>
       <div class="settings_options">
         <a
           href="https://momentjs.com/docs/#/displaying/format/"
@@ -106,7 +96,7 @@
 
 <script>
 export default {
-  name: "TouchscreenOverlaySettingsClock",
+  name: "OverlaySettingsClock",
   computed: {
     show_clock: {
       get() {
