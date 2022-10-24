@@ -38,6 +38,20 @@
         </button>
       </div>
     </div>
+    <div class="settings_row">
+      <div class="settings_name">Reset Settings</div>
+      <div class="settings_options">
+        <button
+          type="button"
+          onclick="location.reload(); localStorage.clear()"
+          class="ui_button settings_button"
+        >
+          <svg>
+            <use href="#svg_refresh" />
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
