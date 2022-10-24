@@ -45,6 +45,13 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    initialiseStore(state) {
+      if (localStorage.getItem("state")) {
+        this.replaceState(
+          Object.assign(state, JSON.parse(localStorage.getItem("state")))
+        );
+      }
+    },
     SET_window_size: (state) => {
       state.ui.width = window.innerWidth;
       state.ui.height = window.innerHeight;
@@ -69,6 +76,7 @@ export default new Vuex.Store({
     },
     SET_current_zone_id: (state, payload) => {
       state.settings.current_zone_id = payload;
+      localStorage.setItem("state", JSON.stringify(state));
     },
     SET_show_zone_select: (state, payload) => {
       state.ui.show_zone_select = payload;
@@ -90,12 +98,15 @@ export default new Vuex.Store({
     },
     SHOW_overlay: (state, payload) => {
       state.ui["show_" + payload.overlay_name] = payload.show;
+      localStorage.setItem("state", JSON.stringify(state));
     },
     SET_clock_settings: (state, payload) => {
       state.settings.clock[payload.option] = payload.value;
+      localStorage.setItem("state", JSON.stringify(state));
     },
     SET_general_settings: (state, payload) => {
       state.settings.general[payload.option] = payload.value;
+      localStorage.setItem("state", JSON.stringify(state));
     },
   },
   actions: {
