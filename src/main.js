@@ -78,11 +78,9 @@ Vue.use(require("vue-moment"), {
 new Vue({
   router,
   store,
-
   beforeCreate() { 
     this.$store.commit("initialiseStore");
    },
-
   mounted: function () {
     this.$nextTick(() => {
       window.addEventListener("resize", () =>
