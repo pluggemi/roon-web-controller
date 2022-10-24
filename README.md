@@ -1,4 +1,4 @@
-# Roon Web Controller 2.0.0 ALPHA
+# Roon Web Controller 2.0.0
 
 NOTE: This is alpha software. There is missing functionality.
 
