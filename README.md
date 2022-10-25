@@ -44,7 +44,7 @@ Touchscreen layout
 - [x] ~~UI: Queue: queue items/time remaining~~
 - [x] ~~UI: Touchscreen Global: Volume overlay~~
 - [ ] UI: Touchscreen Global: Settings overlay
-- [x] ~~UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage
+- [x] ~~UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage~~
 - [ ] UI: Settings Overlay: Select Layout
 - [x] ~~UI: Settings Overlay: Clock enable/disable and Moment.js format option~~
 - [ ] UI: Settings Overlay: Desktop Notifications enable/disable
