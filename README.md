@@ -111,7 +111,7 @@ This docker image has Live, Ready and Health endpoints for Kubernetes deployment
 {
   "app": {
     "name":"Roon Web Controller",
-    "version":"2.0.0-alpha.0",
+    "version":"2.0.1",
     "address":["172.17.0.2"]
   },
   "health":{
