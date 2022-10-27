@@ -1,4 +1,4 @@
-# Roon Web Controller 2.0.0
+# Roon Web Controller 2.0.1
 
 NOTE: This is a fork of pluggemi/roon-web-controller
 
