@@ -1,73 +1,11 @@
 # Roon Web Controller 2.0.0
 
-NOTE: This is alpha software. There is missing functionality.
+NOTE: This is a fork of pluggemi/roon-web-controller
 
-## What works
-
-Touchscreen layout
-
-- Landscape and Portrait view
-- Library functionality
-- Now Playing functionality
-- Clock, with settings for enabled, position, and format
-  - Browser language detection for localized clock format
-- Queue display and "play from here"
-- Volume controls overlay
-- Zone selection overlay
-- Loop, Shuffle, and Radio controls on the Queue page
-
-## What does not work
-
-- Settings overlay is in progress, partial settings controls
-- Track seek controls
-
-## Known Issues
-- Volume overlay does not display when a zone with a fixed volume is selected (such as a Chromecast or an AppleTV).
-- Volume overlay only works if volume.type is number, should work with volume.type = incremental, and possible UI update for volume.type = db. [reference this post](https://community.roonlabs.com/t/roon-extension-roon-web-controller-v1-2-0/28412/362?u=mike_plugge)
-- Song information does not display correctly in portrait view.  It overflows into other view elements.
-
-## TODO - 2.0.0
-
-- [ ] App global: Screen reader layout
-- [x] ~~App global: Change favicons from default Vue icons to Roon Web Controller icons~~
-- [x] ~~App global: configure app manifest colors and icons~~
-- [ ] App global: enable Service Worker
-- [ ] App global: Desktop notifications
-- [ ] App global: Keyboard shortcuts
-- [ ] App global: Option to prevent screensaver/screen blank
-- [x] ~~App global: Option to update browser title with track information~~
-- [x] ~~App global: Circle Icons option~~
-- [ ] UI: Now Playing: Track seek controls
-- [x] ~~UI: Now Playing: Track length / Time Remaining option~~
-- [x] ~~UI: Now Playing: Clock~~
-- [x] ~~UI: Queue: "play from here"~~
-- [x] ~~UI: Queue: queue items/time remaining~~
-- [x] ~~UI: Touchscreen Global: Volume overlay~~
-- [ ] UI: Touchscreen Global: Settings overlay
-- [x] ~~UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage~~
-- [ ] UI: Settings Overlay: Select Layout
-- [x] ~~UI: Settings Overlay: Clock enable/disable and Moment.js format option~~
-- [ ] UI: Settings Overlay: Desktop Notifications enable/disable
-- [x] ~~UI: Settings Overlay: Track Name in Browser Title enable/disable~~
-- [ ] UI: Settings Overlay: Option to prevent screensaver/screen blank
-- [x] ~~UI: Settings Overlay: Circle Icons option~~
-- [x] ~~UI: Settings Overlay: Background cover art enable/disable~~
-- [ ] UI: Settings Overlay: Keyboard shortcuts enable/disable
-- [ ] UI: Settings Overlay: Keyboard shortcuts configure
-- [x] ~~UI: Settings Overlay: Current Position / Time Left option~~
-- [x] ~~Backend: Environmental variables for Roon host/port~~
-- [ ] Backend: Environmental variables to enable / disable Health checks
-- [ ] Backend: Environmental variables to configure Health check port
-- [x] ~~Backend: Multi Session Key support for library browser~~
-- [x] ~~Backend: Dockerfile~~
-- [ ] Backend: Track Seek support
-- [x] ~~Backend: Play from here support~~
-
-## TODO - 2.1.0
-
-- Multi-touch gestures using Hammer.js?
-- Dominant color theme?
-- 10 foot / TV layout?
+## The changes to the original software are
+- UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage
+- UI: Settings Overlay: Reset settings in Settings About added
+- Dockerfile adjusted to avoid error:0308010C
 
 ## To use:
 
