@@ -1,6 +1,6 @@
 {
   "name": "roon-web-controller",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=development nodemon -w backend/app.js backend/app.js & vue-cli-service serve",
