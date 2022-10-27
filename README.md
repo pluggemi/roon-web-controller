@@ -2,7 +2,7 @@
 
 NOTE: This is a fork of pluggemi/roon-web-controller
 
-## The changes to the original software are
+## Changes to the original software are
 - UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage
 - UI: Settings Overlay: Reset settings in Settings About added
 - Dockerfile adjusted to avoid error:0308010C
