@@ -1,6 +1,6 @@
 # Roon Web Controller 2.0.1
 
-NOTE: This is a fork of pluggemi/roon-web-controller
+NOTE: This is a fork of pluggemi/roon-web-controller from Mike Plugge
 
 ## Changes to the original software are
 - UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage
