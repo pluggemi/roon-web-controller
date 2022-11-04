@@ -184,7 +184,7 @@ export default {
   .now_playing_page {
     display: grid;
     grid-template-columns: 45vw 10vw 45vw;
-    grid-template-rows: 7vh 34vh 27vh 25vh 7vh;
+    grid-template-rows: 7vh 30vh 33vh 23vh 7vh;
     grid-template-areas:
       "clock_top_left library_view_button_container clock_top_right"
       "cover_art_container cover_art_container cover_art_container"
