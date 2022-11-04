@@ -29,7 +29,7 @@ SOFTWARE.
 
 const sw = {};
 sw.name = "Roon Web Controller";
-sw.version = "2.0.0-alpha.0";
+sw.version = "2.0.1";
 sw.publisher = "Mike Plugge";
 sw.paired = false;
 
