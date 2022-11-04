@@ -1,5 +1,5 @@
 # stage-1: build dist folder
-FROM node:lts-alpine as build
+FROM node:16-alpine as build
 RUN ["mkdir", "-p", "/usr/src/app"]
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json", "/usr/src/app/"]
@@ -9,7 +9,7 @@ COPY . .
 RUN npm run build
 
 # stage-2: production image
-FROM node:lts-alpine
+FROM node:16-alpine
 RUN ["mkdir", "-p", "/usr/src/app"]
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json", "/usr/src/app/"]
