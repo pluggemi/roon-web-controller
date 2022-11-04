@@ -6,6 +6,7 @@ NOTE: This is a fork of pluggemi/roon-web-controller from Mike Plugge
 - UI: Settings Overlay: Save settings, including current zone id and layout to browser local storage
 - UI: Settings Overlay: Reset settings in Settings About added
 - Dockerfile adjusted to avoid error:0308010C
+- Display of song information in portrait view optimized
 
 ## To use:
 
